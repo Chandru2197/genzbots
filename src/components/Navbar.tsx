@@ -3,6 +3,8 @@
 
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
+import Logo from '@/assets/svgs/GenZBotLogo.svg'
+import Image from 'next/image';
 
 interface NavbarProps {
   addToRefs?: (el: HTMLElement | null) => void;
@@ -36,6 +38,24 @@ export default function Navbar({ addToRefs }: NavbarProps) {
       if (menuRef.current) addToRefs(menuRef.current);
     }
   }, [addToRefs]);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollY = window.scrollY;
+
+      [logoRef.current, menuRef.current].forEach((element) => {
+        if (!element) return;
+
+        const speed = element.dataset.speed || '0.1';
+        const yPos = -scrollY * parseFloat(speed);
+        element.style.transform = `translate3d(0, ${yPos}px, 0)`;
+        element.style.willChange = 'transform';
+      });
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const menuItems: MenuItem[] = [
     { label: 'Home', href: '/' },
@@ -98,23 +118,32 @@ export default function Navbar({ addToRefs }: NavbarProps) {
 
   return (
     <nav 
-      ref={navRef}
-      className={`fixed w-full z-50 transition-all duration-300 ${
-        isScrolled ? 'bg-white shadow-md py-2' : 'bg-white/90 backdrop-blur-sm py-4'
+      // ref={navRef}
+      className={`sticky top-0 w-full z-50 transition-all duration-300 ${
+        isScrolled ? 'bg-white shadow-md py-2' : 'bg-white/90 backdrop-blur-sm py-1'
       }`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="sticky top-0 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center">
-          <div ref={logoRef} className="flex-shrink-0 parallax" data-speed="0.02">
+          <div className="flex-shrink-0" data-speed="0.02">
             <Link href="/" className="flex items-center">
               <span className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
-                AutomateNow
+                <Image src={Logo} alt="Logo"       
+                  sizes="25vw"
+                  style={{
+                    // width: '100%',
+                    // height: 'auto',
+                    // objectFit: 'contain',
+                  }}
+                  width={200}
+                  height={100}
+                />
               </span>
             </Link>
           </div>
           
           {/* Desktop Menu */}
-          <div ref={menuRef} className="hidden md:block parallax" data-speed="0.02">
+          <div  className="hidden md:block" data-speed="0.02">
             <div className="ml-10 flex items-center space-x-6">
               {menuItems.map((item) => (
                 <div key={item.label} className="relative group">
@@ -170,7 +199,7 @@ export default function Navbar({ addToRefs }: NavbarProps) {
               ))}
               <Link 
                 href="#contact" 
-                className="bg-blue-600 text-white px-5 py-2.5 rounded-md hover:bg-blue-700 transition-colors"
+                className="btn-secondary text-white px-5 py-2.5 rounded-md transition-colors"
               >
                 Get Started
               </Link>
@@ -259,7 +288,7 @@ export default function Navbar({ addToRefs }: NavbarProps) {
           ))}
           <Link 
             href="#contact" 
-            className="block px-3 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors text-center mt-4"
+            className="btn-secondary block px-3 py-2 text-white rounded-md transition-colors text-center mt-4 "
             onClick={() => setMobileMenuOpen(false)}
           >
             Get Started

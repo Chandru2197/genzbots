@@ -83,6 +83,24 @@ export default function ProjectsCarousel({ addToRefs }: ProjectsCarouselProps) {
     }
   }, [addToRefs]);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollY = window.scrollY;
+
+      [titleRef.current, carouselRef.current, mobileCarouselRef.current].forEach((element) => {
+        if (!element) return;
+
+        const speed = element.dataset.speed || '0.1';
+        const yPos = -scrollY * parseFloat(speed);
+        element.style.transform = `translate3d(0, ${yPos}px, 0)`;
+        element.style.willChange = 'transform';
+      });
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   const nextSlide = useCallback(() => {
     setCurrentSlide((prev) => (prev === projects.length - 1 ? 0 : prev + 1));
   }, [projects.length]);

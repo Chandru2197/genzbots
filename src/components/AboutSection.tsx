@@ -1,5 +1,6 @@
+import Image from 'next/image';
 import { useRef, useEffect } from 'react';
-
+import TeamCollabrationSvg from '@/assets/svgs/team-collaboration.svg'
 interface AboutSectionProps {
   addToRefs: (el: HTMLElement | null) => void;
 }
@@ -22,7 +23,17 @@ export default function AboutSection({ addToRefs }: AboutSectionProps) {
               <div className="relative h-[400px] w-full rounded-2xl overflow-hidden bg-blue-100">
                 {/* Placeholder for about image */}
                 <div className="absolute inset-0 flex items-center justify-center text-blue-600 text-xl font-medium">
-                  About Image Placeholder
+                  {/* About Image Placeholder */}
+                  <Image src={TeamCollabrationSvg} alt="Logo"       
+                    sizes="25vw"
+                    style={{
+                      width: '100%',
+                      height: 'auto',
+                      objectFit: 'contain',
+                    }}
+                    // width={200}
+                    // height={100}
+                  />
                 </div>
               </div>
             </div>

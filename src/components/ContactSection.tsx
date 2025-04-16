@@ -18,9 +18,9 @@ export default function ContactSection({ addToRefs }: ContactSectionProps) {
     <section id="contact" className="py-24 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div ref={contactTitle} data-speed="0.08" className="parallax text-center mb-16">
-          <h2 className="text-4xl font-bold mb-4">Get In Touch</h2>
+          <h2 className="text-4xl font-bold mb-4">Ready to Automate Your Business Processes?</h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Have questions about our automation solutions? Contact us today to discuss how we can help your business.
+          Contact us today for a free consultation and discover how GenZbots can transform your operations.
           </p>
         </div>
         
@@ -72,9 +72,9 @@ export default function ContactSection({ addToRefs }: ContactSectionProps) {
               <div>
                 <button 
                   type="submit" 
-                  className="w-full md:w-auto px-8 py-4 bg-blue-600 text-white rounded-md text-lg font-medium hover:bg-blue-700 transition-colors"
+                  className="w-full md:w-auto px-8 py-4 btn-secondary text-white rounded-md text-lg font-medium transition-colors"
                 >
-                  Send Message
+                  Schedule a Consultation
                 </button>
               </div>
             </form>

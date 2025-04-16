@@ -10,6 +10,12 @@ declare namespace JSX {
   }
   
   // Types for the parallax props
-  interface ParallaxProps {
-    addToRefs: (el: HTMLElement | null) => void;
-  }
+interface ParallaxProps {
+  addToRefs: (el: HTMLElement | null) => void;
+}
+
+declare module "*.svg" {
+  import React from "react";
+  const SVG: React.FC<React.SVGProps<SVGSVGElement>>;
+  export default SVG;
+}

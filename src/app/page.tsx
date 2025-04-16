@@ -9,6 +9,7 @@ import HeroSection from '@/components/HeroSection';
 import FeaturesSection from '@/components/FeaturesSection';
 import AboutSection from '@/components/AboutSection';
 import SolutionsShowcase from '@/components/SolutionsShowcase';
+import PartnerShowcase from '@/components/PartnerSection';
 import ProjectsCarousel from '@/components/ProjectsCarousel';
 import TestimonialsCarousel from '@/components/TestimonialsCarousel';
 import ContactSection from '@/components/ContactSection';
@@ -73,6 +74,7 @@ export default function Home() {
       <HeroSection addToRefs={addToRefs} />
       <FeaturesSection addToRefs={addToRefs} />
       <SolutionsShowcase addToRefs={addToRefs} />
+      <PartnerShowcase addToRefs={addToRefs}/>
       <ProjectsCarousel addToRefs={addToRefs} />
       <TestimonialsCarousel addToRefs={addToRefs} />
       <AboutSection addToRefs={addToRefs} />

@@ -4,6 +4,10 @@
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 255, 255, 255;
   --background-end-rgb: 245, 245, 245;
+  --color-primary: #1e78c1;
+  --color-secondary: #f75821;
+  --color-secondary-hover: #f5a286;
+  --color-tertiary: #016082;
 }
 
 html {
@@ -23,6 +27,31 @@ html {
     --foreground: #ededed;
   }
 }
+
+@layer components {
+  .btn-primary {
+    @apply text-white px-4 py-2 rounded hover:opacity-90;
+    background-color: var(--color-primary);
+  }
+  .btn-secondary {
+    @apply text-white px-4 py-2 rounded hover:opacity-90;
+    background-color: var(--color-secondary);
+  }
+  .btn-secondary:hover {
+    @apply opacity-90;
+    background-color: var(--color-secondary-hover);
+  }
+  .btn-secondary-outlined {
+    @apply px-4 py-2 rounded hover:opacity-90;
+    border-color: var(--color-secondary);
+    color: var(--color-secondary);
+  }
+  .text-theme {
+    color: var(--color-tertiary);
+  }
+}
+
+
 
 body {
   color: rgb(var(--foreground-rgb));
@@ -61,12 +90,12 @@ body {
   outline: 2px dashed red !important;
 }
 
-/* Fix for mobile devices - disable parallax for better performance */
+/* Remove the restriction for mobile devices */
 @media (max-width: 768px) and (pointer: coarse) {
   .parallax {
-    transform: none !important;
-    transition: none !important;
-    will-change: auto;
+    transform: translate3d(0, 0, 0) !important; /* Enable parallax */
+    transition: transform 0.1s ease-out !important;
+    will-change: transform;
   }
 }
 
