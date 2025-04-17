@@ -134,18 +134,18 @@ export default function PartnerShowcase({ addToRefs }: PartnerShowcaseProps) {
   const activeSolution = getActiveSolution();
 
   return (
-    <section id="partner" className="py-24 bg-gray-50">
+    <section id="partner" className="py-36 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           ref={titleRef}
           data-speed="0.08"
           className="text-center mb-12 parallax"
-          initial={{ opacity: 0, y: -50 }}
+          initial={{ opacity: 0, y: -25 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <h2 className="text-4xl font-bold mb-4">Why Partner With GenZbots?</h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <h2 className="text-xl font-bold mb-4">Why Partner With GenZbots?</h2>
+          <p className="text-md text-gray-600 max-w-3xl mx-auto">
             Discover our comprehensive range of automation solutions designed to transform your business operations.
           </p>
         </motion.div>
@@ -187,9 +187,9 @@ export default function PartnerShowcase({ addToRefs }: PartnerShowcaseProps) {
             animate={{ x: 0, opacity: 1 }}
             transition={{ duration: 0.8, ease: 'easeOut' }}
           >
-            <h3 className="text-3xl font-bold mb-4">{activeSolution.title}</h3>
-            <p className="text-gray-600 mb-6 text-lg">{activeSolution.description}</p>
-            <h4 className="text-xl font-semibold mb-4">Key Features:</h4>
+            <h3 className="text-lg font-bold mb-4">{activeSolution.title}</h3>
+            <p className="text-sm text-gray-600 mb-6 text-lg">{activeSolution.description}</p>
+            <h4 className="text-lg font-semibold mb-4">Key Features:</h4>
             <ul className="space-y-3">
               {activeSolution.features.map((feature, index) => (
                 <motion.li
@@ -210,7 +210,7 @@ export default function PartnerShowcase({ addToRefs }: PartnerShowcaseProps) {
                       clipRule="evenodd"
                     />
                   </svg>
-                  <span className="text-gray-700">{feature}</span>
+                  <span className="text-xs text-gray-700">{feature}</span>
                 </motion.li>
               ))}
             </ul>

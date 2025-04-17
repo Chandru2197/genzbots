@@ -14,6 +14,7 @@ import ProjectsCarousel from '@/components/ProjectsCarousel';
 import TestimonialsCarousel from '@/components/TestimonialsCarousel';
 import ContactSection from '@/components/ContactSection';
 import Footer from '@/components/Footer';
+import AutomationCards from '@/components/AutomationCards';
 
 export default function Home() {
   const parallaxRefs = useRef<HTMLElement[]>([]);
@@ -73,6 +74,7 @@ export default function Home() {
       <Navbar addToRefs={addToRefs} />
       <HeroSection addToRefs={addToRefs} />
       <FeaturesSection addToRefs={addToRefs} />
+      <AutomationCards/>
       <SolutionsShowcase addToRefs={addToRefs} />
       <PartnerShowcase addToRefs={addToRefs}/>
       <ProjectsCarousel addToRefs={addToRefs} />

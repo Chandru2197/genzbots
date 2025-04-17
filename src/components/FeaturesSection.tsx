@@ -78,8 +78,8 @@ export default function FeaturesSection({ addToRefs }: FeaturesSectionProps) {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
         >
-          <h2 className="text-4xl font-bold mb-4">Our Key Features</h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <h2 className="text-xl font-bold mb-4">Our Key Features</h2>
+          <p className="text-sm text-gray-600 max-w-3xl mx-auto">
             Discover how our automation solutions can transform your business operations
             and drive efficiency across your organization.
           </p>
@@ -96,9 +96,9 @@ export default function FeaturesSection({ addToRefs }: FeaturesSectionProps) {
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
               >
-                <div className="text-4xl mb-4">{feature.icon}</div>
-                <h3 className="text-lg font-bold mb-3">{feature.title}</h3>
-                <p className="text-gray-600 text-center">{feature.description}</p>
+                <div className="text-xl mb-4">{feature.icon}</div>
+                <h3 className="text-md font-bold mb-3">{feature.title}</h3>
+                <p className="text-xs text-gray-600 text-center">{feature.description}</p>
               </motion.div>
             ))}
           </div>

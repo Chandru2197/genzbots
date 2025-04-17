@@ -9,6 +9,8 @@ interface HeroSectionProps {
 }
 
 import HeroBackground from '@/assets/svgs/download.svg';
+import CustomizeButton from './custome/button/CustomizeButton';
+import CustomizeButton2 from './custome/button/CustomizeButton2';
 
 export default function HeroSection({ addToRefs }: HeroSectionProps) {
   const heroText = useRef<HTMLDivElement>(null);
@@ -44,16 +46,18 @@ export default function HeroSection({ addToRefs }: HeroSectionProps) {
             <h6 className="text-md md:text-md font-semibold leading-tight text-theme mb-4 border-b p-1">
               Digital workflow solutions for forward-thinking businesses
             </h6>
-            <p className="text-xl text-theme mb-8">
+            <p className="text-lg text-theme mb-8">
               GenZbots specializes in intelligent RPA and AI solutions that transform manual processes into automated workflows, reducing costs and boosting efficiency for businesses across industries.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
-              <Link href="#services" className="px-8 py-4 btn-secondary text-white rounded-md text-lg font-medium hover:bg-blue-700 transition-colors text-center">
+              {/* <Link href="#services" className="px-8 py-4 btn-secondary text-white rounded-md text-lg font-medium hover:bg-blue-700 transition-colors text-center">
                 Explore Services
-              </Link>
-              <Link href="#contact" className="px-8 py-4 border btn-secondary-outlined rounded-md text-lg font-medium hover:bg-blue-50 transition-colors text-center">
+              </Link> */}
+              <CustomizeButton title={"Explore Services"} href={"#services"}/>
+              <CustomizeButton2 title={"Contact Us"} href={"#contact"}/>
+              {/* <Link href="#contact" className="px-2 py-2 border btn-secondary-outlined rounded-md text-lg font-medium hover:bg-blue-50 transition-colors text-center">
                 Contact Us
-              </Link>
+              </Link> */}
             </div>
           </motion.div>
           

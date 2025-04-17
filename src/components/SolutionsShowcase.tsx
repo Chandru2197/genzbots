@@ -117,47 +117,59 @@ export default function SolutionsShowcase({ addToRefs }: SolutionsShowcaseProps)
   const activeSolution = getActiveSolution();
 
   return (
-    <section id="solutions" className="py-24 bg-gray-50">
+    <section id="solutions" className="py-42 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           ref={titleRef}
           data-speed="0.08"
-          className="text-center mb-12 parallax"
-          initial={{ opacity: 0, y: 50 }}
+          className="text-center mb-6 parallax"
+          initial={{ opacity: 0, y: 35 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
         >
-          <h2 className="text-4xl font-bold mb-4">Our Solutions</h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <h2 className="text-xl font-bold mb-4">Our Solutions</h2>
+          <p className="text-md text-gray-600 max-w-3xl mx-auto">
             Discover our comprehensive range of automation solutions designed to transform your business operations.
           </p>
         </motion.div>
         
-        {/* Tabs Navigation */}
+        {/* DaisyUI Tabs Navigation - Responsive */}
         <motion.div
           ref={tabsRef}
           data-speed="0.05"
-          className="flex flex-wrap justify-center mb-8 parallax"
+          className="flex justify-center mb-0 parallax"
           initial={{ opacity: 0, y: 50 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
         >
-          <div className="bg-white rounded-lg shadow-md flex flex-wrap p-1 w-full md:w-auto">
-            {solutions.map(solution => (
-              <motion.button
-                key={solution.id}
-                onClick={() => setActiveTab(solution.id)}
-                className={`px-2 py-1 text-xs md:text-base rounded-md transition-colors duration-300 whitespace-nowrap mx-1 my-1 ${
-                  activeTab === solution.id 
-                    ? 'btn-secondary text-white' 
-                    : 'text-gray-700 hover:bg-gray-100'
-                }`}
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                {solution.label}
-              </motion.button>
-            ))}
+          <div className="w-full">
+            <div className="flex w-full border-b border-gray-200">
+              {solutions.map(solution => (
+                <a
+                  key={solution.id}
+                  onClick={() => setActiveTab(solution.id)}
+                  className={`flex-1 text-center py-3 px-2 transition-colors duration-300 cursor-pointer text-xs sm:text-sm lg:text-base`}
+                  style={activeTab === solution.id 
+                    ? {
+                        backgroundColor: '#f75821', 
+                        color: 'white',
+                        borderTopLeftRadius: '0.5rem',
+                        borderTopRightRadius: '0.5rem',
+                      } 
+                    : {
+                        color: '#f75821',
+                        backgroundColor: 'white',
+                      }
+                  }
+                >
+                  {/* Responsive labels */}
+                  <span className="text-xs hidden md:inline">{solution.label}</span>
+                  <span className="text-xs md:hidden">
+                    {solution.label.split(' ')[0]}
+                  </span>
+                </a>
+              ))}
+            </div>
           </div>
         </motion.div>
         
@@ -165,7 +177,7 @@ export default function SolutionsShowcase({ addToRefs }: SolutionsShowcaseProps)
         <motion.div
           ref={contentRef}
           data-speed="0.03"
-          className="bg-white rounded-xl shadow-lg overflow-hidden parallax"
+          className="bg-white rounded-b-xl shadow-lg overflow-hidden border-t-0 pt-6 parallax"
           initial={{ opacity: 0, y: 50 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
@@ -173,10 +185,10 @@ export default function SolutionsShowcase({ addToRefs }: SolutionsShowcaseProps)
           <div className="flex flex-col md:flex-row">
             {/* Content Section */}
             <div className="md:w-1/2 p-6 md:p-10">
-              <h3 className="text-3xl font-bold mb-4">{activeSolution.title}</h3>
-              <p className="text-gray-600 mb-6 text-lg">{activeSolution.description}</p>
+              <h3 className="text-lg font-bold mb-4">{activeSolution.title}</h3>
+              <p className="text-sm text-gray-600 mb-6 text-lg">{activeSolution.description}</p>
               
-              <h4 className="text-xl font-semibold mb-4">Key Features:</h4>
+              <h4 className="text-lg font-semibold mb-4">Key Features:</h4>
               <ul className="space-y-3">
                 {activeSolution.features.map((feature, index) => (
                   <motion.li
@@ -189,12 +201,15 @@ export default function SolutionsShowcase({ addToRefs }: SolutionsShowcaseProps)
                     <svg className="w-5 h-5 text-blue-500 mt-1 mr-2" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                     </svg>
-                    <span className="text-gray-700">{feature}</span>
+                    <span className="text-xs text-gray-700">{feature}</span>
                   </motion.li>
                 ))}
               </ul>
               
-              <button className="mt-8 bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-md font-medium transition-colors duration-300 inline-flex items-center">
+              <button 
+                className="mt-8 hover:bg-opacity-90 text-white px-6 py-3 rounded-md font-medium transition-colors duration-300 inline-flex items-center"
+                style={{backgroundColor: '#f75821'}}
+              >
                 Learn More
                 <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
