@@ -26,7 +26,7 @@ export default function HeroSection({ addToRefs }: HeroSectionProps) {
   return (
     <section
       className="relative min-h-screen flex items-center overflow-hidden pt-8"
-      style={{ backgroundImage: `url(${HeroBackground.src})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
+      style={{ backgroundImage: `url(/assets/svgs/download.svg)`, backgroundSize: 'cover', backgroundPosition: 'center' }}
     >
       <div className="absolute top-0 left-0 w-full h-full hero-gradient opacity-5 z-0"></div>
       

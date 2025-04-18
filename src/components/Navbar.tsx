@@ -128,7 +128,7 @@ export default function Navbar({ addToRefs }: NavbarProps) {
           <div className="flex-shrink-0" data-speed="0.02">
             <Link href="/" className="flex items-center">
               <span className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
-                <Image src={Logo} alt="Logo"       
+                <Image src={'/assets/svgs/GenZBotLogo.svg'} alt="Logo"       
                   sizes="25vw"
                   style={{
                     // width: '100%',

@@ -4,7 +4,7 @@
 import Image from 'next/image';
 import { useState, useRef, useEffect } from 'react';
 import { motion, useInView } from 'framer-motion';
-import ProcessSvg from '@/assets/svgs/processing.svg';
+import ProcessSvg from '../public/assets/svgs/processing.svg';
 
 interface SolutionsShowcaseProps {
   addToRefs?: (el: HTMLElement | null) => void;
