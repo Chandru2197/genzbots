@@ -3,7 +3,6 @@
 
 import { useRef, useEffect } from 'react';
 import Navbar from '@/components/Navbar';
-import TestimonialsCarousel from '@/components/TestimonialsCarousel';
 import Footer from '@/components/Footer';
 
 // This is a dedicated page for data integration testimonials with fixed mobile spacing

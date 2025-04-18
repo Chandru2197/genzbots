@@ -29,7 +29,7 @@ export default function Home() {
         console.log('Warning: No parallax elements found');
       }
       
-      parallaxRefs.current.forEach((element, index) => {
+      parallaxRefs.current.forEach((element) => {
         if (!element) return;
         
         // Ensure data-speed attribute exists
