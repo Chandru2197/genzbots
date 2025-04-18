@@ -4,7 +4,7 @@
 import Image from 'next/image';
 import { useState, useRef, useEffect } from 'react';
 import { motion, useInView } from 'framer-motion';
-import ProcessSvg from '../public/assets/svgs/processing.svg';
+// import ProcessSvg from '../public/assets/svgs/processing.svg';
 
 interface SolutionsShowcaseProps {
   addToRefs?: (el: HTMLElement | null) => void;
@@ -221,7 +221,7 @@ export default function SolutionsShowcase({ addToRefs }: SolutionsShowcaseProps)
             <div className={`md:w-1/2 ${activeSolution.image} flex items-center justify-center p-10`}>
               <div className="aspect-w-16 aspect-h-9 w-full relative">
                 <div className="absolute inset-0 flex items-center justify-center text-blue-800 text-2xl font-bold">
-                  <Image src={ProcessSvg} alt="Logo"       
+                  <Image src={'/assets/svgs/processing.svg'} alt="Logo"       
                     sizes="25vw"
                     style={{
                       width: '100%',
