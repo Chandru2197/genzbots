@@ -167,14 +167,14 @@ export default function PartnerShowcase({ addToRefs }: PartnerShowcaseProps) {
             <div className="aspect-w-16 aspect-h-9 w-full relative">
               <div className="absolute inset-0 flex items-center justify-center text-blue-800 text-2xl font-bold">
                 <Image
-                  src={ProcessSvg}
+                  src={'/assets/svgs/processing.svg'}
                   alt="Partner Image"
                   sizes="25vw"
-                  style={{
-                    width: '100%',
-                    height: 'auto',
-                    objectFit: 'contain',
-                  }}
+                    style={{
+                      width: '100%',
+                      height: 'auto',
+                      objectFit: 'contain',
+                    }}
                 />
               </div>
             </div>
