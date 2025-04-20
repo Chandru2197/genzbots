@@ -80,7 +80,7 @@ export default function Home() {
       <ProjectsCarousel addToRefs={addToRefs} />
       <TestimonialsCarousel addToRefs={addToRefs} />
       <AboutSection addToRefs={addToRefs} />
-      <ContactSection addToRefs={addToRefs} />
+      <ContactSection />
       <Footer />
     </main>
   );

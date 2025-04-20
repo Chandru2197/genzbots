@@ -1,5 +1,8 @@
-import { useRef, useEffect } from 'react';
-import { motion, useInView } from 'framer-motion';
+// File: components/FeaturesSection.tsx
+"use client";
+
+import { useRef, useEffect } from "react";
+import { motion, useInView } from "framer-motion";
 
 interface FeaturesSectionProps {
   addToRefs: (el: HTMLElement | null) => void;
@@ -12,32 +15,13 @@ interface Feature {
 }
 
 export default function FeaturesSection({ addToRefs }: FeaturesSectionProps) {
-  const featuresTitle = useRef<HTMLDivElement>(null);
-  const featuresCards = useRef<HTMLDivElement>(null);
-  const isInView = useInView(featuresTitle, { once: true });
+  // Only register the decorative background for parallax
+  const decorativeRef = useRef<HTMLDivElement>(null);
+  const isInView = useInView(decorativeRef, { once: true });
 
   useEffect(() => {
-    if (featuresTitle.current) addToRefs(featuresTitle.current);
-    if (featuresCards.current) addToRefs(featuresCards.current);
+    if (decorativeRef.current) addToRefs(decorativeRef.current);
   }, [addToRefs]);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollY = window.scrollY;
-
-      [featuresTitle.current, featuresCards.current].forEach((element) => {
-        if (!element) return;
-
-        const speed = element.dataset.speed || '0.1';
-        const yPos = -scrollY * parseFloat(speed);
-        element.style.transform = `translate3d(0, ${yPos}px, 0)`;
-        element.style.willChange = 'transform';
-      });
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
   const features: Feature[] = [
     {
@@ -68,28 +52,35 @@ export default function FeaturesSection({ addToRefs }: FeaturesSectionProps) {
   ];
 
   return (
-    <section className="py-24 bg-gray-50 overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="py-18 bg-gray-50 overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+        {/* Decorative background/image with parallax */}
         <motion.div
-          ref={featuresTitle}
-          data-speed="0.08"
-          className="parallax text-center mb-16"
-          initial={{ opacity: 0, y: 50 }}
+          ref={decorativeRef}
+          data-speed="0.05"
+          className="parallax absolute inset-0 pointer-events-none"
+          initial={{ opacity: 0, y: 40 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
+          aria-hidden="true"
         >
-          <h2 className="text-xl font-bold mb-4">Our Key Features</h2>
-          <p className="text-sm text-gray-600 max-w-3xl mx-auto">
-            Discover how our automation solutions can transform your business operations
-            and drive efficiency across your organization.
-          </p>
+          {/* Place your decorative SVG, gradient, or image here */}
+          {/* Example: <img src="/assets/svgs/your-decor.svg" alt="" className="w-full h-full object-cover" /> */}
         </motion.div>
-        
-        <div ref={featuresCards} data-speed="0.05" className="parallax">
+
+        {/* Main content (NOT parallax) */}
+        <div className="relative z-10">
+          <div className="text-center mb-8">
+            <h2 className="text-xl font-bold mb-4">Our Key Features</h2>
+            <p className="text-sm text-gray-600 max-w-3xl mx-auto">
+              Discover how our automation solutions can transform your business operations
+              and drive efficiency across your organization.
+            </p>
+          </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
             {features.map((feature, index) => (
-              <motion.div 
-                key={index} 
+              <motion.div
+                key={index}
                 className="bg-white rounded-xl text-center shadow-lg p-8 transform transition-transform duration-300 hover:-translate-y-2"
                 whileHover={{ scale: 1.05 }}
                 initial={{ opacity: 0, y: 50 }}

@@ -1,5 +1,7 @@
 // File: components/Footer.tsx
 import Link from 'next/link';
+import HeroSvg from "@/assets/svgs/herosection.svg";
+import Image from 'next/image';
 
 export default function Footer() {
   return (
@@ -7,7 +9,13 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="col-span-1 md:col-span-2">
-            <h3 className="text-2xl font-bold mb-4">AutomateNow</h3>
+            <Image
+              src={'/assets/svgs/GenZBotLogo.svg'}
+              alt="Logo"
+              width={125}
+              height={125}
+              priority
+            />
             <p className="text-gray-400 mb-4 max-w-md">
               We help businesses streamline operations, increase productivity, and achieve greater efficiency through innovative automation solutions.
             </p>
@@ -50,14 +58,14 @@ export default function Footer() {
               <li>123 Automation Street</li>
               <li>Tech Park, Bangalore 560001</li>
               <li>India</li>
-              <li className="pt-2">info@automatenow.com</li>
+              <li className="pt-2">info@genzbot.com</li>
               <li>+91 123 456 7890</li>
             </ul>
           </div>
         </div>
         
         <div className="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
-          <p className="text-gray-400">© 2025 AutomateNow. All rights reserved.</p>
+          <p className="text-gray-400">© 2025 GenZBot. All rights reserved.</p>
           <div className="mt-4 md:mt-0">
             <ul className="flex space-x-8">
               <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Privacy Policy</a></li>

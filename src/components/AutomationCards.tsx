@@ -1,16 +1,16 @@
 // File: components/AutomationCards.tsx
 "use client";
 
-import { useState, useRef } from 'react';
-import { motion, useInView } from 'framer-motion';
+import { useState, useRef, useEffect } from "react";
+import { motion, useInView } from "framer-motion";
 import {
   Search,
   Lightbulb,
   Code,
   Rocket,
   Server,
-  MessageSquare
-} from 'lucide-react';
+  MessageSquare,
+} from "lucide-react";
 
 interface AutomationCardProps {
   title: string;
@@ -20,11 +20,17 @@ interface AutomationCardProps {
   delay?: number;
 }
 
-const AutomationCard = ({ title, description, icon: Icon, technologies = [], delay = 0 }: AutomationCardProps) => {
+const AutomationCard = ({
+  title,
+  description,
+  icon: Icon,
+  technologies = [],
+  delay = 0,
+}: AutomationCardProps) => {
   const [isHovered, setIsHovered] = useState(false);
   const cardRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(cardRef, { once: true, margin: "-100px" });
-  
+
   return (
     <motion.div
       ref={cardRef}
@@ -33,37 +39,39 @@ const AutomationCard = ({ title, description, icon: Icon, technologies = [], del
       transition={{ duration: 0.6, delay: delay * 0.1 }}
       className="h-full"
     >
-      <div 
+      <div
         className="bg-white rounded-xl shadow-md p-6 h-full flex flex-col transition-all duration-300 hover:shadow-xl border border-gray-100"
-        style={{ 
-          transform: isHovered ? 'translateY(-8px)' : 'translateY(0)', 
-          transition: 'transform 0.3s ease, box-shadow 0.3s ease'
+        style={{
+          transform: isHovered ? "translateY(-8px)" : "translateY(0)",
+          transition: "transform 0.3s ease, box-shadow 0.3s ease",
         }}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
-        <div 
+        <div
           className={`rounded-full p-1 w-16 h-16 flex items-center justify-center mb-5 transition-all duration-300`}
-          style={{ 
-            backgroundColor: isHovered ? '#f75821' : '#FEF1ED', 
-            color: isHovered ? 'white' : '#f75821'
+          style={{
+            backgroundColor: isHovered ? "#f75821" : "#FEF1ED",
+            color: isHovered ? "white" : "#f75821",
           }}
         >
           <Icon size={24} />
         </div>
-        
         <h3 className="text-lg font-bold mb-3">{title}</h3>
         <p className="text-sm text-gray-600 mb-5 flex-grow">{description}</p>
-        
         {technologies.length > 0 && (
           <div className="mb-4">
-            <p className="text-xs font-semibold text-gray-700 mb-2">Technologies:</p>
+            <p className="text-xs font-semibold text-gray-700 mb-2">
+              Technologies:
+            </p>
             <div className="flex flex-wrap gap-2">
               {technologies.map((tech, index) => (
-                <span 
-                  key={index} 
+                <span
+                  key={index}
                   className={`text-xs px-2 py-1 rounded transition-colors duration-300 ${
-                    isHovered ? 'bg-orange-100 text-orange-800' : 'bg-gray-100 text-gray-700'
+                    isHovered
+                      ? "bg-orange-100 text-orange-800"
+                      : "bg-gray-100 text-gray-700"
                   }`}
                 >
                   {tech}
@@ -72,20 +80,24 @@ const AutomationCard = ({ title, description, icon: Icon, technologies = [], del
             </div>
           </div>
         )}
-        
-        <div 
+        <div
           className="flex items-center text-sm font-medium mt-2 transition-all duration-300"
-          style={{ color: isHovered ? '#f75821' : '#4B5563' }}
+          style={{ color: isHovered ? "#f75821" : "#4B5563" }}
         >
-          Learn more 
-          <svg 
+          Learn more
+          <svg
             className="w-4 h-4 ml-2 transition-transform duration-300"
-            style={{ transform: isHovered ? 'translateX(4px)' : 'translateX(0)' }}
-            fill="none" 
-            stroke="currentColor" 
+            style={{ transform: isHovered ? "translateX(4px)" : "translateX(0)" }}
+            fill="none"
+            stroke="currentColor"
             viewBox="0 0 24 24"
           >
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M14 5l7 7m0 0l-7 7m7-7H3"
+            />
           </svg>
         </div>
       </div>
@@ -93,57 +105,73 @@ const AutomationCard = ({ title, description, icon: Icon, technologies = [], del
   );
 };
 
-export default function AutomationCards() {
-  const cardRef = useRef<HTMLDivElement>(null);
-  const isInView = useInView(cardRef, { once: true });
+export default function AutomationCards({ addToRefs }: { addToRefs?: (el: HTMLElement | null) => void }) {
+  // Only register the decorative heading for parallax
+  const headingRef = useRef<HTMLDivElement>(null);
+  const isInView = useInView(headingRef, { once: true });
+
+  useEffect(() => {
+    if (addToRefs && headingRef.current) addToRefs(headingRef.current);
+  }, [addToRefs]);
 
   const services = [
     {
       title: "Discover",
-      description: "We begin by understanding your business challenges and process inefficiencies.",
+      description:
+        "We begin by understanding your business challenges and process inefficiencies.",
       icon: Search,
-      technologies: ["Process Analysis", "Workflow Assessment"]
+      technologies: ["Process Analysis", "Workflow Assessment"],
     },
     {
       title: "Design",
-      description: "We create custom automation solutions aligned with your business objectives.",
+      description:
+        "We create custom automation solutions aligned with your business objectives.",
       icon: Lightbulb,
-      technologies: ["Solution Architecture", "ROI Planning"]
+      technologies: ["Solution Architecture", "ROI Planning"],
     },
     {
       title: "Develop",
       description: "Our expert team builds robust, scalable automation solutions.",
       icon: Code,
-      technologies: ["UiPath", "Automation Anywhere", "Power Automate"]
+      technologies: ["UiPath", "Automation Anywhere", "Power Automate"],
     },
     {
       title: "Deploy",
-      description: "We implement solutions with minimal disruption to your operations.",
+      description:
+        "We implement solutions with minimal disruption to your operations.",
       icon: Rocket,
-      technologies: ["Change Management", "User Training"]
+      technologies: ["Change Management", "User Training"],
     },
     {
       title: "Technology Expertise",
-      description: "We work with leading RPA and AI technologies to deliver the best solution for your needs.",
+      description:
+        "We work with leading RPA and AI technologies to deliver the best solution for your needs.",
       icon: Server,
-      technologies: ["UiPath", "Automation Anywhere", "Blue Prism", "IBM Automation"]
+      technologies: [
+        "UiPath",
+        "Automation Anywhere",
+        "Blue Prism",
+        "IBM Automation",
+      ],
     },
     {
       title: "Contact Us",
-      description: "Ready to transform your business processes? Get a complimentary assessment.",
+      description:
+        "Ready to transform your business processes? Get a complimentary assessment.",
       icon: MessageSquare,
-      technologies: ["AI/ML Integration", "Custom Solutions"]
-    }
+      technologies: ["AI/ML Integration", "Custom Solutions"],
+    },
   ];
 
   return (
-    <section id="automation-process" className="py-24 bg-gray-50">
+    <section id="automation-process" className="py-2 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Heading with parallax */}
         <motion.div
-          ref={cardRef}
+          ref={headingRef}
           data-speed="0.08"
-          className="text-center mb-12 parallax"
-          initial={{ opacity: 0, y: 50 }}
+          className="text-center mb-2 parallax"
+          initial={{ opacity: 0, y: 25 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
         >
@@ -152,12 +180,13 @@ export default function AutomationCards() {
             Automation is a journey, not a destination. Our ongoing support ensures your solutions evolve with your business.
           </p>
         </motion.div>
-        
+
+        {/* Cards (NOT parallax) */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {services.map((service, index) => (
-            <AutomationCard 
-              key={index} 
-              title={service.title} 
+            <AutomationCard
+              key={index}
+              title={service.title}
               description={service.description}
               icon={service.icon}
               technologies={service.technologies}
@@ -165,16 +194,16 @@ export default function AutomationCards() {
             />
           ))}
         </div>
-        
+
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.6 }}
           className="mt-12 text-center"
         >
-          <button 
+          <button
             className="hover:bg-opacity-90 text-white px-6 py-3 rounded-md font-medium transition-all duration-300 inline-flex items-center transform hover:-translate-y-1"
-            style={{backgroundColor: '#f75821'}}
+            style={{ backgroundColor: "#f75821" }}
           >
             Contact Us Today
             <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">

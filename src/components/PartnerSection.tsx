@@ -1,10 +1,9 @@
-// File: components/SolutionsShowcase.tsx
+// File: components/PartnerSection.tsx
 "use client";
 
 import Image from 'next/image';
-import { useState, useRef, useEffect } from 'react';
-import { motion } from 'framer-motion';
-import ProcessSvg from '@/assets/svgs/processing.svg';
+import { useState, useRef } from 'react';
+import { motion, useInView } from 'framer-motion';
 
 interface PartnerShowcaseProps {
   addToRefs?: (el: HTMLElement | null) => void;
@@ -21,38 +20,11 @@ interface SolutionTab {
 
 export default function PartnerShowcase({ addToRefs }: PartnerShowcaseProps) {
   const [activeTab, setActiveTab] = useState('automation');
-  
-  // Refs for parallax elements
-  const titleRef = useRef<HTMLDivElement>(null);
-  const tabsRef = useRef<HTMLDivElement>(null);
-  const contentRef = useRef<HTMLDivElement>(null);
+  const headingRef = useRef<HTMLDivElement>(null);
+  const isInView = useInView(headingRef, { once: true });
 
-  // Apply parallax effect through refs
-  useEffect(() => {
-    if (addToRefs) {
-      if (titleRef.current) addToRefs(titleRef.current);
-      if (tabsRef.current) addToRefs(tabsRef.current);
-      if (contentRef.current) addToRefs(contentRef.current);
-    }
-  }, [addToRefs]);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollY = window.scrollY;
-
-      [titleRef.current, tabsRef.current, contentRef.current].forEach((element) => {
-        if (!element) return;
-
-        const speed = element.dataset.speed || '0.1';
-        const yPos = -scrollY * parseFloat(speed);
-        element.style.transform = `translate3d(0, ${yPos}px, 0)`;
-        element.style.willChange = 'transform';
-      });
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  // Do NOT add headingRef to addToRefs for parallax
+  // Only decorative elements should be registered for parallax
 
   const solutions: SolutionTab[] = [
     {
@@ -69,6 +41,7 @@ export default function PartnerShowcase({ addToRefs }: PartnerShowcaseProps) {
       ],
       image: 'bg-orange-100'
     },
+    // ...other solutions as before
     {
       id: 'integration',
       label: 'Custom Bot Development',
@@ -135,31 +108,29 @@ export default function PartnerShowcase({ addToRefs }: PartnerShowcaseProps) {
 
   return (
     <section id="partner" className="py-36 bg-gray-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+        {/* Decorative parallax elements can go here if needed */}
+        {/* <motion.div ... /> */}
+
+        {/* Heading (NO parallax, NO data-speed) */}
         <motion.div
-          ref={titleRef}
-          data-speed="0.08"
-          className="text-center mb-12 parallax"
+          ref={headingRef}
+          className="text-center mb-12 pt-8 bg-gray-50 relative z-10"
           initial={{ opacity: 0, y: -25 }}
-          animate={{ opacity: 1, y: 0 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5 }}
         >
-          <h2 className="text-xl font-bold mb-4">Why Partner With GenZbots?</h2>
+          <h2 className="text-xl font-bold mb-4">{activeSolution.title}</h2>
           <p className="text-md text-gray-600 max-w-3xl mx-auto">
             Discover our comprehensive range of automation solutions designed to transform your business operations.
           </p>
         </motion.div>
 
-        <motion.div
-          data-speed="0.03"
-          className="bg-white rounded-xl shadow-lg overflow-hidden parallax flex flex-col md:flex-row"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5 }}
-        >
+        {/* Main content (NOT parallax) */}
+        <div className="bg-white rounded-xl shadow-lg overflow-hidden flex flex-col md:flex-row">
           {/* Image Section */}
           <motion.div
-            className="md:w-1/2 bg-orange-100 flex items-center justify-center p-10"
+            className={`md:w-1/2 ${activeSolution.image} flex items-center justify-center p-10`}
             initial={{ x: -200, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
             transition={{ duration: 0.8, ease: 'easeOut' }}
@@ -169,12 +140,14 @@ export default function PartnerShowcase({ addToRefs }: PartnerShowcaseProps) {
                 <Image
                   src={'/assets/svgs/processing.svg'}
                   alt="Partner Image"
+                  width={500}
+                  height={500}
                   sizes="25vw"
-                    style={{
-                      width: '100%',
-                      height: 'auto',
-                      objectFit: 'contain',
-                    }}
+                  style={{
+                    width: '100%',
+                    height: 'auto',
+                    objectFit: 'contain',
+                  }}
                 />
               </div>
             </div>
@@ -215,7 +188,7 @@ export default function PartnerShowcase({ addToRefs }: PartnerShowcaseProps) {
               ))}
             </ul>
           </motion.div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

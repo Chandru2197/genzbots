@@ -1,12 +1,14 @@
+// "use client"
 import { Inter } from 'next/font/google';
 import './globals.css';
 import { Metadata } from 'next';
+import { createTheme, MantineProvider } from '@mantine/core';
 
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'AutomateNow Clone',
-  description: 'A modern Next.js application with parallax effects',
+  title: 'GenZBot',
+  description: 'A modern world-class bot application',
 };
 
 export default function RootLayout({
@@ -17,7 +19,9 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <body className={inter.className}>
-        {children}
+        <MantineProvider>
+            {children}
+        </MantineProvider>
       </body>
     </html>
   );

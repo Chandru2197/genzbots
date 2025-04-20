@@ -4,7 +4,6 @@
 import Image from 'next/image';
 import { useState, useRef, useEffect } from 'react';
 import { motion, useInView } from 'framer-motion';
-// import ProcessSvg from '../public/assets/svgs/processing.svg';
 
 interface SolutionsShowcaseProps {
   addToRefs?: (el: HTMLElement | null) => void;
@@ -21,20 +20,13 @@ interface SolutionTab {
 
 export default function SolutionsShowcase({ addToRefs }: SolutionsShowcaseProps) {
   const [activeTab, setActiveTab] = useState('automation');
-  
-  // Refs for parallax elements
-  const titleRef = useRef<HTMLDivElement>(null);
-  const tabsRef = useRef<HTMLDivElement>(null);
-  const contentRef = useRef<HTMLDivElement>(null);
-  const isInView = useInView(titleRef, { once: true });
 
-  // Apply parallax effect through refs
+  // Only the heading/title gets parallax
+  const headingRef = useRef<HTMLDivElement>(null);
+  const isInView = useInView(headingRef, { once: true });
+
   useEffect(() => {
-    if (addToRefs) {
-      if (titleRef.current) addToRefs(titleRef.current);
-      if (tabsRef.current) addToRefs(tabsRef.current);
-      if (contentRef.current) addToRefs(contentRef.current);
-    }
+    // if (addToRefs && headingRef.current) addToRefs(headingRef.current);
   }, [addToRefs]);
 
   const solutions: SolutionTab[] = [
@@ -109,7 +101,6 @@ export default function SolutionsShowcase({ addToRefs }: SolutionsShowcaseProps)
       image: 'bg-red-100'
     }
   ];
-
   const getActiveSolution = () => {
     return solutions.find(solution => solution.id === activeTab) || solutions[0];
   };
@@ -117,13 +108,27 @@ export default function SolutionsShowcase({ addToRefs }: SolutionsShowcaseProps)
   const activeSolution = getActiveSolution();
 
   return (
-    <section id="solutions" className="py-42 bg-gray-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="solutions" className="py-1 bg-gray-50 mb-1">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+        {/* Decorative background/image with parallax (optional) */}
+        {/* <motion.div
+          ref={decorativeRef}
+          data-speed="0.05"
+          className="parallax absolute inset-0 pointer-events-none"
+          initial={{ opacity: 0, y: 40 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.8 }}
+          aria-hidden="true"
+        >
+          // Place your decorative SVG, gradient, or image here
+        </motion.div> */}
+
+        {/* Heading with parallax */}
         <motion.div
-          ref={titleRef}
-          data-speed="0.08"
-          className="text-center mb-6 parallax"
-          initial={{ opacity: 0, y: 35 }}
+          ref={headingRef}
+          // data-speed="0.08"
+          className="text-center mb-8 pt-8 bg-gray-50 relative z-20"
+          initial={{ opacity: 0, y: 50 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
         >
@@ -132,16 +137,9 @@ export default function SolutionsShowcase({ addToRefs }: SolutionsShowcaseProps)
             Discover our comprehensive range of automation solutions designed to transform your business operations.
           </p>
         </motion.div>
-        
-        {/* DaisyUI Tabs Navigation - Responsive */}
-        <motion.div
-          ref={tabsRef}
-          data-speed="0.05"
-          className="flex justify-center mb-0 parallax"
-          initial={{ opacity: 0, y: 50 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8 }}
-        >
+
+        {/* Tabs Navigation (NOT parallax) */}
+        <div className="flex justify-center mb-2 relative z-10">
           <div className="w-full">
             <div className="flex w-full border-b border-gray-200">
               {solutions.map(solution => (
@@ -162,7 +160,6 @@ export default function SolutionsShowcase({ addToRefs }: SolutionsShowcaseProps)
                       }
                   }
                 >
-                  {/* Responsive labels */}
                   <span className="text-xs hidden md:inline">{solution.label}</span>
                   <span className="text-xs md:hidden">
                     {solution.label.split(' ')[0]}
@@ -171,23 +168,15 @@ export default function SolutionsShowcase({ addToRefs }: SolutionsShowcaseProps)
               ))}
             </div>
           </div>
-        </motion.div>
-        
-        {/* Tab Content */}
-        <motion.div
-          ref={contentRef}
-          data-speed="0.03"
-          className="bg-white rounded-b-xl shadow-lg overflow-hidden border-t-0 pt-6 parallax"
-          initial={{ opacity: 0, y: 50 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8 }}
-        >
+        </div>
+
+        {/* Tab Content (NOT parallax) */}
+        <div className="bg-white rounded-b-xl shadow-lg overflow-hidden border-t-0 pt-6 relative z-10">
           <div className="flex flex-col md:flex-row">
             {/* Content Section */}
             <div className="md:w-1/2 p-6 md:p-10">
               <h3 className="text-lg font-bold mb-4">{activeSolution.title}</h3>
               <p className="text-sm text-gray-600 mb-6 text-lg">{activeSolution.description}</p>
-              
               <h4 className="text-lg font-semibold mb-4">Key Features:</h4>
               <ul className="space-y-3">
                 {activeSolution.features.map((feature, index) => (
@@ -205,7 +194,6 @@ export default function SolutionsShowcase({ addToRefs }: SolutionsShowcaseProps)
                   </motion.li>
                 ))}
               </ul>
-              
               <button 
                 className="mt-8 hover:bg-opacity-90 text-white px-6 py-3 rounded-md font-medium transition-colors duration-300 inline-flex items-center"
                 style={{backgroundColor: '#f75821'}}
@@ -216,13 +204,14 @@ export default function SolutionsShowcase({ addToRefs }: SolutionsShowcaseProps)
                 </svg>
               </button>
             </div>
-            
             {/* Image Section */}
             <div className={`md:w-1/2 ${activeSolution.image} flex items-center justify-center p-10`}>
               <div className="aspect-w-16 aspect-h-9 w-full relative">
                 <div className="absolute inset-0 flex items-center justify-center text-blue-800 text-2xl font-bold">
                   <Image src={'/assets/svgs/processing.svg'} alt="Logo"       
                     sizes="25vw"
+                    width={500}
+                    height={500}
                     style={{
                       width: '100%',
                       height: 'auto',
@@ -233,7 +222,7 @@ export default function SolutionsShowcase({ addToRefs }: SolutionsShowcaseProps)
               </div>
             </div>
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

@@ -1,4 +1,3 @@
-// File: components/ProjectsCarousel.tsx
 "use client";
 
 import { useState, useEffect, useCallback, useRef } from 'react';
@@ -22,11 +21,9 @@ export default function ProjectsCarousel({ addToRefs }: ProjectsCarouselProps) {
   const [touchStart, setTouchStart] = useState<number | null>(null);
   const [touchEnd, setTouchEnd] = useState<number | null>(null);
   const [autoplayPaused, setAutoplayPaused] = useState(false);
-  
-  // Refs for parallax elements
-  const titleRef = useRef<HTMLDivElement>(null);
-  const carouselRef = useRef<HTMLDivElement>(null);
-  const mobileCarouselRef = useRef<HTMLDivElement>(null);
+
+  // Refs for possible decorative parallax elements (not used here)
+  // If you want to add a decorative parallax element, create a ref and register it with addToRefs
 
   // Configure the minimum swipe distance
   const minSwipeDistance = 50;
@@ -74,33 +71,6 @@ export default function ProjectsCarousel({ addToRefs }: ProjectsCarouselProps) {
     }
   ];
 
-  // Apply parallax effect through refs
-  useEffect(() => {
-    if (addToRefs) {
-      if (titleRef.current) addToRefs(titleRef.current);
-      if (carouselRef.current) addToRefs(carouselRef.current);
-      if (mobileCarouselRef.current) addToRefs(mobileCarouselRef.current);
-    }
-  }, [addToRefs]);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollY = window.scrollY;
-
-      [titleRef.current, carouselRef.current, mobileCarouselRef.current].forEach((element) => {
-        if (!element) return;
-
-        const speed = element.dataset.speed || '0.1';
-        const yPos = -scrollY * parseFloat(speed);
-        element.style.transform = `translate3d(0, ${yPos}px, 0)`;
-        element.style.willChange = 'transform';
-      });
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
   const nextSlide = useCallback(() => {
     setCurrentSlide((prev) => (prev === projects.length - 1 ? 0 : prev + 1));
   }, [projects.length]);
@@ -126,17 +96,17 @@ export default function ProjectsCarousel({ addToRefs }: ProjectsCarouselProps) {
 
   const onTouchEnd = () => {
     if (!touchStart || !touchEnd) return;
-    
+
     const distance = touchStart - touchEnd;
     const isLeftSwipe = distance > minSwipeDistance;
     const isRightSwipe = distance < -minSwipeDistance;
-    
+
     if (isLeftSwipe) {
       nextSlide();
     } else if (isRightSwipe) {
       prevSlide();
     }
-    
+
     // Reset autoplay after 5 seconds
     setTimeout(() => setAutoplayPaused(false), 5000);
   };
@@ -144,13 +114,13 @@ export default function ProjectsCarousel({ addToRefs }: ProjectsCarouselProps) {
   // Autoplay functionality
   useEffect(() => {
     let interval: NodeJS.Timeout;
-    
+
     if (!autoplayPaused) {
       interval = setInterval(() => {
         nextSlide();
       }, 5000); // Change slide every 5 seconds
     }
-    
+
     return () => {
       if (interval) clearInterval(interval);
     };
@@ -166,20 +136,19 @@ export default function ProjectsCarousel({ addToRefs }: ProjectsCarouselProps) {
   };
 
   return (
-    <section className="py-24 overflow-hidden">
+    <section className="py-4 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div ref={titleRef} data-speed="0.08" className="text-center mb-12 parallax">
-          <h2 className="text-4xl font-bold mb-4">Our Recent Projects</h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+        {/* Heading (NO parallax, NO data-speed, NO parallax class) */}
+        <div className="text-center mb-6">
+          <h2 className="text-xl font-bold mb-4">Our Recent Projects</h2>
+          <p className="text-md text-gray-600 max-w-3xl mx-auto">
             Explore some of our successful automation implementations across various industries.
           </p>
         </div>
         
         {/* Large Screen Carousel (3 items visible) */}
         <div 
-          ref={carouselRef}
-          data-speed="0.05"
-          className="hidden lg:block relative parallax"
+          className="hidden lg:block relative"
           onTouchStart={onTouchStart}
           onTouchMove={onTouchMove}
           onTouchEnd={onTouchEnd}
@@ -194,13 +163,13 @@ export default function ProjectsCarousel({ addToRefs }: ProjectsCarouselProps) {
                   <div className={`h-48 ${project.image} flex items-center justify-center text-white`}>
                     <span className="text-2xl font-bold">Project Image</span>
                   </div>
-                  <div className="p-6">
+                  <div className="p-3">
                     <div className="text-sm text-blue-600 font-medium mb-2">{project.category}</div>
-                    <h3 className="text-xl font-bold mb-3">{project.title}</h3>
-                    <p className="text-gray-600 mb-4">{project.description}</p>
+                    <h3 className="text-lg font-bold mb-3">{project.title}</h3>
+                    <p className="text-sm text-gray-600 mb-4">{project.description}</p>
                     <Link 
                       href={project.link} 
-                      className="text-blue-600 font-medium hover:text-blue-800 transition-colors inline-flex items-center"
+                      className="text-sm text-blue-600 font-medium hover:text-blue-800 transition-colors inline-flex items-center"
                     >
                       View Case Study
                       <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -237,9 +206,7 @@ export default function ProjectsCarousel({ addToRefs }: ProjectsCarouselProps) {
         
         {/* Mobile & Tablet Carousel (Single item visible) */}
         <div 
-          ref={mobileCarouselRef}
-          data-speed="0.05"
-          className="lg:hidden relative parallax"
+          className="lg:hidden relative"
           onTouchStart={onTouchStart}
           onTouchMove={onTouchMove}
           onTouchEnd={onTouchEnd}
