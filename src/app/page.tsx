@@ -77,7 +77,7 @@ export default function Home() {
       <FeaturesSection addToRefs={addToRefs} />
       <AutomationCards/>
       <SolutionsTabs/>
-      {/* <SolutionsShowcase addToRefs={addToRefs} /> */}
+      <SolutionsShowcase addToRefs={addToRefs} />
       <PartnerShowcase addToRefs={addToRefs}/>
       <ProjectsCarousel addToRefs={addToRefs} />
       <TestimonialsCarousel addToRefs={addToRefs} />

@@ -128,8 +128,8 @@ export default function Navbar({ addToRefs }: NavbarProps) {
                 <Image
                   src={'/assets/svgs/GenZBotLogo.svg'}
                   alt="Logo"
-                  width={125}
-                  height={50}
+                  width={200}
+                  height={100}
                   priority
                 />
               </Link>
