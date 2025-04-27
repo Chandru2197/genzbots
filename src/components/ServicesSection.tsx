@@ -76,7 +76,7 @@ export default function ServicesSection({ addToRefs }: ServicesSectionProps) {
                 <div className="p-6">
                   <h3 className="text-2xl font-bold mb-3">{service.title}</h3>
                   <p className="text-gray-600 mb-4">{service.description}</p>
-                  <button className="text-blue-600 font-medium hover:text-blue-800 transition-colors">
+                  <button className="bg-[var(--color-secondary)] text-white px-6 py-3 rounded-none font-medium transition-all duration-300 inline-flex items-center transform  hover:bg-white hover:text-[var(--color-secondary)] hover:border-[var(--color-secondary)] border-2 border-transparent transition-colors duration-300">
                     Learn more →
                   </button>
                 </div>

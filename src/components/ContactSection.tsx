@@ -267,8 +267,8 @@ export default function ContactSection() {
               >
                 <button
                   type="submit"
-                  className="bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 px-8 rounded-lg shadow-lg transition-all text-lg"
-                >
+                  className="bg-[var(--color-secondary)] text-white px-6 py-3 rounded-none font-medium transition-all duration-300 inline-flex items-center transform  hover:bg-white hover:text-[var(--color-secondary)] hover:border-[var(--color-secondary)] border-2 border-transparent transition-colors duration-300"
+                  >
                   Schedule a Consultation
                 </button>
               </motion.div>

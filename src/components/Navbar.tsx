@@ -117,8 +117,8 @@ export default function Navbar({ addToRefs }: NavbarProps) {
                 <Image
                   src={'/assets/svgs/GenZBotLogo.svg'}
                   alt="Logo"
-                  width={90}
-                  height={36}
+                  width={125}
+                  height={50}
                   priority
                 />
               </Link>
@@ -190,7 +190,7 @@ export default function Navbar({ addToRefs }: NavbarProps) {
           <div className="hidden md:block">
             <Link
               href="#contact"
-              className="btn-secondary text-white px-5 py-2.5 rounded-md transition-colors"
+              className="btn-secondary text-white px-5 py-2.5 rounded-none hover:bg-white hover:text-[var(--color-secondary)] hover:border-[var(--color-secondary)] border-2 border-transparent transition-colors duration-300"
             >
               Get Started
             </Link>

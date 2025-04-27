@@ -81,8 +81,8 @@ const AutomationCard = ({
           </div>
         )}
         <div
-          className="flex items-center text-sm font-medium mt-2 transition-all duration-300"
-          style={{ color: isHovered ? "#f75821" : "#4B5563" }}
+            className="bg-[var(--color-secondary)] text-white px-6 py-3 rounded-none font-medium transition-all duration-300 inline-flex items-center transform  hover:bg-white hover:text-[var(--color-secondary)] hover:border-[var(--color-secondary)] border-2 border-transparent transition-colors duration-300"
+            // style={{ color: isHovered ? "#f75821" : "#4B5563" }}
         >
           Learn more
           <svg
@@ -202,8 +202,8 @@ export default function AutomationCards({ addToRefs }: { addToRefs?: (el: HTMLEl
           className="mt-12 text-center"
         >
           <button
-            className="hover:bg-opacity-90 text-white px-6 py-3 rounded-md font-medium transition-all duration-300 inline-flex items-center transform hover:-translate-y-1"
-            style={{ backgroundColor: "#f75821" }}
+            className="bg-[var(--color-secondary)] text-white px-6 py-3 rounded-none font-medium transition-all duration-300 inline-flex items-center transform  hover:bg-white hover:text-[var(--color-secondary)] hover:border-[var(--color-secondary)] border-2 border-transparent transition-colors duration-300"
+            // style={{ backgroundColor: "#f75821" }}
           >
             Contact Us Today
             <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
