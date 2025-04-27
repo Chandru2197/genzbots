@@ -57,8 +57,8 @@ const AutomationCard = ({
         >
           <Icon size={24} />
         </div>
-        <h3 className="text-lg font-bold mb-3">{title}</h3>
-        <p className="text-sm text-gray-600 mb-5 flex-grow">{description}</p>
+        <h3 className="text-label font-label text-lg font-bold mb-3">{title}</h3>
+        <p className="text-desc font-desc text-sm text-gray-600 mb-5 flex-grow">{description}</p>
         {technologies.length > 0 && (
           <div className="mb-4">
             <p className="text-xs font-semibold text-gray-700 mb-2">
@@ -81,8 +81,7 @@ const AutomationCard = ({
           </div>
         )}
         <div
-            className="w-1/2 bg-[var(--color-secondary)] text-white text-sm px-4 py-2 rounded-none font-medium transition-all duration-300 inline-flex items-center transform  hover:bg-white hover:text-[var(--color-secondary)] hover:border-[var(--color-secondary)] border-2 border-transparent transition-colors duration-300"
-            // style={{ color: isHovered ? "#f75821" : "#4B5563" }}
+            className="text-btn font-btn w-1/2 bg-[var(--color-secondary)] text-white text-sm px-4 py-2 rounded-none font-medium transition-all duration-300 inline-flex items-center transform  hover:bg-white hover:text-[var(--color-secondary)] hover:border-[var(--color-secondary)] border-2 border-transparent transition-colors duration-300"
         >
           Learn more
           <svg
@@ -175,8 +174,8 @@ export default function AutomationCards({ addToRefs }: { addToRefs?: (el: HTMLEl
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
         >
-          <h2 className="text-xl font-bold mb-4">Our Automation Process</h2>
-          <p className="text-md text-gray-600 max-w-3xl mx-auto">
+          <h2 className="text-label font-label text-xl font-bold mb-4">Our Automation Process</h2>
+          <p className="text-desc font-desc text-md text-gray-600 max-w-3xl mx-auto">
             Automation is a journey, not a destination. Our ongoing support ensures your solutions evolve with your business.
           </p>
         </motion.div>
@@ -202,8 +201,7 @@ export default function AutomationCards({ addToRefs }: { addToRefs?: (el: HTMLEl
           className="mt-12 text-center"
         >
           <button
-            className="bg-[var(--color-secondary)] text-white px-6 py-3 rounded-none font-medium transition-all duration-300 inline-flex items-center transform  hover:bg-white hover:text-[var(--color-secondary)] hover:border-[var(--color-secondary)] border-2 border-transparent transition-colors duration-300"
-            // style={{ backgroundColor: "#f75821" }}
+            className="text-btn font-btn bg-[var(--color-secondary)] text-white px-6 py-3 rounded-none transition-all duration-300 inline-flex items-center transform hover:bg-white hover:text-[var(--color-secondary)] hover:border-[var(--color-secondary)] border-2 border-transparent transition-colors duration-300"
           >
             Contact Us Today
             <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">

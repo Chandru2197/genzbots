@@ -56,8 +56,8 @@ export default function ServicesSection({ addToRefs }: ServicesSectionProps) {
     <section id="services" className="py-24 bg-gray-50 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div ref={servicesTitle} data-speed="0.08" className="parallax text-center mb-16">
-          <h2 className="text-4xl font-bold mb-4">Our Services</h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <h2 className="text-label font-label mb-4">Our Services</h2>
+          <p className="text-desc font-desc text-gray-600 max-w-3xl mx-auto">
             Comprehensive automation solutions designed to optimize your business processes
             and drive digital transformation.
           </p>
@@ -74,9 +74,9 @@ export default function ServicesSection({ addToRefs }: ServicesSectionProps) {
                   <div className="text-2xl font-medium">Service Image</div>
                 </div>
                 <div className="p-6">
-                  <h3 className="text-2xl font-bold mb-3">{service.title}</h3>
-                  <p className="text-gray-600 mb-4">{service.description}</p>
-                  <button className="bg-[var(--color-secondary)] text-white px-6 py-3 rounded-none font-medium transition-all duration-300 inline-flex items-center transform  hover:bg-white hover:text-[var(--color-secondary)] hover:border-[var(--color-secondary)] border-2 border-transparent transition-colors duration-300">
+                  <h3 className="text-label font-label mb-3">{service.title}</h3>
+                  <p className="text-desc font-desc text-gray-600 mb-4">{service.description}</p>
+                  <button className="text-btn font-btn bg-[var(--color-secondary)] text-white px-6 py-3 rounded-none transition-all duration-300 inline-flex items-center transform  hover:bg-white hover:text-[var(--color-secondary)] hover:border-[var(--color-secondary)] border-2 border-transparent transition-colors duration-300">
                     Learn more →
                   </button>
                 </div>

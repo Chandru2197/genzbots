@@ -144,7 +144,7 @@ export default function Navbar({ addToRefs }: NavbarProps) {
                         <button
                           data-dropdown
                           onClick={() => toggleDropdown(item.label)}
-                          className={`text-sm text-gray-800 hover:text-[var(--color-secondary)] font-medium transition-colors flex items-center ${
+                          className={`text-label font-label transition-colors flex items-center ${
                             activeDropdown === item.label ? 'text-[var(--color-secondary)]' : ''
                           }`}
                         >
@@ -177,7 +177,7 @@ export default function Navbar({ addToRefs }: NavbarProps) {
                             <Link
                               key={dropdownItem.label}
                               href={dropdownItem.href}
-                              className="block px-4 py-2 text-xs text-gray-700 hover:bg-orange-50 hover:text-[var(--color-secondary)]"
+                              className="block px-4 py-2 text-desc font-desc text-gray-700 hover:bg-orange-50 hover:text-[var(--color-secondary)]"
                               onClick={() => setActiveDropdown(null)}
                             >
                               {dropdownItem.label}
@@ -188,7 +188,7 @@ export default function Navbar({ addToRefs }: NavbarProps) {
                     ) : (
                       <Link
                         href={item.href}
-                        className="text-sm text-gray-800 hover:text-[var(--color-secondary)] font-medium transition-colors"
+                        className="text-label font-label transition-colors"
                       >
                         {item.label}
                       </Link>
@@ -202,7 +202,7 @@ export default function Navbar({ addToRefs }: NavbarProps) {
           <div className="hidden md:block">
             <Link
               href="#contact"
-              className="btn-secondary text-white px-5 py-2.5 rounded-none hover:bg-white hover:text-[var(--color-secondary)] hover:border-[var(--color-secondary)] border-2 border-transparent transition-colors duration-300"
+              className="btn-secondary text-btn font-btn text-white px-5 py-2.5 rounded-none hover:bg-white hover:text-[var(--color-secondary)] hover:border-[var(--color-secondary)] border-2 border-transparent transition-colors duration-300"
             >
               Get Started
             </Link>
@@ -256,7 +256,7 @@ export default function Navbar({ addToRefs }: NavbarProps) {
                 <div className="py-1">
                   <button
                     onClick={() => toggleDropdown(item.label)}
-                    className="flex justify-between items-center w-full px-3 py-2 text-gray-800 hover:text-[var(--color-secondary)] hover:bg-orange-50 font-medium transition-colors rounded-md"
+                    className="flex justify-between items-center w-full px-3 py-2 text-label font-label text-gray-800 hover:text-[var(--color-secondary)] hover:bg-orange-50 font-medium transition-colors rounded-md"
                   >
                     <span>{item.label}</span>
                     <svg
@@ -284,7 +284,7 @@ export default function Navbar({ addToRefs }: NavbarProps) {
                       <Link
                         key={dropdownItem.label}
                         href={dropdownItem.href}
-                        className="block pl-3 pr-4 py-2 text-sm text-gray-700 hover:bg-orange-50 hover:text-[var(--color-secondary)] rounded-md"
+                        className="block pl-3 pr-4 py-2 text-desc font-desc text-gray-700 hover:bg-orange-50 hover:text-[var(--color-secondary)] rounded-md"
                         onClick={() => setMobileMenuOpen(false)}
                       >
                         {dropdownItem.label}
@@ -295,7 +295,7 @@ export default function Navbar({ addToRefs }: NavbarProps) {
               ) : (
                 <Link
                   href={item.href}
-                  className="block px-3 py-2 text-gray-800 hover:text-[var(--color-secondary)] hover:bg-orange-50 font-medium transition-colors rounded-md"
+                  className="block px-3 py-2 text-label font-label text-gray-800 hover:text-[var(--color-secondary)] hover:bg-orange-50 font-medium transition-colors rounded-md"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   {item.label}
@@ -305,7 +305,7 @@ export default function Navbar({ addToRefs }: NavbarProps) {
           ))}
           <Link
             href="#contact"
-            className="btn-secondary block px-3 py-2 text-white rounded-md transition-colors text-center mt-4"
+            className="btn-secondary block px-3 py-2 text-btn font-btn text-white rounded-md transition-colors text-center mt-4"
             onClick={() => setMobileMenuOpen(false)}
           >
             Get Started

@@ -46,8 +46,8 @@ export default function BlogSection({ addToRefs }: BlogSectionProps) {
     <section id="blog" className="py-24 bg-gray-50 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div ref={blogTitle} data-speed="0.08" className="parallax text-center mb-16">
-          <h2 className="text-4xl font-bold mb-4">Latest Insights</h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <h2 className="text-label font-label mb-4">Latest Insights</h2>
+          <p className="text-desc font-desc text-gray-600 max-w-3xl mx-auto">
             Stay updated with the latest trends, best practices, and insights in business automation.
           </p>
         </div>
@@ -64,9 +64,9 @@ export default function BlogSection({ addToRefs }: BlogSectionProps) {
                 </div>
                 <div className="p-6">
                   <p className="text-gray-500 mb-2">{post.date}</p>
-                  <h3 className="text-2xl font-bold mb-3">{post.title}</h3>
-                  <p className="text-gray-600 mb-4">{post.excerpt}</p>
-                  <Link href="#" className="text-blue-600 font-medium hover:text-blue-800 transition-colors">
+                  <h3 className="text-label font-label mb-3">{post.title}</h3>
+                  <p className="text-desc font-desc text-gray-600 mb-4">{post.excerpt}</p>
+                  <Link href="#" className="text-btn font-btn text-[var(--color-secondary)] hover:text-[var(--color-secondary-hover)] transition-colors">
                     Read more →
                   </Link>
                 </div>

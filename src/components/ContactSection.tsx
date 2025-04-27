@@ -86,7 +86,7 @@ export default function ContactSection() {
                       <path d="M8 10h.01M12 10h.01M16 10h.01M9 16h6m2 4H7a2 2 0 01-2-2V7a2 2 0 012-2h3.28a2 2 0 011.42.59l1.42 1.41A2 2 0 0014.72 7H19a2 2 0 012 2v9a2 2 0 01-2 2z"/>
                     </svg>
                   </span>
-                  <span className="text-gray-800 font-medium">Fast, friendly responses</span>
+                  <span className="text-label font-label text-gray-800">Fast, friendly responses</span>
                 </div>
                 <div className="flex items-center gap-3">
                   <span className="bg-blue-100 text-blue-600 rounded-full p-2">
@@ -94,7 +94,7 @@ export default function ContactSection() {
                       <path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
                     </svg>
                   </span>
-                  <span className="text-gray-800 font-medium">Expert advice & support</span>
+                  <span className="text-label font-label text-gray-800">Expert advice & support</span>
                 </div>
                 <div className="flex items-center gap-3">
                   <span className="bg-green-100 text-green-600 rounded-full p-2">
@@ -102,7 +102,7 @@ export default function ContactSection() {
                       <path d="M12 8c-1.657 0-3 1.343-3 3 0 1.306.835 2.417 2 2.83V18h2v-4.17c1.165-.413 2-1.524 2-2.83 0-1.657-1.343-3-3-3z"/>
                     </svg>
                   </span>
-                  <span className="text-gray-800 font-medium">Free consultation</span>
+                  <span className="text-label font-label text-gray-800">Free consultation</span>
                 </div>
               </div>
             </div>

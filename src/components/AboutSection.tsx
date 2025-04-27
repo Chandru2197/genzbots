@@ -41,16 +41,16 @@ export default function AboutSection({ addToRefs }: AboutSectionProps) {
           {/* Main content - NO parallax */}
           <div className="md:w-1/2 order-1 md:order-2">
             <div>
-              <h2 className="text-lg md:text-lg font-bold mb-4 md:mb-6">About AutomateNow</h2>
-              <p className="text-md md:text-md text-gray-600 mb-4 md:mb-6">
+              <h2 className="text-label font-label mb-4 md:mb-6">About AutomateNow</h2>
+              <p className="text-desc font-desc text-gray-600 mb-4 md:mb-6">
                 Founded in 2018, AutomateNow has been at the forefront of business automation solutions, 
                 helping companies of all sizes transform their operations through innovative technology.
               </p>
-              <p className="text-md md:text-md text-gray-600 mb-4 md:mb-6">
+              <p className="text-desc font-desc text-gray-600 mb-4 md:mb-6">
                 Our team of experts combines deep industry knowledge with technical expertise to deliver
                 customized automation solutions that address your specific business challenges.
               </p>
-              <p className="text-md md:text-md text-gray-600 mb-6 md:mb-8">
+              <p className="text-desc font-desc text-gray-600 mb-6 md:mb-8">
                 We believe in creating long-term partnerships with our clients, providing ongoing support
                 and continuously improving solutions to adapt to evolving business needs.
               </p>

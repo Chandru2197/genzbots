@@ -11,8 +11,18 @@ const config: Config = {
     extend: {
       colors: {
         primary: "#1e78c1",    // Blue
-        secondary: "#f75821",  // Orange/Red
+        secondary: "var(--color-secondary, #f75821)",  // Orange/Red, uses CSS variable if set
         tertiary: "#016082",   // Dark Blue
+      },
+      fontSize: {
+        'label': ['1.125rem', { lineHeight: '1.75rem', fontWeight: '600' }], // 18px, semi-bold
+        'desc': ['1rem', { lineHeight: '1.5rem', fontWeight: '400' }], // 16px, normal
+        'btn': ['1rem', { lineHeight: '1.5rem', fontWeight: '500' }], // 16px, medium
+      },
+      fontWeight: {
+        label: '600',
+        desc: '400',
+        btn: '500',
       },
       animation: {
         'fade-in': 'fadeIn 0.5s ease-in-out',

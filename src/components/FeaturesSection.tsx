@@ -71,10 +71,11 @@ export default function FeaturesSection({ addToRefs }: FeaturesSectionProps) {
         {/* Main content (NOT parallax) */}
         <div className="relative z-10">
           <div className="text-center mb-8">
-            <h2 className="text-xl font-bold mb-4">Our Key Features</h2>
-            <p className="text-sm text-gray-600 max-w-3xl mx-auto">
-              Discover how our automation solutions can transform your business operations
-              and drive efficiency across your organization.
+            <h2 className="text-label font-label text-3xl md:text-4xl font-bold mb-6">
+              Powerful Features for Modern Businesses
+            </h2>
+            <p className="text-desc font-desc text-gray-600 mb-8 max-w-2xl">
+              Our platform comes packed with features designed to streamline your operations and boost productivity.
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
@@ -88,8 +89,8 @@ export default function FeaturesSection({ addToRefs }: FeaturesSectionProps) {
                 transition={{ duration: 0.5, delay: index * 0.1 }}
               >
                 <div className="text-xl mb-4">{feature.icon}</div>
-                <h3 className="text-md font-bold mb-3">{feature.title}</h3>
-                <p className="text-xs text-gray-600 text-center">{feature.description}</p>
+                <h3 className="text-label font-label text-xl font-semibold mb-2">{feature.title}</h3>
+                <p className="text-desc font-desc text-gray-600 text-center">{feature.description}</p>
               </motion.div>
             ))}
           </div>

@@ -85,8 +85,8 @@ export default function SolutionsTabs() {
 
   return (
     <section className="w-full py-8 px-2 sm:px-4 bg-gray-50">
-      <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-center mb-8 text-[#2d2940]">Our Solutions</h2>
-      <p className="text-md text-gray-600 max-w-3xl mx-auto text-center mb-8">
+      <h2 className="text-label font-label text-center mb-8 text-[#2d2940]">Our Solutions</h2>
+      <p className="text-desc font-desc text-gray-600 max-w-3xl mx-auto text-center mb-8">
         Discover our comprehensive range of automation solutions designed to transform your business operations.
       </p>
       <div className="w-full">
@@ -125,22 +125,22 @@ export default function SolutionsTabs() {
           </div>
           {/* Overlay: label and description centered in the middle of SVG */}
           <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4 transition-all duration-300 group-hover:-translate-y-2 group-hover:scale-105">
-            <div className="text-lg font-semibold text-[#2d2940] mb-2 drop-shadow">{activeSolution.label}</div>
-            <div className="text-base text-[#2d2940] drop-shadow">{activeSolution.description}</div>
+            <div className="text-label font-label mb-2 drop-shadow">{activeSolution.label}</div>
+            <div className="text-desc font-desc drop-shadow">{activeSolution.description}</div>
           </div>
         </div>
       </div>
       <div className="flex flex-col items-center text-center gap-6 p-4 sm:p-8">
         {/* Key Features */}
         <div className="mt-2">
-          <h4 className="text-base font-semibold mb-2 text-[#2d2940]">Key Features:</h4>
+          <h4 className="text-label font-label mb-2 text-[#2d2940]">Key Features:</h4>
           <ul className="space-y-2 flex flex-col items-start mx-auto">
             {activeSolution.features.map((feature, index) => (
               <li key={index} className="flex items-center">
                 <svg className="w-4 h-4 text-[var(--color-secondary)] mt-1 mr-2" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                 </svg>
-                <span className="text-sm text-[#2d2940]">{feature}</span>
+                <span className="text-desc font-desc text-[#2d2940]">{feature}</span>
               </li>
             ))}
           </ul>
@@ -148,7 +148,7 @@ export default function SolutionsTabs() {
         {/* Button */}
         <div className="mt-4 w-full flex justify-center">
           <button 
-            className="bg-[var(--color-secondary)] text-white px-6 py-2 rounded-none font-medium transition-all duration-300 hover:bg-white hover:text-[var(--color-secondary)] hover:border-[var(--color-secondary)] border-2 border-transparent"
+            className="text-btn font-btn bg-[var(--color-secondary)] text-white px-6 py-2 rounded-none transition-all duration-300 hover:bg-white hover:text-[var(--color-secondary)] hover:border-[var(--color-secondary)] border-2 border-transparent"
           >
             Learn More
             <svg className="w-4 h-4 ml-2 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24">
