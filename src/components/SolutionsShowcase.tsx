@@ -16,6 +16,7 @@ interface SolutionTab {
   description: string;
   features: string[];
   image: string;
+  svg: string;
 }
 
 export default function SolutionsShowcase({ addToRefs }: SolutionsShowcaseProps) {
@@ -42,7 +43,8 @@ export default function SolutionsShowcase({ addToRefs }: SolutionsShowcaseProps)
         'Real-time monitoring and analytics',
         'Automated reporting and notifications'
       ],
-      image: 'bg-blue-100'
+      image: 'bg-blue-100',
+      svg: '/assets/svgs/undraw_process.svg',
     },
     {
       id: 'integration',
@@ -56,7 +58,8 @@ export default function SolutionsShowcase({ addToRefs }: SolutionsShowcaseProps)
         'Secure data transfer protocols',
         'Custom connectors for legacy systems'
       ],
-      image: 'bg-green-100'
+      image: 'bg-green-100',
+      svg: '/assets/svgs/undraw_robotics.svg',
     },
     {
       id: 'rpa',
@@ -70,7 +73,8 @@ export default function SolutionsShowcase({ addToRefs }: SolutionsShowcaseProps)
         'Exception handling and reporting',
         'Centralized bot management'
       ],
-      image: 'bg-purple-100'
+      image: 'bg-purple-100',
+      svg: '/assets/svgs/undraw_automation.svg',
     },
     {
       id: 'custom',
@@ -84,7 +88,8 @@ export default function SolutionsShowcase({ addToRefs }: SolutionsShowcaseProps)
         'Comprehensive testing and QA',
         'Ongoing maintenance and support'
       ],
-      image: 'bg-orange-100'
+      image: 'bg-orange-100',
+      svg: '/assets/svgs/undraw_online_learning.svg',
     },
     {
       id: 'ai',
@@ -98,7 +103,8 @@ export default function SolutionsShowcase({ addToRefs }: SolutionsShowcaseProps)
         'Decision support systems',
         'Continuous learning algorithms'
       ],
-      image: 'bg-red-100'
+      image: 'bg-red-100',
+      svg: '/assets/svgs/undraw_support.svg',
     }
   ];
   const getActiveSolution = () => {
@@ -106,6 +112,7 @@ export default function SolutionsShowcase({ addToRefs }: SolutionsShowcaseProps)
   };
 
   const activeSolution = getActiveSolution();
+  const activeIndex = solutions.findIndex(s => s.id === activeTab);
 
   return (
     <section id="solutions" className="py-1 bg-gray-50 mb-1">
@@ -172,7 +179,7 @@ export default function SolutionsShowcase({ addToRefs }: SolutionsShowcaseProps)
 
         {/* Tab Content (NOT parallax) */}
         <div className="bg-white rounded-b-xl shadow-lg overflow-hidden border-t-0 pt-6 relative z-10">
-          <div className="flex flex-col md:flex-row">
+          <div className={`flex flex-col md:flex-row ${activeIndex % 2 === 0 ? 'md:flex-row-reverse' : ''}`}>
             {/* Content Section */}
             <div className="md:w-1/2 p-6 md:p-10">
               <h2 className="text-label font-label mb-4">{activeSolution.title}</h2>
@@ -207,12 +214,14 @@ export default function SolutionsShowcase({ addToRefs }: SolutionsShowcaseProps)
             <div className={`md:w-1/2 ${activeSolution.image} flex items-center justify-center p-10`}>
               <div className="aspect-w-16 aspect-h-9 w-full relative">
                 <div className="absolute inset-0 flex items-center justify-center text-blue-800 text-2xl font-bold">
-                  <Image src={'/assets/svgs/processing.svg'} alt="Logo"       
+                  <Image
+                    src={activeSolution.svg}
+                    alt={activeSolution.label}
                     sizes="25vw"
-                    width={500}
-                    height={500}
+                    width={400}
+                    height={200}
                     style={{
-                      width: '100%',
+                      width: 'clamp(200px, 30vw, 400px)',
                       height: 'auto',
                       objectFit: 'contain',
                     }}

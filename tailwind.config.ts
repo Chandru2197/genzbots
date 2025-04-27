@@ -18,11 +18,13 @@ const config: Config = {
         'label': ['1.125rem', { lineHeight: '1.75rem', fontWeight: '600' }], // 18px, semi-bold
         'desc': ['1rem', { lineHeight: '1.5rem', fontWeight: '400' }], // 16px, normal
         'btn': ['1rem', { lineHeight: '1.5rem', fontWeight: '500' }], // 16px, medium
+        'menu': ['0.50rem', { lineHeight: '1.5rem', fontWeight: '400' }], // 16px, medium
       },
       fontWeight: {
         label: '600',
         desc: '400',
         btn: '500',
+        menu: '400',
       },
       animation: {
         'fade-in': 'fadeIn 0.5s ease-in-out',
