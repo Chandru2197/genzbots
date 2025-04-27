@@ -112,7 +112,7 @@ export default function Navbar({ addToRefs }: NavbarProps) {
           {/* Left: Logo & Menu */}
           <div className="flex items-center space-x-8">
             {/* Logo */}
-            <div ref={logoRef} data-speed="0.02" className="flex-shrink-0">
+            <div data-speed="0.02" className="flex-shrink-0">
               <Link href="/" className="flex items-center">
                 <Image
                   src={'/assets/svgs/GenZBotLogo.svg'}
@@ -124,7 +124,7 @@ export default function Navbar({ addToRefs }: NavbarProps) {
               </Link>
             </div>
             {/* Desktop Menu */}
-            <div ref={menuRef} data-speed="0.02" className="hidden md:block">
+            <div data-speed="0.02" className="hidden md:block">
               <div className="flex items-center space-x-6">
                 {menuItems.map((item) => (
                   <div key={item.label} className="relative group">
