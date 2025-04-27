@@ -83,14 +83,24 @@ export default function Navbar({ addToRefs }: NavbarProps) {
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 80);
+      setActiveDropdown(null); // Close dropdown on scroll
     };
+
     const handleClickOutside = (event: MouseEvent) => {
-      if (navRef.current && !navRef.current.contains(event.target as Node)) {
+      const target = event.target as HTMLElement;
+      const dropdownButtons = document.querySelectorAll('[data-dropdown]');
+      const isClickInsideDropdown = Array.from(dropdownButtons).some(button => 
+        button.contains(target)
+      );
+      
+      if (!isClickInsideDropdown) {
         setActiveDropdown(null);
       }
     };
+
     window.addEventListener('scroll', handleScroll);
     document.addEventListener('mousedown', handleClickOutside);
+    
     return () => {
       window.removeEventListener('scroll', handleScroll);
       document.removeEventListener('mousedown', handleClickOutside);
@@ -103,6 +113,7 @@ export default function Navbar({ addToRefs }: NavbarProps) {
 
   return (
     <nav
+      ref={navRef}
       className={`sticky top-0 w-full z-50 transition-all duration-300 ${
         isScrolled ? 'bg-white shadow-md py-2' : 'bg-white/90 backdrop-blur-sm py-1'
       }`}
@@ -131,6 +142,7 @@ export default function Navbar({ addToRefs }: NavbarProps) {
                     {item.dropdown ? (
                       <>
                         <button
+                          data-dropdown
                           onClick={() => toggleDropdown(item.label)}
                           className={`text-sm text-gray-800 hover:text-[var(--color-secondary)] font-medium transition-colors flex items-center ${
                             activeDropdown === item.label ? 'text-[var(--color-secondary)]' : ''
@@ -203,7 +215,7 @@ export default function Navbar({ addToRefs }: NavbarProps) {
             >
               <svg
                 className={`${mobileMenuOpen ? 'hidden' : 'block'} h-6 w-6`}
-                xmlns="http://www.w3.org/2000/svg" 
+                xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -218,7 +230,7 @@ export default function Navbar({ addToRefs }: NavbarProps) {
               </svg>
               <svg
                 className={`${mobileMenuOpen ? 'block' : 'hidden'} h-6 w-6`}
-                xmlns="http://www.w3.org/2000/svg" 
+                xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -293,7 +305,7 @@ export default function Navbar({ addToRefs }: NavbarProps) {
           ))}
           <Link
             href="#contact"
-            className="btn-secondary block px-3 py-2 text-white rounded-md transition-colors text-center mt-4 "
+            className="btn-secondary block px-3 py-2 text-white rounded-md transition-colors text-center mt-4"
             onClick={() => setMobileMenuOpen(false)}
           >
             Get Started
