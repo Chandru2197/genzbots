@@ -26,7 +26,7 @@ export default function TestimonialsCarousel({ addToRefs }: TestimonialsCarousel
       name: "Sarah Johnson",
       position: "Operations Manager",
       company: "TechCorp Solutions",
-      text: "Implementing AutomateNow's process automation solutions has transformed our operations. We've seen a 40% reduction in processing time and virtually eliminated manual errors. Their team was incredibly supportive throughout the entire implementation process.",
+      text: "Implementing GenZBot's process automation solutions has transformed our operations. We've seen a 40% reduction in processing time and virtually eliminated manual errors. Their team was incredibly supportive throughout the entire implementation process.",
       image: "bg-blue-200"
     },
     {
@@ -34,7 +34,7 @@ export default function TestimonialsCarousel({ addToRefs }: TestimonialsCarousel
       name: "Michael Chen",
       position: "CTO",
       company: "FinanceHub",
-      text: "The data integration platform from AutomateNow has been a game-changer for our financial services. We're now able to process transactions 60% faster while maintaining complete data integrity. Their technical support is always responsive and helpful.",
+      text: "The data integration platform from GenZBot has been a game-changer for our financial services. We're now able to process transactions 60% faster while maintaining complete data integrity. Their technical support is always responsive and helpful.",
       image: "bg-green-200"
     },
     {
@@ -42,7 +42,7 @@ export default function TestimonialsCarousel({ addToRefs }: TestimonialsCarousel
       name: "Emily Rodriguez",
       position: "Director of Marketing",
       company: "BrandX Global",
-      text: "Working with AutomateNow to automate our marketing workflows was one of the best decisions we made. Their custom solution has helped us increase campaign throughput by 75% and improved our targeting accuracy significantly.",
+      text: "Working with GenZBot to automate our marketing workflows was one of the best decisions we made. Their custom solution has helped us increase campaign throughput by 75% and improved our targeting accuracy significantly.",
       image: "bg-purple-200"
     },
     {
@@ -50,7 +50,7 @@ export default function TestimonialsCarousel({ addToRefs }: TestimonialsCarousel
       name: "David Thompson",
       position: "CEO",
       company: "MediTech Innovations",
-      text: "The healthcare-specific automation solutions from AutomateNow have revolutionized our patient care processes. We've improved response times by 50% and our staff can now focus on what matters most - patient care instead of paperwork.",
+      text: "The healthcare-specific automation solutions from GenZBot have revolutionized our patient care processes. We've improved response times by 50% and our staff can now focus on what matters most - patient care instead of paperwork.",
       image: "bg-red-200"
     }
   ];

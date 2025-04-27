@@ -24,19 +24,19 @@ export default function TestimonialsSection({ addToRefs }: TestimonialsSectionPr
     {
       name: "Sarah Johnson",
       position: "Operations Manager, TechCorp",
-      testimonial: "AutomateNow transformed our business processes, reducing manual workload by 70% and improving accuracy across the board. Their team was professional and responsive throughout the implementation.",
+      testimonial: "GenZBot transformed our business processes, reducing manual workload by 70% and improving accuracy across the board. Their team was professional and responsive throughout the implementation.",
       avatar: "bg-blue-200"
     },
     {
       name: "Michael Chen",
       position: "CTO, FinanceHub",
-      testimonial: "The custom automation solution developed by AutomateNow has been a game-changer for our finance operations. We've seen significant improvements in efficiency and data accuracy.",
+      testimonial: "The custom automation solution developed by GenZBot has been a game-changer for our finance operations. We've seen significant improvements in efficiency and data accuracy.",
       avatar: "bg-green-200"
     },
     {
       name: "Emily Rodriguez",
       position: "Director of Marketing, BrandX",
-      testimonial: "Working with AutomateNow to automate our marketing workflows was one of the best decisions we made. Their expertise and innovative approach delivered results beyond our expectations.",
+      testimonial: "Working with GenZBot to automate our marketing workflows was one of the best decisions we made. Their expertise and innovative approach delivered results beyond our expectations.",
       avatar: "bg-purple-200"
     }
   ];

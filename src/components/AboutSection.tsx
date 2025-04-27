@@ -41,9 +41,9 @@ export default function AboutSection({ addToRefs }: AboutSectionProps) {
           {/* Main content - NO parallax */}
           <div className="md:w-1/2 order-1 md:order-2">
             <div>
-              <h2 className="text-label font-label mb-4 md:mb-6">About AutomateNow</h2>
+              <h2 className="text-label font-label mb-4 md:mb-6">About GenZBot</h2>
               <p className="text-desc font-desc text-gray-600 mb-4 md:mb-6">
-                Founded in 2018, AutomateNow has been at the forefront of business automation solutions, 
+                Founded in 2018, GenZBot has been at the forefront of business automation solutions, 
                 helping companies of all sizes transform their operations through innovative technology.
               </p>
               <p className="text-desc font-desc text-gray-600 mb-4 md:mb-6">
