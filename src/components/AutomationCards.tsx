@@ -81,7 +81,7 @@ const AutomationCard = ({
           </div>
         )}
         <div
-            className="bg-[var(--color-secondary)] text-white px-6 py-3 rounded-none font-medium transition-all duration-300 inline-flex items-center transform  hover:bg-white hover:text-[var(--color-secondary)] hover:border-[var(--color-secondary)] border-2 border-transparent transition-colors duration-300"
+            className="w-1/2 bg-[var(--color-secondary)] text-white text-sm px-4 py-2 rounded-none font-medium transition-all duration-300 inline-flex items-center transform  hover:bg-white hover:text-[var(--color-secondary)] hover:border-[var(--color-secondary)] border-2 border-transparent transition-colors duration-300"
             // style={{ color: isHovered ? "#f75821" : "#4B5563" }}
         >
           Learn more
