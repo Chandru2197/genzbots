@@ -2,7 +2,6 @@
 import { useEffect } from 'react';
 import Image from 'next/image';
 import { Parallax } from 'react-scroll-parallax';
-import TeamCollabrationSvg from '@/assets/svgs/team-collaboration.svg';
 import { ParallaxProvider } from 'react-scroll-parallax';
 
 interface AboutSectionProps {
@@ -25,7 +24,7 @@ export default function AboutSection({ addToRefs }: AboutSectionProps) {
             <Parallax speed={-15}>
               <div className="relative h-64 md:h-96 w-full rounded-2xl overflow-hidden bg-blue-100 shadow-lg border border-blue-200 mb-8 md:mb-0">
                 <Image
-                  src={TeamCollabrationSvg}
+                  src="/assets/svgs/team-collaboration.svg"
                   alt="Team Collaboration"
                   fill
                   className="object-cover"
