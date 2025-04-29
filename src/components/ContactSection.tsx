@@ -74,10 +74,19 @@ export default function ContactSection() {
           >
             {/* Section Title & Welcome */}
             <div>
-              <h2 className="text-2xl font-bold mb-2 text-orange-500">Let's Connect!</h2>
-              <p className="text-gray-600 mb-6">
-                We love hearing from you. Whether you have a question, want to partner, or just want to say hi—reach out!
-              </p>
+              <div className="container mx-auto px-4 py-16">
+                <div className="text-center mb-12 relative">
+                  <div className="relative">
+                    <h2 className="text-label font-label text-3xl md:text-4xl font-bold mb-6 bg-gradient-to-r from-[#FF5722] via-[#FF8A65] to-[#FF5722] bg-clip-text text-transparent">
+                      Get in Touch
+                    </h2>
+                    <div className="absolute -inset-1 bg-gradient-to-r from-[#FF5722]/20 via-[#FF8A65]/20 to-[#FF5722]/20 blur-lg -z-10 rounded-lg opacity-75"></div>
+                  </div>
+                  <p className="text-desc font-desc text-gray-600 mb-8 max-w-2xl mx-auto text-center">
+                    Ready to transform your business? Let's discuss your automation needs.
+                  </p>
+                </div>
+              </div>
               {/* Highlights */}
               <div className="space-y-4">
                 <div className="flex items-center gap-3">
@@ -234,12 +243,26 @@ export default function ContactSection() {
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-x-8 gap-y-2">
                   {featuresList.map((feature) => (
                     <label key={feature} className="flex items-center gap-2 cursor-pointer">
-                      <input
-                        type="checkbox"
-                        checked={features.includes(feature)}
-                        onChange={() => handleFeatureChange(feature)}
-                        className="w-5 h-5 accent-orange-500"
-                      />
+                      <div className="relative inline-flex">
+                        <input
+                          type="checkbox"
+                          checked={features.includes(feature)}
+                          onChange={() => handleFeatureChange(feature)}
+                          className="peer appearance-none w-5 h-5 border-2 border-[var(--color-secondary)] bg-white rounded-sm checked:bg-white checked:border-[var(--color-secondary)] focus:outline-none focus:ring-2 focus:ring-[var(--color-secondary)]/20 transition-colors cursor-pointer"
+                        />
+                        <svg
+                          className="absolute inset-0 w-full h-full pointer-events-none invisible peer-checked:visible text-[var(--color-secondary)] p-0.5"
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="3"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        >
+                          <polyline points="20 6 9 17 4 12" />
+                        </svg>
+                      </div>
                       <span className="text-gray-700">{feature}</span>
                     </label>
                   ))}
@@ -248,12 +271,26 @@ export default function ContactSection() {
               {/* Consent */}
               <div>
                 <label className="flex items-center gap-2 cursor-pointer">
-                  <input
-                    type="checkbox"
-                    checked={consent}
-                    onChange={() => setConsent((c) => !c)}
-                    className="w-5 h-5 accent-orange-500"
-                  />
+                  <div className="relative inline-flex">
+                    <input
+                      type="checkbox"
+                      checked={consent}
+                      onChange={() => setConsent((c) => !c)}
+                      className="peer appearance-none w-5 h-5 border-2 border-[var(--color-secondary)] bg-white rounded-sm checked:bg-white checked:border-[var(--color-secondary)] focus:outline-none focus:ring-2 focus:ring-[var(--color-secondary)]/20 transition-colors cursor-pointer"
+                    />
+                    <svg
+                      className="absolute inset-0 w-full h-full pointer-events-none invisible peer-checked:visible text-[var(--color-secondary)] p-0.5"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="3"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <polyline points="20 6 9 17 4 12" />
+                    </svg>
+                  </div>
                   <span className="text-gray-700 text-sm">
                     By submitting your personal data you agree to receive marketing communications.
                   </span>

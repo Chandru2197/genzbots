@@ -1,3 +1,5 @@
+"use client";
+
 import { useState } from "react";
 import Image from 'next/image';
 
@@ -84,84 +86,81 @@ export default function SolutionsTabs() {
   const activeSolution = solutions.find(s => s.id === activeTab) || solutions[0];
 
   return (
-    <section className="w-full py-8 px-2 sm:px-4 lg:px-8 xl:px-12 bg-gray-50">
-      <h2 className="text-label font-label text-center mb-8 text-[#2d2940]">Our Solutions</h2>
-      <p className="text-desc font-desc text-gray-600 max-w-3xl mx-auto text-center mb-8">
+    <section className="w-full py-8 px-2 sm:px-4 lg:px-8 xl:px-12">
+      <h2 className="text-label font-label text-center mb-6 text-[#2d2940]">Our Solutions</h2>
+      <p className="text-desc font-desc text-gray-600 max-w-3xl mx-auto text-center mb-6">
         Discover our comprehensive range of automation solutions designed to transform your business operations.
       </p>
-      <div className="w-full">
-        <div className="flex flex-wrap justify-center border-b border-[#bdb8d3] mb-4">
+      <div className="w-full max-w-7xl mx-auto">
+        {/* Simple Horizontal Tabs */}
+        <div className="flex flex-nowrap overflow-x-auto hide-scrollbar gap-4 mb-8">
           {solutions.map((solution) => (
             <button
               key={solution.id}
-              className={`relative px-2 sm:px-3 lg:px-4 py-1 text-xs sm:text-sm lg:text-base font-normal transition-colors whitespace-nowrap focus:outline-none
+              className={`flex-none px-4 py-2 rounded-lg text-sm transition-all duration-300 whitespace-nowrap
                 ${activeTab === solution.id
-                  ? "text-[var(--color-secondary)] font-medium"
-                  : "text-[#7c7890] hover:text-[var(--color-secondary)]"
+                  ? "bg-[#FF5722] text-white shadow-md"
+                  : "text-[#FF5722] hover:bg-[#FF5722]/10"
                 }`}
-              style={{ background: "none", borderRadius: 0 }}
               onClick={() => setActiveTab(solution.id)}
             >
               {solution.label}
-              {activeTab === solution.id && (
-                <span className="absolute left-1/2 -translate-x-1/2 bottom-0 block h-[2px] w-8 lg:w-12 bg-[var(--color-secondary)] rounded-full" />
-              )}
             </button>
           ))}
         </div>
       </div>
-      <div className="w-full flex justify-center">
-        <div className="relative bg-[#edeaf7] rounded-2xl flex items-center justify-center mx-auto py-8 sm:py-12 lg:py-16 group" 
-          style={{ 
-            minHeight: 'clamp(320px, 40vw, 500px)', 
-            maxWidth: 'clamp(700px, 80vw, 1200px)', 
-            width: '100%' 
-          }}>
-          <div className="text-[var(--color-secondary)] w-full flex items-center justify-center">
-            <Image
-              src={activeSolution.svg}
-              alt={activeSolution.label}
-              width={400}
-              height={200}
-              style={{ 
-                objectFit: 'contain',
-                width: 'clamp(200px, 30vw, 400px)',
-                height: 'auto'
-              }}
-              className="mx-auto blur-xs opacity-60 transition-all duration-300 group-hover:blur-0 group-hover:opacity-100"
-            />
-          </div>
-          <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4 lg:px-8 transition-all duration-300 group-hover:-translate-y-2 group-hover:scale-105">
-            <div className="text-label font-label mb-2 lg:mb-4 drop-shadow text-lg lg:text-xl">{activeSolution.label}</div>
-            <div className="text-desc font-desc drop-shadow max-w-2xl lg:max-w-3xl">{activeSolution.description}</div>
-          </div>
+      
+      {/* Content Area */}
+      <div className="relative bg-gradient-to-br from-[var(--color-primary)/5] via-[var(--color-secondary)/5] to-[var(--color-primary)/5] rounded-2xl flex items-center justify-center mx-auto py-6 sm:py-8 lg:py-10 group backdrop-blur-sm" 
+        style={{ 
+          minHeight: 'clamp(280px, 35vw, 400px)', 
+          maxWidth: 'clamp(600px, 70vw, 1000px)', 
+          width: '100%' 
+        }}>
+        <div className="text-[var(--color-secondary)] w-full flex items-center justify-center">
+          <Image
+            src={activeSolution.svg}
+            alt={activeSolution.label}
+            width={300}
+            height={150}
+            style={{ 
+              objectFit: 'contain',
+              width: 'clamp(150px, 25vw, 300px)',
+              height: 'auto'
+            }}
+            className="mx-auto blur-xs opacity-60 transition-all duration-300 group-hover:blur-0 group-hover:opacity-100"
+          />
+        </div>
+        <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4 lg:px-6 transition-all duration-300 group-hover:-translate-y-1">
+          <div className="text-label font-label mb-2 drop-shadow text-base lg:text-lg">{activeSolution.label}</div>
+          <div className="text-desc font-desc drop-shadow max-w-xl lg:max-w-2xl text-sm lg:text-base">{activeSolution.description}</div>
         </div>
       </div>
-      <div className="flex flex-col items-center text-center gap-6 p-4 sm:p-8 lg:p-12">
-        <div className="mt-2 w-full max-w-4xl">
-          <h4 className="text-label font-label mb-4 lg:mb-6 text-[#2d2940] text-lg lg:text-xl">Key Features:</h4>
-          <ul className="space-y-2 lg:space-y-3 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {activeSolution.features.map((feature, index) => (
-              <li key={index} className="flex items-start">
-                <svg className="w-4 h-4 lg:w-5 lg:h-5 text-[var(--color-secondary)] mt-1 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                </svg>
-                <span className="text-desc font-desc text-[#2d2940] text-sm lg:text-base">{feature}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-        <div className="mt-4 w-full flex justify-center">
-          <button 
-            className="text-btn font-btn bg-[var(--color-secondary)] text-white px-6 py-2 lg:px-8 lg:py-3 rounded-none transition-all duration-300 hover:bg-white hover:text-[var(--color-secondary)] hover:border-[var(--color-secondary)] border-2 border-transparent text-sm lg:text-base"
-          >
-            Learn More
-            <svg className="w-4 h-4 lg:w-5 lg:h-5 ml-2 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-            </svg>
-          </button>
+      
+      {/* Features Grid */}
+      <div className="mt-6 w-full max-w-4xl mx-auto px-4">
+        <h4 className="text-label font-label mb-4 text-[#2d2940] text-base">Key Features:</h4>
+        <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+          {activeSolution.features.map((feature, index) => (
+            <div key={index} className="flex items-start bg-gradient-to-r from-[var(--color-primary)/5] via-[var(--color-secondary)/5] to-[var(--color-primary)/5] backdrop-blur-sm p-2 rounded-lg">
+              <svg className="w-4 h-4 text-[var(--color-secondary)] mt-1 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+              </svg>
+              <span className="text-desc font-desc text-gray-600 text-xs">{feature}</span>
+            </div>
+          ))}
         </div>
       </div>
+
+      <style jsx global>{`
+        .hide-scrollbar {
+          -ms-overflow-style: none;
+          scrollbar-width: none;
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+          display: none;
+        }
+      `}</style>
     </section>
   );
 } 

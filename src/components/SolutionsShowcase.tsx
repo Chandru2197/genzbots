@@ -115,7 +115,7 @@ export default function SolutionsShowcase({ addToRefs }: SolutionsShowcaseProps)
   const activeIndex = solutions.findIndex(s => s.id === activeTab);
 
   return (
-    <section id="solutions" className="py-1 bg-gray-50 mb-1">
+    <section id="solutions" className="py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         {/* Decorative background/image with parallax (optional) */}
         {/* <motion.div
@@ -133,59 +133,53 @@ export default function SolutionsShowcase({ addToRefs }: SolutionsShowcaseProps)
         {/* Heading with parallax */}
         <motion.div
           ref={headingRef}
-          // data-speed="0.08"
-          className="text-center mb-8 pt-8 bg-gray-50 relative z-20"
+          className="text-center mb-16 relative z-20"
           initial={{ opacity: 0, y: 50 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
         >
-          <h2 className="text-label font-label mb-4">Our Solutions</h2>
-          <p className="text-desc font-desc text-gray-600 max-w-3xl mx-auto">
-            Discover our comprehensive range of automation solutions designed to transform your business operations.
+          <div className="relative mb-4">
+            <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-[#FF5722] via-[#FF8A65] to-[#FF5722] bg-clip-text text-transparent">
+              Our Solutions
+            </h2>
+            <div className="absolute -inset-1 bg-gradient-to-r from-[#FF5722]/20 via-[#FF8A65]/20 to-[#FF5722]/20 blur-lg -z-10 rounded-lg opacity-75"></div>
+          </div>
+          <p className="text-gray-600 mb-8 text-center max-w-2xl mx-auto">
+            Explore our comprehensive suite of automation solutions
           </p>
         </motion.div>
 
-        {/* Tabs Navigation (NOT parallax) */}
-        <div className="flex justify-center mb-2 relative z-10">
-          <div className="w-full">
-            <div className="flex w-full border-b border-gray-200">
-              {solutions.map(solution => (
-                <a
-                  key={solution.id}
-                  onClick={() => setActiveTab(solution.id)}
-                  className={`flex-1 text-center py-3 px-2 transition-colors duration-300 cursor-pointer text-xs sm:text-sm lg:text-base`}
-                  style={activeTab === solution.id 
-                    ? {
-                        backgroundColor: '#f75821', 
-                        color: 'white',
-                        borderTopLeftRadius: '0.5rem',
-                        borderTopRightRadius: '0.5rem',
-                      } 
-                    : {
-                        color: '#f75821',
-                        backgroundColor: 'white',
-                      }
+        {/* Tabs Navigation */}
+        <div className="w-full max-w-7xl mx-auto mb-12">
+          <div className="flex justify-between items-center w-full">
+            {solutions.map((solution, index) => (
+              <button
+                key={solution.id}
+                className={`flex-1 px-2 py-2 text-xs sm:text-sm transition-all duration-300 whitespace-nowrap relative
+                  ${activeTab === solution.id
+                    ? "bg-[#FF5722] text-white"
+                    : "text-[#FF5722] hover:bg-[#FF5722]/10"
                   }
-                >
-                  <span className="text-xs hidden md:inline">{solution.label}</span>
-                  <span className="text-xs md:hidden">
-                    {solution.label.split(' ')[0]}
-                  </span>
-                </a>
-              ))}
-            </div>
+                  ${index !== solutions.length - 1 ? "border-r border-[#FF5722]/30" : ""}
+                `}
+                onClick={() => setActiveTab(solution.id)}
+              >
+                <span className="hidden sm:inline">{solution.label}</span>
+                <span className="sm:hidden">{solution.label.split(' ')[0]}</span>
+              </button>
+            ))}
           </div>
         </div>
 
-        {/* Tab Content (NOT parallax) */}
-        <div className="bg-white rounded-b-xl shadow-lg overflow-hidden border-t-0 pt-6 relative z-10">
-          <div className={`flex flex-col md:flex-row ${activeIndex % 2 === 0 ? 'md:flex-row-reverse' : ''}`}>
-            {/* Content Section */}
-            <div className="md:w-1/2 p-6 md:p-10">
-              <h2 className="text-label font-label mb-4">{activeSolution.title}</h2>
-              <p className="text-desc font-desc text-gray-600 mb-6">{activeSolution.description}</p>
-              <h4 className="text-label font-label mb-4">Key Features:</h4>
-              <ul className="space-y-3">
+        {/* Content Section */}
+        <div className="relative z-10">
+          <div className={`flex flex-col md:flex-row ${activeIndex % 2 === 0 ? 'md:flex-row-reverse' : ''} gap-8 items-center`}>
+            {/* Content Side */}
+            <div className="md:w-1/2 p-6 md:p-10 bg-white/70 backdrop-blur-md rounded-2xl shadow-xl">
+              <h2 className="text-2xl md:text-3xl font-bold mb-4 text-[var(--color-primary)]">{activeSolution.title}</h2>
+              <p className="text-gray-600 mb-8 text-lg">{activeSolution.description}</p>
+              <h4 className="text-xl font-semibold mb-6 text-[var(--color-secondary)]">Key Features:</h4>
+              <ul className="space-y-4">
                 {activeSolution.features.map((feature, index) => (
                   <motion.li
                     key={index}
@@ -194,38 +188,40 @@ export default function SolutionsShowcase({ addToRefs }: SolutionsShowcaseProps)
                     animate={isInView ? { opacity: 1, x: 0 } : {}}
                     transition={{ duration: 0.3, delay: index * 0.1 }}
                   >
-                    <svg className="w-5 h-5 text-[var(--color-secondary)] mt-1 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                    <svg className="w-6 h-6 text-[var(--color-secondary)] mt-1 mr-3" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                     </svg>
-                    <span className="text-desc font-desc text-gray-700">{feature}</span>
+                    <span className="text-gray-700">{feature}</span>
                   </motion.li>
                 ))}
               </ul>
               <button 
-                className="text-btn font-btn bg-[var(--color-secondary)] text-white px-6 py-3 rounded-none transition-all duration-300 inline-flex items-center transform hover:bg-white hover:text-[var(--color-secondary)] hover:border-[var(--color-secondary)] border-2 border-transparent transition-colors duration-300"
+                className="mt-8 bg-[var(--color-secondary)] text-white px-8 py-3 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 flex items-center group"
               >
                 Learn More
-                <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-5 h-5 ml-2 transform transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
                 </svg>
               </button>
             </div>
-            {/* Image Section */}
-            <div className={`md:w-1/2 ${activeSolution.image} flex items-center justify-center p-10`}>
-              <div className="aspect-w-16 aspect-h-9 w-full relative">
-                <div className="absolute inset-0 flex items-center justify-center text-blue-800 text-2xl font-bold">
-                  <Image
-                    src={activeSolution.svg}
-                    alt={activeSolution.label}
-                    sizes="25vw"
-                    width={400}
-                    height={200}
-                    style={{
-                      width: 'clamp(200px, 30vw, 400px)',
-                      height: 'auto',
-                      objectFit: 'contain',
-                    }}
-                  />
+
+            {/* Image Side */}
+            <div className="md:w-1/2">
+              <div className="relative h-[400px] md:h-[500px] w-full group">
+                <div className="absolute inset-0 bg-gradient-to-r from-[var(--color-primary)/10] to-[var(--color-secondary)/10] rounded-2xl blur-xl transform transition-all duration-300 group-hover:scale-105"></div>
+                <div className="relative w-full h-full bg-white/50 backdrop-blur-sm rounded-2xl shadow-xl transform transition-all duration-300 group-hover:scale-105 overflow-hidden">
+                  <div className="absolute inset-0 flex items-center justify-center p-8">
+                    <Image
+                      src={activeSolution.svg}
+                      alt={activeSolution.label}
+                      fill
+                      style={{
+                        objectFit: 'contain',
+                        padding: '2rem'
+                      }}
+                      className="transition-transform duration-300 group-hover:scale-110"
+                    />
+                  </div>
                 </div>
               </div>
             </div>

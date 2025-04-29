@@ -12,12 +12,13 @@ import AboutSection from '@/components/AboutSection';
 import SolutionsShowcase from '@/components/SolutionsShowcase';
 import PartnerShowcase from '@/components/PartnerSection';
 import ProjectsCarousel from '@/components/ProjectsCarousel';
-import TestimonialsCarousel from '@/components/TestimonialsCarousel';
+import TestimonialsSection from '@/components/TestimonialsSection';
 import ContactSection from '@/components/ContactSection';
 import Footer from '@/components/Footer';
 import AutomationCards from '@/components/AutomationCards';
 import SolutionsTabs from '@/components/SolutionsTabs';
 import Glass3DCardStyled from '@/components/Glass3DCardStyled';
+import SectionWrapper from '@/components/SectionWrapper';
 
 export default function Home() {
   const parallaxRefs = useRef<HTMLElement[]>([]);
@@ -76,14 +77,27 @@ export default function Home() {
     <main className="min-h-screen">
       <Navbar addToRefs={addToRefs} />
       <HeroSection addToRefs={addToRefs} />
-      <FeaturesSection addToRefs={addToRefs} />
-      <AutomationCards/>
-      {/* <SolutionsTabs/> */}
-      <SolutionsShowcase addToRefs={addToRefs} />
-      <ProjectsCarousel addToRefs={addToRefs} />
-      <TestimonialsCarousel addToRefs={addToRefs} />
-      <PartnerShowcase addToRefs={addToRefs}/>
-      <AboutSection addToRefs={addToRefs} />
+      <SectionWrapper>
+        <FeaturesSection addToRefs={addToRefs} />
+      </SectionWrapper>
+      <SectionWrapper isAlternate>
+        <AutomationCards/>
+      </SectionWrapper>
+      <SectionWrapper>
+        <SolutionsShowcase addToRefs={addToRefs} />
+      </SectionWrapper>
+      <SectionWrapper isAlternate>
+        <ProjectsCarousel addToRefs={addToRefs} />
+      </SectionWrapper>
+      <SectionWrapper>
+        <TestimonialsSection addToRefs={addToRefs} />
+      </SectionWrapper>
+      <SectionWrapper isAlternate>
+        <PartnerShowcase addToRefs={addToRefs}/>
+      </SectionWrapper>
+      <SectionWrapper>
+        <AboutSection addToRefs={addToRefs} />
+      </SectionWrapper>
       <ContactSection />
       <Footer />
     </main>

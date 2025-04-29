@@ -55,12 +55,18 @@ export default function ServicesSection({ addToRefs }: ServicesSectionProps) {
   return (
     <section id="services" className="py-24 bg-gray-50 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div ref={servicesTitle} data-speed="0.08" className="parallax text-center mb-16">
-          <h2 className="text-label font-label mb-4">Our Services</h2>
-          <p className="text-desc font-desc text-gray-600 max-w-3xl mx-auto">
-            Comprehensive automation solutions designed to optimize your business processes
-            and drive digital transformation.
-          </p>
+        <div className="container mx-auto px-4 py-16">
+          <div className="text-center mb-12 relative">
+            <div className="relative">
+              <h2 className="text-label font-label text-3xl md:text-4xl font-bold mb-6 bg-gradient-to-r from-[#FF5722] via-[#FF8A65] to-[#FF5722] bg-clip-text text-transparent">
+                Our Services
+              </h2>
+              <div className="absolute -inset-1 bg-gradient-to-r from-[#FF5722]/20 via-[#FF8A65]/20 to-[#FF5722]/20 blur-lg -z-10 rounded-lg opacity-75"></div>
+            </div>
+            <p className="text-desc font-desc text-gray-600 mb-8 max-w-2xl mx-auto text-center">
+              Discover our comprehensive range of automation and development solutions.
+            </p>
+          </div>
         </div>
         
         <div ref={servicesCards} data-speed="0.05" className="parallax">

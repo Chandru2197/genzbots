@@ -41,7 +41,23 @@ export default function AboutSection({ addToRefs }: AboutSectionProps) {
           {/* Main content - NO parallax */}
           <div className="md:w-1/2 order-1 md:order-2">
             <div>
-              <h2 className="text-label font-label mb-4 md:mb-6">About GenZBot</h2>
+              <div className="text-center mb-8 relative">
+                <div className="relative">
+                  <h2 className="text-label font-label text-3xl md:text-4xl font-bold mb-6 bg-gradient-to-r from-[#FF5722] via-[#FF8A65] to-[#FF5722] bg-clip-text text-transparent">
+                    About Our Mission
+                  </h2>
+                  <div className="absolute -inset-1 bg-gradient-to-r from-[#FF5722]/20 via-[#FF8A65]/20 to-[#FF5722]/20 blur-lg -z-10 rounded-lg opacity-75"></div>
+                </div>
+                <p className="text-desc font-desc text-gray-600 mb-8 max-w-2xl mx-auto text-center">
+                  Empowering businesses with cutting-edge automation solutions for the digital age.
+                </p>
+              </div>
+              <div className="relative mb-6">
+                <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-[#FF5722] via-[#FF8A65] to-[#FF5722] bg-clip-text text-transparent">
+                  About GenZBot
+                </h2>
+                <div className="absolute -inset-1 bg-gradient-to-r from-[#FF5722]/20 via-[#FF8A65]/20 to-[#FF5722]/20 blur-lg -z-10 rounded-lg opacity-75"></div>
+              </div>
               <p className="text-desc font-desc text-gray-600 mb-4 md:mb-6">
                 Founded in 2018, GenZBot has been at the forefront of business automation solutions, 
                 helping companies of all sizes transform their operations through innovative technology.

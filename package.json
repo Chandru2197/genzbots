@@ -20,7 +20,8 @@
     "react-dom": "^19.0.0",
     "react-phone-input-2": "^2.15.1",
     "react-scroll-parallax": "^3.4.5",
-    "styled-components": "^6.1.17"
+    "styled-components": "^6.1.17",
+    "swiper": "^11.2.6"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
