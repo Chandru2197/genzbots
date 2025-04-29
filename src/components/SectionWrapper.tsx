@@ -6,21 +6,11 @@ interface SectionWrapperProps {
   isAlternate?: boolean;
 }
 
-const SectionWrapper: React.FC<SectionWrapperProps> = ({ children, isAlternate = false }) => {
-  return (
-    <StyledSectionWrapper isAlternate={isAlternate}>
-      <div className="content-wrapper">
-        {children}
-      </div>
-    </StyledSectionWrapper>
-  );
-};
-
-const StyledSectionWrapper = styled.section<{ isAlternate: boolean }>`
+const StyledSection = styled.section<{ $isAlternate?: boolean }>`
   position: relative;
   padding: 6rem 0;
-  background: ${({ isAlternate }) => 
-    isAlternate 
+  background: ${({ $isAlternate }) => 
+    $isAlternate 
       ? 'linear-gradient(to bottom, rgba(247, 88, 33, 0.05), rgba(247, 88, 33, 0.1))'
       : 'linear-gradient(to bottom, rgba(30, 120, 193, 0.05), rgba(30, 120, 193, 0.1))'
   };
@@ -32,8 +22,8 @@ const StyledSectionWrapper = styled.section<{ isAlternate: boolean }>`
     left: 0;
     right: 0;
     height: 1px;
-    background: ${({ isAlternate }) => 
-      isAlternate 
+    background: ${({ $isAlternate }) => 
+      $isAlternate 
         ? 'linear-gradient(90deg, transparent, rgba(247, 88, 33, 0.2), transparent)'
         : 'linear-gradient(90deg, transparent, rgba(30, 120, 193, 0.2), transparent)'
     };
@@ -46,8 +36,8 @@ const StyledSectionWrapper = styled.section<{ isAlternate: boolean }>`
     left: 0;
     right: 0;
     height: 1px;
-    background: ${({ isAlternate }) => 
-      isAlternate 
+    background: ${({ $isAlternate }) => 
+      $isAlternate 
         ? 'linear-gradient(90deg, transparent, rgba(247, 88, 33, 0.2), transparent)'
         : 'linear-gradient(90deg, transparent, rgba(30, 120, 193, 0.2), transparent)'
     };
@@ -67,5 +57,15 @@ const StyledSectionWrapper = styled.section<{ isAlternate: boolean }>`
     }
   }
 `;
+
+const SectionWrapper: React.FC<SectionWrapperProps> = ({ children, isAlternate = false }) => {
+  return (
+    <StyledSection $isAlternate={isAlternate}>
+      <div className="content-wrapper">
+        {children}
+      </div>
+    </StyledSection>
+  );
+};
 
 export default SectionWrapper; 

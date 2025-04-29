@@ -14,7 +14,10 @@ interface SolutionTab {
   label: string;
   title: string;
   description: string;
+  features_label:string;
   features: string[];
+  highlight: string;
+  button_label: string;
   image: string;
   svg: string;
 }
@@ -33,54 +36,58 @@ export default function SolutionsShowcase({ addToRefs }: SolutionsShowcaseProps)
   const solutions: SolutionTab[] = [
     {
       id: 'automation',
-      label: 'Process Assessment & Optimization',
-      title: 'Streamline Your Business Workflows',
+      label: 'Time Liberation Package',
+      title: 'Get Back 15 Hours/Week Guaranteed',
       description: 'Our process automation solutions help businesses eliminate repetitive tasks, minimize errors, and speed up operations. We analyze your existing workflows and identify opportunities for automation, implementing tailored solutions that drive efficiency.',
+      features_label:"We automate your:",
       features: [
-        'Workflow analysis and optimization',
-        'Custom automation scripts and tools',
-        'Integration with existing systems',
-        'Real-time monitoring and analytics',
-        'Automated reporting and notifications'
+        'Invoice processing',
+        'Data entry',
+        'Report generation'
       ],
+      highlight: 'Like hiring 2 FTEs for 1/10th the cost',
+      button_label: 'Free Time Calculator',
       image: 'bg-blue-100',
       svg: '/assets/svgs/undraw_process.svg',
     },
     {
       id: 'integration',
-      label: 'Custom Bot Development',
-      title: 'Connect Your Systems Seamlessly',
+      label: 'Profit Rescue Kit',
+      title: 'Stop Losing Money to Human Errors',
       description: 'Break down data silos with our comprehensive data integration solutions. We connect disparate systems, databases, and applications to enable smooth data flow across your organization, providing a unified view of your business information.',
+      features_label:"Automatically catch:",
       features: [
-        'API development and integration',
-        'ETL (Extract, Transform, Load) processes',
-        'Real-time data synchronization',
-        'Secure data transfer protocols',
-        'Custom connectors for legacy systems'
+        'Overpayments',
+        'Missed billings',
+        'Compliance gaps'
       ],
+      highlight: 'Recovered $240K/year for a mid-size law firm',
+      button_label: 'See Recovery Bot in Action ',
       image: 'bg-green-100',
       svg: '/assets/svgs/undraw_robotics.svg',
     },
     {
       id: 'rpa',
-      label: 'Intelligent Workflow Automation',
-      title: 'Automate with Robotic Process Automation',
+      label: 'Growth Accelerator',
+      title: 'Scale Operations Without Hiring',
       description: 'Our RPA solutions deploy software robots to handle high-volume, rule-based tasks with precision and speed. These digital workers operate 24/7, freeing your human talent to focus on more strategic, creative, and customer-facing activities.',
+      features_label:"Our bots become your:",
       features: [
-        'Bot development and deployment',
-        'Process mining and analysis',
-        'Attended and unattended automation',
-        'Exception handling and reporting',
-        'Centralized bot management'
+        '24/7 sales ops team',
+        'Instant customer service rep',
+        'AI-powered analyst'
       ],
+      highlight: 'Helped 8-figure startups grow with zero added headcount',
+      button_label: 'Match a Bot to Your Goal',
       image: 'bg-purple-100',
       svg: '/assets/svgs/undraw_automation.svg',
     },
     {
       id: 'custom',
-      label: 'Implementation & Training',
+      label: 'Custom Bot Development',
       title: 'Tailor-Made Solutions for Your Business',
       description: `When off-the-shelf software doesn't meet your needs, our custom development team creates bespoke applications specifically designed for your unique business requirements, ensuring perfect alignment with your processes and goals.`,
+      features_label:"We automate your:",
       features: [
         'Requirements analysis and planning',
         'User-centered design process',
@@ -88,24 +95,28 @@ export default function SolutionsShowcase({ addToRefs }: SolutionsShowcaseProps)
         'Comprehensive testing and QA',
         'Ongoing maintenance and support'
       ],
+      highlight: 'Like hiring 2 FTEs for 1/10th the cost',
+      button_label: 'See Recovery Bot in Action ',
       image: 'bg-orange-100',
       svg: '/assets/svgs/undraw_online_learning.svg',
     },
-    {
-      id: 'ai',
-      label: 'Support & Continuous Improvement',
-      title: 'Intelligent Automation Solutions',
-      description: 'Leverage the power of artificial intelligence and machine learning to unlock predictive capabilities and intelligent automation. Our AI solutions learn from data patterns to make decisions, optimize processes, and deliver actionable insights.',
-      features: [
-        'Predictive analytics models',
-        'Natural language processing',
-        'Computer vision solutions',
-        'Decision support systems',
-        'Continuous learning algorithms'
-      ],
-      image: 'bg-red-100',
-      svg: '/assets/svgs/undraw_support.svg',
-    }
+    // {
+    //   id: 'ai',
+    //   label: 'Support & Continuous Improvement',
+    //   title: 'Intelligent Automation Solutions',
+    //   description: 'Leverage the power of artificial intelligence and machine learning to unlock predictive capabilities and intelligent automation. Our AI solutions learn from data patterns to make decisions, optimize processes, and deliver actionable insights.',
+    //   features_label:"We automate your:",
+    //   features: [
+    //     'Predictive analytics models',
+    //     'Natural language processing',
+    //     'Computer vision solutions',
+    //     'Decision support systems',
+    //     'Continuous learning algorithms'
+    //   ],
+    //   highlight: 'Like hiring 2 FTEs for 1/10th the cost',
+    //   image: 'bg-red-100',
+    //   svg: '/assets/svgs/undraw_support.svg',
+    // }
   ];
   const getActiveSolution = () => {
     return solutions.find(solution => solution.id === activeTab) || solutions[0];
@@ -178,7 +189,7 @@ export default function SolutionsShowcase({ addToRefs }: SolutionsShowcaseProps)
             <div className="md:w-1/2 p-6 md:p-10 bg-white/70 backdrop-blur-md rounded-2xl shadow-xl">
               <h2 className="text-2xl md:text-3xl font-bold mb-4 text-[var(--color-primary)]">{activeSolution.title}</h2>
               <p className="text-gray-600 mb-8 text-lg">{activeSolution.description}</p>
-              <h4 className="text-xl font-semibold mb-6 text-[var(--color-secondary)]">Key Features:</h4>
+              <h4 className="text-xl font-semibold mb-6 text-[var(--color-secondary)]">{activeSolution.features_label}</h4>
               <ul className="space-y-4">
                 {activeSolution.features.map((feature, index) => (
                   <motion.li
@@ -198,7 +209,7 @@ export default function SolutionsShowcase({ addToRefs }: SolutionsShowcaseProps)
               <button 
                 className="mt-8 bg-[var(--color-secondary)] text-white px-8 py-3 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 flex items-center group"
               >
-                Learn More
+                {activeSolution.button_label}
                 <svg className="w-5 h-5 ml-2 transform transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
                 </svg>

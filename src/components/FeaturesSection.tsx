@@ -4,6 +4,7 @@
 import { useRef, useEffect } from "react";
 import { motion, useInView } from "framer-motion";
 import Glass3DCardStyled from '@/components/Glass3DCardStyled';
+import CustomeListCard from "./custome/card/CustomeListCard";
 
 interface FeaturesSectionProps {
   addToRefs: (el: HTMLElement | null) => void;
@@ -11,25 +12,45 @@ interface FeaturesSectionProps {
 
 export const features = [
   {
-    title: "Process Assessment & Optimization",
-    description: "Streamline repetitive tasks and workflows to save time and reduce errors.",
+    title: "15-Minute Bot Rescue",
+    sub:"Emergency Fix Guarantee",
+    description: "1.Broken bot? We diagnose & fix in <24 hours 2. 24/7 ER for your automation",
+    key:[" Broken bot? We diagnose & fix in <24 hours"," 24/7 ER for your automation"]
   },
   {
-    title: "Custom Bot Development",
-    description: "Connect your systems and applications for seamless data flow.",
+    title: "Pay-As-You-Grow",
+    sub:"No Lock-In Scaling",
+    description: `1.Start with 1 bot ($800)
+    2.Scale to 100+ with volume discounts
+    3.Only pay for what you use`,
+    key:["Start with 1 bot ($800)",
+      "Scale to 100+ with volume discounts",
+      "Only pay for what you use"]
   },
   {
-    title: "Intelligent Workflow Automation",
-    description: "Tailored automation solutions designed specifically for your business needs.",
+    title: "Invisible IT Team",
+    sub:"Hands-Free Maintenance",
+    description: `1.We monitor & optimize automatically
+
+2.Get surprise upgrades every quarter
+
+3.Forget tech debt exists`,
+key:["We monitor & optimize automatically","Get surprise upgrades every quarter","Forget tech debt exists"]
   },
   {
-    title: "Implementation & Training",
-    description: "Gain insights from your data with automated analytics and reporting tools.",
+    title: "Future-Proof Bots",
+    sub:"Self-Learning AI",
+    description: `1.Bots improve from your team's habits
+
+2.Auto-adapts to software updates
+
+3.Gets smarter while you sleep`,
   },
-  {
-    title: "Support & Continuous Improvement",
-    description: "Continuous improvement and support for your automation journey.",
-  },
+  // {
+  //   title: "Support & Continuous Improvement",
+  //   sub:"Emergency Fix Guarantee",
+  //   description: "Continuous improvement and support for your automation journey.",
+  // },
 ];
 
 export default function FeaturesSection({ addToRefs }: FeaturesSectionProps) {
@@ -82,15 +103,26 @@ export default function FeaturesSection({ addToRefs }: FeaturesSectionProps) {
               <div className="w-full md:w-1/2 flex justify-center">
                 <Glass3DCardStyled
                   title={feature.title}
+                  sub={feature.sub}
                   description={feature.description}
                   colorVariant={idx % 2 === 0 ? 'primary' : 'secondary'}
                 />
               </div>
               <div className="w-full md:w-1/2 text-center md:text-left flex flex-col items-center md:items-start justify-center relative">
-                <div className="relative z-10 p-6">
+              {feature?.key?.map((key, index) => (
+        //         <div id={key+index} className="w-[300px] px-4 py-5 bg-white flex flex-col gap-3 rounded-md shadow-[0px_0px_15px_rgba(0,0,0,0.09)]">
+        // <div className="w-full fill-blue-500">
+        //           {key}
+        //           </div>
+        //       </div>
+        <CustomeListCard label={key}/>
+              ))}
+
+                {/* <div className="relative z-10 p-6">
                   <h3 className="text-2xl font-bold mb-2 text-[var(--color-primary)]">{feature.title}</h3>
+                  <p className="text-gray-600">{feature.sub}</p>
                   <p className="text-gray-600">{feature.description}</p>
-                </div>
+                </div> */}
                 <div className="absolute inset-0 bg-gradient-to-r from-[var(--color-primary)/5] via-[var(--color-secondary)/5] to-[var(--color-primary)/5] backdrop-blur-sm rounded-2xl -z-10"></div>
               </div>
             </div>

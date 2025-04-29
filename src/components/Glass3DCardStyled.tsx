@@ -3,12 +3,14 @@ import styled from 'styled-components';
 
 interface Glass3DCardStyledProps {
   title?: string;
+  sub?:string;
   description?: string;
   colorVariant?: 'primary' | 'secondary';
 }
 
 const Glass3DCardStyled: React.FC<Glass3DCardStyledProps> = ({
   title = 'UIVERSE (3D UI)',
+  sub = 'UIVERSE',
   description = 'Create, share, and use beautiful custom elements made with CSS',
   colorVariant = 'primary',
 }) => {
@@ -98,7 +100,8 @@ const Glass3DCardStyled: React.FC<Glass3DCardStyledProps> = ({
           <div className="glass" />
           <div className="content">
             <span className="title">{title}</span>
-            <span className="text">{description}</span>
+            {/* <span className="title">{sub}</span> */}
+            <span className="text">{sub}</span>
           </div>
           <div className="bottom">
             <div className="view-more">

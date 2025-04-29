@@ -10,7 +10,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="col-span-1 md:col-span-2">
             <Image
-              src={'/assets/svgs/GenZBotLogo.svg'}
+              src={'/Zlogo.svg'}
               alt="Logo"
               width={125}
               height={125}

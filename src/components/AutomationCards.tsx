@@ -62,9 +62,9 @@ const AutomationCard = ({
           <p className="text-desc font-desc text-sm text-gray-600 mb-5 flex-grow">{description}</p>
           {technologies.length > 0 && (
             <div className="mb-4">
-              <p className="text-xs font-semibold text-gray-700 mb-2">
+              {/* <p className="text-xs font-semibold text-gray-700 mb-2">
                 Technologies:
-              </p>
+              </p> */}
               <div className="flex flex-wrap gap-2">
                 {technologies.map((tech, index) => (
                   <span
@@ -117,42 +117,41 @@ export default function AutomationCards({ addToRefs }: { addToRefs?: (el: HTMLEl
 
   const services = [
     {
-      title: "Discover",
+      title: "Discovery Call (Free, 30 mins)",
       description:
-        "We begin by understanding your business challenges and process inefficiencies.",
+        "We analyze your pain points via:",
       icon: Search,
-      technologies: ["Process Analysis", "Workflow Assessment"],
+      technologies: ["Process audit", "ROI estimation","Bot recommendation"],
     },
     {
-      title: "Design",
+      title: "Bot Blueprint (48 hrs)",
       description:
-        "We create custom automation solutions aligned with your business objectives.",
+        "✍️ You receive",
       icon: Lightbulb,
-      technologies: ["Solution Architecture", "ROI Planning"],
+      technologies: ["Custom workflow diagram", "Timeline & pricing","Integration checklist"],
     },
     {
-      title: "Develop",
-      description: "Our expert team builds robust, scalable automation solutions.",
+      title: "Build & Test (1-3 weeks)",
+      description: "👩💻 We:",
       icon: Code,
-      technologies: ["UiPath", "Automation Anywhere", "Power Automate"],
+      technologies: ["Develop in agile sprints", "Share weekly demo videos", "Train your team via Discord"],
     },
     {
-      title: "Deploy",
+      title: "Hypercare Launch (2 weeks)",
       description:
-        "We implement solutions with minimal disruption to your operations.",
+        "🚨 Includes:",
       icon: Rocket,
-      technologies: ["Change Management", "User Training"],
+      technologies: ["24/7 priority support", "Performance analytics",'3 free tweaks'],
     },
     {
-      title: "Technology Expertise",
+      title: "Scale & Optimize (Ongoing)",
       description:
-        "We work with leading RPA and AI technologies to deliver the best solution for your needs.",
+        "📈 We:",
       icon: Server,
       technologies: [
-        "UiPath",
-        "Automation Anywhere",
-        "Blue Prism",
-        "IBM Automation",
+        "Suggest new automations",
+        "Provide quarterly health checks",
+        "Celebrate your time savings!"
       ],
     },
     {
