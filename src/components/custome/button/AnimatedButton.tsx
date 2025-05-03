@@ -29,6 +29,7 @@ const AnimatedButton = ({title}:any) => {
         `}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
+        suppressHydrationWarning
       >
         <div className="relative z-10 flex items-center">
           {title}

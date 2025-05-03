@@ -205,13 +205,13 @@ export default function FeaturesSection({ addToRefs }: FeaturesSectionProps) {
                     <IconWrapper>
                       {<feature.icon />}
                     </IconWrapper>
-                    <h3 className="text-2xl font-bold text-gray-800 mb-2">
+                    <h3 className="text-2xl font-bold text-[var(--color-tertiary)] mb-2">
                       {feature.title}
                     </h3>
                     <p className="text-gray-600 font-medium">{feature.sub}</p>
                   </CardFront>
                   <CardBack>
-                    <h4 className="text-xl font-bold text-gray-800 mb-4">{feature.title}</h4>
+                    <h4 className="text-xl font-bold text-[var(--color-tertiary)] mb-4">{feature.title}</h4>
                     {feature.key?.map((point, index) => (
                       <KeyPoint key={index}>
                         <span className="text-gray-700">{point}</span>

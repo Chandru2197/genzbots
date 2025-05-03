@@ -76,7 +76,7 @@ export default function Navbar({ addToRefs }: NavbarProps) {
   };
 
   return (
-    <nav className={`sticky top-0 w-full z-50 bg-white/90 backdrop-blur-sm shadow-md`}>
+    <nav className={`fixed top-0 w-full z-[100] bg-white/95 backdrop-blur-sm shadow-md transition-all duration-300 ${isScrolled ? 'shadow-lg' : 'shadow-md'}`}>
       <div className="max-w-screen-xl mx-auto h-14 lg:h-16 flex justify-between items-center px-4">
         {/* Logo (left) */}
         <div className="flex items-center w-[200px]">
@@ -103,6 +103,7 @@ export default function Navbar({ addToRefs }: NavbarProps) {
                     className={`text-menu font-medium transition-colors flex items-center ${
                       activeDropdown === item.label ? 'text-[var(--color-secondary)]' : 'text-gray-700 hover:text-[var(--color-secondary)]'
                     }`}
+                    suppressHydrationWarning
                   >
                     {item.label}
                     <svg
@@ -166,6 +167,7 @@ export default function Navbar({ addToRefs }: NavbarProps) {
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className="inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-[var(--color-secondary)] hover:bg-orange-50 focus:outline-none transition-colors duration-200"
+              suppressHydrationWarning
             >
               <svg
                 className={`${mobileMenuOpen ? 'hidden' : 'block'} h-6 w-6`}
@@ -215,6 +217,7 @@ export default function Navbar({ addToRefs }: NavbarProps) {
                   <button
                     onClick={() => toggleDropdown(item.label)}
                     className="flex justify-between items-center w-full px-3 py-2 text-label font-label text-gray-800 hover:text-[var(--color-secondary)] hover:bg-orange-50 font-medium transition-colors rounded-md"
+                    suppressHydrationWarning
                   >
                     <span>{item.label}</span>
                     <svg
