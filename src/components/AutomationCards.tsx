@@ -42,63 +42,77 @@ const AutomationCard = ({
       transition={{ duration: 0.6, delay: delay * 0.1 }}
       className="h-full"
     >
-      <div
-        className="h-full flex flex-col p-8"
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
+      <GlassmorphismCard
+        variant={delay % 2 === 0 ? "primary" : "secondary"}
+        data-hoverable="true"
+        className="h-full relative"
       >
-        {/* Icon in circular background */}
-        <div className="mb-6">
-          <div 
-            className="w-[70px] h-[70px] rounded-full bg-[#FFF4F1] flex items-center justify-center text-[var(--color-secondary)]"
-          >
-            <Icon size={28} />
+        <div
+          className="h-full p-8 pb-24"
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
+        >
+          {/* Icon */}
+          <div className="mb-5">
+            <div 
+              className={`w-[80px] h-[80px] rounded-full flex items-center justify-center transition-colors duration-300 ${
+                isHovered ? "bg-[var(--color-secondary)] text-white" : "bg-[#FFF1ED] text-[var(--color-secondary)]"
+              }`}
+            >
+              <Icon size={26} color={isHovered ? "white" : "var(--color-secondary)"} />
+            </div>
           </div>
-        </div>
-        
-        {/* Title */}
-        <h3 className="text-[#0A6E94] text-xl font-bold mb-4">{title}</h3>
-        
-        {/* Description */}
-        <p className="text-gray-600 mb-6">{description}</p>
-        
-        {/* Features list with light gray backgrounds */}
-        <div className="flex-grow">
-          <div className="flex flex-wrap">
+          
+          {/* Title */}
+          <h3 className="text-[#0A6E94] text-xl font-bold mb-3">{title}</h3>
+          
+          {/* Description */}
+          <p className="text-gray-600 text-sm mb-5">{description}</p>
+          
+          {/* Features list with light gray backgrounds */}
+          <div className="grid gap-2">
             {technologies.map((tech, index) => (
               <div 
                 key={index} 
-                className="rounded-md bg-[#F5F5F5] py-2 px-3 text-gray-600 text-sm mb-2 mr-2"
+                className={`rounded-md py-2 px-3 text-sm transition-colors duration-300 ${
+                  isHovered
+                    ? "bg-[#f8f0e5] text-[#e98248]"
+                    : "bg-[#f5f5f5] text-gray-700"
+                }`}
               >
                 {tech}
               </div>
             ))}
           </div>
-        </div>
-        
-        {/* Button fixed at bottom with proper spacing */}
-        <div className="mt-auto pt-8">
-          <button
-            className="w-full bg-[var(--color-secondary)] text-white py-3 px-4 rounded-md flex items-center justify-center transition-all duration-300 hover:bg-[#e94817]"
-          >
-            Learn more
-            <svg
-              className="w-4 h-4 ml-2 transition-transform duration-300"
-              style={{ transform: isHovered ? "translateX(4px)" : "translateX(0)" }}
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
+          
+          {/* Button with fixed position */}
+          <div className="absolute left-0 right-0 bottom-0 px-8 pb-8 bg-white/5 backdrop-blur-[1px]">
+            <button
+              className={`w-full py-3 px-4 rounded-md flex items-center justify-center transition-all duration-300 ${
+                isHovered 
+                  ? "bg-white text-[var(--color-secondary)] border-2 border-[var(--color-secondary)]" 
+                  : "bg-[var(--color-secondary)] text-white border-2 border-transparent"
+              }`}
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M14 5l7 7m0 0l-7 7m7-7H3"
-              />
-            </svg>
-          </button>
+              Learn more
+              <svg
+                className="w-4 h-4 ml-2 transition-transform duration-300"
+                style={{ transform: isHovered ? "translateX(4px)" : "translateX(0)" }}
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M14 5l7 7m0 0l-7 7m7-7H3"
+                />
+              </svg>
+            </button>
+          </div>
         </div>
-      </div>
+      </GlassmorphismCard>
     </motion.div>
   );
 };
@@ -182,21 +196,98 @@ export default function AutomationCards({ addToRefs }: { addToRefs?: (el: HTMLEl
           </p>
         </motion.div>
 
-        {/* Cards with fixed dimensions and styling to match reference */}
+        {/* Direct implementation of cards for better control */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          {services.map((service, index) => (
-            <div key={index} className="h-[500px]"> 
-              <div className="bg-white h-full rounded-3xl shadow-md overflow-hidden">
-                <AutomationCard
-                  title={service.title}
-                  description={service.description}
-                  icon={service.icon}
-                  technologies={service.technologies}
-                  delay={index}
-                />
+          {services.map((service, index) => {
+            const [isHovered, setIsHovered] = useState(false);
+            const variant = index % 2 === 0 ? "primary" : "secondary";
+            
+            return (
+              <div 
+                key={index} 
+                className={`rounded-3xl overflow-hidden shadow-md h-[500px] relative
+                  ${isHovered 
+                    ? variant === "primary" 
+                      ? "bg-gradient-to-br from-[#fff9f6] to-[#fff6f0] border border-white/20 transform scale-[1.02]" 
+                      : "bg-gradient-to-br from-[#f6fcff] to-[#f0f9ff] border border-white/20 transform scale-[1.02]"
+                    : "bg-white border border-white/10"
+                  } 
+                  backdrop-blur-[2px] transition-all duration-300 hover:shadow-lg
+                `}
+                onMouseEnter={() => setIsHovered(true)}
+                onMouseLeave={() => setIsHovered(false)}
+              >
+                {/* Card content */}
+                <div className="p-8 h-full">
+                  {/* Floating elements for glass effect */}
+                  <div className="absolute w-24 h-24 rounded-full bg-[var(--color-secondary)]/5 -top-10 -right-10 blur-xl"></div>
+                  <div className="absolute w-24 h-24 rounded-full bg-[var(--color-primary)]/5 bottom-20 -left-10 blur-xl"></div>
+                
+                  {/* Icon */}
+                  <div 
+                    className={`relative mb-5 w-[80px] h-[80px] rounded-full flex items-center justify-center transition-all duration-300 transform ${
+                      isHovered ? "bg-[var(--color-secondary)] text-white scale-110" : "bg-[#FFF4F1] text-[var(--color-secondary)]"
+                    }`}
+                  >
+                    <service.icon size={26} color={isHovered ? "white" : "var(--color-secondary)"} />
+                  </div>
+                  
+                  {/* Title & Description */}
+                  <h3 className="relative text-[#0A6E94] text-xl font-bold mb-3">{service.title}</h3>
+                  <p className="relative text-gray-600 text-sm mb-5">{service.description}</p>
+                  
+                  {/* Features list - no scroll */}
+                  <div className="relative space-y-2">
+                    {service.technologies.map((tech, idx) => (
+                      <div 
+                        key={idx} 
+                        className={`rounded-md py-2 px-3 text-sm transition-all duration-300 ${
+                          isHovered
+                            ? "bg-[#f8f0e5] text-[#e98248] transform translate-x-1"
+                            : "bg-[#f5f5f5] text-gray-700"
+                        }`}
+                      >
+                        {tech}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                
+                {/* Button - fixed position at bottom */}
+                <div className={`absolute bottom-0 left-0 right-0 px-8 pb-8 pt-4 transition-all duration-300 ${
+                  isHovered 
+                    ? variant === "primary"
+                      ? "bg-gradient-to-t from-[#fff9f6] via-[#fff9f6] to-transparent" 
+                      : "bg-gradient-to-t from-[#f6fcff] via-[#f6fcff] to-transparent"
+                    : "bg-gradient-to-t from-white via-white to-white/80"
+                }`}>
+                  <button
+                    className={`relative w-full py-3 px-4 rounded-md flex items-center justify-center transition-all duration-300 transform ${
+                      isHovered 
+                        ? "bg-white text-[var(--color-secondary)] border-2 border-[var(--color-secondary)] translate-y-[-2px]" 
+                        : "bg-[var(--color-secondary)] text-white border-2 border-transparent"
+                    }`}
+                  >
+                    Learn more
+                    <svg
+                      className="w-4 h-4 ml-2 transition-transform duration-300"
+                      style={{ transform: isHovered ? "translateX(4px)" : "translateX(0)" }}
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M14 5l7 7m0 0l-7 7m7-7H3"
+                      />
+                    </svg>
+                  </button>
+                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
 
         <motion.div
