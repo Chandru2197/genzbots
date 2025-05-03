@@ -65,7 +65,7 @@ const ProjectsCarousel = ({ addToRefs }: ProjectsCarouselProps) => {
           >
             <div className="absolute inset-0 -inset-x-24 bg-gradient-to-r from-[var(--color-primary)]/10 via-[var(--color-secondary)]/15 to-[var(--color-tertiary)]/10 blur-3xl"></div>
             <h2 className="relative text-4xl md:text-5xl font-bold mb-4 text-[var(--color-primary)] z-10">
-              Our Solutions
+              Our Projects
             </h2>
           </motion.div>
           

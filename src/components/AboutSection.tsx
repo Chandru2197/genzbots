@@ -40,7 +40,7 @@ export default function AboutSection({ addToRefs }: AboutSectionProps) {
           {/* Main content - NO parallax */}
           <div className="md:w-1/2 order-1 md:order-2">
             <div>
-              <div className="text-center mb-8 relative">
+              {/* <div className="text-center mb-8 relative">
                 <div className="relative">
                   <h2 className="text-label font-label text-3xl md:text-4xl font-bold mb-6 bg-gradient-to-r from-[#FF5722] via-[#FF8A65] to-[#FF5722] bg-clip-text text-transparent">
                     About Our Mission
@@ -50,7 +50,7 @@ export default function AboutSection({ addToRefs }: AboutSectionProps) {
                 <p className="text-desc font-desc text-gray-600 mb-8 max-w-2xl mx-auto text-center">
                   Empowering businesses with cutting-edge automation solutions for the digital age.
                 </p>
-              </div>
+              </div> */}
               <div className="relative mb-6">
                 <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-[#FF5722] via-[#FF8A65] to-[#FF5722] bg-clip-text text-transparent">
                   About GenZBot
