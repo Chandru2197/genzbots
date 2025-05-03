@@ -1,10 +1,10 @@
+
 // File: components/FeaturesSection.tsx
 "use client";
 
 import { useRef, useEffect } from "react";
 import { motion, useInView } from "framer-motion";
-import Glass3DCardStyled from '@/components/Glass3DCardStyled';
-import CustomeListCard from "./custome/card/CustomeListCard";
+import styled from 'styled-components';
 
 interface FeaturesSectionProps {
   addToRefs: (el: HTMLElement | null) => void;
@@ -13,45 +13,78 @@ interface FeaturesSectionProps {
 export const features = [
   {
     title: "15-Minute Bot Rescue",
-    sub:"Emergency Fix Guarantee",
-    description: "1.Broken bot? We diagnose & fix in <24 hours 2. 24/7 ER for your automation",
-    key:[" Broken bot? We diagnose & fix in <24 hours"," 24/7 ER for your automation"]
+    sub: "Emergency Fix Guarantee",
+    description: "Broken bot? We diagnose & fix in <24 hours. 24/7 ER for your automation",
+    key: ["Broken bot? We diagnose & fix in <24 hours", "24/7 ER for your automation"],
+    color: "from-blue-400/20 to-blue-600/20"
   },
   {
     title: "Pay-As-You-Grow",
-    sub:"No Lock-In Scaling",
-    description: `1.Start with 1 bot ($800)
-    2.Scale to 100+ with volume discounts
-    3.Only pay for what you use`,
-    key:["Start with 1 bot ($800)",
-      "Scale to 100+ with volume discounts",
-      "Only pay for what you use"]
+    sub: "No Lock-In Scaling",
+    description: "Start with 1 bot ($800), scale to 100+ with volume discounts",
+    key: ["Start with 1 bot ($800)", "Scale to 100+ with volume discounts", "Only pay for what you use"],
+    color: "from-orange-400/20 to-orange-600/20"
   },
   {
     title: "Invisible IT Team",
-    sub:"Hands-Free Maintenance",
-    description: `1.We monitor & optimize automatically
-
-2.Get surprise upgrades every quarter
-
-3.Forget tech debt exists`,
-key:["We monitor & optimize automatically","Get surprise upgrades every quarter","Forget tech debt exists"]
+    sub: "Hands-Free Maintenance",
+    description: "We monitor & optimize automatically with surprise quarterly upgrades",
+    key: ["We monitor & optimize automatically", "Get surprise upgrades every quarter", "Forget tech debt exists"],
+    color: "from-purple-400/20 to-purple-600/20"
   },
   {
     title: "Future-Proof Bots",
-    sub:"Self-Learning AI",
-    description: `1.Bots improve from your team's habits
-
-2.Auto-adapts to software updates
-
-3.Gets smarter while you sleep`,
-  },
-  // {
-  //   title: "Support & Continuous Improvement",
-  //   sub:"Emergency Fix Guarantee",
-  //   description: "Continuous improvement and support for your automation journey.",
-  // },
+    sub: "Self-Learning AI",
+    description: "Bots improve from your team's habits and adapt automatically",
+    key: ["Bots improve from your team's habits", "Auto-adapts to software updates", "Gets smarter while you sleep"],
+    color: "from-green-400/20 to-green-600/20"
+  }
 ];
+
+const FeatureCard = styled(motion.div)`
+  position: relative;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 24px;
+  padding: 2rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.1);
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 24px;
+    padding: 2px;
+    background: linear-gradient(45deg, rgba(255,255,255,0.1), rgba(255,255,255,0.2));
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+`;
+
+const KeyPoint = styled.div`
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(5px);
+  border-radius: 12px;
+  padding: 0.75rem 1rem;
+  margin: 0.5rem 0;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateX(5px);
+  }
+`;
 
 export default function FeaturesSection({ addToRefs }: FeaturesSectionProps) {
   const decorativeRef = useRef<HTMLDivElement>(null);
@@ -62,77 +95,63 @@ export default function FeaturesSection({ addToRefs }: FeaturesSectionProps) {
   }, [addToRefs]);
 
   return (
-    <section className="bg-none py-18 overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-        {/* Decorative background/image with parallax */}
+    <section className="py-20 overflow-hidden relative">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           ref={decorativeRef}
-          data-speed="0.05"
-          className="parallax absolute inset-0 pointer-events-none"
-          initial={{ opacity: 0, y: 40 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          className="absolute inset-0 -z-10"
+          initial={{ opacity: 0 }}
+          animate={isInView ? { opacity: 1 } : {}}
           transition={{ duration: 0.8 }}
-          aria-hidden="true"
         >
-          {/* Gradient background */}
-          <div className="absolute inset-0 bg-gradient-to-br from-[var(--color-primary)/10] via-[var(--color-secondary)/10] to-[var(--color-primary)/10] blur-3xl"></div>
+          <div className="absolute inset-0 bg-gradient-to-br from-[#FF5722]/5 via-[#FF8A65]/5 to-[#FF5722]/5 blur-3xl" />
         </motion.div>
 
-        {/* Main content (NOT parallax) */}
-        <div className="text-center mb-8 relative">
-          <div className="relative">
-            <h2 className="text-label font-label text-3xl md:text-4xl font-bold mb-6 bg-gradient-to-r from-[#FF5722] via-[#FF8A65] to-[#FF5722] bg-clip-text text-transparent">
-              Powerful Features for Modern Businesses
-            </h2>
-            <div className="absolute -inset-1 bg-gradient-to-r from-[#FF5722]/20 via-[#FF8A65]/20 to-[#FF5722]/20 blur-lg -z-10 rounded-lg opacity-75"></div>
-          </div>
-          <div className="relative">
-            <p className="text-desc font-desc text-gray-600 mb-8 max-w-2xl mx-auto text-center">
-              Our platform comes packed with features designed to streamline your operations and boost productivity.
-            </p>
-            <div className="absolute -inset-1 bg-gradient-to-r from-[var(--color-primary)/5] via-[var(--color-secondary)/5] to-[var(--color-primary)/5] backdrop-blur-sm -z-10 rounded-lg"></div>
-          </div>
+        <div className="text-center mb-16 relative">
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6 }}
+            className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-[#FF5722] via-[#FF8A65] to-[#FF5722] bg-clip-text text-transparent mb-6"
+          >
+            Powerful Features for Modern Businesses
+          </motion.h2>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="text-gray-600 text-lg max-w-2xl mx-auto"
+          >
+            Our platform comes packed with features designed to streamline your operations and boost productivity.
+          </motion.p>
         </div>
-        
-        <div className="space-y-12">
-          {features.map((feature, idx) => (
-            <div
-              key={idx}
-              className={`flex flex-col md:flex-row items-center gap-8 ${idx % 2 === 1 ? 'md:flex-row-reverse' : ''}`}
-            >
-              <div className="w-full md:w-1/2 flex justify-center">
-                <Glass3DCardStyled
-                  title={feature.title}
-                  sub={feature.sub}
-                  description={feature.description}
-                  colorVariant={idx % 2 === 0 ? 'primary' : 'secondary'}
-                />
-              </div>
-              <div className="w-full md:w-1/2 text-center md:text-left flex flex-col items-center md:items-start justify-center relative">
-              {feature?.key?.map((key, index) => (
-        //         <div id={key+index} className="w-[300px] px-4 py-5 bg-white flex flex-col gap-3 rounded-md shadow-[0px_0px_15px_rgba(0,0,0,0.09)]">
-        // <div className="w-full fill-blue-500">
-        //           {key}
-        //           </div>
-        //       </div>
-        <CustomeListCard label={key}/>
-              ))}
 
-                {/* <div className="relative z-10 p-6">
-                  <h3 className="text-2xl font-bold mb-2 text-[var(--color-primary)]">{feature.title}</h3>
-                  <p className="text-gray-600">{feature.sub}</p>
-                  <p className="text-gray-600">{feature.description}</p>
-                </div> */}
-                <div className="absolute inset-0 bg-gradient-to-r from-[var(--color-primary)/5] via-[var(--color-secondary)/5] to-[var(--color-primary)/5] backdrop-blur-sm rounded-2xl -z-10"></div>
-              </div>
-            </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {features.map((feature, idx) => (
+            <motion.div
+              key={feature.title}
+              initial={{ opacity: 0, y: 20 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.6, delay: idx * 0.1 }}
+            >
+              <FeatureCard className={`bg-gradient-to-br ${feature.color}`}>
+                <h3 className="text-2xl font-bold text-gray-800 mb-2">{feature.title}</h3>
+                <p className="text-gray-600 font-medium mb-4">{feature.sub}</p>
+                <div className="space-y-3">
+                  {feature.key?.map((point, index) => (
+                    <KeyPoint key={index} className="flex items-center">
+                      <svg className="w-5 h-5 text-[#FF5722] mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+                      </svg>
+                      <span className="text-gray-700">{point}</span>
+                    </KeyPoint>
+                  ))}
+                </div>
+              </FeatureCard>
+            </motion.div>
           ))}
         </div>
       </div>
     </section>
   );
 }
-
-// Add this to your global CSS if not present:
-// .perspective { perspective: 1200px; }
-// .backface-hidden { backface-visibility: hidden; }
