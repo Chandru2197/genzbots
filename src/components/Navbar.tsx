@@ -77,7 +77,7 @@ export default function Navbar({ addToRefs }: NavbarProps) {
 
   return (
     <nav className={`sticky top-0 w-full z-50 bg-white/90 backdrop-blur-sm shadow-md`}>
-      <div className="relative max-w-screen-xl mx-auto h-14 lg:h-16 flex items-center px-4">
+      <div className="max-w-screen-xl mx-auto h-14 lg:h-16 flex justify-between items-center px-4">
         {/* Logo (left) */}
         <div className="flex-shrink-0 flex items-center">
           <Link href="/" className="flex items-center">
@@ -91,8 +91,8 @@ export default function Navbar({ addToRefs }: NavbarProps) {
             />
           </Link>
         </div>
-        {/* Menu (center, absolutely centered) */}
-        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 hidden lg:flex items-center space-x-8">
+        {/* Menu (center) */}
+        <div className="hidden lg:flex items-center justify-center space-x-8 flex-1">
           {menuItems.map((item) => (
             <div key={item.label} className="relative group">
               {item.dropdown ? (
@@ -152,7 +152,7 @@ export default function Navbar({ addToRefs }: NavbarProps) {
           ))}
         </div>
         {/* Button (right) */}
-        <div className="flex-shrink-0 ml-auto flex items-center">
+        <div className="flex-shrink-0 flex items-center">
           <div className="hidden lg:block">
             <Link
               href="#contact"
