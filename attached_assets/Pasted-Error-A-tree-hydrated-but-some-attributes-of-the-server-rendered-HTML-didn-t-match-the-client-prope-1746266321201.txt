@@ -1,0 +1,356 @@
+Error: A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <HTTPAccessFallbackBoundary notFound={[...]} forbidden={undefined} unauthorized={undefined}>
+      <HTTPAccessFallbackErrorBoundary pathname="/" notFound={[...]} forbidden={undefined} unauthorized={undefined} ...>
+        <RedirectBoundary>
+          <RedirectErrorBoundary router={{...}}>
+            <InnerLayoutRouter url="/" tree={[...]} cacheNode={{lazyData:null, ...}} segmentPath={[...]}>
+              <ClientPageRoot Component={function Home} searchParams={{}} params={{}}>
+                <Home params={Promise} searchParams={Promise}>
+                  <main className="min-h-screen">
+                    <Navbar addToRefs={function addToRefs}>
+                      <nav className="sticky top...">
+                        <div className="max-w-scre...">
+                          <div>
+                          <div>
+                          <div className="flex-shrin...">
+                            <div>
+                            <div className="lg:hidden ...">
+                              <button
+                                onClick={function onClick}
+                                className="inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:..."
+-                               fdprocessedid="ygquhi"
+                              >
+                        <div className="lg:hidden ...">
+                          <div className="px-2 pt-2 ...">
+                            <div>
+                            <div className="block">
+                              <div className="py-1">
+                                <button
+                                  onClick={function onClick}
+                                  className="flex justify-between items-center w-full px-3 py-2 text-label font-label ..."
+-                                 fdprocessedid="4qw6k7"
+                                >
+                                ...
+                            <div className="block">
+                              <div className="py-1">
+                                <button
+                                  onClick={function onClick}
+                                  className="flex justify-between items-center w-full px-3 py-2 text-label font-label ..."
+-                                 fdprocessedid="9bwaet"
+                                >
+                                ...
+                            ...
+                            ...
+                    ...
+                      <div className="flex flex-...">
+                        <motion.div ref={{current:null}} initial={{opacity:0,y:50}} animate={{}} ...>
+                          <div style={{opacity:0, ...}} ref={function useMotionRef.useCallback}>
+                            <h1>
+                            <h6>
+                            <p>
+                            <div className="flex flex-...">
+                              <AnimatedButton title="Explore Se...">
+                                <button
+                                  className={"\n          relative \n          overflow-hidden\n          px-6\n     ..."}
+                                  onMouseEnter={function onMouseEnter}
+                                  onMouseLeave={function onMouseLeave}
+-                                 fdprocessedid="amk29f"
+                                >
+                              <CustomizeButton2 title="Contact Us" href="#contact">
+                                <styled.div>
+                                  <div className="sc-Qotzb h...">
+                                    <button
+-                                     fdprocessedid="od8qg69"
+                                    >
+                        ...
+                    <SectionWrapper>
+                    ...
+                      <AutomationCards>
+                        <section id="automation..." className="py-2">
+                          <div className="max-w-7xl ...">
+                            <motion.div>
+                            <div className="grid grid-...">
+                              ...
+                                <div className="sc-icnseD ..." variant="primary" hoverable={true}>
+                                  <div className="glass-content">
+                                    <div className="h-full fle..." onMouseEnter={function onMouseEnter} ...>
+                                      <div>
+                                      <h3>
+                                      <p>
+                                      <div>
+                                      <button
+                                        className="text-btn font-btn w-auto bg-[var(--color-secondary)] text-white tex..."
+-                                       fdprocessedid="thgv8o"
+                                      >
+                              ...
+                                <div className="sc-icnseD ..." variant="secondary" hoverable={true}>
+                                  <div className="glass-content">
+                                    <div className="h-full fle..." onMouseEnter={function onMouseEnter} ...>
+                                      <div>
+                                      <h3>
+                                      <p>
+                                      <div>
+                                      <button
+                                        className="text-btn font-btn w-auto bg-[var(--color-secondary)] text-white tex..."
+-                                       fdprocessedid="ogkbea"
+                                      >
+                              ...
+                                <div className="sc-icnseD ..." variant="primary" hoverable={true}>
+                                  <div className="glass-content">
+                                    <div className="h-full fle..." onMouseEnter={function onMouseEnter} ...>
+                                      <div>
+                                      <h3>
+                                      <p>
+                                      <div>
+                                      <button
+                                        className="text-btn font-btn w-auto bg-[var(--color-secondary)] text-white tex..."
+-                                       fdprocessedid="q3xejs"
+                                      >
+                              ...
+                                <div className="sc-icnseD ..." variant="secondary" hoverable={true}>
+                                  <div className="glass-content">
+                                    <div className="h-full fle..." onMouseEnter={function onMouseEnter} ...>
+                                      <div>
+                                      <h3>
+                                      <p>
+                                      <div>
+                                      <button
+                                        className="text-btn font-btn w-auto bg-[var(--color-secondary)] text-white tex..."
+-                                       fdprocessedid="e4rwl"
+                                      >
+                              ...
+                                <div className="sc-icnseD ..." variant="primary" hoverable={true}>
+                                  <div className="glass-content">
+                                    <div className="h-full fle..." onMouseEnter={function onMouseEnter} ...>
+                                      <div>
+                                      <h3>
+                                      <p>
+                                      <div>
+                                      <button
+                                        className="text-btn font-btn w-auto bg-[var(--color-secondary)] text-white tex..."
+-                                       fdprocessedid="urue3"
+                                      >
+                              ...
+                                <div className="sc-icnseD ..." variant="secondary" hoverable={true}>
+                                  <div className="glass-content">
+                                    <div className="h-full fle..." onMouseEnter={function onMouseEnter} ...>
+                                      <div>
+                                      <h3>
+                                      <p>
+                                      <div>
+                                      <button
+                                        className="text-btn font-btn w-auto bg-[var(--color-secondary)] text-white tex..."
+-                                       fdprocessedid="c01tqo"
+                                      >
+                            <motion.div initial={{opacity:0,y:30}} animate={{}} transition={{duration:0.6, ...}} ...>
+                              <div className="mt-12 text..." style={{opacity:0, ...}} ...>
+                                <button
+                                  className="text-btn font-btn bg-[var(--color-secondary)] text-white px-6 py-3 rounde..."
+-                                 fdprocessedid="3c9ga"
+                                >
+                    ...
+                      <div className="content-wr...">
+                        <SolutionsShowcase addToRefs={function addToRefs}>
+                          <section id="solutions" className="py-12">
+                            <div className="max-w-7xl ...">
+                              <motion.div>
+                              <div className="w-full max...">
+                                <div className="flex justi...">
+                                  <button
+                                    className={"flex-1 px-2 py-2 text-xs sm:text-sm transition-all duration-300 white..."}
+                                    onClick={function onClick}
+-                                   fdprocessedid="hmytu"
+                                  >
+                                  <button
+                                    className={"flex-1 px-2 py-2 text-xs sm:text-sm transition-all duration-300 white..."}
+                                    onClick={function onClick}
+-                                   fdprocessedid="l3uf4f"
+                                  >
+                                  <button
+                                    className={"flex-1 px-2 py-2 text-xs sm:text-sm transition-all duration-300 white..."}
+                                    onClick={function onClick}
+-                                   fdprocessedid="r1tkw5"
+                                  >
+                                  <button
+                                    className={"flex-1 px-2 py-2 text-xs sm:text-sm transition-all duration-300 white..."}
+                                    onClick={function onClick}
+-                                   fdprocessedid="agftz"
+                                  >
+                              <div className="relative z-10">
+                                <div className="flex flex-...">
+                                  <div className="md:w-1/2 p...">
+                                    <h2>
+                                    <p>
+                                    <h4>
+                                    <ul>
+                                    <button
+                                      className="mt-8 bg-[var(--color-secondary)] text-white px-8 py-3 rounded-lg shad..."
+-                                     fdprocessedid="2msww4"
+                                    >
+                                  ...
+                    ...
+                      <SwiperSlide swiper={{...}} swiperSlideIndex={0}>
+                        <div ref={{current:null}} className="swiper-slide" data-swiper-slide-index={undefined} ...>
+                          <div onMouseEnter={function onMouseEnter} onMouseLeave={function onMouseLeave} ...>
+                            <div>
+                            <div>
+                            <div>
+                            <FloatingElement>
+                            <FloatingElement>
+                            <FloatingElement>
+                            <FloatingElement>
+                            <div className="jsx-58e586...">
+                              <h3>
+                              <h4>
+                              <p>
+                              <div className="jsx-58e586...">
+                                <button
+                                  className="jsx-58e58629e73ef2a2 text-btn font-btn w-auto bg-[var(--color-secondary)]..."
+-                                 fdprocessedid="h4cacq"
+                                >
+                      <SwiperSlide swiper={{...}} swiperSlideIndex={1}>
+                        <div ref={{current:null}} className="swiper-slide" data-swiper-slide-index={undefined} ...>
+                          <div onMouseEnter={function onMouseEnter} onMouseLeave={function onMouseLeave} ...>
+                            <div>
+                            <div>
+                            <div>
+                            <FloatingElement>
+                            <FloatingElement>
+                            <FloatingElement>
+                            <FloatingElement>
+                            <div className="jsx-58e586...">
+                              <h3>
+                              <h4>
+                              <p>
+                              <div className="jsx-58e586...">
+                                <button
+                                  className="jsx-58e58629e73ef2a2 text-btn font-btn w-auto bg-[var(--color-secondary)]..."
+-                                 fdprocessedid="xtast"
+                                >
+                      ...
+                    <SectionWrapper>
+                    <SectionWrapper>
+                    <SectionWrapper>
+                    ...
+                      <motion.div initial={{opacity:0,x:60}} whileInView={{opacity:1,x:0}} ...>
+                        <div className="bg-white/9..." style={{opacity:0, ...}} ref={function useMotionRef.useCallback}>
+                          <div>
+                          <form className="space-y-6">
+                            <div className="grid grid-...">
+                              <div>
+                                <label>
+                                <input
+                                  required={true}
+                                  placeholder="Fill"
+                                  className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:border-orange-40..."
+-                                 fdprocessedid="vfbvh"
+                                >
+                              <div>
+                                <label>
+                                <input
+                                  required={true}
+                                  placeholder="Fill"
+                                  className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:border-orange-40..."
+-                                 fdprocessedid="n0eu8"
+                                >
+                            <div className="grid grid-...">
+                              <div>
+                                <label>
+                                <t country="in" value="" onChange={function bound dispatchSetState} ...>
+                                  <div className={"!w-full ..."} style={{}} onKeyDown={function}>
+                                    <div>
+                                    <input
+                                      className="form-control !w-full !py-2 !pl-14 !pr-4 !rounded-lg !border !border-g..."
+                                      style={{}}
+                                      onChange={function}
+                                      onClick={function}
+                                      onDoubleClick={function}
+                                      onFocus={function}
+                                      onBlur={function}
+                                      onCopy={function}
+                                      value="+91"
+                                      onKeyDown={function}
+                                      placeholder="1 (702) 123-4567"
+                                      disabled={false}
+                                      type="tel"
+                                      name="phone"
+                                      required={true}
+                                      autoFocus={false}
+                                      autoComplete="tel"
+                                      ref={function ref}
+-                                     fdprocessedid="j4py0v"
+                                    >
+                                    <div className="flag-dropd..." style={{}} ref={function ref}>
+                                      <div
+                                        onClick={function}
+                                        className="selected-flag"
+                                        title="India: + 91"
+                                        tabIndex="0"
+                                        role="button"
+                                        aria-haspopup="listbox"
+                                        aria-expanded={undefined}
+-                                       fdprocessedid="ekhjj5"
+                                      >
+                              <div>
+                                <label>
+                                <input
+                                  placeholder="Fill"
+                                  className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:border-orange-40..."
+-                                 fdprocessedid="ggbrbk"
+                                >
+                            <div className="grid grid-...">
+                              <div>
+                                <label>
+                                <input
+                                  type="email"
+                                  required={true}
+                                  placeholder="Fill"
+                                  className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:border-orange-40..."
+-                                 fdprocessedid="571eoh"
+                                >
+                              ...
+                            <div>
+                            <div>
+                            <motion.div whileHover={{scale:1.04}} whileTap={{scale:0.97}} className="w-fit">
+                              <div className="w-fit" tabIndex={0} style={{}} ref={function useMotionRef.useCallback}>
+                                <button
+                                  type="submit"
+                                  className="bg-[var(--color-secondary)] text-white px-6 py-3 rounded-none font-medium..."
+-                                 fdprocessedid="zx57ou"
+                                >
++                                 Schedule a Consultation
+                    ...
+              ...
+
+    at createUnhandledError (https://7954c5f3-33d3-48f2-bf24-82b9aafcc639-00-36gozc2yv6jz8.pike.replit.dev/_next/static/chunks/node_modules_next_dist_client_43e3ffb8._.js:879:71)
+    at handleClientError (https://7954c5f3-33d3-48f2-bf24-82b9aafcc639-00-36gozc2yv6jz8.pike.replit.dev/_next/static/chunks/node_modules_next_dist_client_43e3ffb8._.js:1052:56)
+    at error (https://7954c5f3-33d3-48f2-bf24-82b9aafcc639-00-36gozc2yv6jz8.pike.replit.dev/_next/static/chunks/node_modules_next_dist_client_43e3ffb8._.js:1191:56)
+    at console.error (https://7954c5f3-33d3-48f2-bf24-82b9aafcc639-00-36gozc2yv6jz8.pike.replit.dev/_next/static/chunks/node_modules_@mantine_c2944705._.js:1806:13)
+    at https://7954c5f3-33d3-48f2-bf24-82b9aafcc639-00-36gozc2yv6jz8.pike.replit.dev/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:9382:25
+    at runWithFiberInDEV (https://7954c5f3-33d3-48f2-bf24-82b9aafcc639-00-36gozc2yv6jz8.pike.replit.dev/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:3501:74)
+    at emitPendingHydrationWarnings (https://7954c5f3-33d3-48f2-bf24-82b9aafcc639-00-36gozc2yv6jz8.pike.replit.dev/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:9381:13)
+    at completeWork (https://7954c5f3-33d3-48f2-bf24-82b9aafcc639-00-36gozc2yv6jz8.pike.replit.dev/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:9455:102)
+    at runWithFiberInDEV (https://7954c5f3-33d3-48f2-bf24-82b9aafcc639-00-36gozc2yv6jz8.pike.replit.dev/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:3501:131)
+    at completeUnitOfWork (https://7954c5f3-33d3-48f2-bf24-82b9aafcc639-00-36gozc2yv6jz8.pike.replit.dev/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:10233:23)
+    at performUnitOfWork (https://7954c5f3-33d3-48f2-bf24-82b9aafcc639-00-36gozc2yv6jz8.pike.replit.dev/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:10170:28)
+    at workLoopConcurrentByScheduler (https://7954c5f3-33d3-48f2-bf24-82b9aafcc639-00-36gozc2yv6jz8.pike.replit.dev/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:10164:58)
+    at renderRootConcurrent (https://7954c5f3-33d3-48f2-bf24-82b9aafcc639-00-36gozc2yv6jz8.pike.replit.dev/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:10146:71)
+    at performWorkOnRoot (https://7954c5f3-33d3-48f2-bf24-82b9aafcc639-00-36gozc2yv6jz8.pike.replit.dev/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:9784:176)
+    at performWorkOnRootViaSchedulerTask (https://7954c5f3-33d3-48f2-bf24-82b9aafcc639-00-36gozc2yv6jz8.pike.replit.dev/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:10796:9)
+    at MessagePort.performWorkUntilDeadline (https://7954c5f3-33d3-48f2-bf24-82b9aafcc639-00-36gozc2yv6jz8.pike.replit.dev/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:1952:64)
+    at button (<anonymous>)
+    at Navbar (https://7954c5f3-33d3-48f2-bf24-82b9aafcc639-00-36gozc2yv6jz8.pike.replit.dev/_next/static/chunks/src_404da0f0._.js:262:245)
+    at Home (https://7954c5f3-33d3-48f2-bf24-82b9aafcc639-00-36gozc2yv6jz8.pike.replit.dev/_next/static/chunks/src_404da0f0._.js:5060:215)
+    at ClientPageRoot (https://7954c5f3-33d3-48f2-bf24-82b9aafcc639-00-36gozc2yv6jz8.pike.replit.dev/_next/static/chunks/node_modules_next_dist_1a6ee436._.js:2053:50)
