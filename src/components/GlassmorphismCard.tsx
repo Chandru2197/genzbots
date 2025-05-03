@@ -15,7 +15,7 @@ const GlassmorphismCard = ({
   hoverable = true,
 }: GlassmorphismCardProps) => {
   return (
-    <StyledCard className={className} variant={variant} hoverable={hoverable}>
+    <StyledCard className={className} variant={variant} data-hoverable={hoverable.toString()}>
       <div className="glass-content">{children}</div>
     </StyledCard>
   );
@@ -89,4 +89,4 @@ const StyledCard = styled.div<{ variant: 'primary' | 'secondary'; hoverable: boo
   }
 `;
 
-export default GlassmorphismCard; 
+export default GlassmorphismCard;

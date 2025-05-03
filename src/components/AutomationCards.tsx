@@ -43,7 +43,7 @@ const AutomationCard = ({
     >
       <GlassmorphismCard
         variant={delay % 2 === 0 ? "primary" : "secondary"}
-        hoverable
+        data-hoverable="true"
         className="h-full"
       >
         <div
