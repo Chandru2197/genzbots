@@ -9,6 +9,10 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      screens: {
+        '3xl': '2000px',
+        '4xl': '3000px',
+      },
       colors: {
         primary: "#1e78c1",    // Blue
         secondary: "var(--color-secondary, #f75821)",  // Orange/Red, uses CSS variable if set

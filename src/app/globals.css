@@ -63,6 +63,54 @@ body {
     rgb(var(--background-end-rgb))
   )
   rgb(var(--background-start-rgb));
+  min-height: 100vh;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+@media screen and (min-width: 2000px) {
+  .container {
+    max-width: 1800px !important;
+    margin: 0 auto;
+  }
+  
+  .text-xl {
+    font-size: 1.5rem;
+  }
+  
+  .text-2xl {
+    font-size: 2rem;
+  }
+  
+  .text-3xl {
+    font-size: 2.5rem;
+  }
+  
+  .text-4xl {
+    font-size: 3rem;
+  }
+}
+
+@media screen and (min-width: 3000px) {
+  .container {
+    max-width: 2400px !important;
+  }
+  
+  .text-xl {
+    font-size: 2rem;
+  }
+  
+  .text-2xl {
+    font-size: 2.5rem;
+  }
+  
+  .text-3xl {
+    font-size: 3rem;
+  }
+  
+  .text-4xl {
+    font-size: 3.5rem;
+  }
 }
 
 /* Add these styles to your globals.css file */

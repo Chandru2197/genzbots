@@ -171,7 +171,7 @@ export default function FeaturesSection({ addToRefs }: FeaturesSectionProps) {
 
   return (
     <section className="py-20 overflow-hidden relative bg-gradient-to-b from-white to-gray-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 2xl:max-w-[90%]">
         <div className="text-center mb-16 relative" ref={decorativeRef}>
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
