@@ -15,13 +15,13 @@ const GlassmorphismCard = ({
   hoverable = true,
 }: GlassmorphismCardProps) => {
   return (
-    <StyledCard className={className} variant={variant} data-hoverable={hoverable.toString()}>
+    <StyledCard className={className} variant={variant} hoverable={hoverable}>
       <div className="glass-content">{children}</div>
     </StyledCard>
   );
 };
 
-const StyledCard = styled.div<{ variant: 'primary' | 'secondary'; hoverable: boolean }>`
+const StyledCard = styled.div<{ variant: 'primary' | 'secondary'; hoverable: any }>`
   position: relative;
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(10px);
