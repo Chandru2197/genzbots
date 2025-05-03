@@ -153,7 +153,7 @@ export default function SolutionsShowcase({ addToRefs }: SolutionsShowcaseProps)
             <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-[#FF5722] via-[#FF8A65] to-[#FF5722] bg-clip-text text-transparent">
               Our Solutions
             </h2>
-            <div className="absolute -inset-1 bg-gradient-to-r from-[#FF5722]/20 via-[#FF8A65]/20 to-[#FF5722]/20 blur-lg -z-10 rounded-lg opacity-75"></div>
+            {/* <div className="absolute -inset-1 bg-gradient-to-r from-[#FF5722]/20 via-[#FF8A65]/20 to-[#FF5722]/20 blur-lg -z-10 rounded-lg opacity-75"></div> */}
           </div>
           <p className="text-gray-600 mb-8 text-center max-w-2xl mx-auto">
             Explore our comprehensive suite of automation solutions
@@ -193,7 +193,7 @@ export default function SolutionsShowcase({ addToRefs }: SolutionsShowcaseProps)
               <ul className="space-y-4">
                 {activeSolution.features.map((feature, index) => (
                   <motion.li
-                    key={index}
+                    key={feature+index}
                     className="flex items-start"
                     initial={{ opacity: 0, x: -20 }}
                     animate={isInView ? { opacity: 1, x: 0 } : {}}
