@@ -76,10 +76,14 @@ export default function TestimonialsSection({ addToRefs }: TestimonialsSectionPr
             modules={[Navigation, Pagination, Autoplay]}
             spaceBetween={30}
             slidesPerView={1}
-            navigation={true}
+            navigation={{
+              nextEl: '.swiper-button-next',
+              prevEl: '.swiper-button-prev'
+            }}
             pagination={{ 
               clickable: true,
-              dynamicBullets: true
+              dynamicBullets: true,
+              el: '.swiper-pagination'
             }}
             autoplay={{
               delay: 5000,
@@ -87,7 +91,7 @@ export default function TestimonialsSection({ addToRefs }: TestimonialsSectionPr
               pauseOnMouseEnter: true
             }}
             loop={true}
-            className="testimonials-swiper !pb-16 relative"
+            className="testimonials-swiper !pb-16 relative z-20"
           >
             {testimonials.map((testimonial, index) => (
               <SwiperSlide key={index} className="pb-12">
@@ -105,9 +109,11 @@ export default function TestimonialsSection({ addToRefs }: TestimonialsSectionPr
                 </div>
               </SwiperSlide>
             ))}
-            <div className="swiper-pagination absolute bottom-0 !w-full flex justify-center"></div>
-            <div className="swiper-button-prev !text-[#FF5722]"></div>
-            <div className="swiper-button-next !text-[#FF5722]"></div>
+            
+            {/* Custom navigation and pagination */}
+            <div className="swiper-pagination absolute bottom-0 !w-full flex justify-center z-20"></div>
+            <div className="swiper-button-prev absolute left-0 top-1/2 transform -translate-y-1/2 z-30 text-[#FF5722]"></div>
+            <div className="swiper-button-next absolute right-0 top-1/2 transform -translate-y-1/2 z-30 text-[#FF5722]"></div>
           </Swiper>
         </div>
       </div>
@@ -116,6 +122,10 @@ export default function TestimonialsSection({ addToRefs }: TestimonialsSectionPr
         .testimonials-swiper {
           padding: 20px 0 40px;
           position: relative;
+          overflow: visible !important;
+        }
+        .swiper-wrapper {
+          z-index: 1;
         }
         .swiper-pagination {
           position: absolute;
@@ -145,26 +155,32 @@ export default function TestimonialsSection({ addToRefs }: TestimonialsSectionPr
         }
         .swiper-button-next,
         .swiper-button-prev {
-          color: #FF5722;
-          transition: all 0.3s ease;
-          width: 44px;
-          height: 44px;
-          background: rgba(255, 255, 255, 0.2);
-          backdrop-filter: blur(5px);
-          border-radius: 50%;
-          border: 1px solid rgba(255, 255, 255, 0.3);
+          color: #FF5722 !important;
+          position: absolute;
           top: 50%;
           transform: translateY(-50%);
+          width: 44px !important;
+          height: 44px !important;
+          background: rgba(255, 255, 255, 0.3);
+          backdrop-filter: blur(5px);
+          border-radius: 50%;
+          border: 1px solid rgba(255, 255, 255, 0.5);
+          z-index: 30;
+          transition: all 0.3s ease;
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          justify-content: center;
         }
         .swiper-button-next {
-          right: -50px;
+          right: -60px !important;
         }
         .swiper-button-prev {
-          left: -50px;
+          left: -60px !important;
         }
         .swiper-button-next:hover,
         .swiper-button-prev:hover {
-          background: rgba(255, 255, 255, 0.3);
+          background: rgba(255, 255, 255, 0.5);
           transform: translateY(-50%) scale(1.1);
         }
         .swiper-button-next:after,
@@ -178,10 +194,10 @@ export default function TestimonialsSection({ addToRefs }: TestimonialsSectionPr
         }
         @media (max-width: 768px) {
           .swiper-button-next {
-            right: 10px;
+            right: 10px !important;
           }
           .swiper-button-prev {
-            left: 10px;
+            left: 10px !important;
           }
         }
       `}</style>

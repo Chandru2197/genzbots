@@ -24,6 +24,12 @@ const projects = [
     gradient: "from-[var(--color-primary)] to-[var(--color-tertiary)]",
     accent: "bg-[var(--color-primary)]",
     secondaryAccent: "bg-[var(--color-tertiary)]",
+    icon: "🔍",
+    features: [
+      "Process audit",
+      "ROI estimation",
+      "Bot recommendation"
+    ],
     link: "#"
   },
   {
@@ -33,6 +39,12 @@ const projects = [
     gradient: "from-[var(--color-secondary)] to-[#ff4000]",
     accent: "bg-[var(--color-secondary)]",
     secondaryAccent: "bg-[var(--color-primary)]",
+    icon: "💡",
+    features: [
+      "Custom workflow diagram",
+      "Timeline & pricing",
+      "Integration checklist"
+    ],
     link: "#"
   },
   {
@@ -42,6 +54,12 @@ const projects = [
     gradient: "from-[var(--color-tertiary)] to-[var(--color-primary)]",
     accent: "bg-[var(--color-tertiary)]",
     secondaryAccent: "bg-[var(--color-secondary)]",
+    icon: "📊",
+    features: [
+      "Develop in agile sprints",
+      "Share weekly demo videos",
+      "Train your team via Discord"
+    ],
     link: "#"
   }
 ];
@@ -115,30 +133,46 @@ const ProjectsCarousel = ({ addToRefs }: ProjectsCarouselProps) => {
               {projects.map((project, index) => (
                 <SwiperSlide key={index}>
                   <div 
-                    className={`relative h-[400px] rounded-3xl overflow-hidden p-8 group`}
+                    className={`relative h-[450px] rounded-3xl overflow-hidden p-8 group bg-white shadow-lg`}
                     onMouseEnter={() => setIsHovered(index)}
                     onMouseLeave={() => setIsHovered(-1)}
                   >
-                    {/* Glass effect overlay with gradient background */}
-                    <div className={`absolute inset-0 bg-gradient-to-br ${project.gradient} opacity-20`}></div>
-                    <div className="absolute inset-0 bg-white/5 backdrop-blur-[2px]"></div>
-                    <div className="absolute inset-0 border border-white/10 rounded-3xl"></div>
+                    {/* Subtle background accent */}
+                    <div className={`absolute inset-0 bg-gradient-to-br ${project.gradient} opacity-5`}></div>
+                    <div className="absolute inset-0 border border-gray-100 rounded-3xl"></div>
                     
-                    {/* Floating elements */}
-                    <FloatingElement className={`${project.accent} opacity-40 -top-2 right-12 animate-float-slow`} />
-                    <FloatingElement className={`${project.secondaryAccent} opacity-40 top-20 -right-2 animate-float-delayed`} />
-                    <FloatingElement className={`${project.accent} opacity-40 bottom-20 left-4 animate-float`} />
-                    <FloatingElement className={`${project.secondaryAccent} opacity-40 -bottom-2 right-16 animate-float-slow`} />
-                    
-                    {/* Content */}
-                    <div className="relative z-10 h-full flex flex-col">
-                      <h3 className="text-3xl font-bold text-[var(--color-tertiary)] mb-3">{project.title}</h3>
-                      <h4 className="text-xl text-gray-800 mb-6">{project.subtitle}</h4>
-                      <p className="text-gray-600 text-lg mb-8">{project.description}</p>
+                    {/* Main container with flex column */}
+                    <div className="relative z-10 h-full flex flex-col justify-between">
+                      {/* Top content section */}
+                      <div>
+                        {/* Icon */}
+                        <div className="mb-4 text-3xl flex justify-start">
+                          <span className="text-[var(--color-secondary)] text-4xl">{project.icon}</span>
+                        </div>
+                        
+                        {/* Title and subtitle */}
+                        <h3 className="text-2xl font-bold text-[#0A6E94] mb-4">{project.title}</h3>
+                        
+                        {/* Subtitle line */}
+                        <div className="mb-6">
+                          <p className="text-gray-600">{project.subtitle}</p>
+                        </div>
+                        
+                        {/* Features list with proper spacing */}
+                        <ul className="space-y-3">
+                          {project.features.map((feature, i) => (
+                            <li key={i} className="flex items-start text-gray-600">
+                              <span className="inline-block w-2 h-2 rounded-full bg-[var(--color-secondary)] mr-3 mt-1.5"></span>
+                              <span>{feature}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
                       
-                      <div className="mt-auto">
+                      {/* Button fixed at bottom with absolute positioning */}
+                      <div className="mt-8">
                         <button
-                          className="text-btn font-btn w-auto bg-[var(--color-secondary)] text-white text-sm text-center px-4 py-2 rounded-none font-medium transition-all duration-300 inline-flex items-center transform hover:bg-white hover:text-[var(--color-secondary)] hover:border-[var(--color-secondary)] border-2 border-transparent"
+                          className="text-btn font-btn w-full bg-[var(--color-secondary)] text-white text-center px-6 py-3 rounded-md font-medium transition-all duration-300 inline-flex items-center justify-center transform hover:bg-white hover:text-[var(--color-secondary)] hover:border-[var(--color-secondary)] border-2 border-transparent"
                         >
                           Learn more
                           <svg
