@@ -79,7 +79,7 @@ export default function Navbar({ addToRefs }: NavbarProps) {
     <nav className={`sticky top-0 w-full z-50 bg-white/90 backdrop-blur-sm shadow-md`}>
       <div className="max-w-screen-xl mx-auto h-14 lg:h-16 flex justify-between items-center px-4">
         {/* Logo (left) */}
-        <div className="flex-shrink-0 flex items-center">
+        <div className="flex items-center w-[200px]">
           <Link href="/" className="flex items-center">
             <Image
               src={'/assets/svgs/GenZBotLogo.svg'}
