@@ -53,7 +53,7 @@ const FlipCard = styled.div`
   perspective: 1000px;
   width: 100%;
   height: 350px;
-  margin: 1rem 0;
+  margin: 0 auto;
 
   &:hover .card-inner {
     transform: rotateY(180deg);
