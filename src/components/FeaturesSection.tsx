@@ -53,6 +53,7 @@ const FlipCard = styled.div`
   perspective: 1000px;
   width: 100%;
   height: 350px;
+  margin: 1rem 0;
 
   &:hover .card-inner {
     transform: rotateY(180deg);
@@ -73,11 +74,11 @@ const CardSide = styled.div`
   width: 100%;
   height: 100%;
   backface-visibility: hidden;
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(10px);
   border-radius: 24px;
   padding: 2rem;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
 `;
 
@@ -86,6 +87,7 @@ const CardFront = styled(CardSide)`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
 `;
 
 const CardBack = styled(CardSide)`
@@ -93,13 +95,14 @@ const CardBack = styled(CardSide)`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.1));
 `;
 
 const IconWrapper = styled.div`
   width: 80px;
   height: 80px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.2);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -109,12 +112,12 @@ const IconWrapper = styled.div`
   svg {
     width: 40px;
     height: 40px;
-    color: var(--color-primary);
+    color: #FF5722;
   }
 `;
 
 const KeyPoint = styled.div`
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.1);
   padding: 0.75rem;
   margin: 0.5rem 0;
   border-radius: 8px;
@@ -122,7 +125,7 @@ const KeyPoint = styled.div`
   transition: all 0.3s ease;
 
   &:hover {
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.2);
     transform: translateX(10px);
   }
 `;
@@ -136,9 +139,9 @@ export default function FeaturesSection({ addToRefs }: FeaturesSectionProps) {
   }, [addToRefs]);
 
   return (
-    <section className="py-20 overflow-hidden relative">
+    <section className="py-20 overflow-hidden relative bg-gradient-to-b from-white to-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16 relative">
+        <div className="text-center mb-16 relative" ref={decorativeRef}>
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -171,7 +174,7 @@ export default function FeaturesSection({ addToRefs }: FeaturesSectionProps) {
                     <IconWrapper>
                       {<feature.icon />}
                     </IconWrapper>
-                    <h3 className="text-2xl font-bold bg-gradient-to-br from-gray-800 to-gray-600 bg-clip-text text-transparent mb-2">
+                    <h3 className="text-2xl font-bold text-gray-800 mb-2">
                       {feature.title}
                     </h3>
                     <p className="text-gray-600 font-medium">{feature.sub}</p>
