@@ -165,9 +165,9 @@ export default function PartnerShowcase({ addToRefs }: PartnerShowcaseProps) {
             animate={{ x: 0, opacity: 1 }}
             transition={{ duration: 0.8, ease: 'easeOut' }}
           >
-            <h3 className="text-lg font-bold mb-4">{activeSolution.title}</h3>
+            <h3 className="text-lg text-[var(--color-tertiary)] font-bold mb-4">{activeSolution.title}</h3>
             <p className="text-sm text-gray-600 mb-6 text-lg">{activeSolution.description}</p>
-            <h4 className="text-lg font-semibold mb-4">Key Features:</h4>
+            <h4 className="text-lg text-[var(--color-tertiary)] font-semibold mb-4">Key Features:</h4>
             <ul className="space-y-3">
               {activeSolution.features.map((feature, index) => (
                 <motion.li

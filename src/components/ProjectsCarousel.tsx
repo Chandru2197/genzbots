@@ -64,7 +64,7 @@ const ProjectsCarousel = ({ addToRefs }: ProjectsCarouselProps) => {
             className="relative inline-block"
           >
             <div className="absolute inset-0 -inset-x-24 bg-gradient-to-r from-[var(--color-tertiary)]/10 via-[var(--color-secondary)]/15 to-[var(--color-tertiary)]/10 blur-3xl"></div>
-            <h2 className="relative text-4xl md:text-5xl font-bold mb-4 text-[var(--color-tertiary)] z-10">
+            <h2 className="text-4xl md:text-5xl font-bold mb-1 bg-gradient-to-r from-[#FF5722] via-[#FF8A65] to-[#FF5722] bg-clip-text text-transparent">
               Our Projects
             </h2>
           </motion.div>
