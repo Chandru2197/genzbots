@@ -68,10 +68,59 @@ body {
   overflow-x: hidden;
 }
 
-@media screen and (min-width: 2000px) {
-  .container {
-    max-width: 1800px !important;
-    margin: 0 auto;
+/* Responsive Base Styles */
+.responsive-container {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+/* Responsive Typography */
+@media screen and (max-width: 640px) {
+  html {
+    font-size: 14px;
+  }
+  
+  .mobile-padding {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  
+  .mobile-section {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
+}
+
+@media screen and (min-width: 641px) and (max-width: 1024px) {
+  html {
+    font-size: 15px;
+  }
+  
+  .responsive-container {
+    max-width: 90%;
+  }
+}
+
+@media screen and (min-width: 1025px) and (max-width: 1920px) {
+  html {
+    font-size: 16px;
+  }
+  
+  .responsive-container {
+    max-width: 1200px;
+  }
+}
+
+@media screen and (min-width: 1921px) and (max-width: 2560px) {
+  html {
+    font-size: 18px;
+  }
+  
+  .responsive-container {
+    max-width: 1800px;
   }
   
   .text-xl {
@@ -91,9 +140,13 @@ body {
   }
 }
 
-@media screen and (min-width: 3000px) {
-  .container {
-    max-width: 2400px !important;
+@media screen and (min-width: 2561px) {
+  html {
+    font-size: 20px;
+  }
+  
+  .responsive-container {
+    max-width: 2400px;
   }
   
   .text-xl {
@@ -110,6 +163,55 @@ body {
   
   .text-4xl {
     font-size: 3.5rem;
+  }
+}
+
+/* Responsive Grid Layouts */
+.responsive-grid {
+  display: grid;
+  gap: 1rem;
+  width: 100%;
+}
+
+@media screen and (max-width: 640px) {
+  .responsive-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media screen and (min-width: 641px) and (max-width: 1024px) {
+  .responsive-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (min-width: 1025px) {
+  .responsive-grid {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  }
+}
+
+/* Responsive Images */
+.responsive-image {
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  object-fit: cover;
+}
+
+/* Responsive Spacing */
+.section-spacing {
+  padding: clamp(2rem, 5vw, 6rem) 0;
+}
+
+.content-spacing {
+  margin: clamp(1rem, 3vw, 3rem) 0;
+}
+
+/* Responsive Text Alignment */
+@media screen and (max-width: 640px) {
+  .mobile-text-center {
+    text-align: center;
   }
 }
 

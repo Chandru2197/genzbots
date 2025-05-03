@@ -10,8 +10,15 @@ const config: Config = {
   theme: {
     extend: {
       screens: {
-        '3xl': '2000px',
-        '4xl': '3000px',
+        'xs': '375px',
+        'sm': '640px',
+        'md': '768px',
+        'lg': '1024px',
+        'xl': '1280px',
+        '2xl': '1536px',
+        '3xl': '1920px',
+        '4xl': '2560px',
+        '5xl': '3840px',
       },
       colors: {
         primary: "#1e78c1",    // Blue
