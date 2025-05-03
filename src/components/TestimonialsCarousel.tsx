@@ -127,7 +127,7 @@ export default function TestimonialsCarousel({ addToRefs }: TestimonialsCarousel
     <GlassmorphismCard
       variant={currentIndex % 2 === 0 ? 'primary' : 'secondary'}
       hoverable
-      className="w-full max-w-2xl mx-auto"
+      className="w-full max-w-3xl mx-auto"
     >
       <div className="p-6 md:p-8">
         <div className="flex flex-col md:flex-row items-start md:items-center mb-6">
@@ -153,11 +153,11 @@ export default function TestimonialsCarousel({ addToRefs }: TestimonialsCarousel
   );
 
   return (
-    <section className="py-16 overflow-hidden">
+    <section className="py-16 overflow-hidden max-w-[1920px] mx-auto">
       <motion.div
         ref={carouselRef}
         data-speed="0.08"
-        className="text-center mb-12 parallax"
+        className="text-center mb-12 parallax px-4"
         initial={{ opacity: 0, y: 25 }}
         animate={isInView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.8 }}
@@ -168,7 +168,7 @@ export default function TestimonialsCarousel({ addToRefs }: TestimonialsCarousel
         </p>
       </motion.div>
 
-      <div className="relative max-w-6xl mx-auto px-4">
+      <div className="relative max-w-7xl mx-auto px-4 lg:px-8">
         <button
           onClick={handlePrev}
           className="absolute left-0 top-1/2 -translate-y-1/2 z-10 p-2 rounded-full bg-white/80 shadow-lg hover:bg-white transition-all"
