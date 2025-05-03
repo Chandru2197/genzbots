@@ -187,7 +187,7 @@ export default function SolutionsShowcase({ addToRefs }: SolutionsShowcaseProps)
           <div className={`flex flex-col md:flex-row ${activeIndex % 2 === 0 ? 'md:flex-row-reverse' : ''} gap-8 items-center`}>
             {/* Content Side */}
             <div className="md:w-1/2 p-6 md:p-10 bg-none rounded-2xl shadow-xl">
-              <h2 className="text-2xl md:text-3xl font-bold mb-4 text-[var(--color-primary)]">{activeSolution.title}</h2>
+              <h2 className="text-2xl md:text-3xl font-bold mb-4 text-[var(--color-tertiary)]">{activeSolution.title}</h2>
               <p className="text-gray-600 mb-8 text-lg">{activeSolution.description}</p>
               <h4 className="text-xl font-semibold mb-6 text-[var(--color-secondary)]">{activeSolution.features_label}</h4>
               <ul className="space-y-4">

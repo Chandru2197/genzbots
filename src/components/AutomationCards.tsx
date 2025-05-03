@@ -58,7 +58,7 @@ const AutomationCard = ({
           >
             <Icon size={24} color={isHovered ? "white" : "var(--color-secondary)"} />
           </div>
-          <h3 className="text-label font-label text-lg font-bold mb-3">{title}</h3>
+          <h3 className="text-label text-[var(--color-tertiary)] font-label text-lg font-bold mb-3">{title}</h3>
           <p className="text-desc font-desc text-sm text-gray-600 mb-5 flex-grow">{description}</p>
           {technologies.length > 0 && (
             <div className="mb-4">
@@ -176,7 +176,7 @@ export default function AutomationCards({ addToRefs }: { addToRefs?: (el: HTMLEl
           transition={{ duration: 0.8 }}
         >
           <div className="relative">
-            <h2 className="text-label font-label text-3xl md:text-4xl font-bold mb-6 bg-gradient-to-r from-[#FF5722] via-[#FF8A65] to-[#FF5722] bg-clip-text text-transparent">
+            <h2 className="text-label text-[var(--color-primary)] font-label text-3xl md:text-4xl font-bold mb-6 bg-gradient-to-r from-[#FF5722] via-[#FF8A65] to-[#FF5722] bg-clip-text text-[var(--color-tertiary)]">
               Our Automation Process
             </h2>
             {/* <div className="absolute -inset-1 bg-gradient-to-r from-[#FF5722]/20 via-[#FF8A65]/20 to-[#FF5722]/20 blur-lg -z-10 rounded-lg opacity-75"></div> */}

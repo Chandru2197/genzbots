@@ -172,19 +172,19 @@ export default function FeaturesSection({ addToRefs }: FeaturesSectionProps) {
   return (
     <section className="py-20 overflow-hidden relative">
       <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 2xl:max-w-[90%]">
-        <div className="text-center mb-6 relative">
+        <div className="text-center mt-18 relative" ref={decorativeRef}>
           <motion.h2
-            // initial={{ opacity: 0, y: 20 }}
-            // animate={isInView ? { opacity: 1, y: 0 } : {}}
-            // transition={{ duration: 0.6 }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6 }}
             className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-[#FF5722] via-[#FF8A65] to-[#FF5722] bg-clip-text text-transparent mb-1"
           >
             Powerful Features for Modern Businesses
           </motion.h2>
           <motion.p
-            // initial={{ opacity: 0, y: 20 }}
-            // animate={isInView ? { opacity: 1, y: 0 } : {}}
-            // transition={{ duration: 0.6, delay: 0.2 }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.2 }}
             className="text-gray-600 text-lg max-w-2xl mx-auto"
           >
             Our platform comes packed with features designed to streamline your operations and boost productivity.

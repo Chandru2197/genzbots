@@ -63,8 +63,8 @@ const ProjectsCarousel = ({ addToRefs }: ProjectsCarouselProps) => {
             transition={{ duration: 0.6 }}
             className="relative inline-block"
           >
-            <div className="absolute inset-0 -inset-x-24 bg-gradient-to-r from-[var(--color-primary)]/10 via-[var(--color-secondary)]/15 to-[var(--color-tertiary)]/10 blur-3xl"></div>
-            <h2 className="relative text-4xl md:text-5xl font-bold mb-4 text-[var(--color-primary)] z-10">
+            <div className="absolute inset-0 -inset-x-24 bg-gradient-to-r from-[var(--color-tertiary)]/10 via-[var(--color-secondary)]/15 to-[var(--color-tertiary)]/10 blur-3xl"></div>
+            <h2 className="relative text-4xl md:text-5xl font-bold mb-4 text-[var(--color-tertiary)] z-10">
               Our Projects
             </h2>
           </motion.div>
@@ -132,7 +132,7 @@ const ProjectsCarousel = ({ addToRefs }: ProjectsCarouselProps) => {
                     
                     {/* Content */}
                     <div className="relative z-10 h-full flex flex-col">
-                      <h3 className="text-3xl font-bold text-[var(--color-primary)] mb-3">{project.title}</h3>
+                      <h3 className="text-3xl font-bold text-[var(--color-tertiary)] mb-3">{project.title}</h3>
                       <h4 className="text-xl text-gray-800 mb-6">{project.subtitle}</h4>
                       <p className="text-gray-600 text-lg mb-8">{project.description}</p>
                       
