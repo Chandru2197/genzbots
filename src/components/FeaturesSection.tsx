@@ -118,15 +118,46 @@ const IconWrapper = styled.div`
 
 const KeyPoint = styled.div`
   background: rgba(255, 255, 255, 0.1);
-  padding: 0.75rem;
-  margin: 0.5rem 0;
-  border-radius: 8px;
+  padding: 1rem;
+  margin: 0.75rem 0;
+  border-radius: 12px;
   text-align: left;
-  transition: all 0.3s ease;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(4px);
+  
+  &::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 4px;
+    height: 100%;
+    background: linear-gradient(to bottom, #FF5722, #FF8A65);
+    transform: scaleY(0);
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    transform-origin: bottom;
+  }
 
   &:hover {
-    background: rgba(255, 255, 255, 0.2);
-    transform: translateX(10px);
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateX(10px) scale(1.02);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    border-color: rgba(255, 255, 255, 0.2);
+
+    &::before {
+      transform: scaleY(1);
+    }
+  }
+
+  span {
+    background: linear-gradient(120deg, #FF5722, #FF8A65);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-weight: 500;
   }
 `;
 
