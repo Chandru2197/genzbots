@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useRef, useEffect } from "react";
@@ -74,11 +73,10 @@ const CardSide = styled.div`
   width: 100%;
   height: 100%;
   backface-visibility: hidden;
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
+  background: white;
   border-radius: 24px;
   padding: 2rem;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(240, 240, 250, 0.8);
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
 `;
 
@@ -87,7 +85,8 @@ const CardFront = styled(CardSide)`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+  background: white;
+  box-shadow: 0 8px 32px rgba(31, 38, 135, 0.1);
 `;
 
 const CardBack = styled(CardSide)`
@@ -95,14 +94,15 @@ const CardBack = styled(CardSide)`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.1));
+  background: white;
+  box-shadow: 0 8px 32px rgba(31, 38, 135, 0.1);
 `;
 
 const IconWrapper = styled.div`
   width: 80px;
   height: 80px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 87, 34, 0.1);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -117,7 +117,7 @@ const IconWrapper = styled.div`
 `;
 
 const KeyPoint = styled.div`
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(248, 250, 252, 0.8);
   padding: 1rem;
   margin: 0.75rem 0;
   border-radius: 12px;
@@ -125,8 +125,7 @@ const KeyPoint = styled.div`
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(4px);
+  border: 1px solid rgba(240, 240, 240, 0.8);
   
   &::before {
     content: '';
@@ -142,10 +141,10 @@ const KeyPoint = styled.div`
   }
 
   &:hover {
-    background: rgba(255, 255, 255, 0.15);
+    background: rgba(255, 245, 240, 0.8);
     transform: translateX(10px) scale(1.02);
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-    border-color: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 87, 34, 0.2);
 
     &::before {
       transform: scaleY(1);
@@ -162,17 +161,17 @@ const KeyPoint = styled.div`
 `;
 
 export default function FeaturesSection({ addToRefs }: FeaturesSectionProps) {
-  const decorativeRef = useRef<HTMLDivElement>(null);
-  const isInView = useInView(decorativeRef, { once: true });
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const isInView = useInView(sectionRef, { once: true });
 
   useEffect(() => {
-    if (decorativeRef.current) addToRefs(decorativeRef.current);
+    if (sectionRef.current) addToRefs(sectionRef.current);
   }, [addToRefs]);
 
   return (
-    <section className="py-20 overflow-hidden relative">
-      <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 2xl:max-w-[90%]">
-        <div className="text-center mt-18 relative" ref={decorativeRef}>
+    <section className="py-20 overflow-hidden relative" ref={sectionRef}>
+      <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 2xl:max-w-[90%] relative z-10">
+        <div className="text-center mt-18 mb-4 relative">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
