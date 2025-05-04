@@ -148,7 +148,7 @@ const IconWrapper = styled.div`
   }
 `;
 
-const KeyPoint = styled.div`
+const KeyPoint = styled.div<{ colorIndex?: number }>`
   background: rgb(255, 255, 255);
   padding: 1.25rem 1.5rem;
   margin: 0.9rem auto;
@@ -162,11 +162,12 @@ const KeyPoint = styled.div`
   min-height: 3rem;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
   border: 1px solid rgba(236, 236, 236, 0.8);
-  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition: all 0.3s ease;
   visibility: visible !important;
   z-index: 5;
   opacity: 1 !important;
   overflow: hidden;
+  transform-origin: left center;
   
   &::before {
     content: '';
@@ -175,9 +176,14 @@ const KeyPoint = styled.div`
     top: 0;
     height: 100%;
     width: 5px;
-    background: linear-gradient(to bottom, #FF7A59, #FF5722);
+    background: ${props => {
+      const colors = ["#6c63ff", "#17B8A6", "#F50057", "#f349ff"];
+      return props.colorIndex !== undefined ? 
+        `linear-gradient(to bottom, ${colors[props.colorIndex]}, ${colors[props.colorIndex]})` : 
+        'linear-gradient(to bottom, #FF7A59, #FF5722)';
+    }};
     transform: scaleY(0);
-    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transition: transform 0.4s ease;
     transform-origin: bottom;
     border-radius: 0 2px 2px 0;
     opacity: 0.9;
@@ -185,19 +191,37 @@ const KeyPoint = styled.div`
   
   &:hover {
     transform: translateX(6px);
-    box-shadow: 0 6px 16px rgba(255, 122, 89, 0.18);
-    border-color: rgba(255, 122, 89, 0.4);
-    background-color: rgba(255, 248, 245, 0.9);
-    width: 98%;
+    box-shadow: ${props => {
+      const colors = ["rgba(108, 99, 255, 0.18)", "rgba(23, 184, 166, 0.18)", "rgba(245, 0, 87, 0.18)", "rgba(243, 73, 255, 0.18)"];
+      return props.colorIndex !== undefined ? 
+        `0 6px 16px ${colors[props.colorIndex]}` : 
+        '0 6px 16px rgba(255, 122, 89, 0.18)';
+    }};
+    border-color: ${props => {
+      const colors = ["rgba(108, 99, 255, 0.4)", "rgba(23, 184, 166, 0.4)", "rgba(245, 0, 87, 0.4)", "rgba(243, 73, 255, 0.4)"];
+      return props.colorIndex !== undefined ? colors[props.colorIndex] : 'rgba(255, 122, 89, 0.4)';
+    }};
+    background-color: ${props => {
+      const colors = ["rgba(108, 99, 255, 0.05)", "rgba(23, 184, 166, 0.05)", "rgba(245, 0, 87, 0.05)", "rgba(243, 73, 255, 0.05)"];
+      return props.colorIndex !== undefined ? colors[props.colorIndex] : 'rgba(255, 248, 245, 0.9)';
+    }};
     
     &::before {
       transform: scaleY(1);
-      box-shadow: 0 0 10px rgba(255, 122, 89, 0.6);
+      box-shadow: ${props => {
+        const colors = ["rgba(108, 99, 255, 0.6)", "rgba(23, 184, 166, 0.6)", "rgba(245, 0, 87, 0.6)", "rgba(243, 73, 255, 0.6)"];
+        return props.colorIndex !== undefined ? 
+          `0 0 10px ${colors[props.colorIndex]}` : 
+          '0 0 10px rgba(255, 122, 89, 0.6)';
+      }};
     }
   }
   
   span {
-    color: #FF7A59;
+    color: ${props => {
+      const colors = ["#6c63ff", "#17B8A6", "#F50057", "#f349ff"];
+      return props.colorIndex !== undefined ? colors[props.colorIndex] : '#FF7A59';
+    }};
     font-weight: 500;
     font-size: 1.1rem;
     transition: all 0.3s ease;
@@ -209,7 +233,10 @@ const KeyPoint = styled.div`
   
   &:hover span {
     transform: none;
-    color: #E95F2E;
+    color: ${props => {
+      const colors = ["#5a52e0", "#15a595", "#d80050", "#dc41e9"];
+      return props.colorIndex !== undefined ? colors[props.colorIndex] : '#E95F2E';
+    }};
     left: 4px;
     font-weight: 600;
   }
@@ -217,6 +244,14 @@ const KeyPoint = styled.div`
 
 export default function FeaturesSection({ addToRefs }: FeaturesSectionProps) {
   const sectionRef = useRef<HTMLDivElement>(null);
+
+  // Card color mapping
+  const cardColors = {
+    frontBg: ["rgba(108, 99, 255, 0.1)", "rgba(23, 184, 166, 0.1)", "rgba(245, 0, 87, 0.1)", "rgba(243, 73, 255, 0.1)"],
+    backBg: ["rgba(108, 99, 255, 0.05)", "rgba(23, 184, 166, 0.05)", "rgba(245, 0, 87, 0.05)", "rgba(243, 73, 255, 0.05)"],
+    borderHover: ["rgba(108, 99, 255, 0.4)", "rgba(23, 184, 166, 0.4)", "rgba(245, 0, 87, 0.4)", "rgba(243, 73, 255, 0.4)"],
+    textColor: ["#6c63ff", "#17B8A6", "#F50057", "#f349ff"]
+  };
 
   // Log the features data to verify it's correct
   useEffect(() => {
@@ -264,10 +299,7 @@ export default function FeaturesSection({ addToRefs }: FeaturesSectionProps) {
                       <div
                         className="absolute inset-0"
                         style={{
-                          backgroundColor: `rgba(${feature.title.includes('Rescue') ? '59, 130, 246' : 
-                                            feature.title.includes('Pay') ? '251, 146, 60' : 
-                                            feature.title.includes('IT') ? '192, 132, 252' : 
-                                            '74, 222, 128'}, 0.1)`,
+                          backgroundColor: cardColors.frontBg[idx],
                           borderBottom: '1px solid rgba(0,0,0,0.05)'
                         }}
                       ></div>
@@ -278,7 +310,7 @@ export default function FeaturesSection({ addToRefs }: FeaturesSectionProps) {
                       />
                     </div>
                     <div className="w-full h-[30%] flex flex-col justify-center items-center px-6 py-4">
-                      <h3 className="text-2xl font-bold text-[var(--color-tertiary)] mb-2 text-center">
+                      <h3 className="text-2xl font-bold mb-2 text-center" style={{ color: cardColors.textColor[idx] }}>
                         {feature.title}
                       </h3>
                       <p className="text-lg text-gray-600 font-medium text-center max-w-[90%]">{feature.sub}</p>
@@ -288,10 +320,7 @@ export default function FeaturesSection({ addToRefs }: FeaturesSectionProps) {
                     <div 
                       className="w-full h-full flex flex-col items-center px-1"
                       style={{
-                        backgroundColor: feature.title.includes('Pay') ? '#FFF8F3' : 
-                                        feature.title.includes('IT') ? '#F7F5FF' : 
-                                        feature.title.includes('Rescue') ? '#F5F9FF' : 
-                                        '#F5FFF8'
+                        backgroundColor: cardColors.backBg[idx]
                       }}
                     >
                       <div 
@@ -300,16 +329,18 @@ export default function FeaturesSection({ addToRefs }: FeaturesSectionProps) {
                           borderBottom: 'none'
                         }}
                       >
-                        <h4 className="text-2xl font-bold text-[#006589] text-center px-4">
+                        <h4 className="text-2xl font-bold text-center px-4" style={{ color: cardColors.textColor[idx] }}>
                           {feature.title}
                         </h4>
                       </div>
                       <div className="w-full flex-1 flex flex-col items-center justify-start p-4 pt-8 pb-6">
                         {Array.isArray(feature.key) && feature.key.length > 0 ? (
                           feature.key.map((point, index) => (
-                            <KeyPoint key={index}>
-                              <span>{point}</span>
-                            </KeyPoint>
+                            <div key={index} style={{ width: '100%', position: 'relative' }}>
+                              <KeyPoint colorIndex={idx}>
+                                <span>{point}</span>
+                              </KeyPoint>
+                            </div>
                           ))
                         ) : (
                           <KeyPoint>
