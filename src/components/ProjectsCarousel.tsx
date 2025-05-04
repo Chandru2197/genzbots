@@ -210,9 +210,9 @@ const ProjectsCarousel = ({ addToRefs }: ProjectsCarouselProps) => {
             <div className="embla overflow-hidden mx-12" ref={emblaRef}>
               <div className="embla__container">
                 {projects.map((project, index) => (
-                  <div key={index} className="embla__slide px-4">
+                  <div key={index} className="embla__slide px-4 pb-6">
                     <div 
-                      className={`relative h-[450px] rounded-3xl overflow-hidden p-8 group bg-white shadow-lg`}
+                      className={`relative h-[480px] rounded-3xl overflow-hidden p-8 group bg-white shadow-lg`}
                       onMouseEnter={() => setIsHovered(index)}
                       onMouseLeave={() => setIsHovered(-1)}
                     >
@@ -248,10 +248,11 @@ const ProjectsCarousel = ({ addToRefs }: ProjectsCarouselProps) => {
                           </ul>
                         </div>
                         
-                        {/* Button fixed at bottom with absolute positioning */}
+                        {/* Button fixed at bottom with margin instead of absolute positioning */}
                         <div className="mt-8">
                           <button
                             className="text-btn font-btn w-full bg-[var(--color-secondary)] text-white text-center px-6 py-3 rounded-md font-medium transition-all duration-300 inline-flex items-center justify-center transform hover:bg-white hover:text-[var(--color-secondary)] hover:border-[var(--color-secondary)] border-2 border-transparent cursor-pointer"
+                            suppressHydrationWarning
                           >
                             Learn more
                             <svg
@@ -282,6 +283,7 @@ const ProjectsCarousel = ({ addToRefs }: ProjectsCarouselProps) => {
               onClick={scrollPrev}
               className="absolute left-0 top-1/2 -translate-y-1/2 z-50 w-12 h-12 flex items-center justify-center bg-white rounded-full shadow-md border border-[var(--color-primary)] hover:bg-[var(--color-primary)] hover:text-white transition-all duration-300 cursor-pointer"
               aria-label="Previous slide"
+              suppressHydrationWarning
             >
               <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M15 19L8 12L15 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
@@ -292,6 +294,7 @@ const ProjectsCarousel = ({ addToRefs }: ProjectsCarouselProps) => {
               onClick={scrollNext}
               className="absolute right-0 top-1/2 -translate-y-1/2 z-50 w-12 h-12 flex items-center justify-center bg-white rounded-full shadow-md border border-[var(--color-primary)] hover:bg-[var(--color-primary)] hover:text-white transition-all duration-300 cursor-pointer"
               aria-label="Next slide"
+              suppressHydrationWarning
             >
               <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M9 5L16 12L9 19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
@@ -311,6 +314,7 @@ const ProjectsCarousel = ({ addToRefs }: ProjectsCarouselProps) => {
                   type="button"
                   onClick={() => scrollTo(index)}
                   aria-label={`Go to slide ${index + 1}`}
+                  suppressHydrationWarning
                 />
               ))}
             </div>
