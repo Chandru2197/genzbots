@@ -5,6 +5,8 @@
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 255, 255, 255;
   --background-end-rgb: 245, 245, 245;
+  --color-bg-primary-fade:#E0F2F7;
+  --color-bg-secondary-fade:#B0C4DE;
   --color-primary: #1e78c1;
   --color-primary-dark:#003e70;
   --color-secondary: #f75821;

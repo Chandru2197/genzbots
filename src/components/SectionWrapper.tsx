@@ -10,8 +10,8 @@ const StyledSection = styled.section<{ $isAlternate?: boolean }>`
   position: relative;
   background: ${({ $isAlternate }) => 
     $isAlternate 
-      ? 'linear-gradient(to bottom, rgba(247, 88, 33, 0.05), rgba(247, 88, 33, 0.1))'
-      : 'linear-gradient(to bottom, rgba(30, 120, 193, 0.05), rgba(30, 120, 193, 0.1))'
+      ? 'rgba(255, 200, 150, 0.03)'
+      : 'rgba(30, 120, 193, 0.02)'
   };
   
   &::before {
@@ -21,11 +21,12 @@ const StyledSection = styled.section<{ $isAlternate?: boolean }>`
     left: 0;
     right: 0;
     height: 1px;
-    background: ${({ $isAlternate }) => 
-      $isAlternate 
-        ? 'linear-gradient(90deg, transparent, rgba(247, 88, 33, 0.2), transparent)'
-        : 'linear-gradient(90deg, transparent, rgba(30, 120, 193, 0.2), transparent)'
-    };
+    background: linear-gradient(90deg, rgba(255, 255, 255, 1), 
+      ${({ $isAlternate }) => 
+        $isAlternate 
+          ? 'rgba(255, 150, 100, 0.03)'
+          : 'rgba(30, 120, 193, 0.02)'
+      }, rgba(255, 255, 255, 1));
   }
 
   &::after {
@@ -35,11 +36,12 @@ const StyledSection = styled.section<{ $isAlternate?: boolean }>`
     left: 0;
     right: 0;
     height: 1px;
-    background: ${({ $isAlternate }) => 
-      $isAlternate 
-        ? 'linear-gradient(90deg, transparent, rgba(247, 88, 33, 0.2), transparent)'
-        : 'linear-gradient(90deg, transparent, rgba(30, 120, 193, 0.2), transparent)'
-    };
+    background: linear-gradient(90deg, rgba(255, 255, 255, 1), 
+      ${({ $isAlternate }) => 
+        $isAlternate 
+          ? 'rgba(255, 150, 100, 0.03)'
+          : 'rgba(30, 120, 193, 0.02)'
+      }, rgba(255, 255, 255, 1));
   }
 
   .content-wrapper {

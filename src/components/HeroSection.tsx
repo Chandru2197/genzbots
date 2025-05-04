@@ -27,7 +27,7 @@ export default function HeroSection({ addToRefs }: HeroSectionProps) {
 
   return (
     <section
-      className="relative py-10 flex items-center overflow-hidden bg-size-(--my-image-size) bg-[url(/assets/svgs/herosection-bg-7.jpeg)] bg-cover bg-center"
+      className="relative min-h-screen flex items-center overflow-hidden pt-8 bg-size-(--my-image-size) bg-[url(/assets/svgs/herosection-bg-7.jpeg)] bg-cover bg-center"
       // style={{
       //   backgroundImage: `url(/assets/svgs/RPA.png)`,
       //   backgroundSize: "cover",

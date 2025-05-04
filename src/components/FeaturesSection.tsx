@@ -51,9 +51,8 @@ export const features = [
 const FlipCard = styled.div`
   perspective: 1000px;
   width: 100%;
-  height: 300px;
+  height: 350px;
   margin: 0 auto;
-  margin-bottom: 0;
 
   &:hover .card-inner {
     transform: rotateY(180deg);
@@ -170,9 +169,9 @@ export default function FeaturesSection({ addToRefs }: FeaturesSectionProps) {
   }, [addToRefs]);
 
   return (
-    <section className="pt-24 pb-0 overflow-hidden relative" ref={sectionRef}>
-      <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 2xl:max-w-[90%] relative z-10 mb-0">
-        <div className="text-center mb-4 relative">
+    <section className="py-20 overflow-hidden relative" ref={sectionRef}>
+      <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 2xl:max-w-[90%] relative z-10">
+        <div className="text-center mt-18 mb-4 relative">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -191,14 +190,13 @@ export default function FeaturesSection({ addToRefs }: FeaturesSectionProps) {
           </motion.p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {features.map((feature, idx) => (
             <motion.div
               key={feature.title}
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: idx * 0.1 }}
-              style={{ marginBottom: 0 }}
             >
               <FlipCard>
                 <CardInner className="card-inner">
