@@ -1,13 +1,7 @@
-import { useRef, useEffect } from 'react';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination, Autoplay } from 'swiper/modules';
+"use client";
 
-// Import Swiper styles
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
-import 'swiper/css/autoplay';
-import 'swiper/css/effect-fade';
+import React, { useState, useEffect } from 'react';
+import GlassmorphismCard from './GlassmorphismCard';
 
 interface TestimonialsSectionProps {
   addToRefs: (el: HTMLElement | null) => void;
@@ -53,154 +47,177 @@ export default function TestimonialsSection({ addToRefs }: TestimonialsSectionPr
     }
   ];
 
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isAnimating, setIsAnimating] = useState(false);
+  const sectionRef = React.useRef<HTMLDivElement>(null);
+
+  // Register with parallax effect
+  useEffect(() => {
+    if (addToRefs && sectionRef.current) {
+      addToRefs(sectionRef.current);
+    }
+  }, [addToRefs]);
+
+  // Auto rotate testimonials
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (!isAnimating) {
+        goToNext();
+      }
+    }, 5000);
+    
+    return () => clearInterval(interval);
+  }, [currentIndex, isAnimating]);
+
+  const goToNext = () => {
+    if (isAnimating) return;
+    
+    setIsAnimating(true);
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % testimonials.length);
+    
+    // Reset animation flag after transition
+    setTimeout(() => {
+      setIsAnimating(false);
+    }, 500);
+  };
+
+  const goToPrev = () => {
+    if (isAnimating) return;
+    
+    setIsAnimating(true);
+    setCurrentIndex((prevIndex) => 
+      prevIndex === 0 ? testimonials.length - 1 : prevIndex - 1
+    );
+    
+    // Reset animation flag after transition
+    setTimeout(() => {
+      setIsAnimating(false);
+    }, 500);
+  };
+
+  const goToSpecific = (index: number) => {
+    if (isAnimating || index === currentIndex) return;
+    
+    setIsAnimating(true);
+    setCurrentIndex(index);
+    
+    // Reset animation flag after transition
+    setTimeout(() => {
+      setIsAnimating(false);
+    }, 500);
+  };
+
   return (
-    <div className="relative w-full">
-      <div className="container mx-auto">
-        <div className="text-center mb-16">
-          {/* Header with blur effect */}
-          <div className="relative inline-block">
-            <div className="absolute inset-0 -inset-x-24 bg-gradient-to-r from-[#FF5722]/20 via-[#FF8A65]/30 to-[#FF5722]/20 blur-3xl"></div>
-            <h2 className="relative text-4xl md:text-5xl font-bold mb-4 text-[#FF5722] z-10">
-              What Our Clients Say
-            </h2>
-          </div>
-          
-          {/* Description without blur effect */}
-          <p className="text-gray-600 mt-8 text-center max-w-2xl mx-auto">
-            Discover why businesses trust us with their automation needs
-          </p>
-        </div>
-        
-        <div className="relative px-4 py-8 max-w-5xl mx-auto">
-          <Swiper
-            modules={[Navigation, Pagination, Autoplay]}
-            spaceBetween={30}
-            slidesPerView={1}
-            navigation={{
-              nextEl: '.swiper-button-next',
-              prevEl: '.swiper-button-prev'
-            }}
-            pagination={{ 
-              clickable: true,
-              dynamicBullets: true,
-              el: '.swiper-pagination'
-            }}
-            autoplay={{
-              delay: 5000,
-              disableOnInteraction: false,
-              pauseOnMouseEnter: true
-            }}
-            loop={true}
-            className="testimonials-swiper !pb-16 relative z-20"
-          >
-            {testimonials.map((testimonial, index) => (
-              <SwiperSlide key={index} className="pb-12">
-                <div className="bg-white/5 backdrop-blur-xl rounded-2xl shadow-[0_8px_32px_0_rgba(31,38,135,0.37)] border border-white/20 p-8 min-h-[300px] w-full max-w-3xl mx-auto">
-                  <div className="flex items-center gap-4 mb-8">
-                    <div className={`w-16 h-16 rounded-full ${testimonial.avatar} flex items-center justify-center text-lg font-semibold shadow-lg`}>
-                      {testimonial.initials}
-                    </div>
-                    <div>
-                      <h3 className="text-xl font-bold text-gray-800">{testimonial.name}</h3>
-                      <p className="text-gray-600">{testimonial.position}</p>
-                    </div>
-                  </div>
-                  <p className="text-gray-700 italic text-lg leading-relaxed">{testimonial.testimonial}</p>
-                </div>
-              </SwiperSlide>
-            ))}
-            
-            {/* Custom navigation and pagination */}
-            <div className="swiper-pagination absolute bottom-0 !w-full flex justify-center z-20"></div>
-            <div className="swiper-button-prev absolute left-0 top-1/2 transform -translate-y-1/2 z-30 text-[#FF5722] cursor-pointer"></div>
-            <div className="swiper-button-next absolute right-0 top-1/2 transform -translate-y-1/2 z-30 text-[#FF5722] cursor-pointer"></div>
-          </Swiper>
-        </div>
+    <div className="w-full" ref={sectionRef} data-speed="0">
+      <div className="text-center mb-12">
+        <h2 className="text-4xl font-bold bg-gradient-to-r from-[#0A6E94] to-[#0A6E94] bg-clip-text text-transparent mb-4">
+          What Our Clients Say
+        </h2>
+        <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          Discover why businesses trust us with their automation needs
+        </p>
       </div>
 
-      <style jsx global>{`
-        .testimonials-swiper {
-          padding: 20px 0 40px;
-          position: relative;
-          overflow: visible !important;
-        }
-        .swiper-wrapper {
-          z-index: 1;
-        }
-        .swiper-pagination {
-          position: absolute;
-          bottom: 0;
-          left: 0;
-          right: 0;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          gap: 8px;
-          padding: 1rem 0;
-        }
-        .swiper-pagination-bullet {
-          width: 10px;
-          height: 10px;
-          background: #D1D5DB;
-          opacity: 0.5;
-          transition: all 0.3s ease;
-          cursor: pointer;
-          border-radius: 50%;
-          margin: 0 4px;
-        }
-        .swiper-pagination-bullet-active {
-          opacity: 1;
-          background: #FF5722;
-          transform: scale(1.5);
-        }
-        .swiper-button-next,
-        .swiper-button-prev {
-          color: #FF5722 !important;
-          position: absolute;
-          top: 50%;
-          transform: translateY(-50%);
-          width: 44px !important;
-          height: 44px !important;
-          background: rgba(255, 255, 255, 0.3);
-          backdrop-filter: blur(5px);
-          border-radius: 50%;
-          border: 1px solid rgba(255, 255, 255, 0.5);
-          z-index: 30;
-          transition: all 0.3s ease;
-          cursor: pointer;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-        }
-        .swiper-button-next {
-          right: -60px !important;
-        }
-        .swiper-button-prev {
-          left: -60px !important;
-        }
-        .swiper-button-next:hover,
-        .swiper-button-prev:hover {
-          background: rgba(255, 255, 255, 0.5);
-          transform: translateY(-50%) scale(1.1);
-        }
-        .swiper-button-next:after,
-        .swiper-button-prev:after {
-          font-size: 18px;
-          font-weight: bold;
-        }
-        .swiper-button-disabled {
-          opacity: 0.5;
-          cursor: not-allowed;
-        }
-        @media (max-width: 768px) {
-          .swiper-button-next {
-            right: 10px !important;
-          }
-          .swiper-button-prev {
-            left: 10px !important;
-          }
-        }
-      `}</style>
+      <div className="relative max-w-3xl mx-auto px-4 md:px-0">
+        {/* Carousel container */}
+        <div className="relative overflow-hidden rounded-xl w-full">
+          <div 
+            className="flex transition-transform duration-500 ease-in-out"
+            style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+          >
+            {testimonials.map((testimonial, index) => (
+              <div 
+                key={index} 
+                className="w-full flex-shrink-0 px-0"
+              >
+                <GlassmorphismCard 
+                  variant={index % 2 === 0 ? 'primary' : 'secondary'} 
+                  hoverable={false}
+                  className="overflow-hidden shadow-xl"
+                >
+                  <div className="p-6 sm:p-10">
+                    {/* Avatar and Name Layout */}
+                    <div className="flex items-start mb-8 space-x-4">
+                      <div className={`flex-shrink-0 w-16 h-16 sm:w-20 sm:h-20 rounded-full ${testimonial.avatar} flex items-center justify-center text-2xl font-bold`}>
+                        {testimonial.initials}
+                      </div>
+                      <div>
+                        <h3 className="text-2xl font-bold text-gray-900">{testimonial.name}</h3>
+                        <p className="text-gray-600 text-base">{testimonial.position}</p>
+                      </div>
+                    </div>
+                    
+                    {/* Testimonial Text - Separate, Not in a Box */}
+                    <p className="text-gray-700 text-lg sm:text-xl italic leading-relaxed mt-6">
+                      "{testimonial.testimonial}"
+                    </p>
+                  </div>
+                </GlassmorphismCard>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Navigation arrows - positioned outside */}
+        <button 
+          onClick={goToPrev}
+          className="absolute left-[-50px] md:left-[-60px] top-1/2 -translate-y-1/2 z-10 w-12 h-12 flex items-center justify-center bg-white rounded-full shadow-md text-[#0A6E94] border border-[#0A6E94]/20 hover:bg-[#0A6E94] hover:text-white transition-colors"
+          aria-label="Previous testimonial"
+        >
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M15 19L8 12L15 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        </button>
+
+        <button 
+          onClick={goToNext}
+          className="absolute right-[-50px] md:right-[-60px] top-1/2 -translate-y-1/2 z-10 w-12 h-12 flex items-center justify-center bg-white rounded-full shadow-md text-[#0A6E94] border border-[#0A6E94]/20 hover:bg-[#0A6E94] hover:text-white transition-colors"
+          aria-label="Next testimonial"
+        >
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M9 5L16 12L9 19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        </button>
+
+        {/* Responsive arrows for mobile */}
+        <div className="md:hidden absolute -bottom-14 left-0 right-0 flex justify-between">
+          <button 
+            onClick={goToPrev}
+            className="w-10 h-10 flex items-center justify-center bg-white rounded-full shadow-md text-[#0A6E94] border border-[#0A6E94]/20 hover:bg-[#0A6E94] hover:text-white transition-colors"
+            aria-label="Previous testimonial"
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M15 19L8 12L15 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </button>
+          
+          <button 
+            onClick={goToNext}
+            className="w-10 h-10 flex items-center justify-center bg-white rounded-full shadow-md text-[#0A6E94] border border-[#0A6E94]/20 hover:bg-[#0A6E94] hover:text-white transition-colors"
+            aria-label="Next testimonial"
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M9 5L16 12L9 19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </button>
+        </div>
+
+        {/* Pagination dots */}
+        <div className="flex justify-center mt-6 space-x-2">
+          {testimonials.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => goToSpecific(index)}
+              className={`w-3 h-3 rounded-full transition-all ${
+                index === currentIndex 
+                  ? 'bg-[#0A6E94] transform scale-125' 
+                  : 'bg-gray-300 hover:bg-gray-400'
+              }`}
+              aria-label={`Go to testimonial ${index + 1}`}
+            />
+          ))}
+        </div>
+      </div>
     </div>
   );
 }

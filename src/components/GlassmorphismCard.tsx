@@ -10,6 +10,9 @@ interface GlassmorphismCardProps {
   hoverable?: boolean;
 }
 
+// Create a filtered div that doesn't pass through variant and hoverable
+const FilteredDiv = ({ variant, hoverable, ...rest }: any) => <div {...rest} />;
+
 const GlassmorphismCard = ({
   children,
   variant = 'primary',
@@ -17,13 +20,13 @@ const GlassmorphismCard = ({
   hoverable = true,
 }: GlassmorphismCardProps) => {
   return (
-    <StyledCard className={className} variant={variant} hoverable={hoverable}>
+    <StyledCard $variant={variant} $hoverable={hoverable} className={className}>
       <div className="glass-content p-6 h-full">{children}</div>
     </StyledCard>
   );
 };
 
-const StyledCard = styled.div<{ variant: 'primary' | 'secondary'; hoverable: boolean }>`
+const StyledCard = styled(FilteredDiv)<{ $variant: 'primary' | 'secondary'; $hoverable: boolean }>`
   position: relative;
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(10px);
@@ -35,7 +38,7 @@ const StyledCard = styled.div<{ variant: 'primary' | 'secondary'; hoverable: boo
   height: 100%;
   display: flex;
   flex-direction: column;
-  ${({ hoverable }) => hoverable && 'cursor: pointer;'}
+  ${({ $hoverable }) => $hoverable && 'cursor: pointer;'}
 
   &::before {
     content: '';
@@ -47,8 +50,8 @@ const StyledCard = styled.div<{ variant: 'primary' | 'secondary'; hoverable: boo
     background: linear-gradient(
       90deg,
       transparent,
-      ${({ variant }) =>
-        variant === 'primary'
+      ${({ $variant }) =>
+        $variant === 'primary'
           ? 'rgba(30, 120, 193, 0.1)'
           : 'rgba(247, 88, 33, 0.1)'}
     );
@@ -63,8 +66,8 @@ const StyledCard = styled.div<{ variant: 'primary' | 'secondary'; hoverable: boo
     flex-direction: column;
   }
 
-  ${({ hoverable }) =>
-    hoverable &&
+  ${({ $hoverable }) =>
+    $hoverable &&
     `
     &:hover {
       transform: translateY(-5px);
@@ -88,8 +91,8 @@ const StyledCard = styled.div<{ variant: 'primary' | 'secondary'; hoverable: boo
     background: linear-gradient(
       90deg,
       transparent,
-      ${({ variant }) =>
-        variant === 'primary'
+      ${({ $variant }) =>
+        $variant === 'primary'
           ? 'rgba(30, 120, 193, 0.2)'
           : 'rgba(247, 88, 33, 0.2)'},
       transparent

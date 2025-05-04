@@ -1,14 +1,24 @@
 "use client";
 
-import React, { useState } from 'react';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Pagination, Autoplay } from 'swiper/modules';
+import React, { useState, useCallback, useEffect } from 'react';
 import { motion } from "framer-motion";
+import useEmblaCarousel from 'embla-carousel-react';
+import Autoplay from 'embla-carousel-autoplay';
 
-// Import Swiper styles
-import 'swiper/css';
-import 'swiper/css/pagination';
-import 'swiper/css/autoplay';
+// Add some basic CSS styles to ensure smooth carousel operation
+const EMBLA_STYLES = `
+  .embla { overflow: hidden; }
+  .embla__container { display: flex; }
+  .embla__slide { flex: 0 0 100%; min-width: 0; position: relative; }
+  
+  @media (min-width: 768px) {
+    .embla__slide { flex: 0 0 50%; }
+  }
+  
+  @media (min-width: 1024px) {
+    .embla__slide { flex: 0 0 33.333%; }
+  }
+`;
 
 interface ProjectsCarouselProps {
   addToRefs?: (el: HTMLElement | null) => void;
@@ -59,12 +69,109 @@ const projects = [
       "Train your team via Discord"
     ],
     link: "#"
+  },
+  {
+    title: "AI-Powered Automation",
+    subtitle: "Next-generation process intelligence",
+    description: "Enhance your workflow with machine learning",
+    gradient: "from-[#8A2BE2] to-[#4B0082]",
+    accent: "bg-[#8A2BE2]",
+    secondaryAccent: "bg-[#4B0082]",
+    icon: "🤖",
+    features: [
+      "ML-powered predictions",
+      "Intelligent document analysis",
+      "Adaptive learning systems"
+    ],
+    link: "#"
+  },
+  {
+    title: "Cloud Migration",
+    subtitle: "Modernize your infrastructure",
+    description: "Move your systems to a scalable cloud platform",
+    gradient: "from-[#4682B4] to-[#00BFFF]",
+    accent: "bg-[#4682B4]",
+    secondaryAccent: "bg-[#00BFFF]",
+    icon: "☁️",
+    features: [
+      "Zero-downtime migration",
+      "Hybrid cloud setup",
+      "Cost optimization strategy"
+    ],
+    link: "#"
+  },
+  {
+    title: "Cybersecurity Solutions",
+    subtitle: "Protect your digital assets",
+    description: "Implement robust security measures",
+    gradient: "from-[#800000] to-[#B22222]",
+    accent: "bg-[#800000]",
+    secondaryAccent: "bg-[#B22222]",
+    icon: "🔒",
+    features: [
+      "Threat detection systems",
+      "End-to-end encryption",
+      "Security compliance audits"
+    ],
+    link: "#"
   }
 ];
 
 const ProjectsCarousel = ({ addToRefs }: ProjectsCarouselProps) => {
   const [isHovered, setIsHovered] = useState(-1);
-  const [swiper, setSwiper] = useState<any>(null);
+  
+  // Create autoplay plugin instance
+  const autoplayOptions = { delay: 5000, stopOnInteraction: false };
+  const autoplayPlugin = Autoplay(autoplayOptions);
+  
+  // Set up Embla with better options
+  const [emblaRef, emblaApi] = useEmblaCarousel({
+    loop: true,
+    align: 'start',
+    dragFree: false,
+    containScroll: 'trimSnaps',
+    slidesToScroll: 1
+  }, [autoplayPlugin]);
+  
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  const [scrollSnaps, setScrollSnaps] = useState<number[]>([]);
+
+  // Navigation handlers
+  const scrollPrev = useCallback(() => {
+    if (emblaApi) emblaApi.scrollPrev();
+  }, [emblaApi]);
+
+  const scrollNext = useCallback(() => {
+    if (emblaApi) emblaApi.scrollNext();
+  }, [emblaApi]);
+
+  const scrollTo = useCallback((index: number) => {
+    if (emblaApi) emblaApi.scrollTo(index);
+  }, [emblaApi]);
+
+  const onSelect = useCallback(() => {
+    if (!emblaApi) return;
+    setSelectedIndex(emblaApi.selectedScrollSnap());
+  }, [emblaApi]);
+
+  // Set up Embla on mount and clean up on unmount
+  useEffect(() => {
+    if (!emblaApi) return;
+    
+    // Initialize
+    onSelect();
+    setScrollSnaps(emblaApi.scrollSnapList());
+    
+    // Add event listeners
+    emblaApi.on('select', onSelect);
+    emblaApi.on('reInit', onSelect);
+    
+    // Cleanup
+    return () => {
+      emblaApi.off('select', onSelect);
+      emblaApi.off('reInit', onSelect);
+    };
+  }, [emblaApi, onSelect]);
 
   return (
     <section className="relative w-full py-16 bg-transparent">
@@ -99,32 +206,11 @@ const ProjectsCarousel = ({ addToRefs }: ProjectsCarouselProps) => {
           className="relative px-4 py-8 max-w-7xl mx-auto"
         >
           <div className="relative">
-            <div className="mx-12 relative">
-              <Swiper
-                modules={[Pagination, Autoplay]}
-                spaceBetween={30}
-                slidesPerView={1}
-                breakpoints={{
-                  640: { slidesPerView: 1 },
-                  768: { slidesPerView: 2 },
-                  1024: { slidesPerView: 3 },
-                }}
-                pagination={{ 
-                  clickable: true,
-                  dynamicBullets: true,
-                  el: '.swiper-pagination'
-                }}
-                autoplay={{
-                  delay: 5000,
-                  disableOnInteraction: false,
-                  pauseOnMouseEnter: true
-                }}
-                loop={true}
-                className="!pb-16"
-                onSwiper={(s) => setSwiper(s)}
-              >
+            {/* Embla Carousel */}
+            <div className="embla overflow-hidden mx-12" ref={emblaRef}>
+              <div className="embla__container">
                 {projects.map((project, index) => (
-                  <SwiperSlide key={index}>
+                  <div key={index} className="embla__slide px-4">
                     <div 
                       className={`relative h-[450px] rounded-3xl overflow-hidden p-8 group bg-white shadow-lg`}
                       onMouseEnter={() => setIsHovered(index)}
@@ -186,14 +272,14 @@ const ProjectsCarousel = ({ addToRefs }: ProjectsCarouselProps) => {
                         </div>
                       </div>
                     </div>
-                  </SwiperSlide>
+                  </div>
                 ))}
-              </Swiper>
+              </div>
             </div>
             
-            {/* Navigation buttons */}
+            {/* Custom navigation buttons with higher z-index */}
             <button 
-              onClick={() => swiper?.slidePrev()}
+              onClick={scrollPrev}
               className="absolute left-0 top-1/2 -translate-y-1/2 z-50 w-12 h-12 flex items-center justify-center bg-white rounded-full shadow-md border border-[var(--color-primary)] hover:bg-[var(--color-primary)] hover:text-white transition-all duration-300 cursor-pointer"
               aria-label="Previous slide"
             >
@@ -203,7 +289,7 @@ const ProjectsCarousel = ({ addToRefs }: ProjectsCarouselProps) => {
             </button>
             
             <button 
-              onClick={() => swiper?.slideNext()}
+              onClick={scrollNext}
               className="absolute right-0 top-1/2 -translate-y-1/2 z-50 w-12 h-12 flex items-center justify-center bg-white rounded-full shadow-md border border-[var(--color-primary)] hover:bg-[var(--color-primary)] hover:text-white transition-all duration-300 cursor-pointer"
               aria-label="Next slide"
             >
@@ -211,50 +297,29 @@ const ProjectsCarousel = ({ addToRefs }: ProjectsCarouselProps) => {
                 <path d="M9 5L16 12L9 19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
             </button>
-            
-            <div className="swiper-pagination"></div>
+
+            {/* Pagination dots */}
+            <div className="embla__dots flex items-center justify-center mt-6">
+              {scrollSnaps.map((_, index) => (
+                <button
+                  key={index}
+                  className={`embla__dot w-3 h-3 mx-1 rounded-full transition-all ${
+                    index === selectedIndex 
+                      ? 'bg-[var(--color-primary)] transform scale-125' 
+                      : 'bg-[var(--color-primary)] opacity-30'
+                  }`}
+                  type="button"
+                  onClick={() => scrollTo(index)}
+                  aria-label={`Go to slide ${index + 1}`}
+                />
+              ))}
+            </div>
           </div>
         </motion.div>
       </div>
 
-      <style jsx global>{`
-        .swiper {
-          overflow: visible !important;
-        }
-        
-        .swiper-wrapper {
-          padding: 20px 0;
-        }
-
-        .swiper-pagination {
-          position: absolute;
-          bottom: 0;
-          left: 0;
-          right: 0;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          gap: 8px;
-          padding: 1rem 0;
-        }
-
-        .swiper-pagination-bullet {
-          width: 10px;
-          height: 10px;
-          background: var(--color-primary);
-          opacity: 0.3;
-          transition: all 0.3s ease;
-          cursor: pointer;
-          border-radius: 50%;
-          margin: 0 4px;
-        }
-
-        .swiper-pagination-bullet-active {
-          opacity: 1;
-          background: var(--color-primary);
-          transform: scale(1.5);
-        }
-      `}</style>
+      {/* Add essential Embla styles inline to ensure basic functionality */}
+      <style jsx global>{EMBLA_STYLES}</style>
     </section>
   );
 };
