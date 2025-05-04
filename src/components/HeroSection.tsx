@@ -9,6 +9,7 @@ import CustomizeButton from "./custome/button/CustomizeButton";
 import CustomizeButton2 from "./custome/button/CustomizeButton2";
 import AnimatedButton from "./custome/button/AnimatedButton";
 import { BackgroundIllustration } from "./custome/svg/BackgroundIllustration";
+import Link from "next/link";
 
 interface HeroSectionProps {
   addToRefs: (el: HTMLElement | null) => void;
@@ -57,7 +58,27 @@ export default function HeroSection({ addToRefs }: HeroSectionProps) {
               efficiency for businesses across industries.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
-              <AnimatedButton title={"Explore Services"} />
+              {/* <AnimatedButton title={"Explore Services"} /> */}
+              <div className="">
+                <button
+                  className="group relative w-full py-3 px-4 rounded-none flex items-center justify-center transition-all duration-300 bg-[var(--color-secondary)] text-white border-2 border-transparent hover:bg-white hover:text-[var(--color-secondary)] hover:border-[var(--color-secondary)] cursor-pointer"
+                >
+                  Explore Services
+                  <svg
+                    className="w-4 h-4 ml-2 transition-transform duration-300 group-hover:translate-x-1"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M14 5l7 7m0 0l-7 7m7-7H3"
+                    />
+                  </svg>
+                </button>
+              </div>
               <CustomizeButton2 title={"Contact Us"} href={"#contact"} />
             </div>
           </motion.div>

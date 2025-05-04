@@ -16,13 +16,12 @@ const CustomizeButton2 = ({title, href}:any) => {
 
 const StyledWrapper = styled.div`
   button {
-    padding: 1em 2em;
+    padding: .8em 1.5em;
     border: none;
     background: none;
     font-weight: bold;
     position: relative;
     cursor: pointer;
-    
     --primary-color: #ffffff;
     --hovered-color: #f75821;
     display: flex;
@@ -38,7 +37,7 @@ const StyledWrapper = styled.div`
     margin: 0;
     position: relative;
     font-size: 20px;
-    color: var(--primary-color);
+    color: var(--hovered-color);
     z-index: 1;
   }
   
@@ -60,7 +59,7 @@ const StyledWrapper = styled.div`
   }
 
   button svg {
-    color: var(--primary-color);
+    color: var(--hovered-color);
     transition: all 0.3s ease;
     position: relative;
     width: 15px;
