@@ -36,8 +36,8 @@ export default function HeroSection({ addToRefs }: HeroSectionProps) {
     >
       {/* <BackgroundIllustration/> */}
       <div className="absolute top-0 left-0 w-full h-full hero-gradient opacity-5 z-0"></div>
-      <div className="max-w-4xl mx-auto px-2 sm:px-4 lg:px-6 relative z-10 bg-white/30 backdrop-blur-xs rounded-2xl shadow-lg">
-        <div className="flex flex-col md:flex-row items-center gap-8 md:gap-16">
+      <div className="max-w-4xl mx-auto px-2 sm:px-4 lg:px-6 relative z-10 bg-white/30 backdrop-blur-none rounded-2xl shadow-lg">
+        <div className="flex flex-col md:flex-row items-center gap-8 md:gap-16 p-2">
           {/* Main content - NOT parallax */}
           <motion.div
             ref={heroText}
@@ -45,10 +45,10 @@ export default function HeroSection({ addToRefs }: HeroSectionProps) {
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8 }}
           >
-            <h1 className="text-7xl font-extrabold leading-tight text-[var(--color-primary-dark)] mb-4">
+            <h1 className="text-6xl font-extrabold leading-tight text-[var(--color-primary-dark)] mb-4">
               Simplify Automate Elevate
             </h1>
-            <h6 className="text-5xl font-bold leading-tight text-[var(--color-primary-dark)] mb-4 border-b p-1">
+            <h6 className="text-4xl font-bold leading-tight text-[var(--color-primary-dark)] mb-4 border-b p-1">
               Digital workflow solutions for forward-thinking businesses
             </h6>
             <p className="text-xl font-semi-bold text-[var(--color-primary-dark)] mb-8">
