@@ -45,10 +45,10 @@ export default function HeroSection({ addToRefs }: HeroSectionProps) {
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8 }}
           >
-            <h1 className="text-6xl font-extrabold leading-tight text-[var(--color-primary-dark)] mb-4">
+            <h1 className="text-7xl font-semi-bold leading-tight text-[var(--color-primary-dark)] mb-4">
               Simplify Automate Elevate
             </h1>
-            <h6 className="text-4xl font-bold leading-tight text-[var(--color-primary-dark)] mb-4 border-b p-1">
+            <h6 className="text-4xl font-semi-bold leading-tight text-[var(--color-primary-dark)] mb-4 border-b p-1">
               Digital Workflow Solutions For Forward-Thinking Businesses
             </h6>
             <p className="text-xl font-semi-bold text-[var(--color-primary-dark)] mb-8">
