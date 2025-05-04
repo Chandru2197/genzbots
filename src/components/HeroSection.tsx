@@ -49,7 +49,7 @@ export default function HeroSection({ addToRefs }: HeroSectionProps) {
               Simplify Automate Elevate
             </h1>
             <h6 className="text-4xl font-bold leading-tight text-[var(--color-primary-dark)] mb-4 border-b p-1">
-              Digital workflow solutions for forward-thinking businesses
+              Digital Workflow Solutions For Forward-Thinking Businesses
             </h6>
             <p className="text-xl font-semi-bold text-[var(--color-primary-dark)] mb-8">
               GenZbots specializes in intelligent RPA and AI solutions that transform
