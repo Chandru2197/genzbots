@@ -1,8 +1,9 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { motion, useInView } from "framer-motion";
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import useEmblaCarousel from 'embla-carousel-react';
+import Autoplay from 'embla-carousel-autoplay';
 import GlassmorphismCard from './GlassmorphismCard';
 
 interface Testimonial {
@@ -19,11 +20,63 @@ interface TestimonialsCarouselProps {
 }
 
 export default function TestimonialsCarousel({ addToRefs }: TestimonialsCarouselProps) {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [isTransitioning, setIsTransitioning] = useState(false);
-  const intervalRef = useRef<NodeJS.Timeout | null>(null);
   const carouselRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(carouselRef, { once: true });
+  const [isMounted, setIsMounted] = useState(false);
+
+  // Create autoplay plugin instance
+  const autoplayOptions = { delay: 5000, stopOnInteraction: false };
+  const autoplayPlugin = Autoplay(autoplayOptions);
+  
+  // Set up Embla with options for swipeable cards
+  const [emblaRef, emblaApi] = useEmblaCarousel({ 
+    loop: true,
+    align: 'center',
+    dragFree: true
+  }, [autoplayPlugin]);
+
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  const [scrollSnaps, setScrollSnaps] = useState<number[]>([]);
+
+  // Avoid hydration mismatch by only rendering client-side
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  const scrollPrev = useCallback(() => {
+    if (emblaApi) emblaApi.scrollPrev();
+  }, [emblaApi]);
+
+  const scrollNext = useCallback(() => {
+    if (emblaApi) emblaApi.scrollNext();
+  }, [emblaApi]);
+
+  const scrollTo = useCallback((index: number) => {
+    if (emblaApi) emblaApi.scrollTo(index);
+  }, [emblaApi]);
+
+  const onSelect = useCallback(() => {
+    if (!emblaApi) return;
+    setSelectedIndex(emblaApi.selectedScrollSnap());
+  }, [emblaApi]);
+
+  useEffect(() => {
+    if (!emblaApi) return;
+    
+    // Initialize
+    onSelect();
+    setScrollSnaps(emblaApi.scrollSnapList());
+    
+    // Add event listeners
+    emblaApi.on('select', onSelect);
+    emblaApi.on('reInit', onSelect);
+    
+    // Cleanup
+    return () => {
+      emblaApi.off('select', onSelect);
+      emblaApi.off('reInit', onSelect);
+    };
+  }, [emblaApi, onSelect]);
 
   useEffect(() => {
     if (addToRefs && carouselRef.current) addToRefs(carouselRef.current);
@@ -64,68 +117,9 @@ export default function TestimonialsCarousel({ addToRefs }: TestimonialsCarousel
     }
   ];
 
-  const nextSlide = () => {
-    if (!isTransitioning) {
-      setIsTransitioning(true);
-      setCurrentIndex((prevIndex) => (prevIndex + 1) % testimonials.length);
-      setTimeout(() => setIsTransitioning(false), 500);
-    }
-  };
-
-  const prevSlide = () => {
-    if (!isTransitioning) {
-      setIsTransitioning(true);
-      setCurrentIndex((prevIndex) =>
-        prevIndex === 0 ? testimonials.length - 1 : prevIndex - 1
-      );
-      setTimeout(() => setIsTransitioning(false), 500);
-    }
-  };
-
-  const goToSlide = (index: number) => {
-    if (!isTransitioning && index !== currentIndex) {
-      setIsTransitioning(true);
-      setCurrentIndex(index);
-      setTimeout(() => setIsTransitioning(false), 500);
-    }
-  };
-
-  useEffect(() => {
-    // Auto-advance slides
-    intervalRef.current = setInterval(() => {
-      nextSlide();
-    }, 5000);
-
-    return () => {
-      if (intervalRef.current) {
-        clearInterval(intervalRef.current);
-      }
-    };
-  }, [currentIndex]);
-
-  // Reset interval when manually changing slide
-  const resetInterval = () => {
-    if (intervalRef.current) {
-      clearInterval(intervalRef.current);
-      intervalRef.current = setInterval(() => {
-        nextSlide();
-      }, 5000);
-    }
-  };
-
-  const handlePrev = () => {
-    prevSlide();
-    resetInterval();
-  };
-
-  const handleNext = () => {
-    nextSlide();
-    resetInterval();
-  };
-
   const TestimonialCard = ({ testimonial }: { testimonial: Testimonial }) => (
     <GlassmorphismCard
-      variant={currentIndex % 2 === 0 ? 'primary' : 'secondary'}
+      variant={testimonial.id % 2 === 0 ? 'primary' : 'secondary'}
       hoverable={true}
       className="w-full max-w-3xl mx-auto"
     >
@@ -152,6 +146,21 @@ export default function TestimonialsCarousel({ addToRefs }: TestimonialsCarousel
     </GlassmorphismCard>
   );
 
+  // Don't render anything during server-side rendering
+  if (!isMounted) {
+    return (
+      <section className="py-16 overflow-hidden max-w-[1920px] mx-auto">
+        <div className="text-center mb-12 px-4">
+          <h2 className="text-3xl font-bold mb-4">What Our Clients Say</h2>
+          <p className="text-gray-600 max-w-3xl mx-auto">
+            Hear from businesses that have transformed their operations with our automation solutions.
+          </p>
+        </div>
+        <div className="max-w-3xl mx-auto bg-gray-100 h-80 animate-pulse rounded-xl"></div>
+      </section>
+    );
+  }
+
   return (
     <section className="py-16 overflow-hidden max-w-[1920px] mx-auto">
       <motion.div
@@ -170,7 +179,7 @@ export default function TestimonialsCarousel({ addToRefs }: TestimonialsCarousel
 
       <div className="relative max-w-7xl mx-auto px-4 lg:px-8">
         <button
-          onClick={handlePrev}
+          onClick={scrollPrev}
           className="absolute left-0 top-1/2 -translate-y-1/2 z-10 p-2 rounded-full bg-white/80 shadow-lg hover:bg-white transition-all cursor-pointer"
           aria-label="Previous testimonial"
         >
@@ -180,25 +189,22 @@ export default function TestimonialsCarousel({ addToRefs }: TestimonialsCarousel
         </button>
 
         <div className="overflow-hidden mx-12">
-          <div
-            className="flex transition-transform duration-500 ease-in-out"
-            style={{
-              transform: `translateX(-${currentIndex * 100}%)`,
-            }}
-          >
-            {testimonials.map((testimonial) => (
-              <div
-                key={testimonial.id}
-                className="w-full flex-shrink-0 px-4"
-              >
-                <TestimonialCard testimonial={testimonial} />
-              </div>
-            ))}
+          <div className="embla" ref={emblaRef}>
+            <div className="embla__container">
+              {testimonials.map((testimonial) => (
+                <div
+                  key={testimonial.id}
+                  className="embla__slide px-4"
+                >
+                  <TestimonialCard testimonial={testimonial} />
+                </div>
+              ))}
+            </div>
           </div>
         </div>
 
         <button
-          onClick={handleNext}
+          onClick={scrollNext}
           className="absolute right-0 top-1/2 -translate-y-1/2 z-10 p-2 rounded-full bg-white/80 shadow-lg hover:bg-white transition-all cursor-pointer"
           aria-label="Next testimonial"
         >
@@ -208,15 +214,12 @@ export default function TestimonialsCarousel({ addToRefs }: TestimonialsCarousel
         </button>
 
         <div className="flex justify-center mt-8 gap-2">
-          {testimonials.map((_, index) => (
+          {scrollSnaps.map((_, index: number) => (
             <button
               key={index}
-              onClick={() => {
-                goToSlide(index);
-                resetInterval();
-              }}
+              onClick={() => scrollTo(index)}
               className={`w-3 h-3 rounded-full transition-all cursor-pointer ${
-                index === currentIndex
+                index === selectedIndex
                   ? 'bg-[var(--color-primary)] scale-125'
                   : 'bg-gray-300 hover:bg-gray-400'
               }`}
@@ -225,6 +228,20 @@ export default function TestimonialsCarousel({ addToRefs }: TestimonialsCarousel
           ))}
         </div>
       </div>
+
+      <style jsx>{`
+        .embla { overflow: hidden; }
+        .embla__container { 
+          display: flex;
+          align-items: center;
+          height: 100%;
+        }
+        .embla__slide { 
+          flex: 0 0 100%;
+          min-width: 0;
+          position: relative;
+        }
+      `}</style>
     </section>
   );
 }

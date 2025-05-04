@@ -11,8 +11,8 @@ const AnimatedButton = ({title}:any) => {
           relative 
           inline-flex items-center
           overflow-hidden
-          px-6
-          py-2
+          px-4
+          py-1
           rounded-none
           border-2
           border-[var(--color-secondary)]
@@ -27,7 +27,7 @@ const AnimatedButton = ({title}:any) => {
           items-center
           justify-center
           cursor-pointer
-          ${isHovered ? 'bg-[var(--color-secondary)] text-white' : 'bg-white text-[var(--color-secondary)]'}
+          ${isHovered ? 'bg-[var(--color-secondary)] text-white' : 'bg-transparent text-[var(--color-secondary)]'}
         `}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
@@ -52,7 +52,7 @@ const AnimatedButton = ({title}:any) => {
             left-0 
             w-full 
             h-full 
-            bg-white
+            bg-transparent
             transform
             transition-transform
             duration-500
