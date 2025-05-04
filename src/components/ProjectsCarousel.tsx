@@ -176,7 +176,7 @@ const ProjectsCarousel = ({ addToRefs }: ProjectsCarouselProps) => {
   return (
     <section className="relative w-full py-16 bg-transparent">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
+        <div className="text-center mb-4">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -193,7 +193,7 @@ const ProjectsCarousel = ({ addToRefs }: ProjectsCarouselProps) => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-gray-600 mt-8 text-center max-w-2xl mx-auto text-lg"
+            className="text-gray-600 text-lg max-w-2xl mx-auto"
           >
             Explore our cutting-edge automation solutions
           </motion.p>

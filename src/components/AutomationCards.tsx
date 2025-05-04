@@ -14,13 +14,15 @@ import {
 import styled from 'styled-components';
 import GlassmorphismCard from './GlassmorphismCard';
 import AnimatedButton from "./custome/button/AnimatedButton";
+import Image from "next/image";
 
 interface AutomationCardProps {
   title: string;
   description: string;
-  icon: React.ElementType;
+  icon?: React.ElementType;
   technologies?: string[];
   delay?: number;
+  customImage?: string;
 }
 
 const AutomationCard = ({
@@ -29,6 +31,7 @@ const AutomationCard = ({
   icon: Icon,
   technologies = [],
   delay = 0,
+  customImage,
 }: AutomationCardProps) => {
   const [isHovered, setIsHovered] = useState(false);
   const cardRef = useRef<HTMLDivElement>(null);
@@ -53,15 +56,25 @@ const AutomationCard = ({
           onMouseLeave={() => setIsHovered(false)}
         >
           <div>
-            {/* Icon */}
+            {/* Icon or Custom Image */}
             <div className="mb-5">
-              <div
-                className={`w-[80px] h-[80px] rounded-full flex items-center justify-center transition-colors duration-300 ${
-                  isHovered ? "bg-[var(--color-secondary)] text-white" : "bg-[#FFF1ED] text-[var(--color-secondary)]"
-                }`}
-              >
-                <Icon size={26} color={isHovered ? "white" : "var(--color-secondary)"} />
-              </div>
+              {customImage ? (
+                <div className="w-[80px] h-[80px] rounded-full flex items-center justify-center overflow-hidden">
+                  <img
+                    src={customImage}
+                    alt={title}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+              ) : Icon ? (
+                <div
+                  className={`w-[80px] h-[80px] rounded-full flex items-center justify-center transition-colors duration-300 ${
+                    isHovered ? "bg-[var(--color-secondary)] text-white" : "bg-[#FFF1ED] text-[var(--color-secondary)]"
+                  }`}
+                >
+                  <Icon size={26} color={isHovered ? "white" : "var(--color-secondary)"} />
+                </div>
+              ) : null}
             </div>
             
             {/* Title */}
@@ -129,6 +142,7 @@ export default function AutomationCards({ addToRefs }: { addToRefs?: (el: HTMLEl
       description:
         "We analyze your pain points via:",
       icon: Search,
+      customImage: "/assets/images/customer-service.png",
       technologies: ["Process audit", "ROI estimation","Bot recommendation"],
     },
     {
@@ -136,12 +150,14 @@ export default function AutomationCards({ addToRefs }: { addToRefs?: (el: HTMLEl
       description:
         "✍️ You receive",
       icon: Lightbulb,
+      customImage: "/assets/images/prototype.png",
       technologies: ["Custom workflow diagram", "Timeline & pricing","Integration checklist"],
     },
     {
       title: "Build & Test (1-3 weeks)",
       description: "👩💻 We:",
       icon: Code,
+      customImage: "/assets/images/quality-control.png",
       technologies: ["Develop in agile sprints", "Share weekly demo videos", "Train your team via Discord"],
     },
     {
@@ -149,6 +165,7 @@ export default function AutomationCards({ addToRefs }: { addToRefs?: (el: HTMLEl
       description:
         "🚨 Includes:",
       icon: Rocket,
+      customImage: "/assets/images/healthcare.png",
       technologies: ["24/7 priority support", "Performance analytics",'3 free tweaks'],
     },
     {
@@ -156,6 +173,7 @@ export default function AutomationCards({ addToRefs }: { addToRefs?: (el: HTMLEl
       description:
         "📈 We:",
       icon: Server,
+      customImage: "/assets/images/optimization.png",
       technologies: [
         "Suggest new automations",
         "Provide quarterly health checks",
@@ -166,7 +184,8 @@ export default function AutomationCards({ addToRefs }: { addToRefs?: (el: HTMLEl
       title: "Contact Us",
       description:
         "Ready to transform your business processes? Get a complimentary assessment.",
-      icon: MessageSquare,
+      customImage: "/assets/images/operator.png",
+      icon:MessageSquare,
       technologies: ["AI/ML Integration", "Custom Solutions"],
     },
   ];
@@ -178,17 +197,17 @@ export default function AutomationCards({ addToRefs }: { addToRefs?: (el: HTMLEl
         <motion.div
           ref={headingRef}
           data-speed="0.08"
-          className="text-center mb-12 parallax"
+          className="text-center mb-6 parallax"
           initial={{ opacity: 0, y: 25 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
         >
           <div className="relative">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-[#FF5722] via-[#FF8A65] to-[#FF5722] bg-clip-text text-transparent">
+            <h2 className="text-4xl md:text-5xl font-bold mb-1 bg-gradient-to-r from-[#FF5722] via-[#FF8A65] to-[#FF5722] bg-clip-text text-transparent">
               Our Automation Process
             </h2>
           </div>
-          <p className="text-desc font-desc text-gray-600 max-w-2xl mx-auto text-center">
+          <p className="text-gray-600 text-lg max-w-2xl mx-auto">
             Automation is a journey, not a destination. Our ongoing support ensures your solutions evolve with your business.
           </p>
         </motion.div>
@@ -201,6 +220,7 @@ export default function AutomationCards({ addToRefs }: { addToRefs?: (el: HTMLEl
               title={service.title}
               description={service.description}
               icon={service.icon}
+              customImage={service.customImage}
               technologies={service.technologies}
               delay={index}
             />

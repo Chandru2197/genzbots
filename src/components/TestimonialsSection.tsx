@@ -135,11 +135,11 @@ export default function TestimonialsSection({ addToRefs }: TestimonialsSectionPr
 
   return (
     <div className="w-full py-16" ref={sectionRef} data-speed="0">
-      <div className="text-center mb-12">
-        <h2 className="text-4xl font-bold bg-gradient-to-r from-[#0A6E94] to-[#0A6E94] bg-clip-text text-transparent mb-4">
+      <div className="text-center mb-4">
+        <h2 className="text-4xl font-bold bg-gradient-to-r from-[#0A6E94] to-[#0A6E94] bg-clip-text text-transparent mb-1">
           What Our Clients Say
         </h2>
-        <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+        <p className="text-gray-600 text-lg max-w-2xl mx-auto">
           Discover why businesses trust us with their automation needs
         </p>
       </div>
