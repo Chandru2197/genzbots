@@ -36,7 +36,7 @@ export default function HeroSection({ addToRefs }: HeroSectionProps) {
     >
       {/* <BackgroundIllustration/> */}
       <div className="absolute top-0 left-0 w-full h-full hero-gradient opacity-5 z-0"></div>
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 bg-white/30 backdrop-blur-none rounded-2xl shadow-lg">
+      <div className="max-w-4xl mx-auto px-2 sm:px-4 lg:px-6 relative z-10 bg-white/30 backdrop-blur-xs rounded-2xl shadow-lg">
         <div className="flex flex-col md:flex-row items-center gap-8 md:gap-16">
           {/* Main content - NOT parallax */}
           <motion.div
@@ -45,13 +45,13 @@ export default function HeroSection({ addToRefs }: HeroSectionProps) {
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8 }}
           >
-            <h1 className="text-5xl font-bold leading-tight text-[var(--color-primary-dark)] mb-4">
+            <h1 className="text-7xl font-extrabold leading-tight text-[var(--color-primary-dark)] mb-4">
               Simplify Automate Elevate
             </h1>
-            <h6 className="text-3xl font-label leading-tight text-[var(--color-primary-dark)] mb-4 border-b p-1">
+            <h6 className="text-5xl font-bold leading-tight text-[var(--color-primary-dark)] mb-4 border-b p-1">
               Digital workflow solutions for forward-thinking businesses
             </h6>
-            <p className="text-lg font-desc text-[var(--color-primary-dark)] mb-8">
+            <p className="text-xl font-semi-bold text-[var(--color-primary-dark)] mb-8">
               GenZbots specializes in intelligent RPA and AI solutions that transform
               manual processes into automated workflows, reducing costs and boosting
               efficiency for businesses across industries.
