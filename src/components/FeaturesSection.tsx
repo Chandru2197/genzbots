@@ -59,7 +59,7 @@ export const features = [
     color: "from-green-400/20 to-green-600/20",
     gradient: "linear-gradient(135deg, rgba(74, 222, 128, 0.2), rgba(22, 163, 74, 0.2))",
     icon: Brain,
-    backgroundSvg: "/assets/svgs/undraw_online_learning.svg"
+    backgroundSvg: "/assets/svgs/undraw_ai-agent.svg"
   }
 ];
 
