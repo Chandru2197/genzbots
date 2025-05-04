@@ -48,9 +48,14 @@ export const features = [
 ];
 
 const FlipCard = styled.div`
+  perspective: 1000px;
   width: 100%;
   height: 350px;
   margin: 0 auto;
+
+  &:hover .card-inner {
+    transform: rotateY(180deg);
+  }
 `;
 
 const CardInner = styled.div`
@@ -58,12 +63,15 @@ const CardInner = styled.div`
   width: 100%;
   height: 100%;
   text-align: center;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
 `;
 
 const CardSide = styled.div`
   position: absolute;
   width: 100%;
   height: 100%;
+  backface-visibility: hidden;
   background: white;
   border-radius: 24px;
   padding: 2rem;
@@ -81,7 +89,12 @@ const CardFront = styled(CardSide)`
 `;
 
 const CardBack = styled(CardSide)`
-  display: none;
+  transform: rotateY(180deg);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: white;
+  box-shadow: 0 8px 32px rgba(31, 38, 135, 0.1);
 `;
 
 const IconWrapper = styled.div`
@@ -107,9 +120,34 @@ const KeyPoint = styled.div`
   margin: 0.75rem 0;
   border-radius: 12px;
   text-align: left;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   overflow: hidden;
   border: 1px solid rgba(240, 240, 240, 0.8);
+  
+  &::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 4px;
+    height: 100%;
+    background: linear-gradient(to bottom, #FF5722, #FF8A65);
+    transform: scaleY(0);
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    transform-origin: bottom;
+  }
+
+  &:hover {
+    background: rgba(255, 245, 240, 0.8);
+    transform: translateX(10px) scale(1.02);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    border-color: rgba(255, 87, 34, 0.2);
+
+    &::before {
+      transform: scaleY(1);
+    }
+  }
 
   span {
     background: linear-gradient(120deg, #FF5722, #FF8A65);
