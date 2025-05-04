@@ -177,7 +177,7 @@ const KeyPoint = styled.div<{ colorIndex?: number }>`
     height: 100%;
     width: 5px;
     background: ${props => {
-      const colors = ["#6c63ff", "#17B8A6", "#F50057", "#f349ff"];
+      const colors = ["#008bce", "#17B8A6", "#F50057", "#534aff"];
       return props.colorIndex !== undefined ? 
         `linear-gradient(to bottom, ${colors[props.colorIndex]}, ${colors[props.colorIndex]})` : 
         'linear-gradient(to bottom, #FF7A59, #FF5722)';
@@ -192,24 +192,24 @@ const KeyPoint = styled.div<{ colorIndex?: number }>`
   &:hover {
     transform: translateX(6px);
     box-shadow: ${props => {
-      const colors = ["rgba(108, 99, 255, 0.18)", "rgba(23, 184, 166, 0.18)", "rgba(245, 0, 87, 0.18)", "rgba(243, 73, 255, 0.18)"];
+      const colors = ["rgba(0, 139, 206, 0.18)", "rgba(23, 184, 166, 0.18)", "rgba(245, 0, 87, 0.18)", "rgba(83, 74, 255, 0.18)"];
       return props.colorIndex !== undefined ? 
         `0 6px 16px ${colors[props.colorIndex]}` : 
         '0 6px 16px rgba(255, 122, 89, 0.18)';
     }};
     border-color: ${props => {
-      const colors = ["rgba(108, 99, 255, 0.4)", "rgba(23, 184, 166, 0.4)", "rgba(245, 0, 87, 0.4)", "rgba(243, 73, 255, 0.4)"];
+      const colors = ["rgba(0, 139, 206, 0.4)", "rgba(23, 184, 166, 0.4)", "rgba(245, 0, 87, 0.4)", "rgba(83, 74, 255, 0.4)"];
       return props.colorIndex !== undefined ? colors[props.colorIndex] : 'rgba(255, 122, 89, 0.4)';
     }};
     background-color: ${props => {
-      const colors = ["rgba(108, 99, 255, 0.05)", "rgba(23, 184, 166, 0.05)", "rgba(245, 0, 87, 0.05)", "rgba(243, 73, 255, 0.05)"];
+      const colors = ["rgba(0, 139, 206, 0.05)", "rgba(23, 184, 166, 0.05)", "rgba(245, 0, 87, 0.05)", "rgba(83, 74, 255, 0.05)"];
       return props.colorIndex !== undefined ? colors[props.colorIndex] : 'rgba(255, 248, 245, 0.9)';
     }};
     
     &::before {
       transform: scaleY(1);
       box-shadow: ${props => {
-        const colors = ["rgba(108, 99, 255, 0.6)", "rgba(23, 184, 166, 0.6)", "rgba(245, 0, 87, 0.6)", "rgba(243, 73, 255, 0.6)"];
+        const colors = ["rgba(0, 139, 206, 0.6)", "rgba(23, 184, 166, 0.6)", "rgba(245, 0, 87, 0.6)", "rgba(83, 74, 255, 0.6)"];
         return props.colorIndex !== undefined ? 
           `0 0 10px ${colors[props.colorIndex]}` : 
           '0 0 10px rgba(255, 122, 89, 0.6)';
@@ -219,7 +219,7 @@ const KeyPoint = styled.div<{ colorIndex?: number }>`
   
   span {
     color: ${props => {
-      const colors = ["#6c63ff", "#17B8A6", "#F50057", "#f349ff"];
+      const colors = ["#008bce", "#17B8A6", "#F50057", "#534aff"];
       return props.colorIndex !== undefined ? colors[props.colorIndex] : '#FF7A59';
     }};
     font-weight: 500;
@@ -234,7 +234,7 @@ const KeyPoint = styled.div<{ colorIndex?: number }>`
   &:hover span {
     transform: none;
     color: ${props => {
-      const colors = ["#5a52e0", "#15a595", "#d80050", "#dc41e9"];
+      const colors = ["#0077b0", "#15a595", "#d80050", "#4740dc"];
       return props.colorIndex !== undefined ? colors[props.colorIndex] : '#E95F2E';
     }};
     left: 4px;
@@ -247,10 +247,10 @@ export default function FeaturesSection({ addToRefs }: FeaturesSectionProps) {
 
   // Card color mapping
   const cardColors = {
-    frontBg: ["rgba(108, 99, 255, 0.1)", "rgba(23, 184, 166, 0.1)", "rgba(245, 0, 87, 0.1)", "rgba(243, 73, 255, 0.1)"],
-    backBg: ["rgba(108, 99, 255, 0.05)", "rgba(23, 184, 166, 0.05)", "rgba(245, 0, 87, 0.05)", "rgba(243, 73, 255, 0.05)"],
-    borderHover: ["rgba(108, 99, 255, 0.4)", "rgba(23, 184, 166, 0.4)", "rgba(245, 0, 87, 0.4)", "rgba(243, 73, 255, 0.4)"],
-    textColor: ["#6c63ff", "#17B8A6", "#F50057", "#f349ff"]
+    frontBg: ["rgba(0, 139, 206, 0.1)", "rgba(23, 184, 166, 0.1)", "rgba(245, 0, 87, 0.1)", "rgba(83, 74, 255, 0.1)"],
+    backBg: ["rgba(0, 139, 206, 0.05)", "rgba(23, 184, 166, 0.05)", "rgba(245, 0, 87, 0.05)", "rgba(83, 74, 255, 0.05)"],
+    borderHover: ["rgba(0, 139, 206, 0.4)", "rgba(23, 184, 166, 0.4)", "rgba(245, 0, 87, 0.4)", "rgba(83, 74, 255, 0.4)"],
+    textColor: ["#008bce", "#17B8A6", "#F50057", "#534aff"]
   };
 
   // Log the features data to verify it's correct
