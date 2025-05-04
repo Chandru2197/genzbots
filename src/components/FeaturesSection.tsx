@@ -1,12 +1,24 @@
 "use client";
 
 import { useRef, useEffect } from "react";
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import { CloudLightning, Rocket, Shield, Brain } from 'lucide-react';
 
 interface FeaturesSectionProps {
   addToRefs: (el: HTMLElement | null) => void;
 }
+
+// Add the fadeInUp keyframes
+const fadeInUp = keyframes`
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+`;
 
 export const features = [
   {
@@ -16,16 +28,18 @@ export const features = [
     key: ["Broken bot? We diagnose & fix in <24 hours", "24/7 ER for your automation"],
     color: "from-blue-400/20 to-blue-600/20",
     gradient: "linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(37, 99, 235, 0.2))",
-    icon: CloudLightning
+    icon: CloudLightning,
+    backgroundSvg: "/assets/svgs/undraw_bug-fixing.svg"
   },
   {
     title: "Pay-As-You-Grow",
     sub: "No Lock-In Scaling",
     description: "Start with 1 bot ($800), scale to 100+ with volume discounts",
-    key: ["Start with 1 bot ($800)", "Scale to 100+ with volume discounts", "Only pay for what you use"],
+    key: ["Start with 1 bot ($500)", "Scale to 100+ with volume discounts", "Only pay for what you use"],
     color: "from-orange-400/20 to-orange-600/20",
     gradient: "linear-gradient(135deg, rgba(251, 146, 60, 0.2), rgba(234, 88, 12, 0.2))",
-    icon: Rocket
+    icon: Rocket,
+    backgroundSvg: "/assets/svgs/undraw_growth-analytics.svg"
   },
   {
     title: "Invisible IT Team",
@@ -34,7 +48,8 @@ export const features = [
     key: ["We monitor & optimize automatically", "Get surprise upgrades every quarter", "Forget tech debt exists"],
     color: "from-purple-400/20 to-purple-600/20",
     gradient: "linear-gradient(135deg, rgba(192, 132, 252, 0.2), rgba(168, 85, 247, 0.2))",
-    icon: Shield
+    icon: Shield,
+    backgroundSvg: "/assets/svgs/undraw_shared-workspace.svg"
   },
   {
     title: "Future-Proof Bots",
@@ -43,15 +58,17 @@ export const features = [
     key: ["Bots improve from your team's habits", "Auto-adapts to software updates", "Gets smarter while you sleep"],
     color: "from-green-400/20 to-green-600/20",
     gradient: "linear-gradient(135deg, rgba(74, 222, 128, 0.2), rgba(22, 163, 74, 0.2))",
-    icon: Brain
+    icon: Brain,
+    backgroundSvg: "/assets/svgs/undraw_online_learning.svg"
   }
 ];
 
 const FlipCard = styled.div`
-  perspective: 1000px;
+  perspective: 1200px;
   width: 100%;
-  height: 350px;
+  height: 480px;
   margin: 0 auto;
+  cursor: pointer;
 
   &:hover .card-inner {
     transform: rotateY(180deg);
@@ -63,8 +80,12 @@ const CardInner = styled.div`
   width: 100%;
   height: 100%;
   text-align: center;
-  transition: transform 0.8s;
+  transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   transform-style: preserve-3d;
+  border-radius: 24px;
+  overflow: visible;
+  will-change: transform;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
 `;
 
 const CardSide = styled.div`
@@ -72,29 +93,42 @@ const CardSide = styled.div`
   width: 100%;
   height: 100%;
   backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
   background: white;
   border-radius: 24px;
-  padding: 2rem;
+  padding: 0;
   border: 1px solid rgba(240, 240, 250, 0.8);
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
+  overflow: hidden;
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
 `;
 
 const CardFront = styled(CardSide)`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   background: white;
   box-shadow: 0 8px 32px rgba(31, 38, 135, 0.1);
+  overflow: hidden;
+  padding: 0;
+  z-index: 1;
+  -webkit-transform: rotateY(0deg);
+  transform: rotateY(0deg);
 `;
 
 const CardBack = styled(CardSide)`
   transform: rotateY(180deg);
+  -webkit-transform: rotateY(180deg);
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
+  align-items: center;
   background: white;
   box-shadow: 0 8px 32px rgba(31, 38, 135, 0.1);
+  padding: 0;
+  overflow: hidden;
+  z-index: 2;
 `;
 
 const IconWrapper = styled.div`
@@ -115,51 +149,79 @@ const IconWrapper = styled.div`
 `;
 
 const KeyPoint = styled.div`
-  background: rgba(248, 250, 252, 0.8);
-  padding: 1rem;
-  margin: 0.75rem 0;
-  border-radius: 12px;
+  background: rgb(255, 255, 255);
+  padding: 1.25rem 1.5rem;
+  margin: 0.9rem auto;
+  border-radius: 20px;
   text-align: left;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
+  width: 96%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 3rem;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(236, 236, 236, 0.8);
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  visibility: visible !important;
+  z-index: 5;
+  opacity: 1 !important;
   overflow: hidden;
-  border: 1px solid rgba(240, 240, 240, 0.8);
   
   &::before {
     content: '';
     position: absolute;
     left: 0;
     top: 0;
-    width: 4px;
     height: 100%;
-    background: linear-gradient(to bottom, #FF5722, #FF8A65);
+    width: 5px;
+    background: linear-gradient(to bottom, #FF7A59, #FF5722);
     transform: scaleY(0);
-    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     transform-origin: bottom;
+    border-radius: 0 2px 2px 0;
+    opacity: 0.9;
   }
-
+  
   &:hover {
-    background: rgba(255, 245, 240, 0.8);
-    transform: translateX(10px) scale(1.02);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-    border-color: rgba(255, 87, 34, 0.2);
-
+    transform: translateX(6px);
+    box-shadow: 0 6px 16px rgba(255, 122, 89, 0.18);
+    border-color: rgba(255, 122, 89, 0.4);
+    background-color: rgba(255, 248, 245, 0.9);
+    width: 98%;
+    
     &::before {
       transform: scaleY(1);
+      box-shadow: 0 0 10px rgba(255, 122, 89, 0.6);
     }
   }
-
+  
   span {
-    background: linear-gradient(120deg, #FF5722, #FF8A65);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
+    color: #FF7A59;
     font-weight: 500;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    opacity: 1;
+    position: relative;
+    left: 0;
+    letter-spacing: 0.01em;
+  }
+  
+  &:hover span {
+    transform: none;
+    color: #E95F2E;
+    left: 4px;
+    font-weight: 600;
   }
 `;
 
 export default function FeaturesSection({ addToRefs }: FeaturesSectionProps) {
   const sectionRef = useRef<HTMLDivElement>(null);
+
+  // Log the features data to verify it's correct
+  useEffect(() => {
+    console.log("Features data:", features);
+  }, []);
 
   // Don't add this section to parallax refs to prevent motion effects
   useEffect(() => {
@@ -189,23 +251,73 @@ export default function FeaturesSection({ addToRefs }: FeaturesSectionProps) {
               key={feature.title}
             >
               <FlipCard>
-                <CardInner className="card-inner">
+                <CardInner 
+                  className="card-inner" 
+                  style={{ 
+                    backgroundColor: 'white'
+                  }}
+                >
                   <CardFront>
-                    <IconWrapper>
-                      {<feature.icon />}
-                    </IconWrapper>
-                    <h3 className="text-2xl font-bold text-[var(--color-tertiary)] mb-2">
-                      {feature.title}
-                    </h3>
-                    <p className="text-gray-600 font-medium">{feature.sub}</p>
+                    <div 
+                      className="w-full h-[70%] flex items-center justify-center relative overflow-hidden"
+                    >
+                      <div
+                        className="absolute inset-0"
+                        style={{
+                          backgroundColor: `rgba(${feature.title.includes('Rescue') ? '59, 130, 246' : 
+                                            feature.title.includes('Pay') ? '251, 146, 60' : 
+                                            feature.title.includes('IT') ? '192, 132, 252' : 
+                                            '74, 222, 128'}, 0.1)`,
+                          borderBottom: '1px solid rgba(0,0,0,0.05)'
+                        }}
+                      ></div>
+                      <img 
+                        src={feature.backgroundSvg} 
+                        alt={feature.title} 
+                        className="h-[75%] w-[75%] object-contain z-10 relative"
+                      />
+                    </div>
+                    <div className="w-full h-[30%] flex flex-col justify-center items-center px-6 py-4">
+                      <h3 className="text-2xl font-bold text-[var(--color-tertiary)] mb-2 text-center">
+                        {feature.title}
+                      </h3>
+                      <p className="text-lg text-gray-600 font-medium text-center max-w-[90%]">{feature.sub}</p>
+                    </div>
                   </CardFront>
                   <CardBack>
-                    <h4 className="text-xl font-bold text-[var(--color-tertiary)] mb-4">{feature.title}</h4>
-                    {feature.key?.map((point, index) => (
-                      <KeyPoint key={index}>
-                        <span className="text-gray-700">{point}</span>
-                      </KeyPoint>
-                    ))}
+                    <div 
+                      className="w-full h-full flex flex-col items-center px-1"
+                      style={{
+                        backgroundColor: feature.title.includes('Pay') ? '#FFF8F3' : 
+                                        feature.title.includes('IT') ? '#F7F5FF' : 
+                                        feature.title.includes('Rescue') ? '#F5F9FF' : 
+                                        '#F5FFF8'
+                      }}
+                    >
+                      <div 
+                        className="w-full py-8 flex items-center justify-center"
+                        style={{
+                          borderBottom: 'none'
+                        }}
+                      >
+                        <h4 className="text-2xl font-bold text-[#006589] text-center px-4">
+                          {feature.title}
+                        </h4>
+                      </div>
+                      <div className="w-full flex-1 flex flex-col items-center justify-start p-4 pt-8 pb-6">
+                        {Array.isArray(feature.key) && feature.key.length > 0 ? (
+                          feature.key.map((point, index) => (
+                            <KeyPoint key={index}>
+                              <span>{point}</span>
+                            </KeyPoint>
+                          ))
+                        ) : (
+                          <KeyPoint>
+                            <span>No details available</span>
+                          </KeyPoint>
+                        )}
+                      </div>
+                    </div>
                   </CardBack>
                 </CardInner>
               </FlipCard>

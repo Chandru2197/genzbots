@@ -49,7 +49,7 @@ export default function HeroSection({ addToRefs }: HeroSectionProps) {
             <h1 className="text-7xl font-semi-bold leading-tight text-[var(--color-primary-dark)] mb-4">
               Simplify Automate Elevate
             </h1>
-            <h6 className="text-4xl font-semi-bold leading-tight text-[var(--color-primary-dark)] mb-4 border-b p-1">
+            <h6 className="text-3xl font-semi-bold leading-tight text-[var(--color-primary-dark)] mb-4 border-b p-1">
               Digital Workflow Solutions For Forward-Thinking Businesses
             </h6>
             <p className="text-xl font-semi-bold text-[var(--color-primary-dark)] mb-8">
