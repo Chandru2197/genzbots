@@ -8,6 +8,7 @@ import HeroSvg from "@/assets/svgs/herosection.svg";
 import CustomizeButton from "./custome/button/CustomizeButton";
 import CustomizeButton2 from "./custome/button/CustomizeButton2";
 import AnimatedButton from "./custome/button/AnimatedButton";
+import { BackgroundIllustration } from "./custome/svg/BackgroundIllustration";
 
 interface HeroSectionProps {
   addToRefs: (el: HTMLElement | null) => void;
@@ -26,13 +27,14 @@ export default function HeroSection({ addToRefs }: HeroSectionProps) {
 
   return (
     <section
-      className="relative min-h-screen flex items-center overflow-hidden pt-8"
-      style={{
-        backgroundImage: `url(/assets/svgs/download.svg)`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-      }}
+      className="relative min-h-screen flex items-center overflow-hidden pt-8 bg-size-(--my-image-size) bg-[url(/assets/svgs/herosection-bg-5.jpeg)] bg-cover bg-center"
+      // style={{
+      //   backgroundImage: `url(/assets/svgs/RPA.png)`,
+      //   backgroundSize: "cover",
+      //   backgroundPosition: "center",
+      // }}
     >
+      {/* <BackgroundIllustration/> */}
       <div className="absolute top-0 left-0 w-full h-full hero-gradient opacity-5 z-0"></div>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="flex flex-col md:flex-row items-center gap-8 md:gap-16">
@@ -43,13 +45,13 @@ export default function HeroSection({ addToRefs }: HeroSectionProps) {
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8 }}
           >
-            <h1 className="text-4xl font-bold leading-tight text-theme mb-4">
+            <h1 className="text-4xl font-bold leading-tight text-white mb-4">
               Simplify Automate Elevate
             </h1>
-            <h6 className="text-2xl font-label leading-tight text-theme mb-4 border-b p-1">
+            <h6 className="text-2xl font-label leading-tight text-white mb-4 border-b p-1">
               Digital workflow solutions for forward-thinking businesses
             </h6>
-            <p className="text-desc font-desc text-theme mb-8">
+            <p className="text-desc font-desc text-white mb-8">
               GenZbots specializes in intelligent RPA and AI solutions that transform
               manual processes into automated workflows, reducing costs and boosting
               efficiency for businesses across industries.
