@@ -36,7 +36,7 @@ export default function HeroSection({ addToRefs }: HeroSectionProps) {
     >
       {/* <BackgroundIllustration/> */}
       <div className="absolute top-0 left-0 w-full h-full hero-gradient opacity-5 z-0"></div>
-      <div className="max-w-4xl mx-auto px-2 sm:px-4 lg:px-6 relative z-10 bg-white/30 backdrop-blur-none rounded-2xl shadow-lg">
+      <div className="max-w-6xl mx-auto px-2 sm:px-4 lg:px-6 relative z-10 bg-white/30 backdrop-blur-none rounded-2xl shadow-lg">
         <div className="flex flex-col md:flex-row items-center gap-8 md:gap-16 p-2">
           {/* Main content - NOT parallax */}
           <motion.div
