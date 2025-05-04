@@ -132,7 +132,7 @@ export default function FeaturesSection({ addToRefs }: FeaturesSectionProps) {
   return (
     <section className="py-20 overflow-hidden relative" ref={sectionRef}>
       <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 2xl:max-w-[90%] relative z-10">
-        <div className="text-center mt-12 mb-8 relative">
+        <div className="text-center mb-8 relative">
           <h2
             className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-[#FF5722] via-[#FF8A65] to-[#FF5722] bg-clip-text text-transparent mb-1"
           >
