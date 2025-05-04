@@ -1,7 +1,6 @@
 "use client";
 
 import { useRef, useEffect } from "react";
-import { motion, useInView } from "framer-motion";
 import styled from 'styled-components';
 import { CloudLightning, Rocket, Shield, Brain } from 'lucide-react';
 
@@ -49,14 +48,9 @@ export const features = [
 ];
 
 const FlipCard = styled.div`
-  perspective: 1000px;
   width: 100%;
   height: 350px;
   margin: 0 auto;
-
-  &:hover .card-inner {
-    transform: rotateY(180deg);
-  }
 `;
 
 const CardInner = styled.div`
@@ -64,15 +58,12 @@ const CardInner = styled.div`
   width: 100%;
   height: 100%;
   text-align: center;
-  transition: transform 0.8s;
-  transform-style: preserve-3d;
 `;
 
 const CardSide = styled.div`
   position: absolute;
   width: 100%;
   height: 100%;
-  backface-visibility: hidden;
   background: white;
   border-radius: 24px;
   padding: 2rem;
@@ -90,12 +81,7 @@ const CardFront = styled(CardSide)`
 `;
 
 const CardBack = styled(CardSide)`
-  transform: rotateY(180deg);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  background: white;
-  box-shadow: 0 8px 32px rgba(31, 38, 135, 0.1);
+  display: none;
 `;
 
 const IconWrapper = styled.div`
@@ -107,7 +93,6 @@ const IconWrapper = styled.div`
   align-items: center;
   justify-content: center;
   margin-bottom: 1.5rem;
-  transition: all 0.3s ease;
 
   svg {
     width: 40px;
@@ -122,34 +107,9 @@ const KeyPoint = styled.div`
   margin: 0.75rem 0;
   border-radius: 12px;
   text-align: left;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   overflow: hidden;
   border: 1px solid rgba(240, 240, 240, 0.8);
-  
-  &::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 4px;
-    height: 100%;
-    background: linear-gradient(to bottom, #FF5722, #FF8A65);
-    transform: scaleY(0);
-    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    transform-origin: bottom;
-  }
-
-  &:hover {
-    background: rgba(255, 245, 240, 0.8);
-    transform: translateX(10px) scale(1.02);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-    border-color: rgba(255, 87, 34, 0.2);
-
-    &::before {
-      transform: scaleY(1);
-    }
-  }
 
   span {
     background: linear-gradient(120deg, #FF5722, #FF8A65);
@@ -162,41 +122,33 @@ const KeyPoint = styled.div`
 
 export default function FeaturesSection({ addToRefs }: FeaturesSectionProps) {
   const sectionRef = useRef<HTMLDivElement>(null);
-  const isInView = useInView(sectionRef, { once: true });
 
+  // Don't add this section to parallax refs to prevent motion effects
   useEffect(() => {
-    if (sectionRef.current) addToRefs(sectionRef.current);
+    // Intentionally not adding to refs to disable parallax effect
+    // if (sectionRef.current) addToRefs(sectionRef.current);
   }, [addToRefs]);
 
   return (
     <section className="py-20 overflow-hidden relative" ref={sectionRef}>
       <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 2xl:max-w-[90%] relative z-10">
-        <div className="text-center mt-18 mb-4 relative">
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6 }}
+        <div className="text-center mt-18 mb-8 relative">
+          <h2
             className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-[#FF5722] via-[#FF8A65] to-[#FF5722] bg-clip-text text-transparent mb-1"
           >
             Powerful Features for Modern Businesses
-          </motion.h2>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.2 }}
+          </h2>
+          <p
             className="text-gray-600 text-lg max-w-2xl mx-auto"
           >
             Our platform comes packed with features designed to streamline your operations and boost productivity.
-          </motion.p>
+          </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-4">
           {features.map((feature, idx) => (
-            <motion.div
+            <div
               key={feature.title}
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: idx * 0.1 }}
             >
               <FlipCard>
                 <CardInner className="card-inner">
@@ -219,7 +171,7 @@ export default function FeaturesSection({ addToRefs }: FeaturesSectionProps) {
                   </CardBack>
                 </CardInner>
               </FlipCard>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>
