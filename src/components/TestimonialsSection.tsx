@@ -134,7 +134,7 @@ export default function TestimonialsSection({ addToRefs }: TestimonialsSectionPr
   }
 
   return (
-    <div className="w-full" ref={sectionRef} data-speed="0">
+    <div className="w-full py-16" ref={sectionRef} data-speed="0">
       <div className="text-center mb-12">
         <h2 className="text-4xl font-bold bg-gradient-to-r from-[#0A6E94] to-[#0A6E94] bg-clip-text text-transparent mb-4">
           What Our Clients Say

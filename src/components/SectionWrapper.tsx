@@ -8,7 +8,6 @@ interface SectionWrapperProps {
 
 const StyledSection = styled.section<{ $isAlternate?: boolean }>`
   position: relative;
-  padding: 6rem 0;
   background: ${({ $isAlternate }) => 
     $isAlternate 
       ? 'linear-gradient(to bottom, rgba(247, 88, 33, 0.05), rgba(247, 88, 33, 0.1))'
@@ -46,11 +45,11 @@ const StyledSection = styled.section<{ $isAlternate?: boolean }>`
   .content-wrapper {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 2rem;
+    padding: 0 1rem;
   }
 
   @media (max-width: 768px) {
-    padding: 4rem 0;
+    padding: .5rem 0;
     
     .content-wrapper {
       padding: 0 1rem;

@@ -172,7 +172,7 @@ export default function AutomationCards({ addToRefs }: { addToRefs?: (el: HTMLEl
   ];
 
   return (
-    <section id="automation-process" className="py-2">
+    <section id="automation-process" className="py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Heading with parallax */}
         <motion.div

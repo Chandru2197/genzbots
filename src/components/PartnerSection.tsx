@@ -107,7 +107,7 @@ export default function PartnerShowcase({ addToRefs }: PartnerShowcaseProps) {
   const activeSolution = getActiveSolution();
 
   return (
-    <section id="partner" className="py-36">
+    <section id="partner" className="py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         {/* Decorative parallax elements can go here if needed */}
         {/* <motion.div ... /> */}

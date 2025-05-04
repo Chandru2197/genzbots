@@ -74,7 +74,7 @@ export default function Home() {
   };
 
   return (
-    <main className="min-h-screen pt-16">
+    <main className="min-h-screen">
       <Navbar addToRefs={addToRefs} />
       <HeroSection addToRefs={addToRefs} />
       <SectionWrapper>

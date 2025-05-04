@@ -1,12 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const CustomizeButton2 = ({title}:any) => {
+const CustomizeButton2 = ({title, href}:any) => {
   return (
     <StyledWrapper>
       <button suppressHydrationWarning>
-        <p>Subscribe</p>
-        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={4}>
+        <span className="button-text" data-text={title}>{title}</span>
+        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
           <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
         </svg>
       </button>
@@ -22,9 +22,7 @@ const StyledWrapper = styled.div`
     font-weight: bold;
     position: relative;
     cursor: pointer;
-  }
-
-  button {
+    
     --primary-color: #ffffff;
     --hovered-color: #f75821;
     display: flex;
@@ -32,56 +30,47 @@ const StyledWrapper = styled.div`
     font-size: 20px;
     gap: 0.5rem;
     align-items: center;
+    transition: all 0.3s ease;
+    overflow: hidden;
   }
 
-  button p {
+  .button-text {
     margin: 0;
     position: relative;
     font-size: 20px;
     color: var(--primary-color);
+    z-index: 1;
   }
-
-  button::after {
+  
+  .button-text::before {
+    content: attr(data-text);
     position: absolute;
-    content: "";
-    width: 0;
+    top: 0;
     left: 0;
-    bottom: -7px;
-    background: var(--hovered-color);
-    height: 2px;
-    transition: 0.3s ease-out;
-  }
-
-  button p::before {
-    position: absolute;
-    /*   box-sizing: border-box; */
-    content: "Subscribe";
-    width: 0%;
-    inset: 0;
+    width: 0;
+    height: 100%;
     color: var(--hovered-color);
+    white-space: nowrap;
     overflow: hidden;
-    transition: 0.3s ease-out;
+    transition: width 0.3s ease;
   }
-
-  button:hover::after {
+  
+  button:hover .button-text::before {
     width: 100%;
   }
 
-  button:hover p::before {
-    width: 100%;
+  button svg {
+    color: var(--primary-color);
+    transition: all 0.3s ease;
+    position: relative;
+    width: 15px;
+    z-index: 1;
   }
 
   button:hover svg {
     transform: translateX(4px);
     color: var(--hovered-color);
   }
-
-  button svg {
-    color: var(--primary-color);
-    transition: 0.2s;
-    position: relative;
-    width: 15px;
-    transition-delay: 0.2s;
-  }`;
+`;
 
 export default CustomizeButton2;
