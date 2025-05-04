@@ -136,7 +136,7 @@ export default function TestimonialsSection({ addToRefs }: TestimonialsSectionPr
   return (
     <div className="w-full py-16" ref={sectionRef} data-speed="0">
       <div className="text-center mb-4">
-        <h2 className="text-4xl font-bold bg-gradient-to-r from-[#0A6E94] to-[#0A6E94] bg-clip-text text-transparent mb-1">
+        <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-[#FF5722] via-[#FF8A65] to-[#FF5722] bg-clip-text text-transparent mb-1">
           What Our Clients Say
         </h2>
         <p className="text-gray-600 text-lg max-w-2xl mx-auto">
@@ -157,7 +157,7 @@ export default function TestimonialsSection({ addToRefs }: TestimonialsSectionPr
                   <GlassmorphismCard 
                     variant={index % 2 === 0 ? 'primary' : 'secondary'} 
                     hoverable={false}
-                    className="overflow-hidden shadow-xl mx-4"
+                    className="overflow-hidden bg-white/30 backdrop-blur-none rounded-2xl shadow-lg mx-4"
                   >
                     <div className="p-6 sm:p-10">
                       {/* Avatar and Name Layout */}

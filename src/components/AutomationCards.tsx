@@ -48,7 +48,7 @@ const AutomationCard = ({
       <GlassmorphismCard
         variant={delay % 2 === 0 ? "primary" : "secondary"}
         hoverable={true}
-        className="h-full cursor-pointer"
+        className="h-full cursor-pointer bg-white/30 backdrop-blur-none rounded-2xl shadow-lg"
       >
         <div
           className="h-full flex flex-col justify-between"
@@ -81,7 +81,7 @@ const AutomationCard = ({
             <h3 className="text-[#0A6E94] text-xl font-bold mb-3">{title}</h3>
             
             {/* Description */}
-            <p className="text-gray-600 text-sm mb-5">{description}</p>
+            <p className="text-gray-600 font-bold text-sm mb-5">{description}</p>
             
             {/* Features list with light gray backgrounds */}
             <div className="grid gap-2">
@@ -148,14 +148,14 @@ export default function AutomationCards({ addToRefs }: { addToRefs?: (el: HTMLEl
     {
       title: "Bot Blueprint (48 hrs)",
       description:
-        "✍️ You receive",
+        "You receive",
       icon: Lightbulb,
       customImage: "/assets/images/prototype.png",
       technologies: ["Custom workflow diagram", "Timeline & pricing","Integration checklist"],
     },
     {
       title: "Build & Test (1-3 weeks)",
-      description: "👩💻 We:",
+      description: "We:",
       icon: Code,
       customImage: "/assets/images/quality-control.png",
       technologies: ["Develop in agile sprints", "Share weekly demo videos", "Train your team via Discord"],
@@ -163,7 +163,7 @@ export default function AutomationCards({ addToRefs }: { addToRefs?: (el: HTMLEl
     {
       title: "Hypercare Launch (2 weeks)",
       description:
-        "🚨 Includes:",
+        "Includes:",
       icon: Rocket,
       customImage: "/assets/images/healthcare.png",
       technologies: ["24/7 priority support", "Performance analytics",'3 free tweaks'],
@@ -171,7 +171,7 @@ export default function AutomationCards({ addToRefs }: { addToRefs?: (el: HTMLEl
     {
       title: "Scale & Optimize (Ongoing)",
       description:
-        "📈 We:",
+        "We:",
       icon: Server,
       customImage: "/assets/images/optimization.png",
       technologies: [

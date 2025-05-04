@@ -10,8 +10,8 @@ const StyledSection = styled.section<{ $isAlternate?: boolean }>`
   position: relative;
   background: ${({ $isAlternate }) => 
     $isAlternate 
-      ? 'rgba(255, 200, 150, 0.03)'
-      : 'rgba(30, 120, 193, 0.02)'
+      ? 'rgba(255, 200, 150, 0.12)'
+      : 'rgba(30, 120, 193, 0.08)'
   };
   
   &::before {
@@ -24,8 +24,8 @@ const StyledSection = styled.section<{ $isAlternate?: boolean }>`
     background: linear-gradient(90deg, rgba(255, 255, 255, 1), 
       ${({ $isAlternate }) => 
         $isAlternate 
-          ? 'rgba(255, 150, 100, 0.03)'
-          : 'rgba(30, 120, 193, 0.02)'
+          ? 'rgba(255, 150, 100, 0.12)'
+          : 'rgba(30, 120, 193, 0.08)'
       }, rgba(255, 255, 255, 1));
   }
 
@@ -39,8 +39,8 @@ const StyledSection = styled.section<{ $isAlternate?: boolean }>`
     background: linear-gradient(90deg, rgba(255, 255, 255, 1), 
       ${({ $isAlternate }) => 
         $isAlternate 
-          ? 'rgba(255, 150, 100, 0.03)'
-          : 'rgba(30, 120, 193, 0.02)'
+          ? 'rgba(255, 150, 100, 0.12)'
+          : 'rgba(30, 120, 193, 0.08)'
       }, rgba(255, 255, 255, 1));
   }
 
