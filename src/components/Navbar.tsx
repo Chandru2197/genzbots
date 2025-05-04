@@ -77,7 +77,7 @@ export default function Navbar({ addToRefs }: NavbarProps) {
 
   return (
     <nav className={`fixed top-0 w-full z-[100] transition-all duration-300 ${
-      isScrolled ? 'bg-white/95 backdrop-blur-sm shadow-lg' : 'bg-red'
+      isScrolled ? 'bg-white/80 backdrop-blur-md shadow-lg' : 'bg-white/30 backdrop-blur-md shadow-lg'
     }`}>
       <div className="max-w-screen-xl mx-auto h-14 lg:h-16 flex justify-between items-center px-4">
         {/* Logo (left) */}
@@ -106,7 +106,7 @@ export default function Navbar({ addToRefs }: NavbarProps) {
                     className={`text-menu font-medium transition-colors flex items-center cursor-pointer ${
                       activeDropdown === item.label 
                         ? 'text-[var(--color-secondary)]' 
-                        : isScrolled ? 'text-[var(--color-primary-dark)] hover:text-[var(--color-secondary)]' : 'text-[var(--color-primary-dark)] hover:text-[var(--color-secondary)]'
+                        : 'text-[var(--color-primary-dark)] hover:text-[var(--color-secondary)]'
                     }`}
                     suppressHydrationWarning
                   >
@@ -149,9 +149,7 @@ export default function Navbar({ addToRefs }: NavbarProps) {
               ) : (
                 <Link
                   href={item.href}
-                  className={`text-menu font-medium transition-colors duration-200 cursor-pointer ${
-                    isScrolled ? 'text-[var(--color-primary-dark)] hover:text-[var(--color-secondary)]' : 'text-[var(--color-primary-dark)] hover:text-[var(--color-secondary)]'
-                  }`}
+                  className="text-menu font-medium transition-colors duration-200 text-[var(--color-primary-dark)] hover:text-[var(--color-secondary)] cursor-pointer"
                 >
                   {item.label}
                 </Link>
@@ -173,9 +171,7 @@ export default function Navbar({ addToRefs }: NavbarProps) {
           <div className="lg:hidden ml-2">
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className={`inline-flex items-center justify-center p-2 rounded-md focus:outline-none transition-colors duration-200 ${
-                isScrolled ? 'text-gray-700 hover:text-[var(--color-secondary)] hover:bg-orange-50' : 'text-white hover:text-[var(--color-secondary)]'
-              }`}
+              className="inline-flex items-center justify-center p-2 rounded-md focus:outline-none transition-colors duration-200 text-gray-700 hover:text-[var(--color-secondary)] hover:bg-orange-50"
               suppressHydrationWarning
             >
               <svg
@@ -216,20 +212,16 @@ export default function Navbar({ addToRefs }: NavbarProps) {
       <div
         className={`lg:hidden transition-all duration-300 ease-in-out ${
           mobileMenuOpen ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0'
-        } overflow-hidden ${isScrolled ? '' : 'bg-black/70 backdrop-blur-sm'}`}
+        } overflow-hidden bg-white`}
       >
-        <div className={`px-2 pt-2 pb-3 space-y-1 sm:px-3 ${isScrolled ? 'bg-white shadow-md' : 'bg-transparent'}`}>
+        <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
           {menuItems.map((item) => (
             <div key={item.label} className="block">
               {item.dropdown ? (
                 <div className="py-1">
                   <button
                     onClick={() => toggleDropdown(item.label)}
-                    className={`flex justify-between items-center w-full px-3 py-2 font-medium transition-colors rounded-md cursor-pointer ${
-                      isScrolled 
-                      ? 'text-label font-label text-gray-800 hover:text-[var(--color-secondary)] hover:bg-orange-50' 
-                      : 'text-white hover:text-[var(--color-secondary)]'
-                    }`}
+                    className="flex justify-between items-center w-full px-3 py-2 font-medium transition-colors rounded-md cursor-pointer text-label font-label text-gray-800 hover:text-[var(--color-secondary)] hover:bg-orange-50"
                     suppressHydrationWarning
                   >
                     <span>{item.label}</span>
@@ -258,11 +250,7 @@ export default function Navbar({ addToRefs }: NavbarProps) {
                       <Link
                         key={dropdownItem.label}
                         href={dropdownItem.href}
-                        className={`block pl-3 pr-4 py-2 rounded-md transition-colors duration-200 cursor-pointer ${
-                          isScrolled 
-                          ? 'text-desc font-desc text-gray-700 hover:bg-orange-50 hover:text-[var(--color-secondary)]'
-                          : 'text-gray-200 hover:text-[var(--color-secondary)]'
-                        }`}
+                        className="block pl-3 pr-4 py-2 rounded-md transition-colors duration-200 cursor-pointer text-desc font-desc text-gray-700 hover:bg-orange-50 hover:text-[var(--color-secondary)]"
                         onClick={() => setMobileMenuOpen(false)}
                       >
                         {dropdownItem.label}
@@ -273,11 +261,7 @@ export default function Navbar({ addToRefs }: NavbarProps) {
               ) : (
                 <Link
                   href={item.href}
-                  className={`block px-3 py-2 font-medium transition-colors rounded-md cursor-pointer ${
-                    isScrolled 
-                    ? 'text-label font-label text-gray-800 hover:text-[var(--color-secondary)] hover:bg-orange-50'
-                    : 'text-white hover:text-[var(--color-secondary)]'
-                  }`}
+                  className="block px-3 py-2 font-medium transition-colors rounded-md cursor-pointer text-label font-label text-gray-800 hover:text-[var(--color-secondary)] hover:bg-orange-50"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   {item.label}

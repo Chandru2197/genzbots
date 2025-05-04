@@ -45,13 +45,13 @@ export default function HeroSection({ addToRefs }: HeroSectionProps) {
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8 }}
           >
-            <h1 className="text-4xl font-bold leading-tight text-[var(--color-primary-dark)] mb-4">
+            <h1 className="text-5xl font-bold leading-tight text-[var(--color-primary-dark)] mb-4">
               Simplify Automate Elevate
             </h1>
-            <h6 className="text-2xl font-label leading-tight text-[var(--color-primary-dark)] mb-4 border-b p-1">
+            <h6 className="text-3xl font-label leading-tight text-[var(--color-primary-dark)] mb-4 border-b p-1">
               Digital workflow solutions for forward-thinking businesses
             </h6>
-            <p className="text-desc font-desc text-[var(--color-primary-dark)] mb-8">
+            <p className="text-lg font-desc text-[var(--color-primary-dark)] mb-8">
               GenZbots specializes in intelligent RPA and AI solutions that transform
               manual processes into automated workflows, reducing costs and boosting
               efficiency for businesses across industries.
