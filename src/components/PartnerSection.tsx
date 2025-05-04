@@ -121,7 +121,7 @@ export default function PartnerShowcase({ addToRefs }: PartnerShowcaseProps) {
           transition={{ duration: 0.5 }}
         >
           <div className="relative">
-            <h2 className="text-label font-label text-3xl md:text-4xl font-bold mb-1 bg-gradient-to-r from-[#FF5722] via-[#FF8A65] to-[#FF5722] bg-clip-text text-transparent">
+            <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-[#FF5722] via-[#FF8A65] to-[#FF5722] bg-clip-text text-transparent mb-1">
               {activeSolution.title}
             </h2>
             {/* <div className="absolute -inset-1 bg-gradient-to-r from-[#FF5722]/20 via-[#FF8A65]/20 to-[#FF5722]/20 blur-lg -z-10 rounded-lg opacity-75"></div> */}

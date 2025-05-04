@@ -83,8 +83,8 @@ export default function AboutSection({ addToRefs }: AboutSectionProps) {
               </div>
             </div>
               <div className='px-1 py-4'>
-                <h4 className="italic font-bold text-lg text-center">Our Promise</h4>
-              <p className="text-md font-desc text-gray-600 mb-6 md:mb-8 italic text-center">
+                <h4 className="italic font-bold text-lg text-center text-gray-600">Our Promise</h4>
+              <p className="text-md font-desc text-gray-500 mb-6 md:mb-8 italic text-center">
                 We’re not just a vendor—we’re your automation co-pilots. Let’s build, optimize, and scale together.              </p>
               </div>
           </div>
