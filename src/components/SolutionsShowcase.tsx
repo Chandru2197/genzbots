@@ -206,11 +206,11 @@ export default function SolutionsShowcase({ addToRefs }: SolutionsShowcaseProps)
                   </motion.li>
                 ))}
               </ul>
-              <button 
-                className="mt-8 bg-[var(--color-secondary)] text-white px-8 py-3 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 flex items-center group"
+              <button
+                className="inline-flex items-center justify-center bg-[var(--color-secondary)] text-white py-3 px-6 rounded-md hover:bg-[var(--color-secondary-dark)] transition-all duration-300 cursor-pointer"
               >
                 {activeSolution.button_label}
-                <svg className="w-5 h-5 ml-2 transform transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
                 </svg>
               </button>

@@ -1,3 +1,5 @@
+"use client";
+
 import React from 'react';
 import styled from 'styled-components';
 
@@ -16,21 +18,24 @@ const GlassmorphismCard = ({
 }: GlassmorphismCardProps) => {
   return (
     <StyledCard className={className} variant={variant} hoverable={hoverable}>
-      <div className="glass-content">{children}</div>
+      <div className="glass-content p-6 h-full">{children}</div>
     </StyledCard>
   );
 };
 
-const StyledCard = styled.div<{ variant: 'primary' | 'secondary'; hoverable: any }>`
+const StyledCard = styled.div<{ variant: 'primary' | 'secondary'; hoverable: boolean }>`
   position: relative;
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(10px);
   border-radius: 24px;
-  padding: 2rem;
   border: 1px solid rgba(255, 255, 255, 0.2);
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
   overflow: hidden;
   transition: all 0.3s ease-in-out;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  ${({ hoverable }) => hoverable && 'cursor: pointer;'}
 
   &::before {
     content: '';
@@ -53,6 +58,9 @@ const StyledCard = styled.div<{ variant: 'primary' | 'secondary'; hoverable: any
   .glass-content {
     position: relative;
     z-index: 1;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
   }
 
   ${({ hoverable }) =>

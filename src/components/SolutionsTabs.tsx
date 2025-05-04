@@ -101,7 +101,7 @@ export default function SolutionsTabs() {
                 ${activeTab === solution.id
                   ? "bg-[#FF5722] text-white shadow-md"
                   : "text-[#FF5722] hover:bg-[#FF5722]/10"
-                }`}
+                } cursor-pointer`}
               onClick={() => setActiveTab(solution.id)}
             >
               {solution.label}

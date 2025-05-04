@@ -26,6 +26,7 @@ const AnimatedButton = ({title}:any) => {
           flex
           items-center
           justify-center
+          cursor-pointer
           ${isHovered ? 'bg-[var(--color-secondary)] text-white' : 'bg-white text-[var(--color-secondary)]'}
         `}
         onMouseEnter={() => setIsHovered(true)}

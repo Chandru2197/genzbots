@@ -112,8 +112,8 @@ export default function TestimonialsSection({ addToRefs }: TestimonialsSectionPr
             
             {/* Custom navigation and pagination */}
             <div className="swiper-pagination absolute bottom-0 !w-full flex justify-center z-20"></div>
-            <div className="swiper-button-prev absolute left-0 top-1/2 transform -translate-y-1/2 z-30 text-[#FF5722]"></div>
-            <div className="swiper-button-next absolute right-0 top-1/2 transform -translate-y-1/2 z-30 text-[#FF5722]"></div>
+            <div className="swiper-button-prev absolute left-0 top-1/2 transform -translate-y-1/2 z-30 text-[#FF5722] cursor-pointer"></div>
+            <div className="swiper-button-next absolute right-0 top-1/2 transform -translate-y-1/2 z-30 text-[#FF5722] cursor-pointer"></div>
           </Swiper>
         </div>
       </div>

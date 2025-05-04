@@ -126,10 +126,10 @@ export default function TestimonialsCarousel({ addToRefs }: TestimonialsCarousel
   const TestimonialCard = ({ testimonial }: { testimonial: Testimonial }) => (
     <GlassmorphismCard
       variant={currentIndex % 2 === 0 ? 'primary' : 'secondary'}
-      hoverable
+      hoverable={true}
       className="w-full max-w-3xl mx-auto"
     >
-      <div className="p-6 md:p-8">
+      <div className="flex flex-col h-full">
         <div className="flex flex-col md:flex-row items-start md:items-center mb-6">
           <div className={`w-16 h-16 rounded-full ${testimonial.image} flex items-center justify-center text-white text-xl font-bold shadow-lg transition-transform duration-300 hover:scale-105`}>
             {testimonial.name.split(' ').map(n => n[0]).join('')}
@@ -171,7 +171,7 @@ export default function TestimonialsCarousel({ addToRefs }: TestimonialsCarousel
       <div className="relative max-w-7xl mx-auto px-4 lg:px-8">
         <button
           onClick={handlePrev}
-          className="absolute left-0 top-1/2 -translate-y-1/2 z-10 p-2 rounded-full bg-white/80 shadow-lg hover:bg-white transition-all"
+          className="absolute left-0 top-1/2 -translate-y-1/2 z-10 p-2 rounded-full bg-white/80 shadow-lg hover:bg-white transition-all cursor-pointer"
           aria-label="Previous testimonial"
         >
           <svg className="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -199,7 +199,7 @@ export default function TestimonialsCarousel({ addToRefs }: TestimonialsCarousel
 
         <button
           onClick={handleNext}
-          className="absolute right-0 top-1/2 -translate-y-1/2 z-10 p-2 rounded-full bg-white/80 shadow-lg hover:bg-white transition-all"
+          className="absolute right-0 top-1/2 -translate-y-1/2 z-10 p-2 rounded-full bg-white/80 shadow-lg hover:bg-white transition-all cursor-pointer"
           aria-label="Next testimonial"
         >
           <svg className="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -215,7 +215,7 @@ export default function TestimonialsCarousel({ addToRefs }: TestimonialsCarousel
                 goToSlide(index);
                 resetInterval();
               }}
-              className={`w-3 h-3 rounded-full transition-all ${
+              className={`w-3 h-3 rounded-full transition-all cursor-pointer ${
                 index === currentIndex
                   ? 'bg-[var(--color-primary)] scale-125'
                   : 'bg-gray-300 hover:bg-gray-400'

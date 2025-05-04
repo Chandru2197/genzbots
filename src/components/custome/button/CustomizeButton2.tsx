@@ -16,17 +16,17 @@ const CustomizeButton2 = ({title}:any) => {
 
 const StyledWrapper = styled.div`
   button {
-    padding: 5;
-    margin: 13px 0;
+    padding: 1em 2em;
     border: none;
     background: none;
+    font-weight: bold;
+    position: relative;
     cursor: pointer;
   }
 
   button {
     --primary-color: #ffffff;
     --hovered-color: #f75821;
-    position: relative;
     display: flex;
     font-weight: 600;
     font-size: 20px;
