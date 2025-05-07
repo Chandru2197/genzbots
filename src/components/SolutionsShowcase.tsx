@@ -115,7 +115,7 @@ export default function SolutionsShowcase({ addToRefs }: SolutionsShowcaseProps)
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             ref={headingRef}
-            className="text-center mb-8"
+            className="text-center mb-16"
             initial={{ opacity: 0, y: 50 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8 }}
@@ -128,7 +128,7 @@ export default function SolutionsShowcase({ addToRefs }: SolutionsShowcaseProps)
             </p>
           </motion.div>
 
-          <div className="sticky top-0 z-30 bg-white/80 backdrop-blur-sm py-4 mb-8">
+          <div className="sticky top-20 z-30 bg-white/80 backdrop-blur-sm py-4 mb-12">
             <div className="flex justify-between items-center w-full border-b">
               {solutions.map((solution, index) => (
                 <button
