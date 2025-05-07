@@ -2,6 +2,8 @@
 import React, { useState } from "react";
 import { IconMail, IconMapPin, IconPhone } from "@tabler/icons-react";
 import PhoneInput from "react-phone-input-2";
+import { ParallaxProvider, Parallax } from "react-scroll-parallax";
+import { motion } from "framer-motion";
 import "react-phone-input-2/lib/style.css";
 import * as Select from "@radix-ui/react-select";
 import { Check, ChevronDown } from "lucide-react";
@@ -95,7 +97,14 @@ export default function ContactSection() {
   SelectItem.displayName = "SelectItem";
 
   return (
-    <section className="relative py-20 bg-gradient-to-br from-blue-50 to-orange-50">
+    <ParallaxProvider>
+      <section className="relative py-20 bg-gradient-to-br from-blue-50 to-orange-50 overflow-hidden">
+        <Parallax speed={-20}>
+          <div className="absolute -top-32 -left-40 w-96 h-96 bg-orange-400 bg-opacity-20 rounded-full blur-3xl z-0" />
+        </Parallax>
+        <Parallax speed={10}>
+          <div className="absolute -bottom-40 -right-44 w-[28rem] h-[28rem] bg-blue-400 bg-opacity-20 rounded-full blur-3xl z-0" />
+        </Parallax>
       <div className="relative max-w-6xl mx-auto flex flex-col md:flex-row gap-10 px-4 z-10">
         <div className="bg-white/90 shadow-2xl rounded-2xl p-8 md:w-1/3 flex flex-col gap-8 backdrop-blur-md justify-between">
           <div>
@@ -140,7 +149,12 @@ export default function ContactSection() {
             </div>
           </div>
         </div>
-        <div className="bg-white/95 shadow-2xl rounded-2xl p-10 md:w-2/3 flex flex-col">
+        <motion.div
+          initial={{ opacity: 0, x: 60 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.7, type: "spring", delay: 0.2 }}
+          viewport={{ once: true, amount: 0.6 }}
+          className="bg-white/95 shadow-2xl rounded-2xl p-10 md:w-2/3 flex flex-col">
           <div className="mb-8">
             <h2 className="text-3xl font-bold mb-2 text-orange-500">Product or Service Inquiry</h2>
             <p className="mb-4 text-gray-600">
@@ -329,8 +343,9 @@ export default function ContactSection() {
               Schedule a Consultation
             </button>
           </form>
-        </div>
+        </motion.div>
       </div>
     </section>
+    </ParallaxProvider>
   );
 }
