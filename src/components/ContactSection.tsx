@@ -4,6 +4,10 @@ import { ParallaxProvider, Parallax } from "react-scroll-parallax";
 import { IconMail, IconMapPin, IconPhone } from "@tabler/icons-react";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
+import * as Select from "@radix-ui/react-select";
+import { Check, ChevronDown } from "lucide-react";
+import { cn } from "../lib/utils";
+import { Checkbox } from "@/components/ui/checkbox"
 
 const contactInfo = [
   {
@@ -39,6 +43,32 @@ const featuresList = [
   "SAP automation",
 ];
 
+const ProcessAutomationList = [
+  "Invoice Processing Automation",
+  "HR Onboarding/Offboarding Bots",
+  "Customer Data Entry Automation",
+  "ERP/CRM Integration Bots",
+];
+
+const AdvancedCapabilitiesList = [
+  "AI + RPA (Chatbots/NLP/OCR)",
+  "Legacy System Automation",
+  "Cross-Platform Workflow Bots"
+];
+
+const SupportModelsList = [
+  "End-to-End Implementation",
+  "Managed Automation Services",
+  "Training for In-House Teams",
+  "Other/Custom Bot"
+];
+
+const ProjectTimelineList = [
+  "Immediate (Within 1 month)",
+  "Planning Phase (1-3 months)",
+  "Researching Options (3-6 months)"
+];
+
 export default function ContactSection() {
   const [features, setFeatures] = useState<string[]>([]);
   const [consent, setConsent] = useState(false);
@@ -51,6 +81,86 @@ export default function ContactSection() {
         : [...prev, feature]
     );
   };
+
+  const [selectedCountry, setSelectedCountry] = useState("");
+
+  const countries = [
+    { text: "Afghanistan", value: "AF" },
+    { text: "Albania", value: "AL" },
+    { text: "Algeria", value: "DZ" },
+    { text: "Andorra", value: "AD" },
+    { text: "Angola", value: "AO" },
+    { text: "Argentina", value: "AR" },
+    { text: "Armenia", value: "AM" },
+    { text: "Australia", value: "AU" },
+    { text: "Austria", value: "AT" },
+    { text: "Azerbaijan", value: "AZ" },
+    { text: "Bahamas", value: "BS" },
+    { text: "Bahrain", value: "BH" },
+    { text: "Bangladesh", value: "BD" },
+    { text: "Belarus", value: "BY" },
+    { text: "Belgium", value: "BE" },
+    { text: "Belize", value: "BZ" },
+    { text: "Brazil", value: "BR" },
+    { text: "Canada", value: "CA" },
+    { text: "China", value: "CN" },
+    { text: "France", value: "FR" },
+    { text: "Germany", value: "DE" },
+    { text: "India", value: "IN" },
+    { text: "Indonesia", value: "ID" },
+    { text: "Italy", value: "IT" },
+    { text: "Japan", value: "JP" },
+    { text: "Malaysia", value: "MY" },
+    { text: "Mexico", value: "MX" },
+    { text: "Netherlands", value: "NL" },
+    { text: "New Zealand", value: "NZ" },
+    { text: "Norway", value: "NO" },
+    { text: "Philippines", value: "PH" },
+    { text: "Poland", value: "PL" },
+    { text: "Portugal", value: "PT" },
+    { text: "Russia", value: "RU" },
+    { text: "Saudi Arabia", value: "SA" },
+    { text: "Singapore", value: "SG" },
+    { text: "South Korea", value: "KR" },
+    { text: "Spain", value: "ES" },
+    { text: "Sweden", value: "SE" },
+    { text: "Switzerland", value: "CH" },
+    { text: "Thailand", value: "TH" },
+    { text: "Turkey", value: "TR" },
+    { text: "Ukraine", value: "UA" },
+    { text: "United Arab Emirates", value: "AE" },
+    { text: "United Kingdom", value: "GB" },
+    { text: "United States", value: "US" },
+    { text: "Vietnam", value: "VN" },
+  ];
+
+  const handleCountryChange = (value: string) => {
+    setSelectedCountry(value);
+  };
+
+  const SelectItem = React.forwardRef<HTMLDivElement, Select.SelectItemProps>(
+    ({ children, className, ...props }, forwardedRef) => {
+      return (
+        <Select.Item
+          className={cn(
+            "relative flex w-full cursor-default select-none items-center rounded-sm py-1.5 pl-8 pr-2 text-sm outline-none focus:bg-gray-100 focus:text-gray-900 data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
+            className,
+          )}
+          {...props}
+          ref={forwardedRef}
+        >
+          <span className="absolute left-2 flex h-3.5 w-3.5 items-center justify-center">
+            <Select.ItemIndicator>
+              <Check className="h-4 w-4" />
+            </Select.ItemIndicator>
+          </span>
+          <Select.ItemText>{children}</Select.ItemText>
+        </Select.Item>
+      );
+    },
+  );
+  SelectItem.displayName = "SelectItem";
+
 
   return (
     <ParallaxProvider>
@@ -182,7 +292,55 @@ export default function ContactSection() {
               </div>
               {/* Row 2: Phone/Company */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                  <label className="block font-medium text-gray-700 mb-1">
+                    Company name
+                  </label>
+                  <input
+                    placeholder="Fill"
+                    className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:border-orange-400 focus:ring-2 focus:ring-orange-100 outline-none transition"
+                  />
+                </div>
                 <div>
+                  <label className="block font-medium text-gray-700 mb-1">
+                    Country
+                  </label>
+                  <Select.Root
+                    value={selectedCountry}
+                    onValueChange={handleCountryChange}
+                  >
+                    <Select.Trigger className="flex h-10 w-full items-center justify-between rounded-md border border-gray-300 bg-white px-3 py-2 text-sm placeholder:text-gray-600 focus:outline-none focus:ring-1 focus:ring-orange-400 disabled:cursor-not-allowed disabled:opacity-50">
+                      <Select.Value placeholder="Select a country" className="text-[var(--color-green-100)]"/>
+                      <Select.Icon>
+                        <ChevronDown className="h-4 w-4 opacity-50" />
+                      </Select.Icon>
+                    </Select.Trigger>
+                    <Select.Portal>
+                      <Select.Content className="relative z-50 max-h-96 min-w-[8rem] overflow-hidden rounded-md border bg-white text-gray-700 shadow-md data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2">
+                        <Select.ScrollUpButton className="flex h-6 cursor-default items-center justify-center bg-white">
+                          <ChevronDown className="h-4 w-4 rotate-180" />
+                        </Select.ScrollUpButton>
+                        <Select.Viewport className="p-1">
+                          {countries.map((country) => (
+                            <SelectItem
+                              key={country.value}
+                              value={country.value}
+                            >
+                              {country.text}
+                            </SelectItem>
+                          ))}
+                        </Select.Viewport>
+                        <Select.ScrollDownButton className="flex h-6 cursor-default items-center justify-center bg-white">
+                          <ChevronDown className="h-4 w-4" />
+                        </Select.ScrollDownButton>
+                      </Select.Content>
+                    </Select.Portal>
+                  </Select.Root>
+                </div>               
+              </div>
+              {/* Row 3: Country */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
                   <label className="block font-medium text-gray-700 mb-1">
                     Phone number <span className="text-orange-500">*</span>
                   </label>
@@ -205,18 +363,6 @@ export default function ContactSection() {
                 </div>
                 <div>
                   <label className="block font-medium text-gray-700 mb-1">
-                    Company name
-                  </label>
-                  <input
-                    placeholder="Fill"
-                    className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:border-orange-400 focus:ring-2 focus:ring-orange-100 outline-none transition"
-                  />
-                </div>
-              </div>
-              {/* Row 3: Email/Message */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                  <label className="block font-medium text-gray-700 mb-1">
                     Business email <span className="text-orange-500">*</span>
                   </label>
                   <input
@@ -226,6 +372,10 @@ export default function ContactSection() {
                     className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:border-orange-400 focus:ring-2 focus:ring-orange-100 outline-none transition"
                   />
                 </div>
+              </div>
+              {/* Row 3: Email/Message */}
+              {/* <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                
                 <div>
                   <label className="block font-medium text-gray-700 mb-1">
                     Your message
@@ -236,12 +386,74 @@ export default function ContactSection() {
                     className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:border-orange-400 focus:ring-2 focus:ring-orange-100 outline-none transition"
                   />
                 </div>
+              </div> */}
+              <div>
+                <h3 className="text-xl font-semibold mb-3">What features are you interested in?</h3>
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-x-8 gap-y-2"></div>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="flex flex-col gap-2">
+                  <p className="block font-medium text-gray-700 mb-1 border-b-1 border-[var(--color-secondary)] ">
+                    Process Automation
+                  </p>
+                  {ProcessAutomationList?.map((process:string,index:number) => (
+                    <div key={index+"process"+process} className="items-top flex space-x-2">
+                      <Checkbox id={process} variant="orange" />
+                      <div className="grid gap-1.5 leading-none content-center">
+                        <label
+                          htmlFor={process}
+                          className="text-xs font-medium text-[var(--color-tertiary)]/50 leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                        >
+                          {process}
+                        </label>
+                      </div>
+                    </div>              
+                  ))}
+                </div>
+                <div className="flex flex-col gap-2">
+                  <p className="block font-medium text-gray-700 mb-1 border-b-1 border-[var(--color-secondary)] ">
+                  Advanced Capabilities
+                  </p>
+                  {AdvancedCapabilitiesList?.map((advance:string,index:number) => (
+                    <div key={index+"advance"+advance} className="items-top flex space-x-2">
+                      <Checkbox id={advance} variant="orange" />
+                      <div className="grid gap-1.5 leading-none content-center">
+                        <label
+                          htmlFor={advance}
+                          className="text-xs font-medium text-[var(--color-tertiary)]/50 leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                        >
+                          {advance}
+                        </label>
+                      </div>
+                    </div>              
+                  ))}
+                </div>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="flex flex-col gap-2">
+                  <p className="block font-medium text-gray-700 mb-1 border-b-1 border-[var(--color-secondary)] ">
+                    Support Model
+                  </p>
+                  {SupportModelsList?.map((support:string,index:number) => (
+                    <div key={index+"support"+support} className="items-top flex space-x-2">
+                      <Checkbox id={support} variant="orange" />
+                      <div className="grid gap-1.5 leading-none content-center">
+                        <label
+                          htmlFor={support}
+                          className="text-xs font-medium text-[var(--color-tertiary)]/50 leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                        >
+                          {support}
+                        </label>
+                      </div>
+                    </div>              
+                  ))}
+                </div>
               </div>
               {/* Features Checkbox Grid */}
               <div>
                 <h3 className="text-xl font-semibold mb-3">What features are you interested in?</h3>
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-x-8 gap-y-2">
-                  {featuresList.map((feature) => (
+                  {/* {featuresList.map((feature) => (
                     <label key={feature} className="flex items-center gap-2 cursor-pointer">
                       <div className="relative inline-flex">
                         <input
@@ -265,7 +477,7 @@ export default function ContactSection() {
                       </div>
                       <span className="text-gray-700">{feature}</span>
                     </label>
-                  ))}
+                  ))} */}
                 </div>
               </div>
               {/* Consent */}
