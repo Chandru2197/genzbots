@@ -1,4 +1,3 @@
-
 "use client";
 
 import Image from 'next/image';
@@ -113,40 +112,36 @@ export default function SolutionsShowcase({ addToRefs }: SolutionsShowcaseProps)
   return (
     <ParallaxProvider>
       <section id="solutions" className="py-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             ref={headingRef}
-            className="text-center mb-16 relative z-20"
+            className="text-center mb-8"
             initial={{ opacity: 0, y: 50 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8 }}
           >
-            <div className="relative">
-              <h2 className="text-4xl md:text-5xl font-bold mb-1 bg-gradient-to-r from-[#FF5722] via-[#FF8A65] to-[#FF5722] bg-clip-text text-transparent">
-                Our Solutions
-              </h2>
-            </div>
+            <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-[#FF5722] via-[#FF8A65] to-[#FF5722] bg-clip-text text-transparent">
+              Our Solutions
+            </h2>
             <p className="text-gray-600 text-lg max-w-2xl mx-auto">
               Explore our comprehensive suite of automation solutions
             </p>
           </motion.div>
 
-          <div className="w-full max-w-7xl mx-auto mb-12">
-            <div className="flex justify-between items-center w-full">
+          <div className="sticky top-0 z-30 bg-white/80 backdrop-blur-sm py-4 mb-8">
+            <div className="flex justify-between items-center w-full border-b">
               {solutions.map((solution, index) => (
                 <button
                   key={solution.id}
-                  className={`flex-1 px-2 py-2 text-xs sm:text-sm transition-all duration-300 whitespace-nowrap relative
+                  className={`flex-1 px-4 py-3 text-sm transition-all duration-300 whitespace-nowrap relative
                     ${activeTab === solution.id
-                      ? "bg-[#FF5722] text-white"
-                      : "text-[#FF5722] hover:bg-[#FF5722]/10"
+                      ? "text-[#FF5722] border-b-2 border-[#FF5722]"
+                      : "text-gray-600 hover:text-[#FF5722]"
                     }
-                    ${index !== solutions.length - 1 ? "border-r border-[#FF5722]/30" : ""}
                   `}
                   onClick={() => setActiveTab(solution.id)}
                 >
-                  <span className="hidden sm:inline">{solution.label}</span>
-                  <span className="sm:hidden">{solution.label.split(' ')[0]}</span>
+                  {solution.label}
                 </button>
               ))}
             </div>
