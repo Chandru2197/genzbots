@@ -148,7 +148,7 @@ const IconWrapper = styled.div`
   }
 `;
 
-const KeyPoint = styled.div<{ colorIndex?: number }>`
+const KeyPoint = styled.div<{ $colorIndex?: number }>`
   background: rgb(255, 255, 255);
   padding: 1.25rem 1.5rem;
   margin: 0.9rem auto;
@@ -220,7 +220,7 @@ const KeyPoint = styled.div<{ colorIndex?: number }>`
   span {
     color: ${props => {
       const colors = ["#008bce", "#17B8A6", "#F50057", "#534aff"];
-      return props.colorIndex !== undefined ? colors[props.colorIndex] : '#FF7A59';
+      return props.$colorIndex !== undefined ? colors[props.$colorIndex] : '#FF7A59';
     }};
     font-weight: 500;
     font-size: 1.1rem;
@@ -337,7 +337,7 @@ export default function FeaturesSection({ addToRefs }: FeaturesSectionProps) {
                         {Array.isArray(feature.key) && feature.key.length > 0 ? (
                           feature.key.map((point, index) => (
                             <div key={index} style={{ width: '100%', position: 'relative' }}>
-                              <KeyPoint data-color-index={idx}>
+                              <KeyPoint $colorIndex={idx}>
                                 <span>{point}</span>
                               </KeyPoint>
                             </div>

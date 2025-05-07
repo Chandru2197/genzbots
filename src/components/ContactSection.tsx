@@ -375,7 +375,7 @@ export default function ContactSection() {
               </div>
               {/* Row 3: Email/Message */}
               {/* <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                
+
                 <div>
                   <label className="block font-medium text-gray-700 mb-1">
                     Your message
@@ -516,6 +516,7 @@ export default function ContactSection() {
               >
                 <button
                   type="submit"
+                  suppressHydrationWarning
                   className="bg-[var(--color-secondary)] text-white px-6 py-3 rounded-none font-medium transition-all duration-300 inline-flex items-center transform  hover:bg-white hover:text-[var(--color-secondary)] hover:border-[var(--color-secondary)] border-2 border-transparent transition-colors duration-300"
                   >
                   Schedule a Consultation

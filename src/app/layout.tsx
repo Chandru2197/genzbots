@@ -6,10 +6,16 @@ import { createTheme, MantineProvider } from '@mantine/core';
 
 const inter = Inter({ subsets: ['latin'] });
 
+export const viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 5,
+  viewportFit: 'cover',
+};
+
 export const metadata: Metadata = {
   title: 'GenZBots',
   description: 'A modern world-class bot application',
-  viewport: 'width=device-width, initial-scale=1.0, viewport-fit=cover',
   icons: {
     icon: [
       {
