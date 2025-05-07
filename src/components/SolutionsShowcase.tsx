@@ -28,6 +28,9 @@ export default function SolutionsShowcase({ addToRefs }: SolutionsShowcaseProps)
   const contentRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(headingRef, { once: true });
 
+  return (
+    <ParallaxProvider>
+
   useEffect(() => {
     if (addToRefs && headingRef.current) addToRefs(headingRef.current);
     if (addToRefs && contentRef.current) addToRefs(contentRef.current);
@@ -219,5 +222,6 @@ export default function SolutionsShowcase({ addToRefs }: SolutionsShowcaseProps)
         </div>
       </div>
     </section>
+    </ParallaxProvider>
   );
 }
