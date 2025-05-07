@@ -1,0 +1,503 @@
+Error: A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <HTTPAccessFallbackBoundary notFound={[...]} forbidden={undefined} unauthorized={undefined}>
+      <HTTPAccessFallbackErrorBoundary pathname="/" notFound={[...]} forbidden={undefined} unauthorized={undefined} ...>
+        <RedirectBoundary>
+          <RedirectErrorBoundary router={{...}}>
+            <InnerLayoutRouter url="/" tree={[...]} cacheNode={{lazyData:null, ...}} segmentPath={[...]}>
+              <ClientPageRoot Component={function Home} searchParams={{}} params={{}}>
+                <Home params={Promise} searchParams={Promise}>
+                  <main className="min-h-screen">
+                    <Navbar>
+                    <HeroSection>
+                    <SectionWrapper>
+                    ...
+                      <div className="grid grid-...">
+                        ...
+                          <div className="sc-icnseD ...">
+                            <div className="glass-cont...">
+                              <div className="h-full fle..." onMouseEnter={function onMouseEnter} ...>
+                                <div>
+                                <div className="mt-6">
+                                  <button
+                                    className="group relative w-full py-3 px-4 rounded-md flex items-center justify-ce..."
+-                                   fdprocessedid="982gth"
+                                  >
+                        ...
+                          <div className="sc-icnseD ...">
+                            <div className="glass-cont...">
+                              <div className="h-full fle..." onMouseEnter={function onMouseEnter} ...>
+                                <div>
+                                <div className="mt-6">
+                                  <button
+                                    className="group relative w-full py-3 px-4 rounded-md flex items-center justify-ce..."
+-                                   fdprocessedid="jaz2p6"
+                                  >
+                        ...
+                          <div className="sc-icnseD ...">
+                            <div className="glass-cont...">
+                              <div className="h-full fle..." onMouseEnter={function onMouseEnter} ...>
+                                <div>
+                                <div className="mt-6">
+                                  <button
+                                    className="group relative w-full py-3 px-4 rounded-md flex items-center justify-ce..."
+-                                   fdprocessedid="ad8tgq"
+                                  >
+                        ...
+                          <div className="sc-icnseD ...">
+                            <div className="glass-cont...">
+                              <div className="h-full fle..." onMouseEnter={function onMouseEnter} ...>
+                                <div>
+                                <div className="mt-6">
+                                  <button
+                                    className="group relative w-full py-3 px-4 rounded-md flex items-center justify-ce..."
+-                                   fdprocessedid="j8tnsc"
+                                  >
+                        ...
+                          <div className="sc-icnseD ...">
+                            <div className="glass-cont...">
+                              <div className="h-full fle..." onMouseEnter={function onMouseEnter} ...>
+                                <div>
+                                <div className="mt-6">
+                                  <button
+                                    className="group relative w-full py-3 px-4 rounded-md flex items-center justify-ce..."
+-                                   fdprocessedid="fify6"
+                                  >
+                        ...
+                          <div className="sc-icnseD ...">
+                            <div className="glass-cont...">
+                              <div className="h-full fle..." onMouseEnter={function onMouseEnter} ...>
+                                <div>
+                                <div className="mt-6">
+                                  <button
+                                    className="group relative w-full py-3 px-4 rounded-md flex items-center justify-ce..."
+-                                   fdprocessedid="cmlwk"
+                                  >
+                    <SolutionsShowcase addToRefs={function addToRefs}>
+                      <section id="solutions" className="py-12">
+                        <div className="max-w-7xl ...">
+                          <motion.div>
+                          <div className="w-full max...">
+                            <div className="flex justi...">
+                              <button
+                                className={"flex-1 px-2 py-2 text-xs sm:text-sm transition-all duration-300 whitespac..."}
+                                onClick={function onClick}
+-                               fdprocessedid="kjpclw"
+                              >
+                              <button
+                                className={"flex-1 px-2 py-2 text-xs sm:text-sm transition-all duration-300 whitespac..."}
+                                onClick={function onClick}
+-                               fdprocessedid="efmgn9"
+                              >
+                              <button
+                                className={"flex-1 px-2 py-2 text-xs sm:text-sm transition-all duration-300 whitespac..."}
+                                onClick={function onClick}
+-                               fdprocessedid="9qy8s4"
+                              >
+                              <button
+                                className={"flex-1 px-2 py-2 text-xs sm:text-sm transition-all duration-300 whitespac..."}
+                                onClick={function onClick}
+-                               fdprocessedid="450mfs"
+                              >
+                          <div className="relative z-10">
+                            <div className="flex flex-...">
+                              <div className="md:w-1/2 p...">
+                                <h2>
+                                <p>
+                                <h4>
+                                <ul>
+                                <div className="mt-6">
+                                  <button
+                                    className="group relative w-full py-3 px-4 rounded-none flex items-center justify-..."
+-                                   fdprocessedid="gt7evp"
+                                  >
+                              ...
+                    <SectionWrapper>
+                    <SectionWrapper>
+                    <SectionWrapper>
+                    <SectionWrapper>
+                    ...
+                      <motion.div initial={{opacity:0,x:60}} whileInView={{opacity:1,x:0}} ...>
+                        <div className="bg-white/9..." style={{opacity:0, ...}} ref={function useMotionRef.useCallback}>
+                          <div>
+                          <form className="space-y-6">
+                            <div className="grid grid-...">
+                              <div>
+                                <label>
+                                <input
+                                  required={true}
+                                  placeholder="Fill"
+                                  className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:border-orange-40..."
+-                                 fdprocessedid="5czhv"
+                                >
+                              <div>
+                                <label>
+                                <input
+                                  required={true}
+                                  placeholder="Fill"
+                                  className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:border-orange-40..."
+-                                 fdprocessedid="0zvdv"
+                                >
+                            <div className="grid grid-...">
+                              <div>
+                                <label>
+                                <input
+                                  placeholder="Fill"
+                                  className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:border-orange-40..."
+-                                 fdprocessedid="2le6as"
+                                >
+                              ...
+                                <Primitive.div.Slot ref={function}>
+                                  <Primitive.div.SlotClone ref={function}>
+                                    <Primitive.button type="button" role="combobox" aria-controls="radix-«Ra5..." ...>
+                                      <button
+                                        type="button"
+                                        role="combobox"
+                                        aria-controls="radix-«Ra5at3ul7»"
+                                        aria-expanded={false}
+                                        aria-required={undefined}
+                                        aria-autocomplete="none"
+                                        dir="ltr"
+                                        data-state="closed"
+                                        disabled={false}
+                                        data-disabled={undefined}
+                                        data-placeholder=""
+                                        className="flex h-10 w-full items-center justify-between rounded-md border bor..."
+                                        onClick={function handleEvent}
+                                        onPointerDown={function handleEvent}
+                                        onKeyDown={function handleEvent}
+                                        ref={function}
+-                                       fdprocessedid="y6eom"
+                                      >
+                            <div className="grid grid-...">
+                              <div>
+                                <label>
+                                <t country="in" value="" onChange={function bound dispatchSetState} ...>
+                                  <div className={"!w-full ..."} style={{}} onKeyDown={function}>
+                                    <div>
+                                    <input
+                                      className="form-control !w-full !py-2 !pl-14 !pr-4 !rounded-lg !border !border-g..."
+                                      style={{}}
+                                      onChange={function}
+                                      onClick={function}
+                                      onDoubleClick={function}
+                                      onFocus={function}
+                                      onBlur={function}
+                                      onCopy={function}
+                                      value="+91"
+                                      onKeyDown={function}
+                                      placeholder="1 (702) 123-4567"
+                                      disabled={false}
+                                      type="tel"
+                                      name="phone"
+                                      required={true}
+                                      autoFocus={false}
+                                      autoComplete="tel"
+                                      ref={function ref}
+-                                     fdprocessedid="m94aj"
+                                    >
+                                    <div className="flag-dropd..." style={{}} ref={function ref}>
+                                      <div
+                                        onClick={function}
+                                        className="selected-flag"
+                                        title="India: + 91"
+                                        tabIndex="0"
+                                        role="button"
+                                        aria-haspopup="listbox"
+                                        aria-expanded={undefined}
+-                                       fdprocessedid="yzoh8"
+                                      >
+                              <div>
+                                <label>
+                                <input
+                                  type="email"
+                                  required={true}
+                                  placeholder="Fill"
+                                  className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:border-orange-40..."
+-                                 fdprocessedid="35nnjd"
+                                >
+                            <div>
+                            <div className="grid grid-...">
+                              <div className="flex flex-...">
+                                <p>
+                                ...
+                                  <CheckboxTrigger data-slot="checkbox" className="peer dark:..." id="Invoice Pr..." ...>
+                                    <Primitive.button type="button" role="checkbox" aria-checked={false} ...>
+                                      <button
+                                        type="button"
+                                        role="checkbox"
+                                        aria-checked={false}
+                                        aria-required={undefined}
+                                        data-state="unchecked"
+                                        data-disabled={undefined}
+                                        disabled={undefined}
+                                        value="on"
+                                        data-slot="checkbox"
+                                        className="peer dark:bg-input/30 focus-visible:border-[var(--color-secondary)]..."
+                                        id="Invoice Processing Automation"
+                                        onKeyDown={function handleEvent}
+                                        onClick={function handleEvent}
+                                        ref={function}
+-                                       fdprocessedid="czqebb"
+                                      >
+                                  ...
+                                ...
+                                  <CheckboxTrigger data-slot="checkbox" className="peer dark:..." id="HR Onboard..." ...>
+                                    <Primitive.button type="button" role="checkbox" aria-checked={false} ...>
+                                      <button
+                                        type="button"
+                                        role="checkbox"
+                                        aria-checked={false}
+                                        aria-required={undefined}
+                                        data-state="unchecked"
+                                        data-disabled={undefined}
+                                        disabled={undefined}
+                                        value="on"
+                                        data-slot="checkbox"
+                                        className="peer dark:bg-input/30 focus-visible:border-[var(--color-secondary)]..."
+                                        id="HR Onboarding/Offboarding Bots"
+                                        onKeyDown={function handleEvent}
+                                        onClick={function handleEvent}
+                                        ref={function}
+-                                       fdprocessedid="njwftn"
+                                      >
+                                  ...
+                                ...
+                                  <CheckboxTrigger data-slot="checkbox" className="peer dark:..." id="Customer D..." ...>
+                                    <Primitive.button type="button" role="checkbox" aria-checked={false} ...>
+                                      <button
+                                        type="button"
+                                        role="checkbox"
+                                        aria-checked={false}
+                                        aria-required={undefined}
+                                        data-state="unchecked"
+                                        data-disabled={undefined}
+                                        disabled={undefined}
+                                        value="on"
+                                        data-slot="checkbox"
+                                        className="peer dark:bg-input/30 focus-visible:border-[var(--color-secondary)]..."
+                                        id="Customer Data Entry Automation"
+                                        onKeyDown={function handleEvent}
+                                        onClick={function handleEvent}
+                                        ref={function}
+-                                       fdprocessedid="q5r48"
+                                      >
+                                  ...
+                                ...
+                                  <CheckboxTrigger data-slot="checkbox" className="peer dark:..." id="ERP/CRM In..." ...>
+                                    <Primitive.button type="button" role="checkbox" aria-checked={false} ...>
+                                      <button
+                                        type="button"
+                                        role="checkbox"
+                                        aria-checked={false}
+                                        aria-required={undefined}
+                                        data-state="unchecked"
+                                        data-disabled={undefined}
+                                        disabled={undefined}
+                                        value="on"
+                                        data-slot="checkbox"
+                                        className="peer dark:bg-input/30 focus-visible:border-[var(--color-secondary)]..."
+                                        id="ERP/CRM Integration Bots"
+                                        onKeyDown={function handleEvent}
+                                        onClick={function handleEvent}
+                                        ref={function}
+-                                       fdprocessedid="xywb8"
+                                      >
+                                  ...
+                              <div className="flex flex-...">
+                                <p>
+                                ...
+                                  <CheckboxTrigger data-slot="checkbox" className="peer dark:..." id="AI + RPA (..." ...>
+                                    <Primitive.button type="button" role="checkbox" aria-checked={false} ...>
+                                      <button
+                                        type="button"
+                                        role="checkbox"
+                                        aria-checked={false}
+                                        aria-required={undefined}
+                                        data-state="unchecked"
+                                        data-disabled={undefined}
+                                        disabled={undefined}
+                                        value="on"
+                                        data-slot="checkbox"
+                                        className="peer dark:bg-input/30 focus-visible:border-[var(--color-secondary)]..."
+                                        id="AI + RPA (Chatbots/NLP/OCR)"
+                                        onKeyDown={function handleEvent}
+                                        onClick={function handleEvent}
+                                        ref={function}
+-                                       fdprocessedid="oz5dtj"
+                                      >
+                                  ...
+                                ...
+                                  <CheckboxTrigger data-slot="checkbox" className="peer dark:..." id="Legacy Sys..." ...>
+                                    <Primitive.button type="button" role="checkbox" aria-checked={false} ...>
+                                      <button
+                                        type="button"
+                                        role="checkbox"
+                                        aria-checked={false}
+                                        aria-required={undefined}
+                                        data-state="unchecked"
+                                        data-disabled={undefined}
+                                        disabled={undefined}
+                                        value="on"
+                                        data-slot="checkbox"
+                                        className="peer dark:bg-input/30 focus-visible:border-[var(--color-secondary)]..."
+                                        id="Legacy System Automation"
+                                        onKeyDown={function handleEvent}
+                                        onClick={function handleEvent}
+                                        ref={function}
+-                                       fdprocessedid="mebygtr"
+                                      >
+                                  ...
+                                ...
+                                  <CheckboxTrigger data-slot="checkbox" className="peer dark:..." id="Cross-Plat..." ...>
+                                    <Primitive.button type="button" role="checkbox" aria-checked={false} ...>
+                                      <button
+                                        type="button"
+                                        role="checkbox"
+                                        aria-checked={false}
+                                        aria-required={undefined}
+                                        data-state="unchecked"
+                                        data-disabled={undefined}
+                                        disabled={undefined}
+                                        value="on"
+                                        data-slot="checkbox"
+                                        className="peer dark:bg-input/30 focus-visible:border-[var(--color-secondary)]..."
+                                        id="Cross-Platform Workflow Bots"
+                                        onKeyDown={function handleEvent}
+                                        onClick={function handleEvent}
+                                        ref={function}
+-                                       fdprocessedid="ufukgh"
+                                      >
+                                  ...
+                            ...
+                              ...
+                                <CheckboxTrigger data-slot="checkbox" className="peer dark:..." id="End-to-End..." ...>
+                                  <Primitive.button type="button" role="checkbox" aria-checked={false} ...>
+                                    <button
+                                      type="button"
+                                      role="checkbox"
+                                      aria-checked={false}
+                                      aria-required={undefined}
+                                      data-state="unchecked"
+                                      data-disabled={undefined}
+                                      disabled={undefined}
+                                      value="on"
+                                      data-slot="checkbox"
+                                      className="peer dark:bg-input/30 focus-visible:border-[var(--color-secondary)] f..."
+                                      id="End-to-End Implementation"
+                                      onKeyDown={function handleEvent}
+                                      onClick={function handleEvent}
+                                      ref={function}
+-                                     fdprocessedid="q3vbkj"
+                                    >
+                                ...
+                              ...
+                                <CheckboxTrigger data-slot="checkbox" className="peer dark:..." id="Managed Au..." ...>
+                                  <Primitive.button type="button" role="checkbox" aria-checked={false} ...>
+                                    <button
+                                      type="button"
+                                      role="checkbox"
+                                      aria-checked={false}
+                                      aria-required={undefined}
+                                      data-state="unchecked"
+                                      data-disabled={undefined}
+                                      disabled={undefined}
+                                      value="on"
+                                      data-slot="checkbox"
+                                      className="peer dark:bg-input/30 focus-visible:border-[var(--color-secondary)] f..."
+                                      id="Managed Automation Services"
+                                      onKeyDown={function handleEvent}
+                                      onClick={function handleEvent}
+                                      ref={function}
+-                                     fdprocessedid="aqb1n"
+                                    >
+                                ...
+                              ...
+                                <CheckboxTrigger data-slot="checkbox" className="peer dark:..." id="Training f..." ...>
+                                  <Primitive.button type="button" role="checkbox" aria-checked={false} ...>
+                                    <button
+                                      type="button"
+                                      role="checkbox"
+                                      aria-checked={false}
+                                      aria-required={undefined}
+                                      data-state="unchecked"
+                                      data-disabled={undefined}
+                                      disabled={undefined}
+                                      value="on"
+                                      data-slot="checkbox"
+                                      className="peer dark:bg-input/30 focus-visible:border-[var(--color-secondary)] f..."
+                                      id="Training for In-House Teams"
+                                      onKeyDown={function handleEvent}
+                                      onClick={function handleEvent}
+                                      ref={function}
+-                                     fdprocessedid="5ipqi"
+                                    >
+                                ...
+                              ...
+                                <CheckboxTrigger data-slot="checkbox" className="peer dark:..." id="Other/Cust..." ...>
+                                  <Primitive.button type="button" role="checkbox" aria-checked={false} ...>
+                                    <button
+                                      type="button"
+                                      role="checkbox"
+                                      aria-checked={false}
+                                      aria-required={undefined}
+                                      data-state="unchecked"
+                                      data-disabled={undefined}
+                                      disabled={undefined}
+                                      value="on"
+                                      data-slot="checkbox"
+                                      className="peer dark:bg-input/30 focus-visible:border-[var(--color-secondary)] f..."
+                                      id="Other/Custom Bot"
+                                      onKeyDown={function handleEvent}
+                                      onClick={function handleEvent}
+                                      ref={function}
+-                                     fdprocessedid="g5zpoe"
+                                    >
+                                ...
+                            <div>
+                            <div>
+                            <motion.div whileHover={{scale:1.04}} whileTap={{scale:0.97}} className="w-fit">
+                              <div className="w-fit" tabIndex={0} style={{}} ref={function useMotionRef.useCallback}>
+                                <button
+                                  type="submit"
+                                  className="bg-[var(--color-secondary)] text-white px-6 py-3 rounded-none font-medium..."
+-                                 fdprocessedid="m6gxxz5"
+                                >
++                                 Schedule a Consultation
+                    ...
+              ...
+
+    at createUnhandledError (https://54482ff9-2f41-47bd-9867-e40f5495ab81-00-148wb6xjskyut.sisko.replit.dev:5000/_next/static/chunks/node_modules_next_dist_client_43e3ffb8._.js:879:71)
+    at handleClientError (https://54482ff9-2f41-47bd-9867-e40f5495ab81-00-148wb6xjskyut.sisko.replit.dev:5000/_next/static/chunks/node_modules_next_dist_client_43e3ffb8._.js:1052:56)
+    at error (https://54482ff9-2f41-47bd-9867-e40f5495ab81-00-148wb6xjskyut.sisko.replit.dev:5000/_next/static/chunks/node_modules_next_dist_client_43e3ffb8._.js:1191:56)
+    at console.error (https://54482ff9-2f41-47bd-9867-e40f5495ab81-00-148wb6xjskyut.sisko.replit.dev:5000/_next/static/chunks/node_modules_@mantine_c2944705._.js:1806:13)
+    at https://54482ff9-2f41-47bd-9867-e40f5495ab81-00-148wb6xjskyut.sisko.replit.dev:5000/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:9382:25
+    at runWithFiberInDEV (https://54482ff9-2f41-47bd-9867-e40f5495ab81-00-148wb6xjskyut.sisko.replit.dev:5000/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:3501:74)
+    at emitPendingHydrationWarnings (https://54482ff9-2f41-47bd-9867-e40f5495ab81-00-148wb6xjskyut.sisko.replit.dev:5000/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:9381:13)
+    at completeWork (https://54482ff9-2f41-47bd-9867-e40f5495ab81-00-148wb6xjskyut.sisko.replit.dev:5000/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:9455:102)
+    at runWithFiberInDEV (https://54482ff9-2f41-47bd-9867-e40f5495ab81-00-148wb6xjskyut.sisko.replit.dev:5000/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:3501:131)
+    at completeUnitOfWork (https://54482ff9-2f41-47bd-9867-e40f5495ab81-00-148wb6xjskyut.sisko.replit.dev:5000/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:10233:23)
+    at performUnitOfWork (https://54482ff9-2f41-47bd-9867-e40f5495ab81-00-148wb6xjskyut.sisko.replit.dev:5000/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:10170:28)
+    at workLoopConcurrentByScheduler (https://54482ff9-2f41-47bd-9867-e40f5495ab81-00-148wb6xjskyut.sisko.replit.dev:5000/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:10164:58)
+    at renderRootConcurrent (https://54482ff9-2f41-47bd-9867-e40f5495ab81-00-148wb6xjskyut.sisko.replit.dev:5000/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:10146:71)
+    at performWorkOnRoot (https://54482ff9-2f41-47bd-9867-e40f5495ab81-00-148wb6xjskyut.sisko.replit.dev:5000/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:9784:176)
+    at performWorkOnRootViaSchedulerTask (https://54482ff9-2f41-47bd-9867-e40f5495ab81-00-148wb6xjskyut.sisko.replit.dev:5000/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:10796:9)
+    at MessagePort.performWorkUntilDeadline (https://54482ff9-2f41-47bd-9867-e40f5495ab81-00-148wb6xjskyut.sisko.replit.dev:5000/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:1952:64)
+    at button (<anonymous>)
+    at AutomationCard (https://54482ff9-2f41-47bd-9867-e40f5495ab81-00-148wb6xjskyut.sisko.replit.dev:5000/_next/static/chunks/src_a97e9ea0._.js:5835:237)
+    at https://54482ff9-2f41-47bd-9867-e40f5495ab81-00-148wb6xjskyut.sisko.replit.dev:5000/_next/static/chunks/src_a97e9ea0._.js:6027:264
+    at Array.map (<anonymous>)
+    at AutomationCards (https://54482ff9-2f41-47bd-9867-e40f5495ab81-00-148wb6xjskyut.sisko.replit.dev:5000/_next/static/chunks/src_a97e9ea0._.js:6027:40)
+    at Home (https://54482ff9-2f41-47bd-9867-e40f5495ab81-00-148wb6xjskyut.sisko.replit.dev:5000/_next/static/chunks/src_a97e9ea0._.js:6298:229)
+    at ClientPageRoot (https://54482ff9-2f41-47bd-9867-e40f5495ab81-00-148wb6xjskyut.sisko.replit.dev:5000/_next/static/chunks/node_modules_next_dist_1a6ee436._.js:2053:50)
