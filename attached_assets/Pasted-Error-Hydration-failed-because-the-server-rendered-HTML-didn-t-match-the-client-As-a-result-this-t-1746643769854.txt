@@ -1,0 +1,50 @@
+Error: Hydration failed because the server rendered HTML didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <HotReload assetPrefix="" globalError={[...]}>
+      <AppDevOverlay state={{nextId:1, ...}} globalError={[...]}>
+        <AppDevOverlayErrorBoundary globalError={[...]} onError={function bound dispatchSetState}>
+          <ReplaySsrOnlyErrors>
+          <DevRootHTTPAccessFallbackBoundary>
+            <HTTPAccessFallbackBoundary notFound={<NotAllowedRootHTTPFallbackError>}>
+              <HTTPAccessFallbackErrorBoundary pathname="/" notFound={<NotAllowedRootHTTPFallbackError>} ...>
+                <RedirectBoundary>
+                  <RedirectErrorBoundary router={{...}}>
+                    <Head>
+                    <link>
+                    <script>
+                    <script>
+                    <RootLayout>
+                      <html lang="en" className="scroll-smooth">
+                        <head>
+                          <meta>
++                         <link
++                           rel="stylesheet"
++                           href="https://cdn.jsdelivr.net/npm/tailwindcss@4.1.5/dist/tailwind.min.css"
++                         >
+-                         <script src="/__replco/static/devtools/eruda/3.2.3/eruda.js">
+                        ...
+                    ...
+        ...
+
+    at throwOnHydrationMismatch (https://54482ff9-2f41-47bd-9867-e40f5495ab81-00-148wb6xjskyut.sisko.replit.dev/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:9266:56)
+    at beginWork (https://54482ff9-2f41-47bd-9867-e40f5495ab81-00-148wb6xjskyut.sisko.replit.dev/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:7831:918)
+    at runWithFiberInDEV (https://54482ff9-2f41-47bd-9867-e40f5495ab81-00-148wb6xjskyut.sisko.replit.dev/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:3501:74)
+    at performUnitOfWork (https://54482ff9-2f41-47bd-9867-e40f5495ab81-00-148wb6xjskyut.sisko.replit.dev/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:10168:97)
+    at workLoopConcurrentByScheduler (https://54482ff9-2f41-47bd-9867-e40f5495ab81-00-148wb6xjskyut.sisko.replit.dev/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:10164:58)
+    at renderRootConcurrent (https://54482ff9-2f41-47bd-9867-e40f5495ab81-00-148wb6xjskyut.sisko.replit.dev/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:10146:71)
+    at performWorkOnRoot (https://54482ff9-2f41-47bd-9867-e40f5495ab81-00-148wb6xjskyut.sisko.replit.dev/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:9784:176)
+    at performWorkOnRootViaSchedulerTask (https://54482ff9-2f41-47bd-9867-e40f5495ab81-00-148wb6xjskyut.sisko.replit.dev/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:10796:9)
+    at MessagePort.performWorkUntilDeadline (https://54482ff9-2f41-47bd-9867-e40f5495ab81-00-148wb6xjskyut.sisko.replit.dev/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:1952:64)
+    at link (<anonymous>)
+    at RootLayout (rsc://React/Server/file:///home/runner/workspace/.next/server/chunks/ssr/%5Broot%20of%20the%20server%5D__a4dabdc9._.js?1:107:272)

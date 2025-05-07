@@ -1,0 +1,28 @@
+Error: React does not recognize the `colorIndex` prop on a DOM element. If you intentionally want it to appear in the DOM as a custom attribute, spell it as lowercase `colorindex` instead. If you accidentally passed it from a parent component, remove it from the DOM element.
+    at createUnhandledError (https://54482ff9-2f41-47bd-9867-e40f5495ab81-00-148wb6xjskyut.sisko.replit.dev/_next/static/chunks/node_modules_next_dist_client_43e3ffb8._.js:879:71)
+    at handleClientError (https://54482ff9-2f41-47bd-9867-e40f5495ab81-00-148wb6xjskyut.sisko.replit.dev/_next/static/chunks/node_modules_next_dist_client_43e3ffb8._.js:1052:56)
+    at error (https://54482ff9-2f41-47bd-9867-e40f5495ab81-00-148wb6xjskyut.sisko.replit.dev/_next/static/chunks/node_modules_next_dist_client_43e3ffb8._.js:1191:56)
+    at console.error (https://54482ff9-2f41-47bd-9867-e40f5495ab81-00-148wb6xjskyut.sisko.replit.dev/_next/static/chunks/node_modules_@mantine_c2944705._.js:1806:13)
+    at validateProperty (https://54482ff9-2f41-47bd-9867-e40f5495ab81-00-148wb6xjskyut.sisko.replit.dev/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:4187:60)
+    at warnUnknownProperties (https://54482ff9-2f41-47bd-9867-e40f5495ab81-00-148wb6xjskyut.sisko.replit.dev/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:4296:26)
+    at validatePropertiesInDevelopment (https://54482ff9-2f41-47bd-9867-e40f5495ab81-00-148wb6xjskyut.sisko.replit.dev/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:11239:66)
+    at setInitialProperties (https://54482ff9-2f41-47bd-9867-e40f5495ab81-00-148wb6xjskyut.sisko.replit.dev/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:11510:9)
+    at completeWork (https://54482ff9-2f41-47bd-9867-e40f5495ab81-00-148wb6xjskyut.sisko.replit.dev/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:9543:35)
+    at runWithFiberInDEV (https://54482ff9-2f41-47bd-9867-e40f5495ab81-00-148wb6xjskyut.sisko.replit.dev/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:3501:74)
+    at completeUnitOfWork (https://54482ff9-2f41-47bd-9867-e40f5495ab81-00-148wb6xjskyut.sisko.replit.dev/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:10233:23)
+    at performUnitOfWork (https://54482ff9-2f41-47bd-9867-e40f5495ab81-00-148wb6xjskyut.sisko.replit.dev/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:10170:28)
+    at workLoopSync (https://54482ff9-2f41-47bd-9867-e40f5495ab81-00-148wb6xjskyut.sisko.replit.dev/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:10060:40)
+    at renderRootSync (https://54482ff9-2f41-47bd-9867-e40f5495ab81-00-148wb6xjskyut.sisko.replit.dev/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:10043:13)
+    at performWorkOnRoot (https://54482ff9-2f41-47bd-9867-e40f5495ab81-00-148wb6xjskyut.sisko.replit.dev/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:9808:56)
+    at performWorkOnRootViaSchedulerTask (https://54482ff9-2f41-47bd-9867-e40f5495ab81-00-148wb6xjskyut.sisko.replit.dev/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:10796:9)
+    at MessagePort.performWorkUntilDeadline (https://54482ff9-2f41-47bd-9867-e40f5495ab81-00-148wb6xjskyut.sisko.replit.dev/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:1952:64)
+    at div (<anonymous>)
+    at https://54482ff9-2f41-47bd-9867-e40f5495ab81-00-148wb6xjskyut.sisko.replit.dev/_next/static/chunks/node_modules_694f2e4e._.js:4526:329
+    at O (https://54482ff9-2f41-47bd-9867-e40f5495ab81-00-148wb6xjskyut.sisko.replit.dev/_next/static/chunks/node_modules_694f2e4e._.js:4527:10)
+    at https://54482ff9-2f41-47bd-9867-e40f5495ab81-00-148wb6xjskyut.sisko.replit.dev/_next/static/chunks/src_a97e9ea0._.js:1340:277
+    at Array.map (<anonymous>)
+    at https://54482ff9-2f41-47bd-9867-e40f5495ab81-00-148wb6xjskyut.sisko.replit.dev/_next/static/chunks/src_a97e9ea0._.js:1335:134
+    at Array.map (<anonymous>)
+    at FeaturesSection (https://54482ff9-2f41-47bd-9867-e40f5495ab81-00-148wb6xjskyut.sisko.replit.dev/_next/static/chunks/src_a97e9ea0._.js:1232:40)
+    at Home (https://54482ff9-2f41-47bd-9867-e40f5495ab81-00-148wb6xjskyut.sisko.replit.dev/_next/static/chunks/src_a97e9ea0._.js:6285:229)
+    at ClientPageRoot (https://54482ff9-2f41-47bd-9867-e40f5495ab81-00-148wb6xjskyut.sisko.replit.dev/_next/static/chunks/node_modules_next_dist_1a6ee436._.js:2053:50)
