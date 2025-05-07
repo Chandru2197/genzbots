@@ -8,7 +8,7 @@ import "react-phone-input-2/lib/style.css";
 import * as Select from "@radix-ui/react-select";
 import { Check, ChevronDown } from "lucide-react";
 import { cn } from "../lib/utils";
-import { Checkbox } from "@/components/ui/checkbox";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 
 const contactInfo = [
   {
@@ -305,22 +305,22 @@ export default function ContactSection() {
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="flex flex-col gap-2">
-                <p className="block font-medium text-gray-700 mb-1 border-b-1 border-[var(--color-secondary)] ">
+                <p className="block font-medium text-gray-700 mb-3 border-b-1 border-[var(--color-secondary)]">
                   Support Model
                 </p>
-                {SupportModelsList?.map((support:string,index:number) => (
-                  <div key={index+"support"+support} className="items-top flex space-x-2">
-                    <Checkbox id={support} variant="orange" />
-                    <div className="grid gap-1.5 leading-none content-center">
+                <RadioGroup defaultValue="End-to-End Implementation">
+                  {SupportModelsList?.map((support: string) => (
+                    <div key={support} className="flex items-center space-x-2">
+                      <RadioGroupItem value={support} variant="orange" id={support} />
                       <label
                         htmlFor={support}
-                        className="text-xs font-medium text-[var(--color-tertiary)]/50 leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                        className="text-sm font-medium leading-none text-gray-700 peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
                       >
                         {support}
                       </label>
                     </div>
-                  </div>              
-                ))}
+                  ))}
+                </RadioGroup>
               </div>
             </div>
             <div>
