@@ -196,7 +196,7 @@ const ProjectsCarousel = ({ addToRefs }: ProjectsCarouselProps) => {
             className="text-gray-600 text-lg max-w-2xl mx-auto"
           >
             Explore our cutting-edge automation solutions
-          </motion.p>n.p>
+          </motion.p>
         </div>
 
         <motion.div 

@@ -168,7 +168,7 @@ const KeyPoint = styled.div<{ colorIndex?: number }>`
   opacity: 1 !important;
   overflow: hidden;
   transform-origin: left center;
-  
+
   &::before {
     content: '';
     position: absolute;
@@ -188,7 +188,7 @@ const KeyPoint = styled.div<{ colorIndex?: number }>`
     border-radius: 0 2px 2px 0;
     opacity: 0.9;
   }
-  
+
   &:hover {
     transform: translateX(6px);
     box-shadow: ${props => {
@@ -205,7 +205,7 @@ const KeyPoint = styled.div<{ colorIndex?: number }>`
       const colors = ["rgba(0, 139, 206, 0.05)", "rgba(23, 184, 166, 0.05)", "rgba(245, 0, 87, 0.05)", "rgba(83, 74, 255, 0.05)"];
       return props.colorIndex !== undefined ? colors[props.colorIndex] : 'rgba(255, 248, 245, 0.9)';
     }};
-    
+
     &::before {
       transform: scaleY(1);
       box-shadow: ${props => {
@@ -216,7 +216,7 @@ const KeyPoint = styled.div<{ colorIndex?: number }>`
       }};
     }
   }
-  
+
   span {
     color: ${props => {
       const colors = ["#008bce", "#17B8A6", "#F50057", "#534aff"];
@@ -230,7 +230,7 @@ const KeyPoint = styled.div<{ colorIndex?: number }>`
     left: 0;
     letter-spacing: 0.01em;
   }
-  
+
   &:hover span {
     transform: none;
     color: ${props => {
@@ -337,7 +337,7 @@ export default function FeaturesSection({ addToRefs }: FeaturesSectionProps) {
                         {Array.isArray(feature.key) && feature.key.length > 0 ? (
                           feature.key.map((point, index) => (
                             <div key={index} style={{ width: '100%', position: 'relative' }}>
-                              <KeyPoint colorIndex={idx}>
+                              <KeyPoint data-color-index={idx}>
                                 <span>{point}</span>
                               </KeyPoint>
                             </div>

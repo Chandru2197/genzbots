@@ -58,7 +58,6 @@ export default function RootLayout({
     <html lang="en" className="scroll-smooth">
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@4.1.5/dist/tailwind.min.css" />
       </head>
       <body className={inter.className}>
         <MantineProvider>
