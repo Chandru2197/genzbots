@@ -308,19 +308,38 @@ export default function ContactSection() {
                 <p className="block font-medium text-gray-700 mb-3 border-b-1 border-[var(--color-secondary)]">
                   Support Model
                 </p>
-                <RadioGroup defaultValue="End-to-End Implementation">
-                  {SupportModelsList?.map((support: string) => (
-                    <div key={support} className="flex items-center space-x-2">
-                      <RadioGroupItem value={support} variant="orange" id={support} />
-                      <label
-                        htmlFor={support}
-                        className="text-sm font-medium leading-none text-gray-700 peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                      >
-                        {support}
-                      </label>
-                    </div>
-                  ))}
-                </RadioGroup>
+                <div className="flex gap-8">
+                  <div className="flex-1">
+                    <RadioGroup defaultValue="End-to-End Implementation">
+                      {SupportModelsList?.map((support: string) => (
+                        <div key={support} className="flex items-center space-x-2">
+                          <RadioGroupItem value={support} variant="orange" id={support} />
+                          <label
+                            htmlFor={support}
+                            className="text-sm font-medium leading-none text-gray-700 peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                          >
+                            {support}
+                          </label>
+                        </div>
+                      ))}
+                    </RadioGroup>
+                  </div>
+                  <div className="flex-1">
+                    <RadioGroup defaultValue="End-to-End Implementation">
+                      {SupportModelsList?.map((support: string) => (
+                        <div key={support} className="flex items-center space-x-2">
+                          <RadioGroupItem value={support} variant="orange" id={`second-${support}`} />
+                          <label
+                            htmlFor={`second-${support}`}
+                            className="text-sm font-medium leading-none text-gray-700 peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                          >
+                            {support}
+                          </label>
+                        </div>
+                      ))}
+                    </RadioGroup>
+                  </div>
+                </div>
               </div>
             </div>
             <div>
