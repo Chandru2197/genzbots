@@ -1,4 +1,3 @@
-
 import { AppProps } from 'next/app';
 import { Inter } from 'next/font/google';
 import { MantineProvider } from '@mantine/core';

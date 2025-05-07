@@ -73,6 +73,7 @@ export default function Home() {
       <SectionWrapper>
         <AboutSection addToRefs={addToRefs} />
       </SectionWrapper>
+      {console.log('Rendering ContactSection')}
       <ContactSection />
       <Footer />
     </main>
