@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import { IconMail, IconMapPin, IconPhone } from "@tabler/icons-react";
 import PhoneInput from "react-phone-input-2";
@@ -20,7 +21,7 @@ const contactInfo = [
     label: "Visit us",
     description: "Visit our office HQ.",
     value: "123 Street 256 House",
-    link: "[https://maps.google.com](https://maps.google.com)",
+    link: "https://maps.google.com",
   },
   {
     icon: <IconPhone size={28} className="text-orange-500" />,
@@ -188,7 +189,7 @@ export default function ContactSection() {
                   onValueChange={handleCountryChange}
                 >
                   <Select.Trigger className="flex h-10 w-full items-center justify-between rounded-md border border-gray-300 bg-white px-3 py-2 text-sm placeholder:text-gray-600 focus:outline-none focus:ring-1 focus:ring-orange-400 disabled:cursor-not-allowed disabled:opacity-50">
-                    <Select.Value placeholder="Select a country" className="text-[var(--color-green-100)]"/>
+                    <Select.Value placeholder="Select a country" />
                     <Select.Icon>
                       <ChevronDown className="h-4 w-4 opacity-50" />
                     </Select.Icon>
