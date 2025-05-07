@@ -1,3 +1,4 @@
+
 "use client";
 
 import Image from 'next/image';
@@ -87,16 +88,14 @@ export default function SolutionsShowcase({ addToRefs }: SolutionsShowcaseProps)
       label: 'Custom Bot Development',
       title: 'Tailor-Made Solutions for Your Business',
       description: "When off-the-shelf software doesn't meet your needs, our custom development team creates bespoke applications specifically designed for your unique business requirements, ensuring perfect alignment with your processes and goals.",
-      features_label: "We automate your:",
+      features_label: "We build:",
       features: [
-        'Requirements analysis and planning',
-        'User-centered design process',
-        'Agile development methodology',
-        'Comprehensive testing and QA',
-        'Ongoing maintenance and support'
+        'Custom automation solutions',
+        'Integration with existing systems',
+        'Scalable and maintainable code'
       ],
-      highlight: 'Like hiring 2 FTEs for 1/10th the cost',
-      button_label: 'See Recovery Bot in Action',
+      highlight: 'Delivered 100+ custom solutions across industries',
+      button_label: 'Discuss Your Project',
       image: 'bg-orange-100',
       svg: '/assets/svgs/undraw_online_learning.svg',
     }
@@ -115,44 +114,40 @@ export default function SolutionsShowcase({ addToRefs }: SolutionsShowcaseProps)
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             ref={headingRef}
-            className="text-center mb-16"
+            className="text-center mb-8"
             initial={{ opacity: 0, y: 50 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8 }}
           >
             <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-[#FF5722] via-[#FF8A65] to-[#FF5722] bg-clip-text text-transparent">
-              Our Solutions
+              {activeSolution.title}
             </h2>
             <p className="text-gray-600 text-lg max-w-2xl mx-auto">
-              Explore our comprehensive suite of automation solutions
+              {activeSolution.description}
             </p>
           </motion.div>
 
-          <div className="sticky top-20 z-30 bg-white/80 backdrop-blur-sm py-4 mb-12">
-            <div className="flex justify-between items-center w-full border-b">
-              {solutions.map((solution, index) => (
-                <button
-                  key={solution.id}
-                  className={`flex-1 px-4 py-3 text-sm transition-all duration-300 whitespace-nowrap relative
-                    ${activeTab === solution.id
-                      ? "text-[#FF5722] border-b-2 border-[#FF5722]"
-                      : "text-gray-600 hover:text-[#FF5722]"
-                    }
-                  `}
-                  onClick={() => setActiveTab(solution.id)}
-                >
-                  {solution.label}
-                </button>
-              ))}
-            </div>
+          <div className="flex justify-between items-center w-full border-b mb-8">
+            {solutions.map((solution, index) => (
+              <button
+                key={solution.id}
+                className={`flex-1 px-4 py-3 text-sm transition-all duration-300 whitespace-nowrap relative
+                  ${activeTab === solution.id
+                    ? "text-[#FF5722] border-b-2 border-[#FF5722]"
+                    : "text-gray-600 hover:text-[#FF5722]"
+                  }
+                `}
+                onClick={() => setActiveTab(solution.id)}
+              >
+                {solution.label}
+              </button>
+            ))}
           </div>
 
-          <div className="relative z-10" ref={contentRef} data-speed="0.1">
+          <div className="relative z-10" ref={contentRef}>
             <Parallax speed={5}>
               <div className={`flex flex-col md:flex-row ${activeIndex % 2 === 0 ? 'md:flex-row-reverse' : ''} gap-8 items-center`}>
                 <div className="md:w-1/2 p-6 md:p-10">
-                  <h2 className="text-2xl md:text-3xl font-bold mb-4 text-[var(--color-tertiary)]">{activeSolution.title}</h2>
-                  <p className="text-gray-600 mb-8 text-lg">{activeSolution.description}</p>
                   <h4 className="text-xl font-semibold mb-6 text-[var(--color-secondary)]">{activeSolution.features_label}</h4>
                   <ul className="space-y-4">
                     {activeSolution.features.map((feature, index) => (
