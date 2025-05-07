@@ -24,13 +24,13 @@ interface SolutionTab {
 
 export default function SolutionsShowcase({ addToRefs }: SolutionsShowcaseProps) {
   const [activeTab, setActiveTab] = useState('automation');
-
-  // Only the heading/title gets parallax
   const headingRef = useRef<HTMLDivElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(headingRef, { once: true });
 
   useEffect(() => {
-    // if (addToRefs && headingRef.current) addToRefs(headingRef.current);
+    if (addToRefs && headingRef.current) addToRefs(headingRef.current);
+    if (addToRefs && contentRef.current) addToRefs(contentRef.current);
   }, [addToRefs]);
 
   const solutions: SolutionTab[] = [
@@ -183,10 +183,11 @@ export default function SolutionsShowcase({ addToRefs }: SolutionsShowcaseProps)
         </div>
 
         {/* Content Section */}
-        <div className="relative z-10">
-          <div className={`flex flex-col md:flex-row ${activeIndex % 2 === 0 ? 'md:flex-row-reverse' : ''} gap-8 items-center`}>
-            {/* Content Side */}
-            <div className="md:w-1/2 p-6 md:p-10">
+        <div className="relative z-10" ref={contentRef} data-speed="0.1">
+          <Parallax speed={5} className="relative">
+            <div className={`flex flex-col md:flex-row ${activeIndex % 2 === 0 ? 'md:flex-row-reverse' : ''} gap-8 items-center`}>
+              {/* Content Side */}
+              <div className="md:w-1/2 p-6 md:p-10">
               <h2 className="text-2xl md:text-3xl font-bold mb-4 text-[var(--color-tertiary)]">{activeSolution.title}</h2>
               <p className="text-gray-600 mb-8 text-lg">{activeSolution.description}</p>
               <h4 className="text-xl font-semibold mb-6 text-[var(--color-secondary)]">{activeSolution.features_label}</h4>
@@ -238,7 +239,8 @@ export default function SolutionsShowcase({ addToRefs }: SolutionsShowcaseProps)
 
             {/* Image Side */}
             <div className="md:w-1/2">
-              <div className="relative h-[400px] md:h-[500px] w-full group">
+              <Parallax speed={-5} className="relative">
+                <div className="relative h-[400px] md:h-[500px] w-full group">
                 <div className="absolute inset-0 bg-gradient-to-r from-[var(--color-primary)/10] to-[var(--color-secondary)/10] rounded-2xl blur-xl transform transition-all duration-300 group-hover:scale-105"></div>
                 <div className="relative w-full h-full transform transition-all duration-300 group-hover:scale-105 overflow-hidden">
                   <div className="absolute inset-0 flex items-center justify-center p-8">
@@ -254,10 +256,11 @@ export default function SolutionsShowcase({ addToRefs }: SolutionsShowcaseProps)
                     />
                   </div>
                 </div>
-              </div>
+              </Parallax>
             </div>
           </div>
-        </div>
+        </Parallax>
+      </div>
       </div>
     </section>
   );
