@@ -103,7 +103,7 @@ const AutomationCard = ({
           {/* Button */}
           <div className="mt-6">
             <button
-              className="group relative w-full py-3 px-4 rounded-md flex items-center justify-center transition-all duration-300 bg-[var(--color-secondary)] text-white border-2 border-transparent hover:bg-white hover:text-[var(--color-secondary)] hover:border-[var(--color-secondary)] cursor-pointer"
+              className="group relative w-full py-2 px-4 rounded-none flex items-center justify-center transition-all duration-300 bg-[var(--color-secondary)] text-white border-2 border-transparent hover:bg-white hover:text-[var(--color-secondary)] hover:border-[var(--color-secondary)] cursor-pointer"
             >
               Learn more
               <svg

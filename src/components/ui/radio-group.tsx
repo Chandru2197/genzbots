@@ -40,7 +40,7 @@ function RadioGroupItem({
         // Default variant styling
         variant === "default" && "border-input text-primary focus-visible:border-ring",
         // Orange variant styling
-        variant === "orange" && "border-orange-300 text-orange-500 focus-visible:border-orange-400",
+        variant === "orange" && "border-2 border-[var(--color-secondary)] text-[var(--color-secondary)] focus-visible:border-[var(--color-secondary)]",
         // Blue variant styling
         variant === "blue" && "border-blue-300 text-blue-500 focus-visible:border-blue-400",
         className

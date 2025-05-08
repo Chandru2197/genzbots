@@ -23,7 +23,7 @@ function Checkbox({
         // Default variant styling
         variant === "default" && "data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground dark:data-[state=checked]:bg-primary data-[state=checked]:border-primary",
         // Orange variant styling
-        variant === "orange" && "border-[var(--color-secondary)] data-[state=checked]:bg-[var(--color-secondary)] data-[state=checked]:text-white dark:data-[state=checked]:bg-[var(--color-secondary)] data-[state=checked]:border-[var(--color-secondary)]",
+        variant === "orange" && "border-2 border-[var(--color-secondary)] data-[state=checked]:bg-[var(--color-secondary)] data-[state=checked]:text-white dark:data-[state=checked]:bg-[var(--color-secondary)] data-[state=checked]:border-[var(--color-secondary)]",
         // Blue variant styling
         variant === "blue" && "data-[state=checked]:bg-blue-500 data-[state=checked]:text-white dark:data-[state=checked]:bg-blue-500 data-[state=checked]:border-blue-500",
         className

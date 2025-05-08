@@ -8,18 +8,20 @@ export default function Footer() {
     <footer className="bg-gray-900 text-white py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-          <div className="col-span-1 md:col-span-2">
+          <div className="col-span-1 md:col-span-2 mb-4 max-w-md">
+            <div>
             <Image
-              src={'/Zlogo.svg'}
+              src={'/assets/svgs/GenZBotLogo.svg'}
               alt="Logo"
               width={125}
               height={125}
               priority
             />
-            <p className="text-gray-400 mb-4 max-w-md">
+            </div>
+            {/* <p className="text-gray-400 mb-4 max-w-md">
               We help businesses streamline operations, increase productivity, and achieve greater efficiency through innovative automation solutions.
-            </p>
-            <div className="flex space-x-4">
+            </p> */}
+            <div className="flex space-x-4 p-2">
               <a href="#" className="text-gray-400 hover:text-white transition-colors">
                 <span className="sr-only">Facebook</span>
                 <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -55,8 +57,8 @@ export default function Footer() {
           <div>
             <h4 className="text-lg font-bold mb-4">Contact</h4>
             <ul className="space-y-2 text-gray-400">
-              <li>123 Automation Street</li>
-              <li>Tech Park, Bangalore 560001</li>
+              <li>123 Street</li>
+              <li>Tech Park, XXXXXX XXX XXX</li>
               <li>India</li>
               <li className="pt-2">info@genzbot.com</li>
               <li>+91 123 456 7890</li>
