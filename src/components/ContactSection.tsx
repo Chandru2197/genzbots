@@ -77,6 +77,7 @@ export default function ContactSection() {
   const [consent, setConsent] = useState(false);
   const [phone, setPhone] = useState("");
   const [selectedCountry, setSelectedCountry] = useState("IN");
+  const [phoneCountry, setPhoneCountry] = useState("in");
   const [searchQuery, setSearchQuery] = useState("");
 
   const countries = [
@@ -139,18 +140,15 @@ export default function ContactSection() {
   const handleCountryChange = (value: string) => {
     setSelectedCountry(value);
     // Update phone input with new country
+    setPhoneCountry(value.toLowerCase());
     const phoneWithoutCode = phone.replace(/^\+\d+/, '');
     setPhone(phoneWithoutCode);
   };
 
-  // Handle phone change with country code
+  // Handle phone change
   const handlePhoneChange = (value: string, country: any) => {
     setPhone(value);
-    // Find the matching country code from our countries array
-    const countryCode = countries.find(
-      c => c.value.toLowerCase() === country.countryCode.toLowerCase()
-    )?.value || selectedCountry;
-    setSelectedCountry(countryCode);
+    setPhoneCountry(country.countryCode);
   };
 
   // const SelectItem = React.forwardRef<HTMLDivElement, Select.SelectItemProps>(
@@ -358,7 +356,7 @@ export default function ContactSection() {
                     Phone number <span className="text-orange-500">*</span>
                   </label>
                   <PhoneInput
-                    country={selectedCountry.toLowerCase()}
+                    country={phoneCountry}
                     value={phone}
                     onChange={handlePhoneChange}
                     inputStyle={{
