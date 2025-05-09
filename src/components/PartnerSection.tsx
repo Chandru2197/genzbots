@@ -244,7 +244,7 @@ export default function PartnerShowcase({ addToRefs }: PartnerShowcaseProps) {
                   transition={{ duration: 0.3, delay: index * 0.1 }}
                 >
                   <IconCircleDashedCheck color='#FF5722' className='p-1'/>
-                  <span className="text-xs text-gray-700">{feature.text}</span>
+                  <span className="text-sm text-gray-700">{feature.text}</span>
               </motion.li>
               ))}
             </ul>
@@ -261,7 +261,7 @@ export default function PartnerShowcase({ addToRefs }: PartnerShowcaseProps) {
                   transition={{ duration: 0.3, delay: index * 0.1 }}
                 >
                   <IconCircleDashedCheck color='#FF5722' className='p-1'/>
-                  <span className="text-xs text-gray-700">{feature}</span>
+                  <span className="text-sm text-gray-700">{feature}</span>
               </motion.li>
               ))}
             </ul>
@@ -278,7 +278,7 @@ export default function PartnerShowcase({ addToRefs }: PartnerShowcaseProps) {
                   transition={{ duration: 0.3, delay: index * 0.1 }}
                 >
                   <IconCircleDashedCheck color='#FF5722' className='p-1'/>
-                  <span className="text-xs text-gray-700">{feature}</span>
+                  <span className="text-sm text-gray-700">{feature}</span>
               </motion.li>
               ))}
             </ul>

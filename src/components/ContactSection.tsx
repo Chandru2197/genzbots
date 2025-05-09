@@ -25,10 +25,10 @@ import { Search } from "lucide-react";
 const contactInfo = [
   {
     icon: <IconMail size={28} className="text-orange-500" />,
-    label: "Chat to us",
+    label: "Email us",
     description: "Chat with our team to help.",
-    value: "exmple@gmail.com",
-    link: "mailto:exmple@gmail.com",
+    value: "sales@genzbots.com",
+    link: "mailto:sales@genzbots.com",
   },
   // {
   //   icon: <IconMapPin size={28} className="text-orange-500" />,
@@ -41,8 +41,8 @@ const contactInfo = [
     icon: <IconPhone size={28} className="text-orange-500" />,
     label: "Call us",
     description: "Monday to Friday.",
-    value: "+158 996 888",
-    link: "tel:+158996888",
+    value: "+1 (508) 501 6411",
+    link: "tel:+1 (508) 501 6411",
   },
 ];
 
@@ -76,7 +76,7 @@ const ProjectTimelineList=[
 export default function ContactSection() {
   const [consent, setConsent] = useState(false);
   const [phone, setPhone] = useState("");
-  const [selectedCountry, setSelectedCountry] = useState("");
+  const [selectedCountry, setSelectedCountry] = useState("IN");
   const [searchQuery, setSearchQuery] = useState("");
 
   const countries = [
@@ -138,6 +138,19 @@ export default function ContactSection() {
 
   const handleCountryChange = (value: string) => {
     setSelectedCountry(value);
+    // Update phone input with new country
+    const phoneWithoutCode = phone.replace(/^\+\d+/, '');
+    setPhone(phoneWithoutCode);
+  };
+
+  // Handle phone change with country code
+  const handlePhoneChange = (value: string, country: any) => {
+    setPhone(value);
+    // Find the matching country code from our countries array
+    const countryCode = countries.find(
+      c => c.value.toLowerCase() === country.countryCode.toLowerCase()
+    )?.value || selectedCountry;
+    setSelectedCountry(countryCode);
   };
 
   // const SelectItem = React.forwardRef<HTMLDivElement, Select.SelectItemProps>(
@@ -202,6 +215,22 @@ export default function ContactSection() {
                   <span className="text-gray-800">
                     Fast, friendly responses
                   </span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <span className="bg-blue-100 text-blue-600 rounded-full p-2">
+                    <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                      <path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
+                  </span>
+                  <span className="text-label font-label text-gray-800">Expert advice & support</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <span className="bg-green-100 text-green-600 rounded-full p-2">
+                    <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                      <path d="M12 8c-1.657 0-3 1.343-3 3 0 1.306.835 2.417 2 2.83V18h2v-4.17c1.165-.413 2-1.524 2-2.83 0-1.657-1.343-3-3-3z"/>
+                    </svg>
+                  </span>
+                  <span className="text-label font-label text-gray-800">Free consultation</span>
                 </div>
               </div>
             </div>
@@ -287,9 +316,11 @@ export default function ContactSection() {
                   <label className="block font-medium text-gray-700 mb-1">
                     Country
                   </label>
-                  <Select value={selectedCountry} onValueChange={setSelectedCountry}>
+                  <Select value={selectedCountry} onValueChange={handleCountryChange}>
                     <SelectTrigger className="w-full">
-                      <SelectValue placeholder="Select a country" />
+                      <SelectValue>
+                        {countries.find(c => c.value === selectedCountry)?.text || "Select a country"}
+                      </SelectValue>
                     </SelectTrigger>
                     <SelectContent>
                       <div className="sticky top-0 bg-white p-2">
@@ -327,13 +358,13 @@ export default function ContactSection() {
                     Phone number <span className="text-orange-500">*</span>
                   </label>
                   <PhoneInput
-                    country={"in"}
+                    country={selectedCountry.toLowerCase()}
                     value={phone}
-                    onChange={setPhone}
+                    onChange={handlePhoneChange}
                     inputStyle={{
                       width: "100%",
                       padding: "20px 0px",
-                      borderRadius: "8px",
+                      borderRadius: "8px", 
                       border: "1px solid #d1d5db",
                       outline: "none",
                       transition: "border-color 0.2s ease-in-out",
@@ -343,6 +374,7 @@ export default function ContactSection() {
                     dropdownClass="!rounded-lg !shadow-lg !bg-white"
                     containerClass="!w-full"
                     enableSearch
+                    countryCodeEditable={true}
                     inputProps={{
                       name: "phone",
                       required: true,
