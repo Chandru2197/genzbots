@@ -127,7 +127,7 @@ export default function SolutionsShowcase({ addToRefs }: SolutionsShowcaseProps)
   const activeIndex = solutions.findIndex(s => s.id === activeTab);
 
   return (
-    <section id="solutions" className="py-0 min-h-screen flex items-center">
+    <section id="solutions" className="py-0 min-h-screen flex items-center mt-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative w-full">
         {/* Decorative background/image with parallax (optional) */}
         {/* <motion.div
@@ -162,7 +162,7 @@ export default function SolutionsShowcase({ addToRefs }: SolutionsShowcaseProps)
         </motion.div>
 
         {/* Tabs Navigation */}
-        <div className="w-full max-w-7xl mx-auto mb-12">
+        <div className="w-full max-w-7xl mx-auto mb-1">
           <div className="flex justify-between items-center w-full">
             {solutions.map((solution, index) => (
               <button

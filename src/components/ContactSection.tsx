@@ -291,7 +291,8 @@ export default function ContactSection() {
                 </div>
                 <div>
                   <label className="block font-medium text-gray-700 mb-1">
-                    Last name <span className="text-orange-500">*</span>
+                    Last name 
+                    {/* <span className="text-orange-500">*</span> */}
                   </label>
                   <input
                     required
