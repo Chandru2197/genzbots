@@ -127,7 +127,7 @@ export default function SolutionsShowcase({ addToRefs }: SolutionsShowcaseProps)
   const activeIndex = solutions.findIndex(s => s.id === activeTab);
 
   return (
-    <section id="solutions" className="py-0 min-h-screen flex items-center mt-8">
+    <section id="solutions" className="py-0 flex items-center mt-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative w-full">
         {/* Decorative background/image with parallax (optional) */}
         {/* <motion.div
@@ -186,7 +186,7 @@ export default function SolutionsShowcase({ addToRefs }: SolutionsShowcaseProps)
       
         {/* Content Section */}
         <div className="relative z-10 mb-10">
-          <div className={`grid grid-cols-1 md:grid-cols-2 gap-4 place-items-center min-h-screen`}>
+          <div className={`grid grid-cols-1 md:grid-cols-2 gap-4 place-items-center`}>
             {activeIndex % 2 === 0 ? (
               <>
                 {/* Image Side */}
