@@ -185,7 +185,7 @@ export default function SolutionsShowcase({ addToRefs }: SolutionsShowcaseProps)
 
       
         {/* Content Section */}
-        <div className="relative z-10 mb-10">
+        <div className="relative z-10 px-6 py-12">
           <div className={`grid grid-cols-1 md:grid-cols-2 gap-4 place-items-center`}>
             {activeIndex % 2 === 0 ? (
               <>

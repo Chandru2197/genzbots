@@ -75,7 +75,7 @@ export default function Home() {
       <SectionWrapper>
         <AboutSection addToRefs={addToRefs} />
       </SectionWrapper>
-      <ContactSection />
+      <ContactSection/>
       <Footer />
     </main>
   );
