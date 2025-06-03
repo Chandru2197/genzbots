@@ -60,7 +60,9 @@ export default function Home() {
       <SectionWrapper isAlternate>
         <AutomationCards/>
       </SectionWrapper>
-      <SolutionsShowcase addToRefs={addToRefs} />
+      {/* <SectionWrapper> */}
+        <SolutionsShowcase addToRefs={addToRefs} />
+      {/* </SectionWrapper> */}
       <SectionWrapper isAlternate>
         <ProjectsCarousel addToRefs={addToRefs} />
       </SectionWrapper>
@@ -73,7 +75,7 @@ export default function Home() {
       <SectionWrapper>
         <AboutSection addToRefs={addToRefs} />
       </SectionWrapper>
-      <ContactSection />
+      <ContactSection/>
       <Footer />
     </main>
   );

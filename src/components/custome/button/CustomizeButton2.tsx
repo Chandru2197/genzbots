@@ -1,15 +1,29 @@
+import Link from 'next/link';
 import React from 'react';
 import styled from 'styled-components';
 
 const CustomizeButton2 = ({title, href}:any) => {
   return (
     <StyledWrapper>
-      <button suppressHydrationWarning>
+      {href ? (
+        <Link
+        href={href}
+        className="text-menu font-medium transition-colors duration-200 text-[var(--color-primary-dark)] hover:text-[var(--color-secondary)] cursor-pointer"
+      >
+        <button>
+      <span className="button-text" data-text={title}>{title}</span>
+        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+        </svg>
+        </button>
+      </Link>) : (
+      <button>
         <span className="button-text" data-text={title}>{title}</span>
         <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
           <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
         </svg>
       </button>
+      )}
     </StyledWrapper>
   );
 }

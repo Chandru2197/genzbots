@@ -176,7 +176,7 @@ export default function ContactSection() {
 
   return (
     <ParallaxProvider>
-      <section className="relative py-20 bg-gradient-to-br from-blue-50 to-orange-50 overflow-hidden">
+      <section id="contact" className="relative py-20 bg-gradient-to-br from-blue-50 to-orange-50 overflow-hidden">
         <Parallax speed={-20}>
           <div className="absolute -top-32 -left-40 w-96 h-96 bg-orange-400 bg-opacity-20 rounded-full blur-3xl z-0" />
         </Parallax>
@@ -291,7 +291,8 @@ export default function ContactSection() {
                 </div>
                 <div>
                   <label className="block font-medium text-gray-700 mb-1">
-                    Last name <span className="text-orange-500">*</span>
+                    Last name 
+                    {/* <span className="text-orange-500">*</span> */}
                   </label>
                   <input
                     required
