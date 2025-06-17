@@ -28,28 +28,28 @@ export default function TestimonialsSection({ addToRefs }: TestimonialsSectionPr
   const testimonials: Testimonial[] = [
     {
       name: "Michael Chen",
-      position: "CTO, FinanceHub",
+      position: "CTO",
       testimonial: "The custom automation solution developed by GenZBot has been a game-changer for our finance operations. We've seen significant improvements in efficiency and data accuracy.",
       avatar: "bg-[#C8F7D0]",
       initials: "MC"
     },
     {
       name: "Emily Rodriguez",
-      position: "Director of Marketing, BrandX",
+      position: "Director of Marketing",
       testimonial: "Working with GenZBot to automate our marketing workflows was one of the best decisions we made. Their expertise and innovative approach delivered results beyond our expectations.",
       avatar: "bg-[#E9D5FF]",
       initials: "ER"
     },
     {
       name: "David Smith",
-      position: "CEO, InnovateNow",
+      position: "CEO",
       testimonial: "The implementation of GenZBot's automation solutions has revolutionized our operational efficiency. Their expertise and dedication to excellence are truly remarkable.",
       avatar: "bg-[#FFE4C8]",
       initials: "DS"
     },
     {
       name: "Lisa Wong",
-      position: "Head of Operations, TechGrowth",
+      position: "Head of Operations",
       testimonial: "GenZBot's solutions have helped us scale our operations seamlessly. Their team's technical expertise and customer support are outstanding.",
       avatar: "bg-[#FFD5D5]",
       initials: "LW"
