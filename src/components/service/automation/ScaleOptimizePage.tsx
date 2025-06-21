@@ -622,7 +622,7 @@ const ScaleOptimizePage: React.FC = () => {
               <BarChart3 className="w-5 h-5 mr-2" />
               Schedule Health Check
             </Button>
-            <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-emerald-600">
+            <Button size="lg" variant="outline" className="border-white text-white bg-transparent hover:bg-white hover:text-emerald-600">
               <Lightbulb className="w-5 h-5 mr-2" />
               Suggest New Automation
             </Button>

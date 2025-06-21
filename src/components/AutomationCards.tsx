@@ -107,7 +107,8 @@ const AutomationCard = ({
           {servicePath && (
             <Link href={servicePath} className="mt-4 block">
               <button
-                className="w-full py-3 px-4 rounded-md text-white bg-[var(--color-secondary)] hover:bg-[var(--color-secondary-dark)] transition-colors duration-300"
+                // className="w-full py-3 px-4 rounded-md text-white bg-[var(--color-secondary)] hover:bg-[var(--color-secondary-dark)] transition-colors duration-300"
+                className="text-btn font-btn w-full bg-[var(--color-secondary)] text-white text-center px-4 py-2 rounded-none font-medium transition-all duration-300 inline-flex items-center justify-center transform hover:bg-white hover:text-[var(--color-secondary)] hover:border-[var(--color-secondary)] border-2 border-transparent cursor-pointer"
               >
                 Learn More
               </button>

@@ -66,7 +66,7 @@ export default function Navbar({ addToRefs }: NavbarProps) {
       { label: 'For Healthcare', href: '#healthcare' },
       { label: 'For Finance', href: '#finance' }
     ]},
-    { label: 'About', href: '#about' },
+    { label: 'About', href: '/about' },
     { label: 'Blog', href: '#blog' },
     { label: 'Contact', href: '#contact' }
   ];
