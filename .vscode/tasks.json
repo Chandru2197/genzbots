@@ -1,0 +1,11 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Install shadcn/ui",
+			"type": "shell",
+			"command": "npx shadcn-ui@latest init && npx shadcn-ui@latest add card badge button tabs progress",
+			"group": "build"
+		}
+	]
+}

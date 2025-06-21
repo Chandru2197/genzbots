@@ -15,6 +15,7 @@ import styled from 'styled-components';
 import GlassmorphismCard from './GlassmorphismCard';
 import AnimatedButton from "./custome/button/AnimatedButton";
 import Image from "next/image";
+import Link from 'next/link';
 
 interface AutomationCardProps {
   title: string;
@@ -23,6 +24,7 @@ interface AutomationCardProps {
   technologies?: string[];
   delay?: number;
   customImage?: string;
+  servicePath?: string;
 }
 
 const AutomationCard = ({
@@ -32,6 +34,7 @@ const AutomationCard = ({
   technologies = [],
   delay = 0,
   customImage,
+  servicePath,
 }: AutomationCardProps) => {
   const [isHovered, setIsHovered] = useState(false);
   const cardRef = useRef<HTMLDivElement>(null);
@@ -100,27 +103,16 @@ const AutomationCard = ({
             </div>
           </div>
           
-          {/* Button */}
-          <div className="mt-6">
-            <button
-              className="group relative w-full py-2 px-4 rounded-none flex items-center justify-center transition-all duration-300 bg-[var(--color-secondary)] text-white border-2 border-transparent hover:bg-white hover:text-[var(--color-secondary)] hover:border-[var(--color-secondary)] cursor-pointer"
-            >
-              Learn more
-              <svg
-                className="w-4 h-4 ml-2 transition-transform duration-300 group-hover:translate-x-1"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
+          {/* Learn More Button */}
+          {servicePath && (
+            <Link href={servicePath} className="mt-4 block">
+              <button
+                className="w-full py-3 px-4 rounded-md text-white bg-[var(--color-secondary)] hover:bg-[var(--color-secondary-dark)] transition-colors duration-300"
               >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M14 5l7 7m0 0l-7 7m7-7H3"
-                />
-              </svg>
-            </button>
-          </div>
+                Learn More
+              </button>
+            </Link>
+          )}
         </div>
       </GlassmorphismCard>
     </motion.div>
@@ -144,6 +136,7 @@ export default function AutomationCards({ addToRefs }: { addToRefs?: (el: HTMLEl
       icon: Search,
       customImage: "/assets/images/customer-service.png",
       technologies: ["Process audit", "ROI estimation","Bot recommendation"],
+      servicePath: "/services/discovery-call"
     },
     {
       title: "Bot Blueprint (48 hrs)",
@@ -152,6 +145,7 @@ export default function AutomationCards({ addToRefs }: { addToRefs?: (el: HTMLEl
       icon: Lightbulb,
       customImage: "/assets/images/prototype.png",
       technologies: ["Custom workflow diagram", "Timeline & pricing","Integration checklist"],
+      servicePath: "/services/bot-blueprint"
     },
     {
       title: "Build & Test (1-3 weeks)",
@@ -159,6 +153,7 @@ export default function AutomationCards({ addToRefs }: { addToRefs?: (el: HTMLEl
       icon: Code,
       customImage: "/assets/images/quality-control.png",
       technologies: ["Develop in agile sprints", "Share weekly demo videos", "Train your team via Discord"],
+      servicePath: "/services/build-and-test"
     },
     {
       title: "Hypercare Launch (2 weeks)",
@@ -167,6 +162,7 @@ export default function AutomationCards({ addToRefs }: { addToRefs?: (el: HTMLEl
       icon: Rocket,
       customImage: "/assets/images/healthcare.png",
       technologies: ["24/7 priority support", "Performance analytics",'3 free tweaks'],
+      servicePath: "/services/time-liberation"
     },
     {
       title: "Scale & Optimize (Ongoing)",
@@ -179,6 +175,7 @@ export default function AutomationCards({ addToRefs }: { addToRefs?: (el: HTMLEl
         "Provide quarterly health checks",
         "Celebrate your time savings!"
       ],
+      servicePath: "/services/hyper-care"
     },
     {
       title: "Contact Us",
@@ -187,6 +184,7 @@ export default function AutomationCards({ addToRefs }: { addToRefs?: (el: HTMLEl
       customImage: "/assets/images/operator.png",
       icon:MessageSquare,
       technologies: ["AI/ML Integration", "Custom Solutions"],
+      servicePath: "/contactus"
     },
   ];
 
@@ -223,6 +221,8 @@ export default function AutomationCards({ addToRefs }: { addToRefs?: (el: HTMLEl
               customImage={service.customImage}
               technologies={service.technologies}
               delay={index}
+              servicePath={service.servicePath}
+              // servicePath={`/services/${service.title.toLowerCase().replace(/ /g, "-")}`}
             />
           ))}
         </div>
