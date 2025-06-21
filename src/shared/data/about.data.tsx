@@ -642,6 +642,7 @@ export const contactAbout: ContactProps = {
       {
         label: 'Have you read our privacy policy?',
         value: '',
+        name: 'privacyPolicy',
       },
     ],
     btn: {

@@ -10,7 +10,7 @@ import { useRouter } from 'next/router';
 
 const ScaleOptimizePage: React.FC = () => {
   const router = useRouter();
-  const [selectedOpportunity, setSelectedOpportunity] = useState(null);
+  const [selectedOpportunity, setSelectedOpportunity] = useState<number | null>(null);
   const [activeService, setActiveService] = useState(null);
 
   const ongoingServices = [
@@ -261,7 +261,7 @@ const ScaleOptimizePage: React.FC = () => {
       {/* Hero Section */}
       <div className="relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-r from-green-600 via-emerald-600 to-green-700 opacity-90"></div>
-        <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="%23ffffff" fill-opacity="0.1"%3E%3Cpath d="M20 20c0 11.046-8.954 20-20 20s-20-8.954-20-20 8.954-20 20-20 20 8.954 20 20z"/%3E%3C/g%3E%3C/svg%3E')] opacity-20"></div>
+        <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width=&quot;60&quot; height=&quot;60&quot; viewBox=&quot;0 0 60 60&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;%3E%3Cg fill=&quot;%23ffffff&quot; fill-opacity=&quot;0.1&quot;%3E%3Cpath d=&quot;M20 20c0 11.046-8.954 20-20 20s-20-8.954-20-20 8.954-20 20-20 20 8.954 20 20z&quot;/%3E%3C/g%3E%3C/svg%3E')] opacity-20"></div>
         
         <div className="relative max-w-7xl mx-auto px-4 py-20">
           <Button variant="ghost" className="text-green-200 hover:text-white mb-6 p-0" onClick={() => router.push('/') }>
@@ -349,10 +349,9 @@ const ScaleOptimizePage: React.FC = () => {
                   Continuous support and optimization to maximize your automation investment and drive ongoing success.
                 </p>
               </div>
-              
               <div className="grid md:grid-cols-2 gap-8">
-              {quarterlyReviews.map((review, index) => (
-                <Card key={index} className="border-0 shadow-lg overflow-hidden">
+                {quarterlyReviews.map((review, index) => (
+                  <Card key={index} className="border-0 shadow-lg overflow-hidden">
                   <CardHeader>
                     <div className="flex items-center justify-between">
                       <CardTitle className="text-xl">{review.quarter}</CardTitle>
@@ -400,179 +399,15 @@ const ScaleOptimizePage: React.FC = () => {
                     </div>
                   </CardContent>
                 </Card>
-              ))}
-            </div>
-
-            <Alert className="border-emerald-200 bg-emerald-50">
-              <Calendar className="h-4 w-4" />
-              <AlertDescription className="text-emerald-800">
-                <strong>Next Review:</strong> Q4 2024 health check scheduled for December 15th. 
-                We'll analyze your current performance and identify new optimization opportunities for the coming year.
-              </AlertDescription>
-            </Alert>
-          </TabsContent>
-        </Tabs>
-      </div>
-
-      {/* CTA Section */}
-      <div className="relative overflow-hidden bg-gradient-to-r from-emerald-600 via-teal-600 to-green-700 mt-20">
-        <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="%23ffffff" fill-opacity="0.1"%3E%3Cpath d="M20 20c0 11.046-8.954 20-20 20s-20-8.954-20-20 8.954-20 20-20 20 8.954 20 20z"/%3E%3C/g%3E%3C/svg%3E')] opacity-20"></div>
-        <div className="relative max-w-7xl mx-auto px-4 py-16 text-center text-white">
-          <h2 className="text-4xl font-bold mb-6">Ready to Scale Your Success?</h2>
-          <p className="text-xl text-emerald-100 mb-8 max-w-3xl mx-auto">
-            Let's continue optimizing your automation systems and identify new opportunities for growth and efficiency.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" className="bg-white text-emerald-600 hover:bg-emerald-50 shadow-xl">
-              <BarChart3 className="w-5 h-5 mr-2" />
-              Schedule Health Check
-            </Button>
-            <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-emerald-600">
-              <Lightbulb className="w-5 h-5 mr-2" />
-              Suggest New Automation
-            </Button>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-};
-
-export default ScaleOptimizePage;d:grid-cols-2 lg:grid-cols-4 gap-6">
-                {ongoingServices.map((service, index) => (
-                  <Card 
-                    key={index} 
-                    className={`group border-0 shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 overflow-hidden cursor-pointer ${
-                      activeService === index ? 'ring-2 ring-emerald-500' : ''
-                    }`}
-                    onClick={() => setActiveService(activeService === index ? null : index)}
-                  >
-                    <div className={`h-2 bg-gradient-to-r ${service.color}`}></div>
-                    <CardHeader className="text-center">
-                      <div className={`w-16 h-16 bg-gradient-to-r ${service.color} rounded-2xl flex items-center justify-center text-white mx-auto mb-4 group-hover:scale-110 transition-transform`}>
-                        {service.icon}
-                      </div>
-                      <CardTitle className="text-lg">{service.title}</CardTitle>
-                      <CardDescription>{service.description}</CardDescription>
-                    </CardHeader>
-                    <CardContent>
-                      <div className="space-y-3">
-                        <Badge variant="outline" className="w-full justify-center">
-                          {service.frequency}
-                        </Badge>
-                        
-                        {activeService === index && (
-                          <div className="mt-4 space-y-2">
-                            <div className="text-sm font-semibold text-gray-800">Deliverables:</div>
-                            {service.deliverables.map((deliverable, dIndex) => (
-                              <div key={dIndex} className="flex items-center text-sm">
-                                <CheckCircle className="w-4 h-4 text-green-500 mr-2 flex-shrink-0" />
-                                <span className="text-gray-700">{deliverable}</span>
-                              </div>
-                            ))}
-                          </div>
-                        )}
-                      </div>
-                    </CardContent>
-                  </Card>
                 ))}
               </div>
-            </div>
-
-            {/* Success Metrics */}
-            <Card className="bg-gradient-to-r from-emerald-50 to-teal-100 border-0 overflow-hidden">
-              <CardHeader className="text-center">
-                <CardTitle className="text-3xl font-bold text-gray-800">Success Metrics</CardTitle>
-                <CardDescription className="text-lg">Tracking your automation journey and continuous improvements</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-                  {successMetrics.map((metric, index) => (
-                    <Card key={index} className="border-0 shadow-lg bg-white text-center">
-                      <CardHeader className="pb-4">
-                        <CardTitle className="text-lg">{metric.metric}</CardTitle>
-                        <div className="text-3xl font-bold text-emerald-600">{metric.current}</div>
-                        <Badge variant="secondary" className="bg-emerald-100 text-emerald-700">
-                          {metric.status}
-                        </Badge>
-                      </CardHeader>
-                      <CardContent>
-                        <div className="space-y-2 text-sm">
-                          <div className="flex justify-between">
-                            <span className="text-gray-600">Growth:</span>
-                            <span className="font-medium text-green-600">{metric.growth}</span>
-                          </div>
-                          <div className="flex justify-between">
-                            <span className="text-gray-600">Target:</span>
-                            <span className="font-medium">{metric.target}</span>
-                          </div>
-                          <Progress value={85} className="h-2 mt-3" />
-                        </div>
-                      </CardContent>
-                    </Card>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* Value Proposition */}
-            <div className="grid lg:grid-cols-2 gap-12 items-center">
-              <div>
-                <h2 className="text-3xl font-bold text-gray-800 mb-6">Why Continuous Optimization Matters</h2>
-                <div className="space-y-4">
-                  <div className="flex items-start">
-                    <CheckCircle className="w-6 h-6 text-emerald-500 mr-4 flex-shrink-0 mt-1" />
-                    <div>
-                      <h3 className="font-semibold text-gray-800 mb-1">Maximize ROI</h3>
-                      <p className="text-gray-600 text-sm">Continuous improvements ensure you get the maximum return on your automation investment</p>
-                    </div>
-                  </div>
-                  <div className="flex items-start">
-                    <CheckCircle className="w-6 h-6 text-emerald-500 mr-4 flex-shrink-0 mt-1" />
-                    <div>
-                      <h3 className="font-semibold text-gray-800 mb-1">Stay Competitive</h3>
-                      <p className="text-gray-600 text-sm">Regular optimization keeps your processes ahead of industry standards</p>
-                    </div>
-                  </div>
-                  <div className="flex items-start">
-                    <CheckCircle className="w-6 h-6 text-emerald-500 mr-4 flex-shrink-0 mt-1" />
-                    <div>
-                      <h3 className="font-semibold text-gray-800 mb-1">Identify New Opportunities</h3>
-                      <p className="text-gray-600 text-sm">Proactive analysis reveals additional automation possibilities as your business grows</p>
-                    </div>
-                  </div>
-                  <div className="flex items-start">
-                    <CheckCircle className="w-6 h-6 text-emerald-500 mr-4 flex-shrink-0 mt-1" />
-                    <div>
-                      <h3 className="font-semibold text-gray-800 mb-1">Future-Proof Technology</h3>
-                      <p className="text-gray-600 text-sm">Regular updates ensure your automation stays current with latest technologies</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <Card className="bg-white border-0 shadow-lg">
-                <CardHeader>
-                  <CardTitle className="text-xl">Typical Growth Trajectory</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="space-y-4">
-                    {[
-                      { period: 'Month 1-3', achievement: 'Initial 15-20 hrs/week saved', color: 'bg-blue-500' },
-                      { period: 'Month 4-6', achievement: '25-30 hrs/week with optimizations', color: 'bg-green-500' },
-                      { period: 'Month 7-12', achievement: '35+ hrs/week with new automations', color: 'bg-emerald-500' },
-                      { period: 'Year 2+', achievement: '50+ hrs/week with AI enhancements', color: 'bg-teal-500' }
-                    ].map((stage, index) => (
-                      <div key={index} className="flex items-center">
-                        <div className={`w-3 h-3 rounded-full ${stage.color} mr-4`}></div>
-                        <div className="flex-1">
-                          <div className="font-semibold text-gray-800 text-sm">{stage.period}</div>
-                          <div className="text-gray-600 text-xs">{stage.achievement}</div>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
+              <Alert className="border-emerald-200 bg-emerald-50">
+                <Calendar className="h-4 w-4" />
+                <AlertDescription className="text-emerald-800">
+                  <strong>Next Review:</strong> Q4 2024 health check scheduled for December 15th. 
+                  We'll analyze your current performance and identify new optimization opportunities for the coming year.
+                </AlertDescription>
+              </Alert>
             </div>
           </TabsContent>
 
@@ -776,7 +611,7 @@ export default ScaleOptimizePage;d:grid-cols-2 lg:grid-cols-4 gap-6">
 
       {/* CTA Section */}
       <div className="relative overflow-hidden bg-gradient-to-r from-emerald-600 via-teal-600 to-green-700 mt-20">
-        <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="%23ffffff" fill-opacity="0.1"%3E%3Cpath d="M20 20c0 11.046-8.954 20-20 20s-20-8.954-20-20 8.954-20 20-20 20 8.954 20 20z"/%3E%3C/g%3E%3C/svg%3E')] opacity-20"></div>
+        <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width=&quot;60&quot; height=&quot;60&quot; viewBox=&quot;0 0 60 60&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;%3E%3Cg fill=&quot;%23ffffff&quot; fill-opacity=&quot;0.1&quot;%3E%3Cpath d=&quot;M20 20c0 11.046-8.954 20-20 20s-20-8.954-20-20 8.954-20 20-20 20 8.954 20 20z&quot;/%3E%3C/g%3E%3C/svg%3E')] opacity-20"></div>
         <div className="relative max-w-7xl mx-auto px-4 py-16 text-center text-white">
           <h2 className="text-4xl font-bold mb-6">Ready to Scale Your Success?</h2>
           <p className="text-xl text-emerald-100 mb-8 max-w-3xl mx-auto">

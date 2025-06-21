@@ -159,7 +159,6 @@ export const contact2Contact: ContactProps = {
         name: 'firstName',
         autocomplete: 'given-name',
         placeholder: 'Enter your first name',
-        required: true,
       },
       {
         type: 'text',
@@ -200,7 +199,6 @@ export const contact2Contact: ContactProps = {
         name: 'phoneNumber',
         autocomplete: 'tel',
         placeholder: '+91',
-        required: true,
       },
       {
         type: 'email',
@@ -208,38 +206,6 @@ export const contact2Contact: ContactProps = {
         name: 'businessEmail',
         autocomplete: 'email',
         placeholder: 'Enter your business email',
-        required: true,
-      },
-    ],
-    checkboxGroups: [
-      {
-        label: 'Process Automation',
-        name: 'processAutomation',
-        options: [
-          { value: 'invoice', label: 'Invoice Processing Automation' },
-          { value: 'hr', label: 'HR Onboarding/Offboarding Bots' },
-          { value: 'dataEntry', label: 'Customer Data Entry Automation' },
-          { value: 'erp', label: 'ERP/CRM Integration Bots' },
-        ],
-      },
-      {
-        label: 'Advanced Capabilities',
-        name: 'advancedCapabilities',
-        options: [
-          { value: 'ai', label: 'AI + RPA (Chatbots/NLP/OCR)' },
-          { value: 'legacy', label: 'Legacy System Automation' },
-          { value: 'workflow', label: 'Cross-Platform Workflow Bots' },
-        ],
-      },
-      {
-        label: 'Implementation Services',
-        name: 'implementationServices',
-        options: [
-          { value: 'endToEnd', label: 'End-to-End Implementation' },
-          { value: 'managed', label: 'Managed Automation Services' },
-          { value: 'training', label: 'Training for In-House Teams' },
-          { value: 'custom', label: 'Other/Custom Bot' },
-        ],
       },
     ],
     radioBtns: {

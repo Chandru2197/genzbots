@@ -60,6 +60,8 @@ type Input = {
   value?: string;
   autocomplete?: string;
   placeholder: string; // made required
+  options?: { value: string; label: string }[];
+  defaultValue?: string;
 };
 
 type Textarea = {
