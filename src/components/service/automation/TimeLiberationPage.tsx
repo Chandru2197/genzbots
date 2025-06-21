@@ -7,8 +7,10 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '../../ui/tabs';
 import { Progress } from '../../ui/progress';
 import { Alert, AlertDescription } from '../../ui/alert';
 import DotPatternCircle from '../../ui/DotPatternCircle';
+import { useRouter } from 'next/router';
 
 export default function TimeLiberation() {
+  const router = useRouter();
   const [activeProcess, setActiveProcess] = useState<number | null>(null);
   const [selectedPlan, setSelectedPlan] = useState('professional');
 
@@ -263,7 +265,7 @@ export default function TimeLiberation() {
         <DotPatternCircle className="opacity-20" />
         
         <div className="relative max-w-7xl mx-auto px-4 py-20">
-          <Button variant="ghost" className="text-blue-200 hover:text-white mb-6 p-0">
+          <Button variant="ghost" className="text-blue-200 hover:text-white mb-6 p-0" onClick={() => router.push('/') }>
             <ArrowLeft className="w-4 h-4 mr-2" />
             Back to Services
           </Button>
