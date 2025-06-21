@@ -50,16 +50,16 @@ type LinkOrButton = {
 
 type Button = {
   title: string;
-  type: 'button' | 'submit' | 'reset';
+  type: 'button' | 'submit';
 };
 
 type Input = {
   type: string;
-  label?: string;
+  label: string;
+  name: string; // made required
   value?: string;
-  name?: string;
   autocomplete?: string;
-  placeholder?: string;
+  placeholder: string; // made required
 };
 
 type Textarea = {
@@ -73,14 +73,17 @@ type Textarea = {
 type Checkbox = {
   label: string;
   value: string;
+  name: string;
 };
 
 type Radio = {
   label: string;
+  value: string;
 };
 
-type RadioBtn = {
-  label?: string;
+type RadioBtnGroup = {
+  label: string;
+  name: string;
   radios: Array<Radio>;
 };
 
@@ -94,7 +97,7 @@ type FormProps = {
   title?: string;
   description?: string;
   inputs: Array<Input>;
-  radioBtns?: RadioBtn;
+  radioBtns?: RadioBtnGroup;
   textarea?: Textarea;
   checkboxes?: Array<Checkbox>;
   btn: Button;

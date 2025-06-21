@@ -22,15 +22,29 @@ import {
   Infinity
 } from 'lucide-react';
 
+// Define types for Stats component props
+interface StatItem {
+  label: string;
+  value: number;
+  suffix?: string;
+  icon?: React.ElementType;
+}
+
+interface StatsProps {
+  items: StatItem[];
+  id?: string;
+  hasBackground?: boolean;
+}
+
 // Enhanced Stats Component with Advanced Animations
-const Stats = ({ items, id, hasBackground = false }) => {
+const Stats: React.FC<StatsProps> = ({ items, id, hasBackground = false }) => {
   const [visibleStats, setVisibleStats] = useState(false);
-  const [animatedStats, setAnimatedStats] = useState([]);
-  const statsRef = useRef(null);
+  const [animatedStats, setAnimatedStats] = useState<number[]>([]);
+  const statsRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
-      ([entry]) => {
+      ([entry]: IntersectionObserverEntry[]) => {
         if (entry.isIntersecting) {
           setVisibleStats(true);
         }
@@ -45,14 +59,14 @@ const Stats = ({ items, id, hasBackground = false }) => {
     return () => observer.disconnect();
   }, []);
 
-  const AnimatedCounter = ({ end, duration = 2500, suffix = '' }) => {
+  const AnimatedCounter: React.FC<{ end: number; duration?: number; suffix?: string }> = ({ end, duration = 2500, suffix = '' }) => {
     const [count, setCount] = useState(0);
 
     useEffect(() => {
       if (!visibleStats) return;
 
-      let startTime;
-      const animate = (currentTime) => {
+      let startTime: number | undefined;
+      const animate = (currentTime: number) => {
         if (!startTime) startTime = currentTime;
         const progress = Math.min((currentTime - startTime) / duration, 1);
         
@@ -76,7 +90,7 @@ const Stats = ({ items, id, hasBackground = false }) => {
     );
   };
 
-  const iconMap = {
+  const iconMap: Record<string, { icon: React.ElementType; color: string }> = {
     'Workflows Automated': { icon: Zap, color: 'from-blue-500 to-cyan-400' },
     'Client Retention Rate': { icon: Award, color: 'from-amber-500 to-orange-400' },
     'RPA Specialists': { icon: Users, color: 'from-purple-500 to-pink-400' },
@@ -119,10 +133,9 @@ const Stats = ({ items, id, hasBackground = false }) => {
         
         {/* Stats Grid */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
-          {items.map(({ title, description }, index) => {
-            const iconData = iconMap[description] || { icon: Award, color: 'from-blue-500 to-indigo-500' };
+          {items.map(({ label, value, suffix, icon }, index) => {
+            const iconData = iconMap[label] || { icon: Award, color: 'from-blue-500 to-indigo-500' };
             const IconComponent = iconData.icon;
-            
             return (
               <div
                 key={`stat-${index}`}
@@ -162,8 +175,8 @@ const Stats = ({ items, id, hasBackground = false }) => {
                 <div className="mb-4">
                   <div className="text-5xl lg:text-6xl font-bold text-slate-800 mb-2">
                     <AnimatedCounter 
-                      end={title} 
-                      suffix={description === 'Client Retention Rate' ? '%' : '+'} 
+                      end={value} 
+                      suffix={suffix === 'Client Retention Rate' ? '%' : '+'} 
                     />
                   </div>
                   
@@ -172,7 +185,7 @@ const Stats = ({ items, id, hasBackground = false }) => {
                 
                 {/* Description */}
                 <p className="text-sm font-semibold uppercase tracking-widest text-slate-600 group-hover:text-blue-600 transition-colors duration-300">
-                  {description}
+                  {suffix}
                 </p>
               </div>
             );
@@ -205,11 +218,18 @@ const Stats = ({ items, id, hasBackground = false }) => {
 };
 
 // Premium Hero2 Component
-const Hero2 = ({ title, subtitle, tagline, callToAction, callToAction2, image }) => {
+const Hero2 = ({ title, subtitle, tagline, callToAction, callToAction2, image }: {
+  title: string;
+  subtitle: string;
+  tagline?: string;
+  callToAction?: { text: string; href: string; targetBlank?: boolean };
+  callToAction2?: { text: string; href: string };
+  image?: { src: string; alt: string };
+}) => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   
   useEffect(() => {
-    const handleMouseMove = (e) => {
+    const handleMouseMove = (e: MouseEvent) => {
       setMousePosition({ x: e.clientX, y: e.clientY });
     };
     
@@ -465,11 +485,23 @@ const Hero2 = ({ title, subtitle, tagline, callToAction, callToAction2, image })
 };
 
 // Interactive Steps Component
-const Steps = ({ id, header, items, isImageDisplayed = true, image, isReversed = false, hasBackground = false }) => {
+const Steps = ({ id, header, items, isImageDisplayed = true, image, isReversed = false, hasBackground = false }: {
+  id: string;
+  header: { title: string; subtitle: string; tagline?: string };
+  items: { title: string; description: string }[];
+  isImageDisplayed?: boolean;
+  image?: { src: string; alt: string };
+  isReversed?: boolean;
+  hasBackground?: boolean;
+}) => {
   const [activeStep, setActiveStep] = useState(0);
-  const [hoveredStep, setHoveredStep] = useState(null);
+  const [hoveredStep, setHoveredStep] = useState<number | null>(null);
 
-  const Timeline = ({ items, defaultIcon, iconClass }) => (
+  const Timeline = ({ items, defaultIcon, iconClass }: {
+    items: { title: string; description: string }[];
+    defaultIcon: React.ElementType;
+    iconClass?: string;
+  }) => (
     <div className="relative">
       {/* Timeline Line */}
       <div className="absolute left-12 top-0 w-1 h-full bg-gradient-to-b from-blue-500 via-indigo-500 to-purple-600 rounded-full shadow-lg"></div>
@@ -566,7 +598,12 @@ const Steps = ({ id, header, items, isImageDisplayed = true, image, isReversed =
     </div>
   );
 
-  const Headline = ({ header, containerClass, titleClass, subtitleClass }) => (
+  const Headline = ({ header, containerClass, titleClass, subtitleClass }: {
+    header: { tagline?: string; title?: string; subtitle?: string };
+    containerClass?: string;
+    titleClass?: string;
+    subtitleClass?: string;
+  }) => (
     <div className={`mb-16 ${containerClass}`}>
       {header.tagline && (
         <div className="inline-flex items-center px-6 py-3 rounded-full bg-blue-100 text-blue-800 mb-8 border border-blue-200">
@@ -644,8 +681,15 @@ const Steps = ({ id, header, items, isImageDisplayed = true, image, isReversed =
 };
 
 // Premium Features4 Component
-const Features4 = ({ id, hasBackground, header, isAfterContent, columns = 1, items = [] }) => {
-  const [hoveredCard, setHoveredCard] = useState(null);
+const Features4 = ({ id, hasBackground, header, isAfterContent, columns = 1, items = [] }: {
+  id: string;
+  hasBackground?: boolean;
+  header?: { title?: string; subtitle?: string; tagline?: string };
+  isAfterContent?: boolean;
+  columns?: number;
+  items?: { title: string; description: string }[];
+}) => {
+  const [hoveredCard, setHoveredCard] = useState<number | null>(null);
 
   const valueIcons = {
     'Innovation-First Mindset': { icon: Lightbulb, color: 'from-purple-500 to-pink-500' },
@@ -696,7 +740,7 @@ const Features4 = ({ id, hasBackground, header, isAfterContent, columns = 1, ite
         {items.length > 0 && (
           <div className={`grid gap-8 ${columns === 2 ? 'md:grid-cols-2 lg:grid-cols-3' : 'grid-cols-1'}`}>
             {items.map((item, index) => {
-              const iconData = valueIcons[item.title] || { icon: User, color: 'from-blue-500 to-purple-500' };
+              const iconData = valueIcons[item.title as keyof typeof valueIcons] || { icon: User, color: 'from-blue-500 to-purple-500' };
               const IconComponent = iconData.icon;
               const isHovered = hoveredCard === index;
               
@@ -775,10 +819,10 @@ const AboutUsPage = () => {
   // GenZBots specific data
   const statsData = {
     items: [
-      { title: 100, description: 'Workflows Automated' },
-      { title: 95, description: 'Client Retention Rate' },
-      { title: 30, description: 'RPA Specialists' },
-      { title: 8, description: 'Industries Optimized' }
+      { label: 'Workflows Automated', value: 100, icon: Zap, suffix: '+' },
+      { label: 'Client Retention Rate', value: 95, icon: Award, suffix: '%' },
+      { label: 'RPA Specialists', value: 30, icon: Users },
+      { label: 'Industries Optimized', value: 8, icon: Building }
     ],
     id: 'stats-on-about',
     hasBackground: true
