@@ -27,6 +27,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { FeaturesProps } from '../../../shared/types';
 import Headline from '../common/Headline';
+import { Icon123 } from '@tabler/icons-react';
 
 const Features2 = ({ header, items, columns = 3, id }: FeaturesProps) => (
   <section className="relative mx-auto py-16 md:py-20 lg:py-24 bg-gray-100 dark:bg-gray-800" id="features2">
@@ -94,7 +95,7 @@ const Features2 = ({ header, items, columns = 3, id }: FeaturesProps) => (
               className="bg-white dark:bg-gray-700 p-8 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-600 hover:shadow-md transition-all duration-300 group"
             >
               <div className={`w-12 h-12 ${getIconBg(index)} rounded-xl flex items-center justify-center mb-6`}>
-                <Icon className={`w-6 h-6 ${getIconColor(index)}`} />
+                <Icon123 className={`w-6 h-6 ${getIconColor(index)}`} />
               </div>
               
               <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">

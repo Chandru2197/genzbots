@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { TrendingUp, CheckCircle, ArrowRight, Clock, BarChart3, MessageCircle, ArrowLeft, Star, Users, Zap, Calendar, Settings, Target, Phone, Lightbulb, Repeat, Growth, ChartBar, Cog } from 'lucide-react';
+import { TrendingUp, CheckCircle, ArrowRight, Clock, BarChart3, MessageCircle, ArrowLeft, Star, Users, Zap, Calendar, Settings, Target, Phone, Lightbulb, Repeat, ChartColumnIncreasing, ChartBar, Cog } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -39,7 +39,7 @@ const ScaleOptimizePage: React.FC = () => {
       deliverables: ['Speed improvements', 'Efficiency gains', 'Cost reductions']
     },
     {
-      icon: <Growth className="w-6 h-6" />,
+      icon: <ChartColumnIncreasing className="w-6 h-6" />,
       title: 'Time Savings Celebration',
       description: 'Track and celebrate your automation success milestones',
       color: 'from-purple-500 to-pink-500',

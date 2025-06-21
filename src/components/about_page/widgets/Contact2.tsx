@@ -20,6 +20,7 @@ import Form from '../common/Form';
 import Headline from '../common/Headline';
 import { ContactProps } from '../../../shared/types';
 import WidgetWrapper from '../common/WidgetWrapper';
+import { Icon123 } from '@tabler/icons-react';
 
 const Contact2 = ({ header, form, items, id, hasBackground = false }: ContactProps) => (
   <WidgetWrapper id={id ? id : ''} hasBackground={hasBackground} containerClass="max-w-7xl mx-auto">
@@ -50,7 +51,7 @@ const Contact2 = ({ header, form, items, id, hasBackground = false }: ContactPro
               >
                 <div className="flex-shrink-0">
                   <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg flex items-center justify-center">
-                    <Icon className="w-6 h-6 text-white" />
+                    <Icon123 className="w-6 h-6 text-white" />
                   </div>
                 </div>
                 <div>
