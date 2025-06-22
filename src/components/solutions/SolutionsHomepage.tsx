@@ -22,8 +22,9 @@ interface Solution {
   automations: string[];
   highlight: string;
   link?: string;
+  [key:string]: any; // Allow additional properties
   stats: {
-    accuracy: string;
+    accuracy?: string;
     clients?: string;
     satisfaction?: string;
     saved?: string;
@@ -365,7 +366,7 @@ const SolutionsHomePage: React.FC = () => {
         </div>
         
         <div className="grid lg:grid-cols-2 gap-10">
-          {solutions.map((solution, index) => (
+          {solutions.map((solution:any, index) => (
             <div 
               key={solution.id}
               className="group cursor-pointer transition-all duration-700 hover:shadow-3xl transform hover:-translate-y-4"
@@ -422,7 +423,7 @@ const SolutionsHomePage: React.FC = () => {
                   <div className="space-y-3">
                     <h4 className="text-lg font-semibold text-gray-800 mb-4">Key Features</h4>
                     <div className="grid grid-cols-1 gap-3">
-                      {solution.features.map((feature, featureIndex) => (
+                      {solution.features.map((feature:any, featureIndex:number) => (
                         <div key={featureIndex} className="flex items-center p-3 bg-white rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-all">
                           <CheckCircle className="w-5 h-5 text-green-500 mr-3 flex-shrink-0" />
                           <span className="text-gray-700 font-medium">{feature}</span>
@@ -433,7 +434,7 @@ const SolutionsHomePage: React.FC = () => {
 
                   {/* Stats Display */}
                   <div className="grid grid-cols-3 gap-4 pt-6 border-t border-gray-100">
-                    {Object.entries(solution.stats).map(([key, value], statIndex) => (
+                    {Object.entries(solution.stats).map(([key, value]:any, statIndex) => (
                       <div key={statIndex} className="text-center">
                         <div className="text-lg font-bold text-gray-900">{value}</div>
                         <div className="text-xs text-gray-500 capitalize">{key.replace(/([A-Z])/g, ' $1').trim()}</div>

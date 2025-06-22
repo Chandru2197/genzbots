@@ -491,7 +491,8 @@ const ProfitRescueKit: React.FC = () => {
                         : 'bg-white/80 hover:bg-white shadow-lg hover:shadow-xl hover:-translate-y-1'
                     }`}
                     style={{ 
-                      ringColor: selectedError === index ? error.color : 'transparent',
+                    //   ringColor: selectedError === index ? error.color : 'transparent',
+                    borderColor: selectedError === index ? error.color : 'transparent',
                       boxShadow: selectedError === index 
                         ? `0 15px 30px rgba(0,0,0,0.15), 0 0 0 4px ${error.color}20`
                         : '0 5px 15px rgba(0,0,0,0.1)'
