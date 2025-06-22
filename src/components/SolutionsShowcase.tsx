@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { useState, useRef, useEffect } from 'react';
 import { motion, useInView, AnimatePresence } from 'framer-motion';
 import { IconCircleDashedCheck } from '@tabler/icons-react';
+import { useRouter } from 'next/router';
 
 interface SolutionsShowcaseProps {
   addToRefs?: (el: HTMLElement | null) => void;
@@ -125,7 +126,8 @@ export default function SolutionsShowcase({ addToRefs }: SolutionsShowcaseProps)
 
   const activeSolution = getActiveSolution();
   const activeIndex = solutions.findIndex(s => s.id === activeTab);
-
+  
+  const router = useRouter();
   return (
     <section id="solutions" className="py-0 flex items-center mt-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative w-full">
@@ -258,6 +260,7 @@ export default function SolutionsShowcase({ addToRefs }: SolutionsShowcaseProps)
                     <div className="mt-6">
                       <button
                         className="w-auto group relative py-1 px-4 rounded-none flex items-center justify-center transition-all duration-300 bg-[var(--color-secondary)] text-white border-2 border-transparent hover:bg-white hover:text-[var(--color-secondary)] hover:border-[var(--color-secondary)] cursor-pointer shadow-lg hover:shadow-[0_0_20px_4px_rgba(255,87,34,0.3)] focus:ring-2 focus:ring-[#FF5722] focus:ring-offset-2"
+                        onClick={() => router.push('/solutions') }
                         >
                         {activeSolution.button_label}
                         <svg

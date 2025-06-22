@@ -4,6 +4,7 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { Button } from './ui/button';
 
 interface NavbarProps {
   addToRefs?: (el: HTMLElement | null) => void;
@@ -54,18 +55,23 @@ export default function Navbar({ addToRefs }: NavbarProps) {
 
   const menuItems: MenuItem[] = [
     { label: 'Home', href: '/' },
-    { label: 'Services', href: '#services', dropdown: [
-      { label: 'Process Automation', href: '#process-automation' },
-      { label: 'Data Integration', href: '#data-integration' },
-      { label: 'Custom Software', href: '#custom-software' },
-      { label: 'RPA Implementation', href: '#rpa' }
-    ]},
-    { label: 'Solutions', href: '#solutions', dropdown: [
-      { label: 'For Small Business', href: '#small-business' },
-      { label: 'For Enterprise', href: '#enterprise' },
-      { label: 'For Healthcare', href: '#healthcare' },
-      { label: 'For Finance', href: '#finance' }
-    ]},
+    { label: 'Services', href: '#services', 
+      dropdown: [
+        { label: 'Bot Blueprint', href: '/services/bot-blueprint' },
+        { label: 'Build & Test', href: '/services/build-and-test' },
+        { label: 'Discovery Call', href: '/services/discovery-call' },
+        { label: 'Hyper Care', href: '/services/hyper-care' },
+        { label: 'Scale & Optimize', href: '/services/scale-optimize' }
+      ]
+    },
+    { label: 'Solutions', href: '#solutions',
+      dropdown: [
+        { label: 'Time Liberation', href: '/solutions/time-liberation' },
+        { label: 'Growth Accelerator', href: '/solutions/growth-accelerator' },
+        { label: 'Profit Rescue', href: '/solutions/profit-rescue' },
+        { label: 'Custom Bot Development', href: '/solutions/custombot-development' }
+      ]
+    },
     { label: 'About', href: '/about' },
     { label: 'Blog', href: '#blog' },
     { label: 'Contact', href: '#contact' }
@@ -101,7 +107,8 @@ export default function Navbar({ addToRefs }: NavbarProps) {
               <div key={item.label} className="relative group">
                 {item.dropdown ? (
                   <>
-                    <button
+                    <Button
+                      variant={'ghost'}
                       data-dropdown
                       onClick={() => toggleDropdown(item.label)}
                       className={`text-menu font-medium transition-colors flex items-center cursor-pointer ${
@@ -127,7 +134,7 @@ export default function Navbar({ addToRefs }: NavbarProps) {
                           d="M19 9l-7 7-7-7"
                         />
                       </svg>
-                    </button>
+                    </Button>
                     <div
                       className={`absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-10 transform transition-all duration-200 origin-top-left ${
                         activeDropdown === item.label
