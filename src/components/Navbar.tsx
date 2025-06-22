@@ -5,6 +5,8 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Button } from './ui/button';
+import { serviceIcons } from './ui/lucide-icons';
+import { solutionIcons } from './ui/lucide-solution-icons';
 
 interface NavbarProps {
   addToRefs?: (el: HTMLElement | null) => void;
@@ -19,6 +21,15 @@ interface MenuItem {
   label: string;
   href: string;
   dropdown?: DropdownItem[];
+}
+
+// Helper for icon type safety
+function getServiceIcon(label: string) {
+  return (serviceIcons as Record<string, any>)[label] || serviceIcons['default'];
+}
+
+function getSolutionIcon(label: string) {
+  return (solutionIcons as Record<string, any>)[label] || solutionIcons['default'];
 }
 
 export default function Navbar({ addToRefs }: NavbarProps) {
@@ -107,8 +118,7 @@ export default function Navbar({ addToRefs }: NavbarProps) {
               <div key={item.label} className="relative group">
                 {item.dropdown ? (
                   <>
-                    <Button
-                      variant={'ghost'}
+                    <button
                       data-dropdown
                       onClick={() => toggleDropdown(item.label)}
                       className={`text-menu font-medium transition-colors flex items-center cursor-pointer ${
@@ -134,25 +144,174 @@ export default function Navbar({ addToRefs }: NavbarProps) {
                           d="M19 9l-7 7-7-7"
                         />
                       </svg>
-                    </Button>
-                    <div
-                      className={`absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-10 transform transition-all duration-200 origin-top-left ${
-                        activeDropdown === item.label
-                          ? 'opacity-100 scale-100'
-                          : 'opacity-0 scale-95 pointer-events-none'
-                      }`}
-                    >
-                      {item.dropdown.map((dropdownItem) => (
-                        <Link
-                          key={dropdownItem.label}
-                          href={dropdownItem.href}
-                          className="block px-4 py-2 text-menu font-desc text-gray-700 hover:bg-orange-50 hover:text-[var(--color-secondary)] transition-colors duration-200 cursor-pointer"
-                          onClick={() => setActiveDropdown(null)}
-                        >
-                          {dropdownItem.label}
-                        </Link>
-                      ))}
-                    </div>
+                    </button>
+                    {/* Enhanced Hero Dropdown for Services */}
+                    {item.label === 'Services' && activeDropdown === item.label && (
+                      <div className="fixed left-1/2 top-[4.5rem] z-[120] transform -translate-x-1/2 w-full max-w-xl md:max-w-2xl rounded-3xl shadow-2xl border-0 bg-gradient-to-br from-emerald-200/80 via-blue-100/60 to-white/90 p-0 overflow-x-auto transition-all duration-200 opacity-100 scale-100 visible backdrop-blur-xl"
+                        style={{ minWidth: '320px', maxWidth: '48vw' }}
+                      >
+                        <div className="flex">
+                          {/* Left Hero Section */}
+                          <div className="hidden md:flex flex-col items-center justify-center w-1/3 p-8 relative bg-gradient-to-br from-emerald-400/90 via-blue-200/70 to-blue-100/60 animate-fade-in">
+                            <div className="relative flex flex-col items-center">
+                              <div className="w-24 h-24 rounded-full bg-white/30 backdrop-blur-lg flex items-center justify-center shadow-emerald-200/40 shadow-2xl mb-4 animate-glow">
+                                <svg width="60" height="60" viewBox="0 0 60 60" fill="none"><ellipse cx="30" cy="30" rx="28" ry="28" fill="#10B981" fillOpacity="0.12"/><path d="M30 15L40 45H20L30 15Z" fill="#10B981"/></svg>
+                              </div>
+                              <span className="absolute -top-4 right-0 animate-pulse text-3xl">💡</span>
+                            </div>
+                            <h3 className="text-2xl font-extrabold text-emerald-900 mb-2 drop-shadow-lg">Automation Services</h3>
+                            <p className="text-emerald-900/80 text-sm text-center">Unlock efficiency and scale with our expert automation solutions.</p>
+                            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 w-24 h-2 bg-gradient-to-r from-emerald-400 to-blue-300 rounded-full blur-sm opacity-40" />
+                          </div>
+                          {/* Right: Menu grid for Services */}
+                          <div className="w-full md:w-2/3 grid grid-cols-1 md:grid-cols-2 divide-x divide-y divide-emerald-200 bg-transparent">
+                            {item.dropdown.map((dropdownItem, idx) => {
+                              const IconComponent = getServiceIcon(dropdownItem.label);
+                              let cardBg, accent;
+                              switch (dropdownItem.label) {
+                                case 'Bot Blueprint':
+                                  cardBg = 'bg-white/70';
+                                  accent = <span className="absolute -top-3 left-6 text-yellow-400 animate-bounce text-xl">💡</span>;
+                                  break;
+                                case 'Build & Test':
+                                  cardBg = 'bg-blue-50/60';
+                                  accent = <span className="absolute top-3 right-6 text-blue-400 animate-spin-slow text-lg">⚙️</span>;
+                                  break;
+                                case 'Discovery Call':
+                                  cardBg = 'bg-yellow-50/60';
+                                  accent = <span className="absolute top-2 left-8 text-orange-400 animate-bounce text-lg">📅</span>;
+                                  break;
+                                case 'Hyper Care':
+                                  cardBg = 'bg-pink-50/60';
+                                  accent = <span className="absolute top-3 right-6 text-pink-400 animate-heartbeat text-lg">❤️</span>;
+                                  break;
+                                case 'Scale & Optimize':
+                                  cardBg = 'bg-emerald-50/60';
+                                  accent = <span className="absolute top-3 left-6 text-emerald-400 animate-bounce text-lg">🚀</span>;
+                                  break;
+                                default:
+                                  cardBg = 'bg-white/60';
+                                  accent = null;
+                              }
+                              return (
+                                <Link
+                                  key={dropdownItem.label}
+                                  href={dropdownItem.href}
+                                  className={`flex flex-col gap-1 px-5 py-4 border-0 ${cardBg} hover:bg-emerald-100/80 hover:shadow-emerald-200 hover:shadow-xl hover:text-emerald-700 transition-all duration-200 cursor-pointer group min-h-[90px] relative animate-fade-in-up backdrop-blur-md hover:border-emerald-400 border-0 overflow-hidden`}
+                                  style={{ boxShadow: idx % 2 === 0 ? '0 2px 12px 0 rgba(16, 185, 129, 0.08)' : '0 2px 12px 0 rgba(59, 130, 246, 0.08)' }}
+                                  onClick={() => setActiveDropdown(null)}
+                                >
+                                  {accent}
+                                  <div className="flex items-center gap-2 mb-0.5 z-10">
+                                    <span className="inline-flex items-center justify-center w-8 h-8 bg-transparent group-hover:bg-emerald-50 transition-colors shadow-none text-xl text-emerald-500">
+                                      <IconComponent size={22} />
+                                    </span>
+                                    <span className="font-bold text-base group-hover:text-emerald-700 transition-colors drop-shadow-sm">{dropdownItem.label}</span>
+                                  </div>
+                                  <span className="text-sm text-gray-500 group-hover:text-emerald-800 transition-colors z-10 leading-tight">
+                                    {dropdownItem.label === 'Bot Blueprint' && 'Plan, design, and architect your automation bot.'}
+                                    {dropdownItem.label === 'Build & Test' && 'Develop, test, and iterate your automation solution.'}
+                                    {dropdownItem.label === 'Discovery Call' && 'Book a call to explore automation opportunities.'}
+                                    {dropdownItem.label === 'Hyper Care' && 'Ongoing support and optimization for your bots.'}
+                                    {dropdownItem.label === 'Scale & Optimize' && 'Expand and enhance your automation for growth.'}
+                                  </span>
+                                </Link>
+                              );
+                            })}
+                          </div>
+                        </div>
+                      </div>
+                    )}
+                    {/* Enhanced Hero Dropdown for Solutions */}
+                    {item.label === 'Solutions' && activeDropdown === item.label && (
+                      <div className="fixed left-1/2 top-[4.5rem] z-[120] transform -translate-x-1/2 w-full max-w-xl md:max-w-2xl rounded-3xl shadow-2xl border-0 bg-gradient-to-br from-yellow-100/90 via-pink-100/80 to-orange-50/90 p-0 overflow-x-auto transition-all duration-200 opacity-100 scale-100 visible backdrop-blur-xl"
+                        style={{ minWidth: '320px', maxWidth: '48vw' }}
+                      >
+                        <div className="flex">
+                          {/* Left Hero Section */}
+                          <div className="hidden md:flex flex-col items-center justify-center w-1/3 p-8 relative bg-gradient-to-br from-orange-300/90 via-pink-200/70 to-yellow-100/60 animate-fade-in">
+                            <div className="relative flex flex-col items-center">
+                              <div className="w-24 h-24 rounded-full bg-white/40 backdrop-blur-lg flex items-center justify-center shadow-orange-200/40 shadow-2xl mb-4 animate-pop">
+                                <svg width="60" height="60" viewBox="0 0 60 60" fill="none"><ellipse cx="30" cy="30" rx="28" ry="28" fill="#FB923C" fillOpacity="0.12"/><path d="M30 15L50 50H10L30 15Z" fill="#FB923C"/></svg>
+                              </div>
+                              <span className="absolute -top-4 left-0 animate-bounce text-3xl">🚀</span>
+                              <span className="absolute top-0 right-0 animate-sparkle text-2xl">✨</span>
+                            </div>
+                            <h3 className="text-2xl font-extrabold text-orange-900 mb-2 drop-shadow-lg">Business Solutions</h3>
+                            <p className="text-orange-900/80 text-sm text-center">Accelerate growth and profits with our tailored solutions.</p>
+                            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 w-24 h-2 bg-gradient-to-r from-orange-400 to-pink-300 rounded-full blur-sm opacity-40" />
+                          </div>
+                          {/* Right: Menu grid for Solutions */}
+                          <div className="w-full md:w-2/3 grid grid-cols-1 md:grid-cols-2 divide-x divide-y divide-orange-200 bg-transparent">
+                            {item.dropdown.map((dropdownItem, idx) => {
+                              const IconComponent = getSolutionIcon(dropdownItem.label);
+                              let cardBg, accent;
+                              switch (dropdownItem.label) {
+                                case 'Time Liberation':
+                                  cardBg = 'bg-white/80';
+                                  accent = <span className="absolute -top-3 left-6 text-yellow-400 animate-bounce text-xl">✨</span>;
+                                  break;
+                                case 'Growth Accelerator':
+                                  cardBg = 'bg-gradient-to-br from-pink-100/80 via-white/90 to-orange-50/80';
+                                  accent = <span className="absolute top-3 right-6 text-pink-400 animate-sparkle text-lg">🚀</span>;
+                                  break;
+                                case 'Profit Rescue':
+                                  cardBg = 'bg-gradient-to-br from-orange-100/80 via-white/90 to-pink-50/80';
+                                  accent = <span className="absolute top-3 left-6 text-orange-400 animate-bounce text-lg">💡</span>;
+                                  break;
+                                case 'Custom Bot Development':
+                                  cardBg = 'bg-gradient-to-br from-white/90 via-pink-50/80 to-orange-50/80';
+                                  accent = <span className="absolute top-3 right-6 text-pink-400 animate-pop text-lg">🧩</span>;
+                                  break;
+                                default:
+                                  cardBg = 'bg-white/60';
+                                  accent = null;
+                              }
+                              return (
+                                <Link
+                                  key={dropdownItem.label}
+                                  href={dropdownItem.href}
+                                  className={`flex flex-col gap-1 px-5 py-4 border-0 ${cardBg} hover:bg-orange-100/80 hover:shadow-orange-200 hover:shadow-xl hover:text-orange-700 transition-all duration-200 cursor-pointer group min-h-[90px] relative animate-fade-in-up hover:border-orange-400 border-0 overflow-hidden`}
+                                  style={{ boxShadow: idx % 2 === 0 ? '0 2px 12px 0 rgba(251, 191, 36, 0.08)' : '0 2px 12px 0 rgba(236, 72, 153, 0.08)' }}
+                                  onClick={() => setActiveDropdown(null)}
+                                >
+                                  {accent}
+                                  <div className="flex items-center gap-2 mb-0.5 z-10">
+                                    <span className="inline-flex items-center justify-center w-8 h-8 bg-transparent group-hover:bg-orange-50 transition-colors shadow-none text-xl text-orange-500">
+                                      <IconComponent size={22} />
+                                    </span>
+                                    <span className="font-bold text-base group-hover:text-orange-700 transition-colors drop-shadow-sm">{dropdownItem.label}</span>
+                                  </div>
+                                  <span className="text-sm text-gray-500 group-hover:text-orange-800 transition-colors z-10 leading-tight">
+                                    {dropdownItem.label === 'Time Liberation' && 'Automate away the boring stuff—get your time back for what matters most.'}
+                                    {dropdownItem.label === 'Growth Accelerator' && 'Supercharge your business with playful, smart automation that scales as you do.'}
+                                    {dropdownItem.label === 'Profit Rescue' && 'Save money, reduce manual work, and let your team shine at what they do best.'}
+                                    {dropdownItem.label === 'Custom Bot Development' && 'Build something truly yours—bespoke bots, creative automations, and a dash of magic.'}
+                                  </span>
+                                </Link>
+                              );
+                            })}
+                          </div>
+                        </div>
+                      </div>
+                    )}
+                    {/* Default dropdown for other items */}
+                    {item.label !== 'Services' && item.label !== 'Solutions' && activeDropdown === item.label && (
+                      <div
+                        className="absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-10 transform transition-all duration-200 origin-top-left opacity-100 scale-100"
+                      >
+                        {item.dropdown.map((dropdownItem) => (
+                          <Link
+                            key={dropdownItem.label}
+                            href={dropdownItem.href}
+                            className="block px-4 py-2 text-menu font-desc text-gray-700 hover:bg-orange-50 hover:text-[var(--color-secondary)] transition-colors duration-200 cursor-pointer"
+                            onClick={() => setActiveDropdown(null)}
+                          >
+                            {dropdownItem.label}
+                          </Link>
+                        ))}
+                      </div>
+                    )}
                   </>
                 ) : (
                   <Link
@@ -271,7 +430,7 @@ export default function Navbar({ addToRefs }: NavbarProps) {
               ) : (
                 <Link
                   href={item.href}
-                  className="block px-3 py-2 font-medium transition-colors rounded-md cursor-pointer text-label font-label text-gray-800 hover:text-[var(--color-secondary)] hover:bg-orange-50"
+                  className="block px-3 py-2 rounded-md text-base font-medium text-gray-800 hover:text-[var(--color-secondary)] hover:bg-orange-50 transition-colors"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   {item.label}
@@ -279,13 +438,6 @@ export default function Navbar({ addToRefs }: NavbarProps) {
               )}
             </div>
           ))}
-          <Link
-            href="#contact"
-            className="btn-secondary block px-3 py-2 text-btn font-btn text-white rounded-md transition-colors text-center mt-4 cursor-pointer"
-            onClick={() => setMobileMenuOpen(false)}
-          >
-            Get Started
-          </Link>
         </div>
       </div>
     </nav>
