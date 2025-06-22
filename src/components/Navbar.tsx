@@ -5,6 +5,9 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Button } from './ui/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/card';
+import { Badge } from './ui/badge';
+import { Separator } from './ui/separator';
 import { serviceIcons } from './ui/lucide-icons';
 import { solutionIcons } from './ui/lucide-solution-icons';
 
@@ -23,7 +26,6 @@ interface MenuItem {
   dropdown?: DropdownItem[];
 }
 
-// Helper for icon type safety
 function getServiceIcon(label: string) {
   return (serviceIcons as Record<string, any>)[label] || serviceIcons['default'];
 }
@@ -53,7 +55,11 @@ export default function Navbar({ addToRefs }: NavbarProps) {
     const handleClickOutside = (event: MouseEvent) => {
       const target = event.target as HTMLElement;
       const dropdownButtons = document.querySelectorAll('[data-dropdown]');
-      const isClickInsideDropdown = Array.from(dropdownButtons).some(button => button.contains(target));
+      const dropdownMenus = document.querySelectorAll('[data-dropdown-menu]');
+      
+      const isClickInsideDropdown = Array.from(dropdownButtons).some(button => button.contains(target)) ||
+                                   Array.from(dropdownMenus).some(menu => menu.contains(target));
+      
       if (!isClickInsideDropdown) setActiveDropdown(null);
     };
     window.addEventListener('scroll', handleScroll);
@@ -66,7 +72,9 @@ export default function Navbar({ addToRefs }: NavbarProps) {
 
   const menuItems: MenuItem[] = [
     { label: 'Home', href: '/' },
-    { label: 'Services', href: '#services', 
+    { 
+      label: 'Services', 
+      href: '/services',
       dropdown: [
         { label: 'Bot Blueprint', href: '/services/bot-blueprint' },
         { label: 'Build & Test', href: '/services/build-and-test' },
@@ -75,7 +83,9 @@ export default function Navbar({ addToRefs }: NavbarProps) {
         { label: 'Scale & Optimize', href: '/services/scale-optimize' }
       ]
     },
-    { label: 'Solutions', href: '#solutions',
+    { 
+      label: 'Solutions', 
+      href: '/solutions',
       dropdown: [
         { label: 'Time Liberation', href: '/solutions/time-liberation' },
         { label: 'Growth Accelerator', href: '/solutions/growth-accelerator' },
@@ -84,12 +94,17 @@ export default function Navbar({ addToRefs }: NavbarProps) {
       ]
     },
     { label: 'About', href: '/about' },
-    { label: 'Blog', href: '#blog' },
-    { label: 'Contact', href: '#contact' }
+    { label: 'Blog', href: '/blog' },
+    { label: 'Contact', href: '/contact' }
   ];
 
   const toggleDropdown = (label: string) => {
     setActiveDropdown(activeDropdown === label ? null : label);
+  };
+
+  const handleDropdownItemClick = () => {
+    setActiveDropdown(null);
+    setMobileMenuOpen(false);
   };
 
   return (
@@ -97,7 +112,7 @@ export default function Navbar({ addToRefs }: NavbarProps) {
       isScrolled ? 'bg-white/80 backdrop-blur-md shadow-lg' : 'bg-white/30 backdrop-blur-md shadow-lg'
     }`}>
       <div className="relative w-full max-w-[1920px] mx-auto h-14 lg:h-16">
-        {/* Logo absolutely positioned to the left */}
+        {/* Logo */}
         <div className="absolute left-0 top-0 bottom-0 flex items-center pl-4">
           <Link href="/" className="flex items-center">
             <Image
@@ -111,7 +126,7 @@ export default function Navbar({ addToRefs }: NavbarProps) {
           </Link>
         </div>
         
-        {/* Menu (center) - fixed in center */}
+        {/* Menu */}
         <div className="flex h-full w-full justify-center items-center">
           <div className="hidden lg:flex items-center justify-center space-x-6 xl:space-x-8">
             {menuItems.map((item) => (
@@ -145,76 +160,122 @@ export default function Navbar({ addToRefs }: NavbarProps) {
                         />
                       </svg>
                     </button>
-                    {/* Enhanced Hero Dropdown for Services */}
+
+                    {/* Services Dropdown */}
                     {item.label === 'Services' && activeDropdown === item.label && (
-                      <div className="fixed left-1/2 top-[4.5rem] z-[120] transform -translate-x-1/2 w-full max-w-xl md:max-w-2xl rounded-3xl shadow-2xl border-0 bg-gradient-to-br from-emerald-200/80 via-blue-100/60 to-white/90 p-0 overflow-x-auto transition-all duration-200 opacity-100 scale-100 visible backdrop-blur-xl"
-                        style={{ minWidth: '320px', maxWidth: '48vw' }}
+                      <div 
+                        data-dropdown-menu
+                        className="fixed left-1/2 top-[4.5rem] z-[120] transform -translate-x-1/2 w-full max-w-3xl rounded-xl shadow-2xl border bg-white/95 backdrop-blur-2xl p-3 transition-all duration-300 opacity-100 scale-100 visible"
+                        style={{ minWidth: '200px', maxWidth: '45vw' }}
                       >
-                        <div className="flex">
-                          {/* Left Hero Section */}
-                          <div className="hidden md:flex flex-col items-center justify-center w-1/3 p-8 relative bg-gradient-to-br from-emerald-400/90 via-blue-200/70 to-blue-100/60 animate-fade-in">
-                            <div className="relative flex flex-col items-center">
-                              <div className="w-24 h-24 rounded-full bg-white/30 backdrop-blur-lg flex items-center justify-center shadow-emerald-200/40 shadow-2xl mb-4 animate-glow">
-                                <svg width="60" height="60" viewBox="0 0 60 60" fill="none"><ellipse cx="30" cy="30" rx="28" ry="28" fill="#10B981" fillOpacity="0.12"/><path d="M30 15L40 45H20L30 15Z" fill="#10B981"/></svg>
-                              </div>
-                              <span className="absolute -top-4 right-0 animate-pulse text-3xl">💡</span>
-                            </div>
-                            <h3 className="text-2xl font-extrabold text-emerald-900 mb-2 drop-shadow-lg">Automation Services</h3>
-                            <p className="text-emerald-900/80 text-sm text-center">Unlock efficiency and scale with our expert automation solutions.</p>
-                            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 w-24 h-2 bg-gradient-to-r from-emerald-400 to-blue-300 rounded-full blur-sm opacity-40" />
+                        <div className="flex flex-col lg:flex-row gap-3">
+                          <div className="lg:w-1/3 relative">
+                            <Card className="h-full border-0 bg-gradient-to-br from-slate-900 via-slate-800 to-emerald-900 text-white overflow-hidden">
+                              <CardHeader className="relative pb-2">
+                                <div className="absolute top-0 right-0 w-16 h-16 bg-emerald-400/20 rounded-full blur-xl"></div>
+                                <div className="absolute bottom-0 left-0 w-12 h-12 bg-blue-400/20 rounded-full blur-lg"></div>
+                                <div className="relative z-10">
+                                  <div className="flex items-center gap-1.5 mb-1.5">
+                                    <div className="w-6 h-6 rounded-lg bg-emerald-500/20 border border-emerald-400/30 flex items-center justify-center">
+                                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" className="text-emerald-400">
+                                        <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                                        <path d="M2 17L12 22L22 17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                                        <path d="M2 12L12 17L22 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                                      </svg>
+                                    </div>
+                                    <Badge variant="secondary" className="bg-emerald-500/20 text-emerald-300 border-emerald-400/30 text-xs px-1.5 py-0.5">
+                                      SERVICES
+                                    </Badge>
+                                  </div>
+                                  <CardTitle className="text-lg font-bold text-white mb-1">
+                                    Automation Services
+                                  </CardTitle>
+                                  <CardDescription className="text-slate-300 text-xs">
+                                    Enterprise-grade automation solutions designed for scale and efficiency
+                                  </CardDescription>
+                                </div>
+                              </CardHeader>
+                              <CardContent className="relative z-10 pt-0">
+                                <div className="space-y-1.5">
+                                  <div className="flex items-center gap-1 text-xs text-slate-300">
+                                    <div className="w-1 h-1 bg-emerald-400 rounded-full"></div>
+                                    End-to-end automation
+                                  </div>
+                                  <div className="flex items-center gap-1 text-xs text-slate-300">
+                                    <div className="w-1 h-1 bg-blue-400 rounded-full"></div>
+                                    Expert consultation
+                                  </div>
+                                  <div className="flex items-center gap-1 text-xs text-slate-300">
+                                    <div className="w-1 h-1 bg-purple-400 rounded-full"></div>
+                                    24/7 support included
+                                  </div>
+                                </div>
+                              </CardContent>
+                            </Card>
                           </div>
-                          {/* Right: Menu grid for Services */}
-                          <div className="w-full md:w-2/3 grid grid-cols-1 md:grid-cols-2 divide-x divide-y divide-emerald-200 bg-transparent">
+                          
+                          <div className="lg:w-2/3 grid grid-cols-1 md:grid-cols-2 gap-2">
                             {item.dropdown.map((dropdownItem, idx) => {
                               const IconComponent = getServiceIcon(dropdownItem.label);
-                              let cardBg, accent;
+                              let cardStyle, badgeColor, iconColor;
                               switch (dropdownItem.label) {
                                 case 'Bot Blueprint':
-                                  cardBg = 'bg-white/70';
-                                  accent = <span className="absolute -top-3 left-6 text-yellow-400 animate-bounce text-xl">💡</span>;
+                                  cardStyle = 'border-blue-200 hover:border-blue-400 hover:shadow-blue-100';
+                                  badgeColor = 'bg-blue-100 text-blue-700 border-blue-200';
+                                  iconColor = 'text-blue-600';
                                   break;
                                 case 'Build & Test':
-                                  cardBg = 'bg-blue-50/60';
-                                  accent = <span className="absolute top-3 right-6 text-blue-400 animate-spin-slow text-lg">⚙️</span>;
+                                  cardStyle = 'border-emerald-200 hover:border-emerald-400 hover:shadow-emerald-100';
+                                  badgeColor = 'bg-emerald-100 text-emerald-700 border-emerald-200';
+                                  iconColor = 'text-emerald-600';
                                   break;
                                 case 'Discovery Call':
-                                  cardBg = 'bg-yellow-50/60';
-                                  accent = <span className="absolute top-2 left-8 text-orange-400 animate-bounce text-lg">📅</span>;
+                                  cardStyle = 'border-orange-200 hover:border-orange-400 hover:shadow-orange-100';
+                                  badgeColor = 'bg-orange-100 text-orange-700 border-orange-200';
+                                  iconColor = 'text-orange-600';
                                   break;
                                 case 'Hyper Care':
-                                  cardBg = 'bg-pink-50/60';
-                                  accent = <span className="absolute top-3 right-6 text-pink-400 animate-heartbeat text-lg">❤️</span>;
+                                  cardStyle = 'border-pink-200 hover:border-pink-400 hover:shadow-pink-100';
+                                  badgeColor = 'bg-pink-100 text-pink-700 border-pink-200';
+                                  iconColor = 'text-pink-600';
                                   break;
                                 case 'Scale & Optimize':
-                                  cardBg = 'bg-emerald-50/60';
-                                  accent = <span className="absolute top-3 left-6 text-emerald-400 animate-bounce text-lg">🚀</span>;
+                                  cardStyle = 'border-purple-200 hover:border-purple-400 hover:shadow-purple-100';
+                                  badgeColor = 'bg-purple-100 text-purple-700 border-purple-200';
+                                  iconColor = 'text-purple-600';
                                   break;
                                 default:
-                                  cardBg = 'bg-white/60';
-                                  accent = null;
+                                  cardStyle = 'border-gray-200 hover:border-gray-400 hover:shadow-gray-100';
+                                  badgeColor = 'bg-gray-100 text-gray-700 border-gray-200';
+                                  iconColor = 'text-gray-600';
                               }
+                              
                               return (
-                                <Link
-                                  key={dropdownItem.label}
-                                  href={dropdownItem.href}
-                                  className={`flex flex-col gap-1 px-5 py-4 border-0 ${cardBg} hover:bg-emerald-100/80 hover:shadow-emerald-200 hover:shadow-xl hover:text-emerald-700 transition-all duration-200 cursor-pointer group min-h-[90px] relative animate-fade-in-up backdrop-blur-md hover:border-emerald-400 border-0 overflow-hidden`}
-                                  style={{ boxShadow: idx % 2 === 0 ? '0 2px 12px 0 rgba(16, 185, 129, 0.08)' : '0 2px 12px 0 rgba(59, 130, 246, 0.08)' }}
-                                  onClick={() => setActiveDropdown(null)}
-                                >
-                                  {accent}
-                                  <div className="flex items-center gap-2 mb-0.5 z-10">
-                                    <span className="inline-flex items-center justify-center w-8 h-8 bg-transparent group-hover:bg-emerald-50 transition-colors shadow-none text-xl text-emerald-500">
-                                      <IconComponent size={22} />
-                                    </span>
-                                    <span className="font-bold text-base group-hover:text-emerald-700 transition-colors drop-shadow-sm">{dropdownItem.label}</span>
-                                  </div>
-                                  <span className="text-sm text-gray-500 group-hover:text-emerald-800 transition-colors z-10 leading-tight">
-                                    {dropdownItem.label === 'Bot Blueprint' && 'Plan, design, and architect your automation bot.'}
-                                    {dropdownItem.label === 'Build & Test' && 'Develop, test, and iterate your automation solution.'}
-                                    {dropdownItem.label === 'Discovery Call' && 'Book a call to explore automation opportunities.'}
-                                    {dropdownItem.label === 'Hyper Care' && 'Ongoing support and optimization for your bots.'}
-                                    {dropdownItem.label === 'Scale & Optimize' && 'Expand and enhance your automation for growth.'}
-                                  </span>
+                                <Link key={dropdownItem.label} href={dropdownItem.href} onClick={handleDropdownItemClick}>
+                                  <Card className={`${cardStyle} hover:shadow-lg transition-all duration-300 cursor-pointer h-full group`}>
+                                    <CardHeader className="pb-1.5 pt-2 px-2">
+                                      <div className="flex items-start justify-between">
+                                        <div className={`w-5 h-5 rounded-md bg-white border flex items-center justify-center ${iconColor} group-hover:scale-110 transition-transform duration-200`}>
+                                          <IconComponent size={10} />
+                                        </div>
+                                        <Badge variant="outline" className={`${badgeColor} text-xs px-1 py-0`}>
+                                          {String(idx + 1).padStart(2, '0')}
+                                        </Badge>
+                                      </div>
+                                      <CardTitle className="text-sm font-semibold text-slate-800 group-hover:text-slate-900">
+                                        {dropdownItem.label}
+                                      </CardTitle>
+                                    </CardHeader>
+                                    <CardContent className="pt-0 px-2 pb-2">
+                                      <CardDescription className="text-xs leading-relaxed">
+                                        {dropdownItem.label === 'Bot Blueprint' && 'Strategic planning and architecture design for your automation infrastructure.'}
+                                        {dropdownItem.label === 'Build & Test' && 'Development, testing, and quality assurance for robust automation solutions.'}
+                                        {dropdownItem.label === 'Discovery Call' && 'Consultation session to identify automation opportunities and requirements.'}
+                                        {dropdownItem.label === 'Hyper Care' && 'Comprehensive support, monitoring, and continuous optimization services.'}
+                                        {dropdownItem.label === 'Scale & Optimize' && 'Performance enhancement and scalability solutions for growing businesses.'}
+                                      </CardDescription>
+                                    </CardContent>
+                                  </Card>
                                 </Link>
                               );
                             })}
@@ -222,72 +283,159 @@ export default function Navbar({ addToRefs }: NavbarProps) {
                         </div>
                       </div>
                     )}
-                    {/* Enhanced Hero Dropdown for Solutions */}
+
+                    {/* Solutions Dropdown */}
                     {item.label === 'Solutions' && activeDropdown === item.label && (
-                      <div className="fixed left-1/2 top-[4.5rem] z-[120] transform -translate-x-1/2 w-full max-w-xl md:max-w-2xl rounded-3xl shadow-2xl border-0 bg-gradient-to-br from-yellow-100/90 via-pink-100/80 to-orange-50/90 p-0 overflow-x-auto transition-all duration-200 opacity-100 scale-100 visible backdrop-blur-xl"
-                        style={{ minWidth: '320px', maxWidth: '48vw' }}
+                      <div 
+                        data-dropdown-menu
+                        className="fixed left-1/2 top-[4.5rem] z-[120] transform -translate-x-1/2 w-full max-w-3xl rounded-2xl shadow-2xl border-0 bg-gradient-to-br from-orange-50 via-pink-50 to-yellow-50 backdrop-blur-2xl p-3 transition-all duration-300 opacity-100 scale-100 visible overflow-hidden"
+                        style={{ minWidth: '200px', maxWidth: '45vw' }}
                       >
-                        <div className="flex">
-                          {/* Left Hero Section */}
-                          <div className="hidden md:flex flex-col items-center justify-center w-1/3 p-8 relative bg-gradient-to-br from-orange-300/90 via-pink-200/70 to-yellow-100/60 animate-fade-in">
-                            <div className="relative flex flex-col items-center">
-                              <div className="w-24 h-24 rounded-full bg-white/40 backdrop-blur-lg flex items-center justify-center shadow-orange-200/40 shadow-2xl mb-4 animate-pop">
-                                <svg width="60" height="60" viewBox="0 0 60 60" fill="none"><ellipse cx="30" cy="30" rx="28" ry="28" fill="#FB923C" fillOpacity="0.12"/><path d="M30 15L50 50H10L30 15Z" fill="#FB923C"/></svg>
-                              </div>
-                              <span className="absolute -top-4 left-0 animate-bounce text-3xl">🚀</span>
-                              <span className="absolute top-0 right-0 animate-sparkle text-2xl">✨</span>
-                            </div>
-                            <h3 className="text-2xl font-extrabold text-orange-900 mb-2 drop-shadow-lg">Business Solutions</h3>
-                            <p className="text-orange-900/80 text-sm text-center">Accelerate growth and profits with our tailored solutions.</p>
-                            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 w-24 h-2 bg-gradient-to-r from-orange-400 to-pink-300 rounded-full blur-sm opacity-40" />
+                        {/* Floating Elements */}
+                        <div className="absolute top-2 right-4 w-3 h-3 bg-gradient-to-r from-pink-400 to-orange-400 rounded-full animate-pulse"></div>
+                        <div className="absolute top-6 right-8 w-2 h-2 bg-gradient-to-r from-yellow-400 to-pink-400 rounded-full animate-bounce delay-100"></div>
+                        <div className="absolute bottom-4 left-6 w-2.5 h-2.5 bg-gradient-to-r from-orange-400 to-red-400 rounded-full animate-pulse delay-200"></div>
+                        
+                        <div className="flex flex-col lg:flex-row gap-3 relative z-10">
+                          <div className="lg:w-1/3 relative">
+                            <Card className="h-full border-0 bg-gradient-to-br from-pink-500 via-orange-500 to-yellow-500 text-white overflow-hidden relative">
+                              <div className="absolute top-0 right-0 w-20 h-20 bg-white/10 rounded-full -translate-y-4 translate-x-4 animate-pulse"></div>
+                              <div className="absolute bottom-0 left-0 w-16 h-16 bg-white/10 rounded-full translate-y-4 -translate-x-4 animate-bounce"></div>
+                              
+                              <CardHeader className="relative pb-2 z-10 pt-2 px-2">
+                                <div className="flex items-center gap-1.5 mb-2">
+                                  <div className="w-7 h-7 rounded-xl bg-white/20 backdrop-blur-sm border border-white/30 flex items-center justify-center relative overflow-hidden">
+                                    <div className="absolute inset-0 bg-gradient-to-br from-yellow-300/30 to-pink-300/30 animate-pulse"></div>
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" className="text-white relative z-10">
+                                      <path d="M12 2L15.09 8.26L22 9L17 14L18.18 21L12 17.77L5.82 21L7 14L2 9L8.91 8.26L12 2Z" fill="currentColor"/>
+                                    </svg>
+                                  </div>
+                                  <div className="space-y-0.5">
+                                    <Badge variant="secondary" className="bg-white/20 text-white border-white/30 backdrop-blur-sm text-xs px-1.5 py-0.5">
+                                      SOLUTIONS ✨
+                                    </Badge>
+                                    <div className="text-xs text-white/80 font-medium">Transform Your Business</div>
+                                  </div>
+                                </div>
+                                <CardTitle className="text-lg font-bold text-white mb-1.5 leading-tight">
+                                  Business Solutions
+                                </CardTitle>
+                                <CardDescription className="text-white/90 leading-relaxed text-xs">
+                                  Playful yet powerful solutions that transform how you work and grow your business
+                                </CardDescription>
+                              </CardHeader>
+                              <CardContent className="relative z-10 pt-0 px-2 pb-2">
+                                <div className="grid grid-cols-2 gap-1.5">
+                                  <div className="bg-white/10 backdrop-blur-sm rounded-lg p-1.5 border border-white/20">
+                                    <div className="text-lg mb-0.5">⚡</div>
+                                    <div className="text-xs font-medium">Fast Setup</div>
+                                  </div>
+                                  <div className="bg-white/10 backdrop-blur-sm rounded-lg p-1.5 border border-white/20">
+                                    <div className="text-lg mb-0.5">🎯</div>
+                                    <div className="text-xs font-medium">Goal Focused</div>
+                                  </div>
+                                  <div className="bg-white/10 backdrop-blur-sm rounded-lg p-1.5 border border-white/20">
+                                    <div className="text-lg mb-0.5">🚀</div>
+                                    <div className="text-xs font-medium">Scalable</div>
+                                  </div>
+                                  <div className="bg-white/10 backdrop-blur-sm rounded-lg p-1.5 border border-white/20">
+                                    <div className="text-lg mb-0.5">💎</div>
+                                    <div className="text-xs font-medium">Premium</div>
+                                  </div>
+                                </div>
+                              </CardContent>
+                            </Card>
                           </div>
-                          {/* Right: Menu grid for Solutions */}
-                          <div className="w-full md:w-2/3 grid grid-cols-1 md:grid-cols-2 divide-x divide-y divide-orange-200 bg-transparent">
+                          
+                          <div className="lg:w-2/3 grid grid-cols-1 md:grid-cols-2 gap-2.5">
                             {item.dropdown.map((dropdownItem, idx) => {
                               const IconComponent = getSolutionIcon(dropdownItem.label);
-                              let cardBg, accent;
+                              let cardStyle, gradientFrom, gradientTo, emoji, accentColor;
                               switch (dropdownItem.label) {
                                 case 'Time Liberation':
-                                  cardBg = 'bg-white/80';
-                                  accent = <span className="absolute -top-3 left-6 text-yellow-400 animate-bounce text-xl">✨</span>;
+                                  cardStyle = 'border-amber-200 hover:border-amber-400 hover:shadow-amber-100';
+                                  gradientFrom = 'from-amber-400';
+                                  gradientTo = 'to-yellow-400';
+                                  emoji = '⏰';
+                                  accentColor = 'text-amber-600';
                                   break;
                                 case 'Growth Accelerator':
-                                  cardBg = 'bg-gradient-to-br from-pink-100/80 via-white/90 to-orange-50/80';
-                                  accent = <span className="absolute top-3 right-6 text-pink-400 animate-sparkle text-lg">🚀</span>;
+                                  cardStyle = 'border-pink-200 hover:border-pink-400 hover:shadow-pink-100';
+                                  gradientFrom = 'from-pink-400';
+                                  gradientTo = 'to-rose-400';
+                                  emoji = '📈';
+                                  accentColor = 'text-pink-600';
                                   break;
                                 case 'Profit Rescue':
-                                  cardBg = 'bg-gradient-to-br from-orange-100/80 via-white/90 to-pink-50/80';
-                                  accent = <span className="absolute top-3 left-6 text-orange-400 animate-bounce text-lg">💡</span>;
+                                  cardStyle = 'border-emerald-200 hover:border-emerald-400 hover:shadow-emerald-100';
+                                  gradientFrom = 'from-emerald-400';
+                                  gradientTo = 'to-teal-400';
+                                  emoji = '💰';
+                                  accentColor = 'text-emerald-600';
                                   break;
                                 case 'Custom Bot Development':
-                                  cardBg = 'bg-gradient-to-br from-white/90 via-pink-50/80 to-orange-50/80';
-                                  accent = <span className="absolute top-3 right-6 text-pink-400 animate-pop text-lg">🧩</span>;
+                                  cardStyle = 'border-purple-200 hover:border-purple-400 hover:shadow-purple-100';
+                                  gradientFrom = 'from-purple-400';
+                                  gradientTo = 'to-indigo-400';
+                                  emoji = '🤖';
+                                  accentColor = 'text-purple-600';
                                   break;
                                 default:
-                                  cardBg = 'bg-white/60';
-                                  accent = null;
+                                  cardStyle = 'border-gray-200 hover:border-gray-400 hover:shadow-gray-100';
+                                  gradientFrom = 'from-gray-400';
+                                  gradientTo = 'to-slate-400';
+                                  emoji = '⭐';
+                                  accentColor = 'text-gray-600';
                               }
+                              
+                              const progressWidth = `${60 + (idx * 10)}%`;
+                              
                               return (
-                                <Link
-                                  key={dropdownItem.label}
-                                  href={dropdownItem.href}
-                                  className={`flex flex-col gap-1 px-5 py-4 border-0 ${cardBg} hover:bg-orange-100/80 hover:shadow-orange-200 hover:shadow-xl hover:text-orange-700 transition-all duration-200 cursor-pointer group min-h-[90px] relative animate-fade-in-up hover:border-orange-400 border-0 overflow-hidden`}
-                                  style={{ boxShadow: idx % 2 === 0 ? '0 2px 12px 0 rgba(251, 191, 36, 0.08)' : '0 2px 12px 0 rgba(236, 72, 153, 0.08)' }}
-                                  onClick={() => setActiveDropdown(null)}
-                                >
-                                  {accent}
-                                  <div className="flex items-center gap-2 mb-0.5 z-10">
-                                    <span className="inline-flex items-center justify-center w-8 h-8 bg-transparent group-hover:bg-orange-50 transition-colors shadow-none text-xl text-orange-500">
-                                      <IconComponent size={22} />
-                                    </span>
-                                    <span className="font-bold text-base group-hover:text-orange-700 transition-colors drop-shadow-sm">{dropdownItem.label}</span>
-                                  </div>
-                                  <span className="text-sm text-gray-500 group-hover:text-orange-800 transition-colors z-10 leading-tight">
-                                    {dropdownItem.label === 'Time Liberation' && 'Automate away the boring stuff—get your time back for what matters most.'}
-                                    {dropdownItem.label === 'Growth Accelerator' && 'Supercharge your business with playful, smart automation that scales as you do.'}
-                                    {dropdownItem.label === 'Profit Rescue' && 'Save money, reduce manual work, and let your team shine at what they do best.'}
-                                    {dropdownItem.label === 'Custom Bot Development' && 'Build something truly yours—bespoke bots, creative automations, and a dash of magic.'}
-                                  </span>
+                                <Link key={dropdownItem.label} href={dropdownItem.href} onClick={handleDropdownItemClick}>
+                                  <Card className={`${cardStyle} hover:shadow-xl transition-all duration-300 cursor-pointer h-full group bg-white/80 backdrop-blur-sm relative overflow-hidden`}>
+                                    <div className="absolute top-1.5 right-1.5 text-lg animate-bounce group-hover:animate-spin transition-all duration-300">
+                                      {emoji}
+                                    </div>
+                                    
+                                    <div className={`absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r ${gradientFrom} ${gradientTo} group-hover:h-1 transition-all duration-300`}></div>
+                                    
+                                    <CardHeader className="pb-1.5 relative pt-2 px-2">
+                                      <div className="flex items-start gap-1.5">
+                                        <div className={`w-6 h-6 rounded-xl bg-gradient-to-br ${gradientFrom} ${gradientTo} text-white flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg`}>
+                                          <IconComponent size={11} />
+                                        </div>
+                                        <div className="flex-1">
+                                          <CardTitle className={`text-sm font-bold ${accentColor} group-hover:text-opacity-80 transition-colors mb-0.5`}>
+                                            {dropdownItem.label}
+                                          </CardTitle>
+                                          {/* <Badge variant="outline" className={`text-xs bg-gradient-to-r ${gradientFrom} ${gradientTo} text-white border-0 px-1 py-0`}>
+                                            Popular Choice
+                                          </Badge> */}
+                                        </div>
+                                      </div>
+                                    </CardHeader>
+                                    <CardContent className="pt-0 px-2 pb-2">
+                                      <CardDescription className="text-xs leading-relaxed text-slate-600 group-hover:text-slate-800 transition-colors">
+                                        {dropdownItem.label === 'Time Liberation' && 'Automate away the boring stuff—get your time back for what matters most to you and your team.'}
+                                        {dropdownItem.label === 'Growth Accelerator' && 'Supercharge your business with playful, smart automation that scales as you grow and evolve.'}
+                                        {dropdownItem.label === 'Profit Rescue' && 'Save money, reduce manual work, and let your team shine at what they do best every day.'}
+                                        {dropdownItem.label === 'Custom Bot Development' && 'Build something truly yours—bespoke bots, creative automations, and a dash of magic.'}
+                                      </CardDescription>
+                                      
+                                      <div className="mt-2 space-y-1">
+                                        <div className="flex justify-between text-xs text-slate-500">
+                                          <span>Setup Time</span>
+                                          <span>{idx === 0 ? '1 week' : idx === 1 ? '2 weeks' : idx === 2 ? '1 week' : '3 weeks'}</span>
+                                        </div>
+                                        <div className="w-full bg-slate-200 rounded-full h-1">
+                                          <div 
+                                            className={`bg-gradient-to-r ${gradientFrom} ${gradientTo} h-1 rounded-full transition-all duration-1000 group-hover:w-full`}
+                                            style={{ width: progressWidth }}
+                                          ></div>
+                                        </div>
+                                      </div>
+                                    </CardContent>
+                                  </Card>
                                 </Link>
                               );
                             })}
@@ -295,9 +443,11 @@ export default function Navbar({ addToRefs }: NavbarProps) {
                         </div>
                       </div>
                     )}
-                    {/* Default dropdown for other items */}
+
+                    {/* Default dropdown */}
                     {item.label !== 'Services' && item.label !== 'Solutions' && activeDropdown === item.label && (
                       <div
+                        data-dropdown-menu
                         className="absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-10 transform transition-all duration-200 origin-top-left opacity-100 scale-100"
                       >
                         {item.dropdown.map((dropdownItem) => (
@@ -305,7 +455,7 @@ export default function Navbar({ addToRefs }: NavbarProps) {
                             key={dropdownItem.label}
                             href={dropdownItem.href}
                             className="block px-4 py-2 text-menu font-desc text-gray-700 hover:bg-orange-50 hover:text-[var(--color-secondary)] transition-colors duration-200 cursor-pointer"
-                            onClick={() => setActiveDropdown(null)}
+                            onClick={handleDropdownItemClick}
                           >
                             {dropdownItem.label}
                           </Link>
@@ -326,11 +476,11 @@ export default function Navbar({ addToRefs }: NavbarProps) {
           </div>
         </div>
         
-        {/* Button absolutely positioned to the right */}
+        {/* Get Started Button */}
         <div className="absolute right-0 top-0 bottom-0 flex items-center pr-4">
           <div className="hidden lg:block">
             <Link
-              href="#contact"
+              href="/contact"
               className="btn-secondary text-btn font-btn text-white px-6 py-2.5 rounded-none hover:bg-white hover:text-[var(--color-secondary)] hover:border-[var(--color-secondary)] border-2 border-transparent transition-all duration-300 cursor-pointer whitespace-nowrap"
             >
               Get Started
@@ -377,6 +527,7 @@ export default function Navbar({ addToRefs }: NavbarProps) {
           </div>
         </div>
       </div>
+      
       {/* Mobile Menu */}
       <div
         className={`lg:hidden transition-all duration-300 ease-in-out ${
@@ -420,7 +571,7 @@ export default function Navbar({ addToRefs }: NavbarProps) {
                         key={dropdownItem.label}
                         href={dropdownItem.href}
                         className="block pl-3 pr-4 py-2 rounded-md transition-colors duration-200 cursor-pointer text-desc font-desc text-gray-700 hover:bg-orange-50 hover:text-[var(--color-secondary)]"
-                        onClick={() => setMobileMenuOpen(false)}
+                        onClick={handleDropdownItemClick}
                       >
                         {dropdownItem.label}
                       </Link>
