@@ -1,15 +1,27 @@
-// File: components/Navbar.tsx
 "use client";
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from './ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/card';
 import { Badge } from './ui/badge';
 import { Separator } from './ui/separator';
 import { serviceIcons } from './ui/lucide-icons';
 import { solutionIcons } from './ui/lucide-solution-icons';
+import { 
+  Sparkles, 
+  Zap, 
+  ArrowRight, 
+  Menu, 
+  X, 
+  ChevronDown,
+  Rocket,
+  Shield,
+  Users,
+  Award
+} from 'lucide-react';
 
 interface NavbarProps {
   addToRefs?: (el: HTMLElement | null) => void;
@@ -49,7 +61,7 @@ export default function Navbar({ addToRefs }: NavbarProps) {
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 80);
+      setIsScrolled(window.scrollY > 20);
       setActiveDropdown(null);
     };
     const handleClickOutside = (event: MouseEvent) => {
@@ -108,489 +120,748 @@ export default function Navbar({ addToRefs }: NavbarProps) {
   };
 
   return (
-    <nav className={`fixed top-0 left-0 right-0 w-full z-[100] transition-all duration-300 ${
-      isScrolled ? 'bg-white/80 backdrop-blur-md shadow-lg' : 'bg-white/30 backdrop-blur-md shadow-lg'
-    }`}>
-      <div className="relative w-full max-w-[1920px] mx-auto h-14 lg:h-16">
-        {/* Logo */}
-        <div className="absolute left-0 top-0 bottom-0 flex items-center pl-4">
-          <Link href="/" className="flex items-center">
-            <Image
-              src={'/assets/svgs/GenZBotLogo.svg'}
-              alt="Logo"
-              width={isMobile ? 120 : 180}
-              height={isMobile ? 60 : 75}
-              priority
-              className="transition-all duration-300 hover:scale-105 object-contain object-left"
-            />
-          </Link>
+    <>
+      {/* Background blur overlay */}
+      <div 
+        className={`fixed top-0 left-0 right-0 transition-all duration-500 z-[99] ${
+          isScrolled 
+            ? 'bg-white/10 backdrop-blur-2xl shadow-2xl border-b border-white/20' 
+            : 'bg-white/5 backdrop-blur-xl'
+        }`}
+        style={{
+          backdropFilter: isScrolled ? 'blur(20px) saturate(180%)' : 'blur(12px) saturate(150%)',
+          WebkitBackdropFilter: isScrolled ? 'blur(20px) saturate(180%)' : 'blur(12px) saturate(150%)',
+        }}
+      />
+
+      <motion.nav 
+        className="fixed top-0 left-0 right-0 w-full z-[100] transition-all duration-500"
+        initial={{ y: -100 }}
+        animate={{ y: 0 }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
+      >
+        {/* Enhanced glassmorphism container */}
+        <div 
+          className={`relative w-full max-w-[1920px] mx-auto transition-all duration-500 ${
+            isScrolled ? 'h-16' : 'h-18'
+          }`}
+          style={{
+            background: isScrolled 
+              ? 'rgba(255, 255, 255, 0.15)' 
+              : 'rgba(255, 255, 255, 0.08)',
+            backdropFilter: 'blur(25px) saturate(200%)',
+            WebkitBackdropFilter: 'blur(25px) saturate(200%)',
+            borderBottom: isScrolled ? '1px solid rgba(255, 255, 255, 0.2)' : '1px solid rgba(255, 255, 255, 0.1)',
+            boxShadow: isScrolled 
+              ? '0 8px 32px 0 rgba(31, 38, 135, 0.15)' 
+              : '0 4px 16px 0 rgba(31, 38, 135, 0.1)'
+          }}
+        >
+          {/* Animated gradient border */}
+          <div 
+            className={`absolute top-0 left-0 right-0 h-0.5 transition-opacity duration-500 ${
+              isScrolled ? 'opacity-80' : 'opacity-40'
+            }`}
+            style={{
+              background: 'linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.8), rgba(16, 185, 129, 0.8), rgba(245, 101, 101, 0.8), transparent)',
+              animation: 'shimmer 3s ease-in-out infinite'
+            }}
+          />
+
+          {/* Enhanced Logo */}
+          <motion.div 
+            className="absolute left-0 top-0 bottom-0 flex items-center pl-6"
+            whileHover={{ scale: 1.05 }}
+            transition={{ duration: 0.2 }}
+          >
+            <Link href="/" className="flex items-center relative group">
+              <div 
+                className="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-all duration-300"
+                style={{
+                  background: 'radial-gradient(circle, rgba(59, 130, 246, 0.15) 0%, transparent 70%)',
+                  filter: 'blur(10px)'
+                }}
+              />
+              <Image
+                src={'/assets/svgs/GenZBotLogo.svg'}
+                alt="GenZBot Logo"
+                width={isMobile ? 140 : 200}
+                height={isMobile ? 70 : 80}
+                priority
+                className="transition-all duration-300 object-contain object-left relative z-10 drop-shadow-lg"
+              />
+            </Link>
+          </motion.div>
+          
+          {/* Enhanced Menu */}
+          <div className="flex h-full w-full justify-center items-center">
+            <div className="hidden lg:flex items-center justify-center space-x-8 xl:space-x-10">
+              {menuItems.map((item, index) => (
+                <motion.div 
+                  key={item.label} 
+                  className="relative group"
+                  initial={{ opacity: 0, y: -20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                >
+                  {item.dropdown ? (
+                    <>
+                      <button
+                        data-dropdown
+                        onClick={() => toggleDropdown(item.label)}
+                        className={`flex text-white items-center font-semibold transition-all duration-300 relative px-4 py-2 rounded-2xl group ${
+                          activeDropdown === item.label 
+                            ? 'text-blue-600 bg-white/20 backdrop-blur-sm shadow-lg' 
+                            : 'text-gray-700 hover:text-blue-600 hover:bg-white/10'
+                        }`}
+                        style={{
+                          backdropFilter: activeDropdown === item.label ? 'blur(10px)' : undefined,
+                          WebkitBackdropFilter: activeDropdown === item.label ? 'blur(10px)' : undefined,
+                        }}
+                      >
+                        <span className="relative z-10 font-medium">{item.label}</span>
+                        <ChevronDown
+                          className={`ml-2 w-4 h-4 transition-transform duration-300 ${
+                            activeDropdown === item.label ? 'rotate-180' : ''
+                          }`}
+                        />
+                        
+                        {/* Enhanced hover effect */}
+                        <div 
+                          className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                          style={{
+                            background: 'rgba(255, 255, 255, 0.1)',
+                            backdropFilter: 'blur(10px)',
+                            WebkitBackdropFilter: 'blur(10px)',
+                          }}
+                        />
+                      </button>
+
+                      {/* Enhanced Services Dropdown with ultimate blur */}
+                      <AnimatePresence>
+                        {item.label === 'Services' && activeDropdown === item.label && (
+                          <motion.div 
+                            data-dropdown-menu
+                            className="fixed left-1/2 top-[6rem] z-[120] transform -translate-x-1/2 w-full max-w-4xl"
+                            initial={{ opacity: 0, y: -20, scale: 0.95 }}
+                            animate={{ opacity: 1, y: 0, scale: 1 }}
+                            exit={{ opacity: 0, y: -20, scale: 0.95 }}
+                            transition={{ duration: 0.3, ease: "easeOut" }}
+                          >
+                            <div 
+                              className="rounded-3xl shadow-2xl border overflow-hidden"
+                              style={{
+                                background: 'rgba(255, 255, 255, 0.15)',
+                                backdropFilter: 'blur(30px) saturate(180%)',
+                                WebkitBackdropFilter: 'blur(30px) saturate(180%)',
+                                border: '1px solid rgba(255, 255, 255, 0.2)',
+                                boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(255, 255, 255, 0.1) inset'
+                              }}
+                            >
+                              <div className="p-6">
+                                {/* Floating blur elements */}
+                                <div 
+                                  className="absolute top-4 right-6 w-20 h-20 rounded-full opacity-60"
+                                  style={{
+                                    background: 'radial-gradient(circle, rgba(59, 130, 246, 0.3) 0%, transparent 70%)',
+                                    filter: 'blur(20px)'
+                                  }}
+                                />
+                                <div 
+                                  className="absolute bottom-4 left-6 w-16 h-16 rounded-full opacity-40"
+                                  style={{
+                                    background: 'radial-gradient(circle, rgba(16, 185, 129, 0.3) 0%, transparent 70%)',
+                                    filter: 'blur(15px)'
+                                  }}
+                                />
+                                
+                                <div className="flex flex-col lg:flex-row gap-6 relative z-10">
+                                  {/* Hero Card with enhanced blur */}
+                                  <div className="lg:w-1/3">
+                                    <Card 
+                                      className="h-full border-0 text-white overflow-hidden relative"
+                                      style={{
+                                        background: 'linear-gradient(135deg, rgba(59, 130, 246, 0.8) 0%, rgba(16, 185, 129, 0.8) 100%)',
+                                        backdropFilter: 'blur(5px)',
+                                        WebkitBackdropFilter: 'blur(5px)',
+                                      }}
+                                    >
+                                      <div 
+                                        className="absolute inset-0"
+                                        style={{
+                                          background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, transparent 100%)'
+                                        }}
+                                      />
+                                      <CardHeader className="relative z-10 pb-4">
+                                        <div className="flex items-center gap-3 mb-4">
+                                          <div 
+                                            className="w-12 h-12 rounded-2xl flex items-center justify-center border"
+                                            style={{
+                                              background: 'rgba(255, 255, 255, 0.2)',
+                                              backdropFilter: 'blur(10px)',
+                                              WebkitBackdropFilter: 'blur(10px)',
+                                              border: '1px solid rgba(255, 255, 255, 0.3)'
+                                            }}
+                                          >
+                                            <Rocket className="w-6 h-6 text-white" />
+                                          </div>
+                                          <Badge 
+                                            className="text-white border-white/30"
+                                            style={{
+                                              background: 'rgba(255, 255, 255, 0.2)',
+                                              backdropFilter: 'blur(10px)',
+                                              WebkitBackdropFilter: 'blur(10px)',
+                                            }}
+                                          >
+                                            SERVICES
+                                          </Badge>
+                                        </div>
+                                        <CardTitle className="text-2xl font-bold mb-2">
+                                          Automation Services
+                                        </CardTitle>
+                                        <CardDescription className="text-white/90 leading-relaxed">
+                                          Enterprise-grade automation solutions designed for scale and efficiency
+                                        </CardDescription>
+                                      </CardHeader>
+                                      <CardContent className="relative z-10">
+                                        <div className="grid grid-cols-2 gap-3">
+                                          {[
+                                            { icon: <Zap className="w-4 h-4" />, text: "Fast Setup" },
+                                            { icon: <Shield className="w-4 h-4" />, text: "Secure" },
+                                            { icon: <Users className="w-4 h-4" />, text: "24/7 Support" },
+                                            { icon: <Award className="w-4 h-4" />, text: "Premium" }
+                                          ].map((feature, idx) => (
+                                            <div 
+                                              key={idx} 
+                                              className="rounded-xl p-3 border"
+                                              style={{
+                                                background: 'rgba(255, 255, 255, 0.1)',
+                                                backdropFilter: 'blur(10px)',
+                                                WebkitBackdropFilter: 'blur(10px)',
+                                                border: '1px solid rgba(255, 255, 255, 0.2)'
+                                              }}
+                                            >
+                                              <div className="flex items-center gap-2">
+                                                {feature.icon}
+                                                <span className="text-sm font-medium">{feature.text}</span>
+                                              </div>
+                                            </div>
+                                          ))}
+                                        </div>
+                                      </CardContent>
+                                    </Card>
+                                  </div>
+                                  
+                                  {/* Services Grid with enhanced blur cards */}
+                                  <div className="lg:w-2/3 grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    {item.dropdown.map((dropdownItem, idx) => {
+                                      const IconComponent = getServiceIcon(dropdownItem.label);
+                                      const colors = [
+                                        { bg: 'linear-gradient(135deg, rgba(59, 130, 246, 0.8), rgba(147, 197, 253, 0.8))', border: 'rgba(59, 130, 246, 0.3)', text: 'text-blue-600' },
+                                        { bg: 'linear-gradient(135deg, rgba(16, 185, 129, 0.8), rgba(110, 231, 183, 0.8))', border: 'rgba(16, 185, 129, 0.3)', text: 'text-emerald-600' },
+                                        { bg: 'linear-gradient(135deg, rgba(139, 92, 246, 0.8), rgba(196, 181, 253, 0.8))', border: 'rgba(139, 92, 246, 0.3)', text: 'text-purple-600' },
+                                        { bg: 'linear-gradient(135deg, rgba(245, 101, 101, 0.8), rgba(252, 165, 165, 0.8))', border: 'rgba(245, 101, 101, 0.3)', text: 'text-red-600' },
+                                        { bg: 'linear-gradient(135deg, rgba(236, 72, 153, 0.8), rgba(251, 207, 232, 0.8))', border: 'rgba(236, 72, 153, 0.3)', text: 'text-pink-600' }
+                                      ];
+                                      const color = colors[idx % colors.length];
+                                      
+                                      return (
+                                        <motion.div
+                                          key={dropdownItem.label}
+                                          initial={{ opacity: 0, y: 20 }}
+                                          animate={{ opacity: 1, y: 0 }}
+                                          transition={{ duration: 0.3, delay: idx * 0.1 }}
+                                        >
+                                          <Link href={dropdownItem.href} onClick={handleDropdownItemClick}>
+                                            <Card 
+                                              className="transition-all duration-300 cursor-pointer group hover:scale-105 border"
+                                              style={{
+                                                background: 'rgba(255, 255, 255, 0.1)',
+                                                backdropFilter: 'blur(5px)',
+                                                WebkitBackdropFilter: 'blur(5px)',
+                                                border: `1px solid ${color.border}`,
+                                              }}
+                                            >
+                                              <CardHeader className="pb-3">
+                                                <div className="flex items-center justify-between mb-3">
+                                                  <div 
+                                                    className="w-10 h-10 rounded-xl flex items-center justify-center text-white shadow-lg group-hover:scale-110 transition-transform duration-300"
+                                                    style={{ background: color.bg }}
+                                                  >
+                                                    <IconComponent size={16} />
+                                                  </div>
+                                                  <Badge 
+                                                    className="text-white/80 border text-xs"
+                                                    style={{
+                                                      background: 'rgba(255, 255, 255, 0.1)',
+                                                      border: '1px solid rgba(255, 255, 255, 0.2)'
+                                                    }}
+                                                  >
+                                                    {String(idx + 1).padStart(2, '0')}
+                                                  </Badge>
+                                                </div>
+                                                <CardTitle className={`text-lg font-bold ${color.text} group-hover:text-gray-700 transition-colors`}>
+                                                  {dropdownItem.label}
+                                                </CardTitle>
+                                              </CardHeader>
+                                              <CardContent className="pt-0">
+                                                <CardDescription className="text-gray-600 text-sm leading-relaxed group-hover:text-gray-700 transition-colors">
+                                                  {dropdownItem.label === 'Bot Blueprint' && 'Strategic planning and architecture design for your automation infrastructure.'}
+                                                  {dropdownItem.label === 'Build & Test' && 'Development, testing, and quality assurance for robust automation solutions.'}
+                                                  {dropdownItem.label === 'Discovery Call' && 'Consultation session to identify automation opportunities and requirements.'}
+                                                  {dropdownItem.label === 'Hyper Care' && 'Comprehensive support, monitoring, and continuous optimization services.'}
+                                                  {dropdownItem.label === 'Scale & Optimize' && 'Performance enhancement and scalability solutions for growing businesses.'}
+                                                </CardDescription>
+                                              </CardContent>
+                                            </Card>
+                                          </Link>
+                                        </motion.div>
+                                      );
+                                    })}
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+
+                      {/* Enhanced Solutions Dropdown with ultimate blur */}
+                      <AnimatePresence>
+                        {item.label === 'Solutions' && activeDropdown === item.label && (
+                          <motion.div 
+                            data-dropdown-menu
+                            className="fixed left-1/2 top-[6rem] z-[120] transform -translate-x-1/2 w-full max-w-4xl"
+                            initial={{ opacity: 0, y: -20, scale: 0.95 }}
+                            animate={{ opacity: 1, y: 0, scale: 1 }}
+                            exit={{ opacity: 0, y: -20, scale: 0.95 }}
+                            transition={{ duration: 0.3, ease: "easeOut" }}
+                          >
+                            <div 
+                              className="rounded-3xl shadow-2xl border overflow-hidden"
+                              style={{
+                                background: 'rgba(255, 255, 255, 0.15)',
+                                backdropFilter: 'blur(30px) saturate(180%)',
+                                WebkitBackdropFilter: 'blur(30px) saturate(180%)',
+                                border: '1px solid rgba(255, 255, 255, 0.2)',
+                                boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(255, 255, 255, 0.1) inset'
+                              }}
+                            >
+                              <div className="p-6">
+                                {/* Animated background elements */}
+                                <div 
+                                  className="absolute top-2 right-8 w-6 h-6 rounded-full animate-pulse"
+                                  style={{
+                                    background: 'radial-gradient(circle, rgba(236, 72, 153, 0.6) 0%, transparent 70%)',
+                                    filter: 'blur(8px)'
+                                  }}
+                                />
+                                <div 
+                                  className="absolute top-8 right-12 w-4 h-4 rounded-full animate-bounce delay-100"
+                                  style={{
+                                    background: 'radial-gradient(circle, rgba(251, 191, 36, 0.6) 0%, transparent 70%)',
+                                    filter: 'blur(6px)'
+                                  }}
+                                />
+                                <div 
+                                  className="absolute bottom-6 left-8 w-5 h-5 rounded-full animate-pulse delay-200"
+                                  style={{
+                                    background: 'radial-gradient(circle, rgba(245, 101, 101, 0.6) 0%, transparent 70%)',
+                                    filter: 'blur(10px)'
+                                  }}
+                                />
+                                
+                                <div className="flex flex-col lg:flex-row gap-6 relative z-10">
+                                  {/* Hero Card */}
+                                  <div className="lg:w-1/3">
+                                    <Card 
+                                      className="h-full border-0 text-white overflow-hidden relative"
+                                      style={{
+                                        background: 'linear-gradient(135deg, rgba(236, 72, 153, 0.8) 0%, rgba(139, 92, 246, 0.8) 50%, rgba(59, 130, 246, 0.8) 100%)',
+                                        backdropFilter: 'blur(20px)',
+                                        WebkitBackdropFilter: 'blur(20px)',
+                                      }}
+                                    >
+                                      <div 
+                                        className="absolute inset-0"
+                                        style={{
+                                          background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, transparent 100%)'
+                                        }}
+                                      />
+                                      <div 
+                                        className="absolute top-0 right-0 w-24 h-24 rounded-full opacity-30"
+                                        style={{
+                                          background: 'radial-gradient(circle, rgba(255, 255, 255, 0.3) 0%, transparent 70%)',
+                                          filter: 'blur(15px)'
+                                        }}
+                                      />
+                                      
+                                      <CardHeader className="relative z-10 pb-4">
+                                        <div className="flex items-center gap-3 mb-4">
+                                          <div 
+                                            className="w-12 h-12 rounded-2xl flex items-center justify-center border relative overflow-hidden"
+                                            style={{
+                                              background: 'rgba(255, 255, 255, 0.2)',
+                                              backdropFilter: 'blur(10px)',
+                                              WebkitBackdropFilter: 'blur(10px)',
+                                              border: '1px solid rgba(255, 255, 255, 0.3)'
+                                            }}
+                                          >
+                                            <div 
+                                              className="absolute inset-0 animate-pulse"
+                                              style={{
+                                                background: 'linear-gradient(45deg, rgba(251, 191, 36, 0.3) 0%, rgba(236, 72, 153, 0.3) 100%)'
+                                              }}
+                                            />
+                                            <Sparkles className="w-6 h-6 text-white relative z-10" />
+                                          </div>
+                                          <Badge 
+                                            className="text-white border-white/30"
+                                            style={{
+                                              background: 'rgba(255, 255, 255, 0.2)',
+                                              backdropFilter: 'blur(10px)',
+                                              WebkitBackdropFilter: 'blur(10px)',
+                                            }}
+                                          >
+                                            SOLUTIONS ✨
+                                          </Badge>
+                                        </div>
+                                        <CardTitle className="text-2xl font-bold mb-2">
+                                          Business Solutions
+                                        </CardTitle>
+                                        <CardDescription className="text-white/90 leading-relaxed">
+                                          Powerful solutions that transform how you work and grow
+                                        </CardDescription>
+                                      </CardHeader>
+                                      <CardContent className="relative z-10">
+                                        <div className="grid grid-cols-2 gap-3">
+                                          {[
+                                            { emoji: "⚡", text: "Fast Setup" },
+                                            { emoji: "🎯", text: "Goal Focused" },
+                                            { emoji: "🚀", text: "Scalable" },
+                                            { emoji: "💎", text: "Premium" }
+                                          ].map((feature, idx) => (
+                                            <div 
+                                              key={idx} 
+                                              className="rounded-xl p-3 border"
+                                              style={{
+                                                background: 'rgba(255, 255, 255, 0.1)',
+                                                backdropFilter: 'blur(10px)',
+                                                WebkitBackdropFilter: 'blur(10px)',
+                                                border: '1px solid rgba(255, 255, 255, 0.2)'
+                                              }}
+                                            >
+                                              <div className="text-center">
+                                                <div className="text-lg mb-1">{feature.emoji}</div>
+                                                <div className="text-xs font-medium">{feature.text}</div>
+                                              </div>
+                                            </div>
+                                          ))}
+                                        </div>
+                                      </CardContent>
+                                    </Card>
+                                  </div>
+                                  
+                                  {/* Solutions Grid */}
+                                  <div className="lg:w-2/3 grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    {item.dropdown.map((dropdownItem, idx) => {
+                                      const IconComponent = getSolutionIcon(dropdownItem.label);
+                                      const solutions = [
+                                        { bg: 'linear-gradient(135deg, rgba(251, 191, 36, 0.8), rgba(252, 211, 77, 0.8))', emoji: '⏰', color: 'text-amber-600', border: 'rgba(251, 191, 36, 0.3)' },
+                                        { bg: 'linear-gradient(135deg, rgba(236, 72, 153, 0.8), rgba(251, 113, 133, 0.8))', emoji: '📈', color: 'text-pink-600', border: 'rgba(236, 72, 153, 0.3)' },
+                                        { bg: 'linear-gradient(135deg, rgba(16, 185, 129, 0.8), rgba(110, 231, 183, 0.8))', emoji: '💰', color: 'text-green-600', border: 'rgba(16, 185, 129, 0.3)' },
+                                        { bg: 'linear-gradient(135deg, rgba(139, 92, 246, 0.8), rgba(196, 181, 253, 0.8))', emoji: '🤖', color: 'text-purple-600', border: 'rgba(139, 92, 246, 0.3)' }
+                                      ];
+                                      const solution = solutions[idx % solutions.length];
+                                      
+                                      return (
+                                        <motion.div
+                                          key={dropdownItem.label}
+                                          initial={{ opacity: 0, y: 20 }}
+                                          animate={{ opacity: 1, y: 0 }}
+                                          transition={{ duration: 0.3, delay: idx * 0.1 }}
+                                        >
+                                          <Link href={dropdownItem.href} onClick={handleDropdownItemClick}>
+                                            <Card 
+                                              className="transition-all duration-300 cursor-pointer group hover:scale-105 border relative overflow-hidden"
+                                              style={{
+                                                background: 'rgba(255, 255, 255, 0.1)',
+                                                backdropFilter: 'blur(15px)',
+                                                WebkitBackdropFilter: 'blur(15px)',
+                                                border: `1px solid ${solution.border}`,
+                                              }}
+                                            >
+                                              <div className="absolute top-3 right-3 text-xl animate-bounce group-hover:animate-spin transition-all duration-300">
+                                                {solution.emoji}
+                                              </div>
+                                              
+                                              <div 
+                                                className="absolute top-0 left-0 right-0 h-1 group-hover:h-2 transition-all duration-300"
+                                                style={{ background: solution.bg }}
+                                              />
+                                              
+                                              <CardHeader className="pb-3">
+                                                <div className="flex items-start gap-3">
+                                                  <div 
+                                                    className="w-10 h-10 rounded-xl text-white flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg"
+                                                    style={{ background: solution.bg }}
+                                                  >
+                                                    <IconComponent size={16} />
+                                                  </div>
+                                                  <div className="flex-1">
+                                                    <CardTitle className={`text-lg font-bold ${solution.color} group-hover:text-gray-700 transition-colors`}>
+                                                      {dropdownItem.label}
+                                                    </CardTitle>
+                                                  </div>
+                                                </div>
+                                              </CardHeader>
+                                              <CardContent className="pt-0">
+                                                <CardDescription className="text-gray-600 text-sm leading-relaxed group-hover:text-gray-700 transition-colors">
+                                                  {dropdownItem.label === 'Time Liberation' && 'Automate away the boring stuff—get your time back for what matters most.'}
+                                                  {dropdownItem.label === 'Growth Accelerator' && 'Supercharge your business with smart automation that scales as you grow.'}
+                                                  {dropdownItem.label === 'Profit Rescue' && 'Save money, reduce manual work, and let your team shine at what they do best.'}
+                                                  {dropdownItem.label === 'Custom Bot Development' && 'Build something truly yours—bespoke bots and creative automations.'}
+                                                </CardDescription>
+                                              </CardContent>
+                                            </Card>
+                                          </Link>
+                                        </motion.div>
+                                      );
+                                    })}
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    </>
+                  ) : (
+                    <Link
+                      href={item.href}
+                      className="text-white font-semibold transition-all duration-300 relative px-4 py-2 rounded-2xl text-gray-700 hover:text-blue-600 hover:bg-white/10 group"
+                      style={{
+                        backdropFilter: 'blur(10px)',
+                        WebkitBackdropFilter: 'blur(10px)',
+                      }}
+                    >
+                      <span className="relative z-10 font-medium">{item.label}</span>
+                      <div 
+                        className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                        style={{
+                          background: 'rgba(255, 255, 255, 0.1)',
+                          backdropFilter: 'blur(10px)',
+                          WebkitBackdropFilter: 'blur(10px)',
+                        }}
+                      />
+                    </Link>
+                  )}
+                </motion.div>
+              ))}
+            </div>
+          </div>
+          
+          {/* Enhanced Get Started Button with blur */}
+          <div className="absolute right-0 top-0 bottom-0 flex items-center pr-6">
+            <div className="hidden lg:block">
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <Link
+                  href="/contact"
+                  className="relative px-8 py-3 font-bold rounded-2xl transition-all duration-300 shadow-lg hover:shadow-2xl group overflow-hidden text-white"
+                  style={{
+                    background: 'linear-gradient(135deg, rgba(245, 101, 101, 0.9), rgba(251, 113, 133, 0.9))',
+                    backdropFilter: 'blur(15px)',
+                    WebkitBackdropFilter: 'blur(15px)',
+                    border: '1px solid rgba(255, 255, 255, 0.2)'
+                  }}
+                >
+                  <div 
+                    className="absolute inset-0 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"
+                    style={{
+                      background: 'rgba(255, 255, 255, 0.2)',
+                      backdropFilter: 'blur(10px)',
+                      WebkitBackdropFilter: 'blur(10px)',
+                    }}
+                  />
+                  <span className="relative flex items-center">
+                    Get Started
+                    <ArrowRight className="w-4 h-4 ml-2 transition-transform duration-300 group-hover:translate-x-1" />
+                  </span>
+                </Link>
+              </motion.div>
+            </div>
+            
+            {/* Enhanced Mobile Menu Button with blur */}
+            <div className="lg:hidden">
+              <motion.button
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                className="w-12 h-12 rounded-2xl flex items-center justify-center text-gray-700 hover:text-blue-600 transition-all duration-300 border"
+                style={{
+                  background: 'rgba(255, 255, 255, 0.1)',
+                  backdropFilter: 'blur(15px)',
+                  WebkitBackdropFilter: 'blur(15px)',
+                  border: '1px solid rgba(255, 255, 255, 0.2)'
+                }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <AnimatePresence mode="wait">
+                  {mobileMenuOpen ? (
+                    <motion.div
+                      key="close"
+                      initial={{ rotate: -90, opacity: 0 }}
+                      animate={{ rotate: 0, opacity: 1 }}
+                      exit={{ rotate: 90, opacity: 0 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      <X className="w-6 h-6" />
+                    </motion.div>
+                  ) : (
+                    <motion.div
+                      key="menu"
+                      initial={{ rotate: 90, opacity: 0 }}
+                      animate={{ rotate: 0, opacity: 1 }}
+                      exit={{ rotate: -90, opacity: 0 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      <Menu className="w-6 h-6" />
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </motion.button>
+            </div>
+          </div>
         </div>
-        
-        {/* Menu */}
-        <div className="flex h-full w-full justify-center items-center">
-          <div className="hidden lg:flex items-center justify-center space-x-6 xl:space-x-8">
-            {menuItems.map((item) => (
-              <div key={item.label} className="relative group">
-                {item.dropdown ? (
-                  <>
-                    <button
-                      data-dropdown
-                      onClick={() => toggleDropdown(item.label)}
-                      className={`text-menu font-medium transition-colors flex items-center cursor-pointer ${
-                        activeDropdown === item.label 
-                          ? 'text-[var(--color-secondary)]' 
-                          : 'text-[var(--color-primary-dark)] hover:text-[var(--color-secondary)]'
-                      }`}
-                      suppressHydrationWarning
+      </motion.nav>
+      
+      {/* Enhanced Mobile Menu with ultimate blur */}
+      <AnimatePresence>
+        {mobileMenuOpen && (
+          <motion.div
+            className="lg:hidden fixed top-20 left-0 right-0 z-[99] border-t"
+            style={{
+              background: 'rgba(255, 255, 255, 0.15)',
+              backdropFilter: 'blur(25px) saturate(180%)',
+              WebkitBackdropFilter: 'blur(25px) saturate(180%)',
+              border: '1px solid rgba(255, 255, 255, 0.2)',
+              boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.15)'
+            }}
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.3 }}
+          >
+            <div className="px-6 py-4 space-y-2">
+              {menuItems.map((item, index) => (
+                <motion.div 
+                  key={item.label}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.3, delay: index * 0.1 }}
+                >
+                  {item.dropdown ? (
+                    <div>
+                      <button
+                        onClick={() => toggleDropdown(item.label)}
+                        className="flex justify-between items-center w-full px-4 py-3 rounded-2xl font-semibold text-gray-700 transition-all duration-300"
+                        style={{
+                          background: activeDropdown === item.label ? 'rgba(255, 255, 255, 0.15)' : 'rgba(255, 255, 255, 0.05)',
+                          backdropFilter: 'blur(10px)',
+                          WebkitBackdropFilter: 'blur(10px)',
+                        }}
+                      >
+                        <span>{item.label}</span>
+                        <ChevronDown
+                          className={`w-4 h-4 transition-transform duration-300 ${
+                            activeDropdown === item.label ? 'rotate-180' : ''
+                          }`}
+                        />
+                      </button>
+                      <AnimatePresence>
+                        {activeDropdown === item.label && (
+                          <motion.div
+                            className="pl-4 mt-2"
+                            initial={{ height: 0, opacity: 0 }}
+                            animate={{ height: "auto", opacity: 1 }}
+                            exit={{ height: 0, opacity: 0 }}
+                            transition={{ duration: 0.3 }}
+                          >
+                            {item.dropdown.map((dropdownItem, idx) => (
+                              <motion.div
+                                key={dropdownItem.label}
+                                initial={{ opacity: 0, x: -10 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                transition={{ duration: 0.2, delay: idx * 0.05 }}
+                              >
+                                <Link
+                                  href={dropdownItem.href}
+                                  className="block px-4 py-2 rounded-xl text-gray-600 hover:text-gray-700 transition-all duration-300"
+                                  style={{
+                                    background: 'rgba(255, 255, 255, 0.05)',
+                                    backdropFilter: 'blur(5px)',
+                                    WebkitBackdropFilter: 'blur(5px)',
+                                  }}
+                                  onClick={handleDropdownItemClick}
+                                >
+                                  {dropdownItem.label}
+                                </Link>
+                              </motion.div>
+                            ))}
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    </div>
+                  ) : (
+                    <Link
+                      href={item.href}
+                      className="block px-4 py-3 rounded-2xl font-semibold text-gray-700 transition-all duration-300"
+                      style={{
+                        background: 'rgba(255, 255, 255, 0.1)',
+                        backdropFilter: 'blur(10px)',
+                        WebkitBackdropFilter: 'blur(10px)',
+                      }}
+                      onClick={() => setMobileMenuOpen(false)}
                     >
                       {item.label}
-                      <svg
-                        className={`ml-1 w-4 h-4 transition-transform duration-200 ${
-                          activeDropdown === item.label ? 'rotate-180' : ''
-                        }`}
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth="2"
-                          d="M19 9l-7 7-7-7"
-                        />
-                      </svg>
-                    </button>
-
-                    {/* Services Dropdown */}
-                    {item.label === 'Services' && activeDropdown === item.label && (
-                      <div 
-                        data-dropdown-menu
-                        className="fixed left-1/2 top-[4.5rem] z-[120] transform -translate-x-1/2 w-full max-w-3xl rounded-xl shadow-2xl border bg-white/95 backdrop-blur-2xl p-3 transition-all duration-300 opacity-100 scale-100 visible"
-                        style={{ minWidth: '200px', maxWidth: '45vw' }}
-                      >
-                        <div className="flex flex-col lg:flex-row gap-3">
-                          <div className="lg:w-1/3 relative">
-                            <Card className="h-full border-0 bg-gradient-to-br from-slate-900 via-slate-800 to-emerald-900 text-white overflow-hidden">
-                              <CardHeader className="relative pb-2">
-                                <div className="absolute top-0 right-0 w-16 h-16 bg-emerald-400/20 rounded-full blur-xl"></div>
-                                <div className="absolute bottom-0 left-0 w-12 h-12 bg-blue-400/20 rounded-full blur-lg"></div>
-                                <div className="relative z-10">
-                                  <div className="flex items-center gap-1.5 mb-1.5">
-                                    <div className="w-6 h-6 rounded-lg bg-emerald-500/20 border border-emerald-400/30 flex items-center justify-center">
-                                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" className="text-emerald-400">
-                                        <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                                        <path d="M2 17L12 22L22 17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                                        <path d="M2 12L12 17L22 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                                      </svg>
-                                    </div>
-                                    <Badge variant="secondary" className="bg-emerald-500/20 text-emerald-300 border-emerald-400/30 text-xs px-1.5 py-0.5">
-                                      SERVICES
-                                    </Badge>
-                                  </div>
-                                  <CardTitle className="text-lg font-bold text-white mb-1">
-                                    Automation Services
-                                  </CardTitle>
-                                  <CardDescription className="text-slate-300 text-xs">
-                                    Enterprise-grade automation solutions designed for scale and efficiency
-                                  </CardDescription>
-                                </div>
-                              </CardHeader>
-                              <CardContent className="relative z-10 pt-0">
-                                <div className="space-y-1.5">
-                                  <div className="flex items-center gap-1 text-xs text-slate-300">
-                                    <div className="w-1 h-1 bg-emerald-400 rounded-full"></div>
-                                    End-to-end automation
-                                  </div>
-                                  <div className="flex items-center gap-1 text-xs text-slate-300">
-                                    <div className="w-1 h-1 bg-blue-400 rounded-full"></div>
-                                    Expert consultation
-                                  </div>
-                                  <div className="flex items-center gap-1 text-xs text-slate-300">
-                                    <div className="w-1 h-1 bg-purple-400 rounded-full"></div>
-                                    24/7 support included
-                                  </div>
-                                </div>
-                              </CardContent>
-                            </Card>
-                          </div>
-                          
-                          <div className="lg:w-2/3 grid grid-cols-1 md:grid-cols-2 gap-2">
-                            {item.dropdown.map((dropdownItem, idx) => {
-                              const IconComponent = getServiceIcon(dropdownItem.label);
-                              let cardStyle, badgeColor, iconColor;
-                              switch (dropdownItem.label) {
-                                case 'Bot Blueprint':
-                                  cardStyle = 'border-blue-200 hover:border-blue-400 hover:shadow-blue-100';
-                                  badgeColor = 'bg-blue-100 text-blue-700 border-blue-200';
-                                  iconColor = 'text-blue-600';
-                                  break;
-                                case 'Build & Test':
-                                  cardStyle = 'border-emerald-200 hover:border-emerald-400 hover:shadow-emerald-100';
-                                  badgeColor = 'bg-emerald-100 text-emerald-700 border-emerald-200';
-                                  iconColor = 'text-emerald-600';
-                                  break;
-                                case 'Discovery Call':
-                                  cardStyle = 'border-orange-200 hover:border-orange-400 hover:shadow-orange-100';
-                                  badgeColor = 'bg-orange-100 text-orange-700 border-orange-200';
-                                  iconColor = 'text-orange-600';
-                                  break;
-                                case 'Hyper Care':
-                                  cardStyle = 'border-pink-200 hover:border-pink-400 hover:shadow-pink-100';
-                                  badgeColor = 'bg-pink-100 text-pink-700 border-pink-200';
-                                  iconColor = 'text-pink-600';
-                                  break;
-                                case 'Scale & Optimize':
-                                  cardStyle = 'border-purple-200 hover:border-purple-400 hover:shadow-purple-100';
-                                  badgeColor = 'bg-purple-100 text-purple-700 border-purple-200';
-                                  iconColor = 'text-purple-600';
-                                  break;
-                                default:
-                                  cardStyle = 'border-gray-200 hover:border-gray-400 hover:shadow-gray-100';
-                                  badgeColor = 'bg-gray-100 text-gray-700 border-gray-200';
-                                  iconColor = 'text-gray-600';
-                              }
-                              
-                              return (
-                                <Link key={dropdownItem.label} href={dropdownItem.href} onClick={handleDropdownItemClick}>
-                                  <Card className={`${cardStyle} hover:shadow-lg transition-all duration-300 cursor-pointer h-full group`}>
-                                    <CardHeader className="pb-1.5 pt-2 px-2">
-                                      <div className="flex items-start justify-between">
-                                        <div className={`w-5 h-5 rounded-md bg-white border flex items-center justify-center ${iconColor} group-hover:scale-110 transition-transform duration-200`}>
-                                          <IconComponent size={10} />
-                                        </div>
-                                        <Badge variant="outline" className={`${badgeColor} text-xs px-1 py-0`}>
-                                          {String(idx + 1).padStart(2, '0')}
-                                        </Badge>
-                                      </div>
-                                      <CardTitle className="text-sm font-semibold text-slate-800 group-hover:text-slate-900">
-                                        {dropdownItem.label}
-                                      </CardTitle>
-                                    </CardHeader>
-                                    <CardContent className="pt-0 px-2 pb-2">
-                                      <CardDescription className="text-xs leading-relaxed">
-                                        {dropdownItem.label === 'Bot Blueprint' && 'Strategic planning and architecture design for your automation infrastructure.'}
-                                        {dropdownItem.label === 'Build & Test' && 'Development, testing, and quality assurance for robust automation solutions.'}
-                                        {dropdownItem.label === 'Discovery Call' && 'Consultation session to identify automation opportunities and requirements.'}
-                                        {dropdownItem.label === 'Hyper Care' && 'Comprehensive support, monitoring, and continuous optimization services.'}
-                                        {dropdownItem.label === 'Scale & Optimize' && 'Performance enhancement and scalability solutions for growing businesses.'}
-                                      </CardDescription>
-                                    </CardContent>
-                                  </Card>
-                                </Link>
-                              );
-                            })}
-                          </div>
-                        </div>
-                      </div>
-                    )}
-
-                    {/* Solutions Dropdown */}
-                    {item.label === 'Solutions' && activeDropdown === item.label && (
-                      <div 
-                        data-dropdown-menu
-                        className="fixed left-1/2 top-[4.5rem] z-[120] transform -translate-x-1/2 w-full max-w-3xl rounded-2xl shadow-2xl border-0 bg-gradient-to-br from-orange-50 via-pink-50 to-yellow-50 backdrop-blur-2xl p-3 transition-all duration-300 opacity-100 scale-100 visible overflow-hidden"
-                        style={{ minWidth: '200px', maxWidth: '45vw' }}
-                      >
-                        {/* Floating Elements */}
-                        <div className="absolute top-2 right-4 w-3 h-3 bg-gradient-to-r from-pink-400 to-orange-400 rounded-full animate-pulse"></div>
-                        <div className="absolute top-6 right-8 w-2 h-2 bg-gradient-to-r from-yellow-400 to-pink-400 rounded-full animate-bounce delay-100"></div>
-                        <div className="absolute bottom-4 left-6 w-2.5 h-2.5 bg-gradient-to-r from-orange-400 to-red-400 rounded-full animate-pulse delay-200"></div>
-                        
-                        <div className="flex flex-col lg:flex-row gap-3 relative z-10">
-                          <div className="lg:w-1/3 relative">
-                            <Card className="h-full border-0 bg-gradient-to-br from-pink-500 via-orange-500 to-yellow-500 text-white overflow-hidden relative">
-                              <div className="absolute top-0 right-0 w-20 h-20 bg-white/10 rounded-full -translate-y-4 translate-x-4 animate-pulse"></div>
-                              <div className="absolute bottom-0 left-0 w-16 h-16 bg-white/10 rounded-full translate-y-4 -translate-x-4 animate-bounce"></div>
-                              
-                              <CardHeader className="relative pb-2 z-10 pt-2 px-2">
-                                <div className="flex items-center gap-1.5 mb-2">
-                                  <div className="w-7 h-7 rounded-xl bg-white/20 backdrop-blur-sm border border-white/30 flex items-center justify-center relative overflow-hidden">
-                                    <div className="absolute inset-0 bg-gradient-to-br from-yellow-300/30 to-pink-300/30 animate-pulse"></div>
-                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" className="text-white relative z-10">
-                                      <path d="M12 2L15.09 8.26L22 9L17 14L18.18 21L12 17.77L5.82 21L7 14L2 9L8.91 8.26L12 2Z" fill="currentColor"/>
-                                    </svg>
-                                  </div>
-                                  <div className="space-y-0.5">
-                                    <Badge variant="secondary" className="bg-white/20 text-white border-white/30 backdrop-blur-sm text-xs px-1.5 py-0.5">
-                                      SOLUTIONS ✨
-                                    </Badge>
-                                    <div className="text-xs text-white/80 font-medium">Transform Your Business</div>
-                                  </div>
-                                </div>
-                                <CardTitle className="text-lg font-bold text-white mb-1.5 leading-tight">
-                                  Business Solutions
-                                </CardTitle>
-                                <CardDescription className="text-white/90 leading-relaxed text-xs">
-                                  Playful yet powerful solutions that transform how you work and grow your business
-                                </CardDescription>
-                              </CardHeader>
-                              <CardContent className="relative z-10 pt-0 px-2 pb-2">
-                                <div className="grid grid-cols-2 gap-1.5">
-                                  <div className="bg-white/10 backdrop-blur-sm rounded-lg p-1.5 border border-white/20">
-                                    <div className="text-lg mb-0.5">⚡</div>
-                                    <div className="text-xs font-medium">Fast Setup</div>
-                                  </div>
-                                  <div className="bg-white/10 backdrop-blur-sm rounded-lg p-1.5 border border-white/20">
-                                    <div className="text-lg mb-0.5">🎯</div>
-                                    <div className="text-xs font-medium">Goal Focused</div>
-                                  </div>
-                                  <div className="bg-white/10 backdrop-blur-sm rounded-lg p-1.5 border border-white/20">
-                                    <div className="text-lg mb-0.5">🚀</div>
-                                    <div className="text-xs font-medium">Scalable</div>
-                                  </div>
-                                  <div className="bg-white/10 backdrop-blur-sm rounded-lg p-1.5 border border-white/20">
-                                    <div className="text-lg mb-0.5">💎</div>
-                                    <div className="text-xs font-medium">Premium</div>
-                                  </div>
-                                </div>
-                              </CardContent>
-                            </Card>
-                          </div>
-                          
-                          <div className="lg:w-2/3 grid grid-cols-1 md:grid-cols-2 gap-2.5">
-                            {item.dropdown.map((dropdownItem, idx) => {
-                              const IconComponent = getSolutionIcon(dropdownItem.label);
-                              let cardStyle, gradientFrom, gradientTo, emoji, accentColor;
-                              switch (dropdownItem.label) {
-                                case 'Time Liberation':
-                                  cardStyle = 'border-amber-200 hover:border-amber-400 hover:shadow-amber-100';
-                                  gradientFrom = 'from-amber-400';
-                                  gradientTo = 'to-yellow-400';
-                                  emoji = '⏰';
-                                  accentColor = 'text-amber-600';
-                                  break;
-                                case 'Growth Accelerator':
-                                  cardStyle = 'border-pink-200 hover:border-pink-400 hover:shadow-pink-100';
-                                  gradientFrom = 'from-pink-400';
-                                  gradientTo = 'to-rose-400';
-                                  emoji = '📈';
-                                  accentColor = 'text-pink-600';
-                                  break;
-                                case 'Profit Rescue':
-                                  cardStyle = 'border-emerald-200 hover:border-emerald-400 hover:shadow-emerald-100';
-                                  gradientFrom = 'from-emerald-400';
-                                  gradientTo = 'to-teal-400';
-                                  emoji = '💰';
-                                  accentColor = 'text-emerald-600';
-                                  break;
-                                case 'Custom Bot Development':
-                                  cardStyle = 'border-purple-200 hover:border-purple-400 hover:shadow-purple-100';
-                                  gradientFrom = 'from-purple-400';
-                                  gradientTo = 'to-indigo-400';
-                                  emoji = '🤖';
-                                  accentColor = 'text-purple-600';
-                                  break;
-                                default:
-                                  cardStyle = 'border-gray-200 hover:border-gray-400 hover:shadow-gray-100';
-                                  gradientFrom = 'from-gray-400';
-                                  gradientTo = 'to-slate-400';
-                                  emoji = '⭐';
-                                  accentColor = 'text-gray-600';
-                              }
-                              
-                              const progressWidth = `${60 + (idx * 10)}%`;
-                              
-                              return (
-                                <Link key={dropdownItem.label} href={dropdownItem.href} onClick={handleDropdownItemClick}>
-                                  <Card className={`${cardStyle} hover:shadow-xl transition-all duration-300 cursor-pointer h-full group bg-white/80 backdrop-blur-sm relative overflow-hidden`}>
-                                    <div className="absolute top-1.5 right-1.5 text-lg animate-bounce group-hover:animate-spin transition-all duration-300">
-                                      {emoji}
-                                    </div>
-                                    
-                                    <div className={`absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r ${gradientFrom} ${gradientTo} group-hover:h-1 transition-all duration-300`}></div>
-                                    
-                                    <CardHeader className="pb-1.5 relative pt-2 px-2">
-                                      <div className="flex items-start gap-1.5">
-                                        <div className={`w-6 h-6 rounded-xl bg-gradient-to-br ${gradientFrom} ${gradientTo} text-white flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg`}>
-                                          <IconComponent size={11} />
-                                        </div>
-                                        <div className="flex-1">
-                                          <CardTitle className={`text-sm font-bold ${accentColor} group-hover:text-opacity-80 transition-colors mb-0.5`}>
-                                            {dropdownItem.label}
-                                          </CardTitle>
-                                          {/* <Badge variant="outline" className={`text-xs bg-gradient-to-r ${gradientFrom} ${gradientTo} text-white border-0 px-1 py-0`}>
-                                            Popular Choice
-                                          </Badge> */}
-                                        </div>
-                                      </div>
-                                    </CardHeader>
-                                    <CardContent className="pt-0 px-2 pb-2">
-                                      <CardDescription className="text-xs leading-relaxed text-slate-600 group-hover:text-slate-800 transition-colors">
-                                        {dropdownItem.label === 'Time Liberation' && 'Automate away the boring stuff—get your time back for what matters most to you and your team.'}
-                                        {dropdownItem.label === 'Growth Accelerator' && 'Supercharge your business with playful, smart automation that scales as you grow and evolve.'}
-                                        {dropdownItem.label === 'Profit Rescue' && 'Save money, reduce manual work, and let your team shine at what they do best every day.'}
-                                        {dropdownItem.label === 'Custom Bot Development' && 'Build something truly yours—bespoke bots, creative automations, and a dash of magic.'}
-                                      </CardDescription>
-                                      
-                                      <div className="mt-2 space-y-1">
-                                        <div className="flex justify-between text-xs text-slate-500">
-                                          <span>Setup Time</span>
-                                          <span>{idx === 0 ? '1 week' : idx === 1 ? '2 weeks' : idx === 2 ? '1 week' : '3 weeks'}</span>
-                                        </div>
-                                        <div className="w-full bg-slate-200 rounded-full h-1">
-                                          <div 
-                                            className={`bg-gradient-to-r ${gradientFrom} ${gradientTo} h-1 rounded-full transition-all duration-1000 group-hover:w-full`}
-                                            style={{ width: progressWidth }}
-                                          ></div>
-                                        </div>
-                                      </div>
-                                    </CardContent>
-                                  </Card>
-                                </Link>
-                              );
-                            })}
-                          </div>
-                        </div>
-                      </div>
-                    )}
-
-                    {/* Default dropdown */}
-                    {item.label !== 'Services' && item.label !== 'Solutions' && activeDropdown === item.label && (
-                      <div
-                        data-dropdown-menu
-                        className="absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-10 transform transition-all duration-200 origin-top-left opacity-100 scale-100"
-                      >
-                        {item.dropdown.map((dropdownItem) => (
-                          <Link
-                            key={dropdownItem.label}
-                            href={dropdownItem.href}
-                            className="block px-4 py-2 text-menu font-desc text-gray-700 hover:bg-orange-50 hover:text-[var(--color-secondary)] transition-colors duration-200 cursor-pointer"
-                            onClick={handleDropdownItemClick}
-                          >
-                            {dropdownItem.label}
-                          </Link>
-                        ))}
-                      </div>
-                    )}
-                  </>
-                ) : (
-                  <Link
-                    href={item.href}
-                    className="text-menu font-medium transition-colors duration-200 text-[var(--color-primary-dark)] hover:text-[var(--color-secondary)] cursor-pointer"
-                  >
-                    {item.label}
-                  </Link>
-                )}
-              </div>
-            ))}
-          </div>
-        </div>
-        
-        {/* Get Started Button */}
-        <div className="absolute right-0 top-0 bottom-0 flex items-center pr-4">
-          <div className="hidden lg:block">
-            <Link
-              href="/contact"
-              className="btn-secondary text-btn font-btn text-white px-6 py-2.5 rounded-none hover:bg-white hover:text-[var(--color-secondary)] hover:border-[var(--color-secondary)] border-2 border-transparent transition-all duration-300 cursor-pointer whitespace-nowrap"
-            >
-              Get Started
-            </Link>
-          </div>
-          {/* Mobile Menu Button */}
-          <div className="lg:hidden">
-            <button
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="inline-flex items-center justify-center p-2 rounded-md focus:outline-none transition-colors duration-200 text-gray-700 hover:text-[var(--color-secondary)] hover:bg-orange-50"
-              suppressHydrationWarning
-            >
-              <svg
-                className={`${mobileMenuOpen ? 'hidden' : 'block'} h-6 w-6`}
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                aria-hidden="true"
+                    </Link>
+                  )}
+                </motion.div>
+              ))}
+              
+              {/* Mobile CTA Button with blur */}
+              <motion.div
+                className="pt-4"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.3, delay: 0.6 }}
               >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M4 6h16M4 12h16M4 18h16"
-                />
-              </svg>
-              <svg
-                className={`${mobileMenuOpen ? 'block' : 'hidden'} h-6 w-6`}
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                aria-hidden="true"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M6 18L18 6M6 6l12 12"
-                />
-              </svg>
-            </button>
-          </div>
-        </div>
-      </div>
-      
-      {/* Mobile Menu */}
-      <div
-        className={`lg:hidden transition-all duration-300 ease-in-out ${
-          mobileMenuOpen ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0'
-        } overflow-hidden bg-white`}
-      >
-        <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-          {menuItems.map((item) => (
-            <div key={item.label} className="block">
-              {item.dropdown ? (
-                <div className="py-1">
-                  <button
-                    onClick={() => toggleDropdown(item.label)}
-                    className="flex justify-between items-center w-full px-3 py-2 font-medium transition-colors rounded-md cursor-pointer text-label font-label text-gray-800 hover:text-[var(--color-secondary)] hover:bg-orange-50"
-                    suppressHydrationWarning
-                  >
-                    <span>{item.label}</span>
-                    <svg
-                      className={`ml-1 w-4 h-4 transition-transform duration-200 ${
-                        activeDropdown === item.label ? 'rotate-180' : ''
-                      }`}
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M19 9l-7 7-7-7"
-                      />
-                    </svg>
-                  </button>
-                  <div
-                    className={`pl-4 transition-all duration-200 ${
-                      activeDropdown === item.label ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
-                    } overflow-hidden`}
-                  >
-                    {item.dropdown.map((dropdownItem) => (
-                      <Link
-                        key={dropdownItem.label}
-                        href={dropdownItem.href}
-                        className="block pl-3 pr-4 py-2 rounded-md transition-colors duration-200 cursor-pointer text-desc font-desc text-gray-700 hover:bg-orange-50 hover:text-[var(--color-secondary)]"
-                        onClick={handleDropdownItemClick}
-                      >
-                        {dropdownItem.label}
-                      </Link>
-                    ))}
-                  </div>
-                </div>
-              ) : (
                 <Link
-                  href={item.href}
-                  className="block px-3 py-2 rounded-md text-base font-medium text-gray-800 hover:text-[var(--color-secondary)] hover:bg-orange-50 transition-colors"
+                  href="/contact"
+                  className="block w-full px-6 py-3 font-bold rounded-2xl text-center transition-all duration-300 shadow-lg text-white"
+                  style={{
+                    background: 'linear-gradient(135deg, rgba(245, 101, 101, 0.9), rgba(251, 113, 133, 0.9))',
+                    backdropFilter: 'blur(15px)',
+                    WebkitBackdropFilter: 'blur(15px)',
+                    border: '1px solid rgba(255, 255, 255, 0.2)'
+                  }}
                   onClick={() => setMobileMenuOpen(false)}
                 >
-                  {item.label}
+                  Get Started
                 </Link>
-              )}
+              </motion.div>
             </div>
-          ))}
-        </div>
-      </div>
-    </nav>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      <style jsx>{`
+        @keyframes shimmer {
+          0% { transform: translateX(-100%); }
+          100% { transform: translateX(100%); }
+        }
+      `}</style>
+    </>
   );
 }
