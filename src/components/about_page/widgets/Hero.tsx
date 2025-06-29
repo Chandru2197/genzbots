@@ -1,6 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
-import { motion } from 'framer-motion';
+import { motion, easeOut } from 'framer-motion';
 import { HeroProps } from '../../../shared/types';
 import CTA from '../common/CTA';
 
@@ -23,7 +23,7 @@ const Hero = ({ title, subtitle, tagline, callToAction, callToAction2, image }: 
       y: 0,
       transition: {
         duration: 0.8,
-        ease: "easeOut",
+        ease: easeOut,
       },
     },
   };
