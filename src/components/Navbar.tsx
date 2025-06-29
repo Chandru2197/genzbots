@@ -4,12 +4,6 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Button } from './ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/card';
-import { Badge } from './ui/badge';
-import { Separator } from './ui/separator';
-import { serviceIcons } from './ui/lucide-icons';
-import { solutionIcons } from './ui/lucide-solution-icons';
 import { 
   Sparkles, 
   Zap, 
@@ -20,9 +14,36 @@ import {
   Rocket,
   Shield,
   Users,
-  Award
+  Award,
+  Building2,
+  Heart,
+  ShoppingCart,
+  Factory,
+  UserCheck,
+  Landmark,
+  FileText,
+  Eye,
+  CreditCard,
+  BarChart3,
+  UserPlus,
+  HeartHandshake,
+  Clipboard,
+  Pill,
+  TrendingUp,
+  RotateCcw,
+  ShoppingBag,
+  Wrench,
+  Truck,
+  Activity,
+  FileSearch,
+  Calculator,
+  BrainCircuit,
+  Bot,
+  Leaf,
+  ChevronRight
 } from 'lucide-react';
 
+// Types
 interface NavbarProps {
   addToRefs?: (el: HTMLElement | null) => void;
 }
@@ -32,24 +53,287 @@ interface DropdownItem {
   href: string;
 }
 
+interface ProductCategory {
+  id: string;
+  title: string;
+  icon: any;
+  color: string;
+  bgGradient: string;
+  services: ProductService[];
+}
+
+interface ProductService {
+  name: string;
+  description: string;
+  tools: string;
+  href: string;
+  icon: any;
+}
+
 interface MenuItem {
   label: string;
   href: string;
   dropdown?: DropdownItem[];
 }
 
+// Simple Card Components (replace with your UI library if you have one)
+const Card = ({ children, className = '', style, ...props }: any) => (
+  <div className={`rounded-lg border ${className}`} style={style} {...props}>
+    {children}
+  </div>
+);
+
+const CardHeader = ({ children, className = '', ...props }: any) => (
+  <div className={`p-4 ${className}`} {...props}>
+    {children}
+  </div>
+);
+
+const CardContent = ({ children, className = '', ...props }: any) => (
+  <div className={`p-4 pt-0 ${className}`} {...props}>
+    {children}
+  </div>
+);
+
+const CardTitle = ({ children, className = '', ...props }: any) => (
+  <h3 className={`font-semibold ${className}`} {...props}>
+    {children}
+  </h3>
+);
+
+const CardDescription = ({ children, className = '', ...props }: any) => (
+  <p className={`text-sm ${className}`} {...props}>
+    {children}
+  </p>
+);
+
+const Badge = ({ children, className = '', style, ...props }: any) => (
+  <span className={`px-2 py-1 text-xs rounded-md ${className}`} style={style} {...props}>
+    {children}
+  </span>
+);
+
+// Data
+const productCategories: ProductCategory[] = [
+  {
+    id: 'bfsi',
+    title: 'Banking & Financial Services',
+    icon: Building2,
+    color: 'text-blue-600',
+    bgGradient: 'linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(147, 197, 253, 0.1))',
+    services: [
+      {
+        name: 'Loan Application Processing',
+        description: 'Auto-extract KYC data → Credit scoring → Approval',
+        tools: 'UiPath + Abbyy',
+        href: '/product/bfsi/loan',
+        icon: FileText
+      },
+      {
+        name: 'AML Monitoring',
+        description: 'Scan transactions → Flag suspicious activity',
+        tools: 'AI: Anomaly detection',
+        href: '/product/bfsi/aml',
+        icon: Eye
+      },
+      {
+        name: 'Card Dispute Resolution',
+        description: 'Auto-fill dispute forms from transaction logs',
+        tools: 'Blue Prism + SQL',
+        href: '/product/bfsi/card-dispute',
+        icon: CreditCard
+      },
+      {
+        name: 'Bank Reconciliation',
+        description: 'Match statements with ERP entries',
+        tools: 'AI: Fuzzy matching',
+        href: '/product/bfsi/bank-reconciliation',
+        icon: BarChart3
+      }
+    ]
+  },
+  {
+    id: 'healthcare',
+    title: 'Healthcare & Pharma',
+    icon: Heart,
+    color: 'text-red-600',
+    bgGradient: 'linear-gradient(135deg, rgba(239, 68, 68, 0.1), rgba(252, 165, 165, 0.1))',
+    services: [
+      {
+        name: 'Patient Onboarding',
+        description: 'Scan IDs → Populate EHR → Schedule appointments',
+        tools: 'UiPath + OCR',
+        href: '/product/healthcare&pharma/patient-onboarding',
+        icon: UserPlus
+      },
+      {
+        name: 'Claims Processing',
+        description: 'Validate insurance claims → Submit to TPAs',
+        tools: 'AI: Rule-based validation',
+        href: '/product/healthcare&pharma/claims',
+        icon: HeartHandshake
+      },
+      {
+        name: 'Clinical Trial Data Entry',
+        description: 'Extract lab report data → Trial databases',
+        tools: 'Python + AA',
+        href: '/product/healthcare&pharma/clinical',
+        icon: Clipboard
+      },
+      {
+        name: 'Pharmacy Inventory Sync',
+        description: 'Auto-generate purchase orders',
+        tools: 'SAP + RPA',
+        href: '/product/healthcare&pharma/inventory',
+        icon: Pill
+      }
+    ]
+  },
+  {
+    id: 'retail',
+    title: 'Retail & E-Commerce',
+    icon: ShoppingCart,
+    color: 'text-purple-600',
+    bgGradient: 'linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(196, 181, 253, 0.1))',
+    services: [
+      {
+        name: 'Dynamic Pricing',
+        description: 'Scrape competitor prices → Adjust Shopify/Amazon listings',
+        tools: 'AI: Regression models',
+        href: '/product/retail&ecommerce/pricing',
+        icon: TrendingUp
+      },
+      {
+        name: 'Returns Processing',
+        description: 'Validate requests → Generate labels',
+        tools: 'UiPath + USPS API',
+        href: '/product/retail&ecommerce/returns',
+        icon: RotateCcw
+      },
+      {
+        name: 'Order Reconciliation',
+        description: 'Match Amazon/Flipkart orders with warehouses',
+        tools: 'SQL + RPA',
+        href: '/product/retail&ecommerce/order',
+        icon: ShoppingBag
+      }
+    ]
+  },
+  {
+    id: 'manufacturing',
+    title: 'Manufacturing & Logistics',
+    icon: Factory,
+    color: 'text-orange-600',
+    bgGradient: 'linear-gradient(135deg, rgba(251, 146, 60, 0.1), rgba(254, 215, 170, 0.1))',
+    services: [
+      {
+        name: 'BOM Validation',
+        description: 'Cross-check supplier invoices vs. CAD designs',
+        tools: 'SolidWorks + RPA',
+        href: '/product/manufacturing&logistics/bom',
+        icon: Wrench
+      },
+      {
+        name: 'Shipment Tracking',
+        description: 'Monitor courier APIs → Alert customers',
+        tools: 'Python + Twilio',
+        href: '/product/manufacturing&logistics/shipment',
+        icon: Truck
+      },
+      {
+        name: 'Predictive Maintenance',
+        description: 'IoT sensors → Forecast machine failures',
+        tools: 'AI: Time-series forecasting',
+        href: '/product/manufacturing&logistics/maintenance',
+        icon: Activity
+      }
+    ]
+  },
+  {
+    id: 'hr',
+    title: 'Human Resources',
+    icon: UserCheck,
+    color: 'text-green-600',
+    bgGradient: 'linear-gradient(135deg, rgba(34, 197, 94, 0.1), rgba(134, 239, 172, 0.1))',
+    services: [
+      {
+        name: 'Resume Screening',
+        description: 'Parse resumes → Rank candidates',
+        tools: 'AI: NLP + ChatGPT',
+        href: '/product/hr/resume',
+        icon: FileSearch
+      },
+      {
+        name: 'Payroll Processing',
+        description: 'Calculate salaries → Bank transfers',
+        tools: 'Tally + RPA',
+        href: '/product/hr/payroll',
+        icon: Calculator
+      },
+      {
+        name: 'Employee Offboarding',
+        description: 'Revoke access → Asset recovery',
+        tools: 'Active Directory + RPA',
+        href: '/product/hr/offboarding',
+        icon: UserCheck
+      }
+    ]
+  },
+  {
+    id: 'government',
+    title: 'Government & Public Sector',
+    icon: Landmark,
+    color: 'text-indigo-600',
+    bgGradient: 'linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(196, 181, 253, 0.1))',
+    services: [
+      {
+        name: 'Grievance Redressal',
+        description: 'Route complaints → Send updates',
+        tools: 'AI: Text classification',
+        href: '/product/gov&public/grievance-redressal',
+        icon: HeartHandshake
+      },
+      {
+        name: 'Pension Processing',
+        description: 'Verify eligibility → Disburse payments',
+        tools: 'RPA + Aadhaar API',
+        href: '/product/gov&public/pension',
+        icon: Calculator
+      }
+    ]
+  }
+];
+
+// Helper functions
 function getServiceIcon(label: string) {
-  return (serviceIcons as Record<string, any>)[label] || serviceIcons['default'];
+  const icons: Record<string, any> = {
+    'Bot Blueprint': FileText,
+    'Build & Test': Wrench,
+    'Discovery Call': Users,
+    'Hyper Care': Shield,
+    'Scale & Optimize': TrendingUp,
+    'default': Rocket
+  };
+  return icons[label] || icons['default'];
 }
 
 function getSolutionIcon(label: string) {
-  return (solutionIcons as Record<string, any>)[label] || solutionIcons['default'];
+  const icons: Record<string, any> = {
+    'Time Liberation': Zap,
+    'Growth Accelerator': TrendingUp,
+    'Profit Rescue': Shield,
+    'Custom Bot Development': Bot,
+    'default': Sparkles
+  };
+  return icons[label] || icons['default'];
 }
 
+// Main Component
 export default function Navbar({ addToRefs }: NavbarProps) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
+  const [activeCategory, setActiveCategory] = useState<string>('bfsi');
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -62,8 +346,11 @@ export default function Navbar({ addToRefs }: NavbarProps) {
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
-      setActiveDropdown(null);
+      if (window.scrollY > 20) {
+        setActiveDropdown(null);
+      }
     };
+    
     const handleClickOutside = (event: MouseEvent) => {
       const target = event.target as HTMLElement;
       const dropdownButtons = document.querySelectorAll('[data-dropdown]');
@@ -72,10 +359,14 @@ export default function Navbar({ addToRefs }: NavbarProps) {
       const isClickInsideDropdown = Array.from(dropdownButtons).some(button => button.contains(target)) ||
                                    Array.from(dropdownMenus).some(menu => menu.contains(target));
       
-      if (!isClickInsideDropdown) setActiveDropdown(null);
+      if (!isClickInsideDropdown) {
+        setActiveDropdown(null);
+      }
     };
+    
     window.addEventListener('scroll', handleScroll);
     document.addEventListener('mousedown', handleClickOutside);
+    
     return () => {
       window.removeEventListener('scroll', handleScroll);
       document.removeEventListener('mousedown', handleClickOutside);
@@ -105,6 +396,7 @@ export default function Navbar({ addToRefs }: NavbarProps) {
         { label: 'Custom Bot Development', href: '/solutions/custombot-development' }
       ]
     },
+    { label: 'Products', href: '/products' },
     { label: 'About', href: '/about' },
     { label: 'Blog', href: '/blog' },
     { label: 'Contact', href: '/contact' }
@@ -117,6 +409,10 @@ export default function Navbar({ addToRefs }: NavbarProps) {
   const handleDropdownItemClick = () => {
     setActiveDropdown(null);
     setMobileMenuOpen(false);
+  };
+
+  const handleCategoryChange = (categoryId: string) => {
+    setActiveCategory(categoryId);
   };
 
   return (
@@ -182,14 +478,10 @@ export default function Navbar({ addToRefs }: NavbarProps) {
                   filter: 'blur(10px)'
                 }}
               />
-              <Image
-                src={'/assets/svgs/GenZBotLogo.svg'}
-                alt="GenZBot Logo"
-                width={isMobile ? 140 : 200}
-                height={isMobile ? 70 : 80}
-                priority
-                className="transition-all duration-300 object-contain object-left relative z-10 drop-shadow-lg"
-              />
+              {/* Replace with your logo */}
+              <div className="text-2xl font-bold text-white relative z-10">
+                GenZ<span className="text-blue-400">Bot</span>
+              </div>
             </Link>
           </motion.div>
           
@@ -204,7 +496,7 @@ export default function Navbar({ addToRefs }: NavbarProps) {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                 >
-                  {item.dropdown ? (
+                  {item.dropdown || item.label === 'Products' ? (
                     <>
                       <button
                         data-dropdown
@@ -237,12 +529,147 @@ export default function Navbar({ addToRefs }: NavbarProps) {
                         />
                       </button>
 
-                      {/* Enhanced Services Dropdown with ultimate blur */}
+                      {/* Products Dropdown - Compact Vertical Tabs */}
+                      <AnimatePresence>
+                        {item.label === 'Products' && activeDropdown === item.label && (
+                          <motion.div 
+                            data-dropdown-menu
+                            className="fixed left-1/2 top-[4.5rem] z-[120] transform -translate-x-1/2"
+                            initial={{ opacity: 0, y: -20, scale: 0.95 }}
+                            animate={{ opacity: 1, y: 0, scale: 1 }}
+                            exit={{ opacity: 0, y: -20, scale: 0.95 }}
+                            transition={{ duration: 0.3, ease: "easeOut" }}
+                          >
+                            <div 
+                              className="rounded-2xl shadow-2xl border overflow-hidden w-[900px]"
+                              style={{
+                                background: 'rgba(17, 24, 39, 1)',
+                                backdropFilter: 'blur(15px)',
+                                WebkitBackdropFilter: 'blur(15px)',
+                                border: '1px solid rgba(75, 85, 99, 0.3)',
+                                boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.4)',
+                                height: '480px'
+                              }}
+                            >
+                              <div className="flex h-full">
+                                {/* Vertical Tabs */}
+                                <div className="w-64 border-r border-gray-700/50 bg-gray-800/50">
+                                  <div className="p-3 border-b border-gray-700/50">
+                                    <h3 className="text-sm font-bold text-white mb-1">Product Categories</h3>
+                                    <p className="text-xs text-gray-400">Choose your industry</p>
+                                  </div>
+                                  <div className="overflow-y-auto" style={{ height: 'calc(480px - 60px)' }}>
+                                    <div className="p-2">
+                                      {productCategories.map((category) => {
+                                        const IconComponent = category.icon;
+                                        return (
+                                          <button
+                                            key={category.id}
+                                            onClick={() => handleCategoryChange(category.id)}
+                                            className={`w-full text-left p-2.5 rounded-lg mb-1.5 transition-all duration-200 flex items-center gap-2.5 text-sm ${
+                                              activeCategory === category.id
+                                                ? 'bg-blue-600/20 border border-blue-500/30 text-white'
+                                                : 'text-gray-300 hover:bg-gray-700/50 hover:text-white'
+                                            }`}
+                                          >
+                                            <div 
+                                              className={`w-8 h-8 rounded-lg flex items-center justify-center ${
+                                                activeCategory === category.id ? 'bg-blue-600' : 'bg-gray-700'
+                                              }`}
+                                            >
+                                              <IconComponent className="w-4 h-4 text-white" />
+                                            </div>
+                                            <div className="flex-1 min-w-0">
+                                              <div className="font-medium text-xs truncate">{category.title}</div>
+                                              <div className="text-xs text-gray-400">{category.services.length} services</div>
+                                            </div>
+                                            {activeCategory === category.id && (
+                                              <ChevronRight className="w-3 h-3 text-blue-400 flex-shrink-0" />
+                                            )}
+                                          </button>
+                                        );
+                                      })}
+                                    </div>
+                                  </div>
+                                </div>
+
+                                {/* Content Area */}
+                                <div className="flex-1 p-4 overflow-y-auto">
+                                  {productCategories.map((category) => {
+                                    if (category.id !== activeCategory) return null;
+                                    
+                                    const CategoryIcon = category.icon;
+                                    
+                                    return (
+                                      <div key={category.id} className="h-full">
+                                        {/* Header */}
+                                        <div className="mb-4">
+                                          <div className="flex items-center gap-3 mb-3">
+                                            <div 
+                                              className="w-12 h-12 rounded-xl flex items-center justify-center"
+                                              style={{ background: category.bgGradient }}
+                                            >
+                                              <CategoryIcon className={`w-6 h-6 ${category.color}`} />
+                                            </div>
+                                            <div>
+                                              <h2 className="text-lg font-bold text-white">{category.title}</h2>
+                                              <p className="text-gray-400 text-sm">Automation solutions for {category.title.toLowerCase()}</p>
+                                            </div>
+                                          </div>
+                                        </div>
+
+                                        {/* Services Grid */}
+                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                                          {category.services.map((service, idx) => {
+                                            const ServiceIcon = service.icon;
+                                            return (
+                                              <Link 
+                                                key={service.name}
+                                                href={service.href}
+                                                onClick={handleDropdownItemClick}
+                                              >
+                                                <Card className="bg-gray-800/50 border-gray-700/50 hover:bg-gray-700/50 transition-all duration-300 cursor-pointer group h-full">
+                                                  <CardHeader className="pb-2 px-3 pt-3">
+                                                    <div className="flex items-start gap-2.5">
+                                                      <div className="w-8 h-8 rounded-lg bg-blue-600/20 flex items-center justify-center group-hover:bg-blue-600/30 transition-colors flex-shrink-0">
+                                                        <ServiceIcon className="w-4 h-4 text-blue-400" />
+                                                      </div>
+                                                      <div className="flex-1 min-w-0">
+                                                        <CardTitle className="text-white text-sm font-semibold group-hover:text-blue-300 transition-colors leading-tight">
+                                                          {service.name}
+                                                        </CardTitle>
+                                                        <Badge className="mt-1.5 bg-gray-700/50 text-gray-300 border-gray-600/50 text-xs px-2 py-0.5">
+                                                          {service.tools}
+                                                        </Badge>
+                                                      </div>
+                                                    </div>
+                                                  </CardHeader>
+                                                  <CardContent className="pt-0 px-3 pb-3">
+                                                    <CardDescription className="text-gray-400 text-xs leading-relaxed">
+                                                      {service.description}
+                                                    </CardDescription>
+                                                  </CardContent>
+                                                </Card>
+                                              </Link>
+                                            );
+                                          })}
+                                        </div>
+                                      </div>
+                                    );
+                                  })}
+                                </div>
+                              </div>
+                            </div>
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+
+                      {/* Services Dropdown with Hero Section */}
                       <AnimatePresence>
                         {item.label === 'Services' && activeDropdown === item.label && (
                           <motion.div 
                             data-dropdown-menu
-                            className="fixed left-1/2 top-[6rem] z-[120] transform -translate-x-1/2 w-full max-w-4xl"
+                            className="fixed left-1/2 top-[4.5rem] z-[120] transform -translate-x-1/2 w-full max-w-4xl"
                             initial={{ opacity: 0, y: -20, scale: 0.95 }}
                             animate={{ opacity: 1, y: 0, scale: 1 }}
                             exit={{ opacity: 0, y: -20, scale: 0.95 }}
@@ -251,32 +678,16 @@ export default function Navbar({ addToRefs }: NavbarProps) {
                             <div 
                               className="rounded-3xl shadow-2xl border overflow-hidden"
                               style={{
-                                background: 'rgba(255, 255, 255, 0.15)',
-                                backdropFilter: 'blur(30px) saturate(180%)',
-                                WebkitBackdropFilter: 'blur(30px) saturate(180%)',
-                                border: '1px solid rgba(255, 255, 255, 0.2)',
-                                boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(255, 255, 255, 0.1) inset'
+                                background: 'rgba(255, 255, 255, 0.75)',
+                                backdropFilter: 'blur(15px) saturate(150%)',
+                                WebkitBackdropFilter: 'blur(15px) saturate(150%)',
+                                border: '1px solid rgba(255, 255, 255, 0.3)',
+                                boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(255, 255, 255, 0.2) inset'
                               }}
                             >
                               <div className="p-6">
-                                {/* Floating blur elements */}
-                                <div 
-                                  className="absolute top-4 right-6 w-20 h-20 rounded-full opacity-60"
-                                  style={{
-                                    background: 'radial-gradient(circle, rgba(59, 130, 246, 0.3) 0%, transparent 70%)',
-                                    filter: 'blur(20px)'
-                                  }}
-                                />
-                                <div 
-                                  className="absolute bottom-4 left-6 w-16 h-16 rounded-full opacity-40"
-                                  style={{
-                                    background: 'radial-gradient(circle, rgba(16, 185, 129, 0.3) 0%, transparent 70%)',
-                                    filter: 'blur(15px)'
-                                  }}
-                                />
-                                
                                 <div className="flex flex-col lg:flex-row gap-6 relative z-10">
-                                  {/* Hero Card with enhanced blur */}
+                                  {/* Hero Card */}
                                   <div className="lg:w-1/3">
                                     <Card 
                                       className="h-full border-0 text-white overflow-hidden relative"
@@ -352,9 +763,9 @@ export default function Navbar({ addToRefs }: NavbarProps) {
                                     </Card>
                                   </div>
                                   
-                                  {/* Services Grid with enhanced blur cards */}
+                                  {/* Services Grid */}
                                   <div className="lg:w-2/3 grid grid-cols-1 md:grid-cols-2 gap-4">
-                                    {item.dropdown.map((dropdownItem, idx) => {
+                                    {item.dropdown?.map((dropdownItem, idx) => {
                                       const IconComponent = getServiceIcon(dropdownItem.label);
                                       const colors = [
                                         { bg: 'linear-gradient(135deg, rgba(59, 130, 246, 0.8), rgba(147, 197, 253, 0.8))', border: 'rgba(59, 130, 246, 0.3)', text: 'text-blue-600' },
@@ -376,9 +787,9 @@ export default function Navbar({ addToRefs }: NavbarProps) {
                                             <Card 
                                               className="transition-all duration-300 cursor-pointer group hover:scale-105 border"
                                               style={{
-                                                background: 'rgba(255, 255, 255, 0.1)',
-                                                backdropFilter: 'blur(5px)',
-                                                WebkitBackdropFilter: 'blur(5px)',
+                                                background: 'rgba(255, 255, 255, 0.2)',
+                                                backdropFilter: 'blur(8px)',
+                                                WebkitBackdropFilter: 'blur(8px)',
                                                 border: `1px solid ${color.border}`,
                                               }}
                                             >
@@ -393,8 +804,8 @@ export default function Navbar({ addToRefs }: NavbarProps) {
                                                   <Badge 
                                                     className="text-white/80 border text-xs"
                                                     style={{
-                                                      background: 'rgba(255, 255, 255, 0.1)',
-                                                      border: '1px solid rgba(255, 255, 255, 0.2)'
+                                                      background: 'rgba(255, 255, 255, 0.15)',
+                                                      border: '1px solid rgba(255, 255, 255, 0.25)'
                                                     }}
                                                   >
                                                     {String(idx + 1).padStart(2, '0')}
@@ -426,12 +837,12 @@ export default function Navbar({ addToRefs }: NavbarProps) {
                         )}
                       </AnimatePresence>
 
-                      {/* Enhanced Solutions Dropdown with ultimate blur */}
+                      {/* Solutions Dropdown with Hero Section */}
                       <AnimatePresence>
                         {item.label === 'Solutions' && activeDropdown === item.label && (
                           <motion.div 
                             data-dropdown-menu
-                            className="fixed left-1/2 top-[6rem] z-[120] transform -translate-x-1/2 w-full max-w-4xl"
+                            className="fixed left-1/2 top-[4.5rem] z-[120] transform -translate-x-1/2 w-full max-w-4xl"
                             initial={{ opacity: 0, y: -20, scale: 0.95 }}
                             animate={{ opacity: 1, y: 0, scale: 1 }}
                             exit={{ opacity: 0, y: -20, scale: 0.95 }}
@@ -440,37 +851,14 @@ export default function Navbar({ addToRefs }: NavbarProps) {
                             <div 
                               className="rounded-3xl shadow-2xl border overflow-hidden"
                               style={{
-                                background: 'rgba(255, 255, 255, 0.15)',
-                                backdropFilter: 'blur(30px) saturate(180%)',
-                                WebkitBackdropFilter: 'blur(30px) saturate(180%)',
-                                border: '1px solid rgba(255, 255, 255, 0.2)',
-                                boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(255, 255, 255, 0.1) inset'
+                                background: 'rgba(255, 255, 255, 0.75)',
+                                backdropFilter: 'blur(15px) saturate(150%)',
+                                WebkitBackdropFilter: 'blur(15px) saturate(150%)',
+                                border: '1px solid rgba(255, 255, 255, 0.3)',
+                                boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(255, 255, 255, 0.2) inset'
                               }}
                             >
                               <div className="p-6">
-                                {/* Animated background elements */}
-                                <div 
-                                  className="absolute top-2 right-8 w-6 h-6 rounded-full animate-pulse"
-                                  style={{
-                                    background: 'radial-gradient(circle, rgba(236, 72, 153, 0.6) 0%, transparent 70%)',
-                                    filter: 'blur(8px)'
-                                  }}
-                                />
-                                <div 
-                                  className="absolute top-8 right-12 w-4 h-4 rounded-full animate-bounce delay-100"
-                                  style={{
-                                    background: 'radial-gradient(circle, rgba(251, 191, 36, 0.6) 0%, transparent 70%)',
-                                    filter: 'blur(6px)'
-                                  }}
-                                />
-                                <div 
-                                  className="absolute bottom-6 left-8 w-5 h-5 rounded-full animate-pulse delay-200"
-                                  style={{
-                                    background: 'radial-gradient(circle, rgba(245, 101, 101, 0.6) 0%, transparent 70%)',
-                                    filter: 'blur(10px)'
-                                  }}
-                                />
-                                
                                 <div className="flex flex-col lg:flex-row gap-6 relative z-10">
                                   {/* Hero Card */}
                                   <div className="lg:w-1/3">
@@ -478,21 +866,14 @@ export default function Navbar({ addToRefs }: NavbarProps) {
                                       className="h-full border-0 text-white overflow-hidden relative"
                                       style={{
                                         background: 'linear-gradient(135deg, rgba(236, 72, 153, 0.8) 0%, rgba(139, 92, 246, 0.8) 50%, rgba(59, 130, 246, 0.8) 100%)',
-                                        backdropFilter: 'blur(20px)',
-                                        WebkitBackdropFilter: 'blur(20px)',
+                                        backdropFilter: 'blur(5px)',
+                                        WebkitBackdropFilter: 'blur(5px)',
                                       }}
                                     >
                                       <div 
                                         className="absolute inset-0"
                                         style={{
                                           background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, transparent 100%)'
-                                        }}
-                                      />
-                                      <div 
-                                        className="absolute top-0 right-0 w-24 h-24 rounded-full opacity-30"
-                                        style={{
-                                          background: 'radial-gradient(circle, rgba(255, 255, 255, 0.3) 0%, transparent 70%)',
-                                          filter: 'blur(15px)'
                                         }}
                                       />
                                       
@@ -564,7 +945,7 @@ export default function Navbar({ addToRefs }: NavbarProps) {
                                   
                                   {/* Solutions Grid */}
                                   <div className="lg:w-2/3 grid grid-cols-1 md:grid-cols-2 gap-4">
-                                    {item.dropdown.map((dropdownItem, idx) => {
+                                    {item.dropdown?.map((dropdownItem, idx) => {
                                       const IconComponent = getSolutionIcon(dropdownItem.label);
                                       const solutions = [
                                         { bg: 'linear-gradient(135deg, rgba(251, 191, 36, 0.8), rgba(252, 211, 77, 0.8))', emoji: '⏰', color: 'text-amber-600', border: 'rgba(251, 191, 36, 0.3)' },
@@ -585,9 +966,9 @@ export default function Navbar({ addToRefs }: NavbarProps) {
                                             <Card 
                                               className="transition-all duration-300 cursor-pointer group hover:scale-105 border relative overflow-hidden"
                                               style={{
-                                                background: 'rgba(255, 255, 255, 0.1)',
-                                                backdropFilter: 'blur(15px)',
-                                                WebkitBackdropFilter: 'blur(15px)',
+                                                background: 'rgba(255, 255, 255, 0.2)',
+                                                backdropFilter: 'blur(8px)',
+                                                WebkitBackdropFilter: 'blur(8px)',
                                                 border: `1px solid ${solution.border}`,
                                               }}
                                             >
@@ -661,7 +1042,7 @@ export default function Navbar({ addToRefs }: NavbarProps) {
             </div>
           </div>
           
-          {/* Enhanced Get Started Button with blur */}
+          {/* Get Started Button */}
           <div className="absolute right-0 top-0 bottom-0 flex items-center pr-6">
             <div className="hidden lg:block">
               <motion.div
@@ -694,7 +1075,7 @@ export default function Navbar({ addToRefs }: NavbarProps) {
               </motion.div>
             </div>
             
-            {/* Enhanced Mobile Menu Button with blur */}
+            {/* Mobile Menu Button */}
             <div className="lg:hidden">
               <motion.button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -736,7 +1117,7 @@ export default function Navbar({ addToRefs }: NavbarProps) {
         </div>
       </motion.nav>
       
-      {/* Enhanced Mobile Menu with ultimate blur */}
+      {/* Mobile Menu */}
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
@@ -761,13 +1142,13 @@ export default function Navbar({ addToRefs }: NavbarProps) {
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.3, delay: index * 0.1 }}
                 >
-                  {item.dropdown ? (
+                  {item.dropdown || item.label === 'Products' ? (
                     <div>
                       <button
                         onClick={() => toggleDropdown(item.label)}
                         className="flex justify-between items-center w-full px-4 py-3 rounded-2xl font-semibold text-gray-700 transition-all duration-300"
                         style={{
-                          background: activeDropdown === item.label ? 'rgba(255, 255, 255, 0.15)' : 'rgba(255, 255, 255, 0.05)',
+                          background: activeDropdown === item.label ? 'rgba(255, 255, 255, 0.75)' : 'rgba(255, 255, 255, 0.75)',
                           backdropFilter: 'blur(10px)',
                           WebkitBackdropFilter: 'blur(10px)',
                         }}
@@ -788,27 +1169,49 @@ export default function Navbar({ addToRefs }: NavbarProps) {
                             exit={{ height: 0, opacity: 0 }}
                             transition={{ duration: 0.3 }}
                           >
-                            {item.dropdown.map((dropdownItem, idx) => (
-                              <motion.div
-                                key={dropdownItem.label}
-                                initial={{ opacity: 0, x: -10 }}
-                                animate={{ opacity: 1, x: 0 }}
-                                transition={{ duration: 0.2, delay: idx * 0.05 }}
-                              >
-                                <Link
-                                  href={dropdownItem.href}
-                                  className="block px-4 py-2 rounded-xl text-gray-600 hover:text-gray-700 transition-all duration-300"
-                                  style={{
-                                    background: 'rgba(255, 255, 255, 0.05)',
-                                    backdropFilter: 'blur(5px)',
-                                    WebkitBackdropFilter: 'blur(5px)',
-                                  }}
-                                  onClick={handleDropdownItemClick}
+                            {item.label === 'Products' ? (
+                              <div className="space-y-2 max-h-64 overflow-y-auto">
+                                {productCategories.map((category) => (
+                                  <div key={category.id} className="bg-gray-800/30 rounded-xl p-3">
+                                    <div className="font-semibold text-white text-sm mb-2">{category.title}</div>
+                                    <div className="space-y-1">
+                                      {category.services.map((service) => (
+                                        <Link
+                                          key={service.name}
+                                          href={service.href}
+                                          className="block px-3 py-2 rounded-lg text-gray-400 hover:text-white hover:bg-gray-700/50 transition-all duration-300 text-sm"
+                                          onClick={handleDropdownItemClick}
+                                        >
+                                          {service.name}
+                                        </Link>
+                                      ))}
+                                    </div>
+                                  </div>
+                                ))}
+                              </div>
+                            ) : (
+                              item.dropdown?.map((dropdownItem, idx) => (
+                                <motion.div
+                                  key={dropdownItem.label}
+                                  initial={{ opacity: 0, x: -10 }}
+                                  animate={{ opacity: 1, x: 0 }}
+                                  transition={{ duration: 0.2, delay: idx * 0.05 }}
                                 >
-                                  {dropdownItem.label}
-                                </Link>
-                              </motion.div>
-                            ))}
+                                  <Link
+                                    href={dropdownItem.href}
+                                    className="block px-4 py-2 rounded-xl text-gray-600 hover:text-gray-700 transition-all duration-300"
+                                    style={{
+                                      background: 'rgba(255, 255, 255, 0.05)',
+                                      backdropFilter: 'blur(5px)',
+                                      WebkitBackdropFilter: 'blur(5px)',
+                                    }}
+                                    onClick={handleDropdownItemClick}
+                                  >
+                                    {dropdownItem.label}
+                                  </Link>
+                                </motion.div>
+                              ))
+                            )}
                           </motion.div>
                         )}
                       </AnimatePresence>
@@ -830,7 +1233,7 @@ export default function Navbar({ addToRefs }: NavbarProps) {
                 </motion.div>
               ))}
               
-              {/* Mobile CTA Button with blur */}
+              {/* Mobile CTA Button */}
               <motion.div
                 className="pt-4"
                 initial={{ opacity: 0, y: 20 }}
