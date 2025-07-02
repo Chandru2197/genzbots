@@ -480,7 +480,7 @@ export default function Navbar({ addToRefs }: NavbarProps) {
               />
               {/* SVG Logo */}
               <Image
-                src={require('@/assets/svgs/GenZBotLogo.svg').default}
+                src={'/assets/svgs/GenZBotLogo.svg'}
                 alt="GenZBot Logo"
                 height={40}
                 width={120}
