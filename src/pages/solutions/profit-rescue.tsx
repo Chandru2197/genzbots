@@ -1,5 +1,3 @@
-import Footer from '@/components/Footer';
-import Navbar from '@/components/Navbar';
 import ProfitRescueKit from '@/components/solutions/ProfitRescueKit';
 import { useEffect, useRef } from 'react';
 
@@ -41,10 +39,6 @@ export default function ProfitRescue() {
         }
       };
     return (
-        <main className="min-h-screen">
-            <Navbar addToRefs={addToRefs} />
                 <ProfitRescueKit />
-            <Footer/>
-        </main>
     );
 }

@@ -174,7 +174,6 @@ export const metadata: Metadata = {
 const AboutPage = () => {
   return (
     <>
-      <Navbar />
       <AboutUsPage/>
       {/* <Hero2 {...hero2About} />
       <Stats {...statsAbout} />
@@ -187,7 +186,6 @@ const AboutPage = () => {
       <Testimonials2 {...testimonials2About} />
       <FAQs {...faqsAbout} />
       <Contact {...contactAbout} /> */}
-      <Footer />
     </>
   );
 };

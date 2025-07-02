@@ -478,10 +478,17 @@ export default function Navbar({ addToRefs }: NavbarProps) {
                   filter: 'blur(10px)'
                 }}
               />
-              {/* Replace with your logo */}
-              <div className="text-2xl font-bold text-white relative z-10">
-                GenZ<span className="text-blue-400">Bot</span>
-              </div>
+              {/* SVG Logo */}
+              <Image
+                src={require('@/assets/svgs/GenZBotLogo.svg').default}
+                alt="GenZBot Logo"
+                height={40}
+                width={120}
+                className="h-10 w-auto relative z-10"
+                style={{ maxHeight: '40px' }}
+                priority
+                unoptimized
+              />
             </Link>
           </motion.div>
           
