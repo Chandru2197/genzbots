@@ -116,7 +116,7 @@ const Badge = ({ children, className = '', style, ...props }: any) => (
 // Data
 const productCategories: ProductCategory[] = [
   {
-    id: 'bfsi',
+    id: 'bsfi',
     title: 'Banking & Financial Services',
     icon: Building2,
     color: 'text-blue-600',
@@ -126,28 +126,28 @@ const productCategories: ProductCategory[] = [
         name: 'Loan Application Processing',
         description: 'Auto-extract KYC data → Credit scoring → Approval',
         tools: 'UiPath + Abbyy',
-        href: '/product/bfsi/loan',
+        href: '/product/bsfi/loan',
         icon: FileText
       },
       {
         name: 'AML Monitoring',
         description: 'Scan transactions → Flag suspicious activity',
         tools: 'AI: Anomaly detection',
-        href: '/product/bfsi/aml',
+        href: '/product/bsfi/aml',
         icon: Eye
       },
       {
         name: 'Card Dispute Resolution',
         description: 'Auto-fill dispute forms from transaction logs',
         tools: 'Blue Prism + SQL',
-        href: '/product/bfsi/card-dispute',
+        href: '/product/bsfi/card-dispute',
         icon: CreditCard
       },
       {
         name: 'Bank Reconciliation',
         description: 'Match statements with ERP entries',
         tools: 'AI: Fuzzy matching',
-        href: '/product/bfsi/bank-reconciliation',
+        href: '/product/bsfi/bank-reconciliation',
         icon: BarChart3
       }
     ]
