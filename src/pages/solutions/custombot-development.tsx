@@ -42,9 +42,7 @@ export default function CustomBotDevelopmentPage() {
       };
     return (
         <main className="min-h-screen">
-            <Navbar addToRefs={addToRefs} />
-                <CustomBotDevelopment />
-            <Footer/>
+          <CustomBotDevelopment />
         </main>
     );
 }

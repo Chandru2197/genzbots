@@ -24,7 +24,7 @@ import { Icon123 } from '@tabler/icons-react';
 
 const Contact2 = ({ header, form, items, id, hasBackground = false }: ContactProps) => (
   <WidgetWrapper id={id ? id : ''} hasBackground={hasBackground} containerClass="max-w-7xl mx-auto">
-    {header && <Headline header={header} titleClass="text-3xl sm:text-5xl" />}
+    {header && <Headline header={header} titleClass="text-3xl sm:text-5xl text-white" />}
     
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12">
       {/* Contact Information Cards */}

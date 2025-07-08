@@ -65,6 +65,7 @@ const SolutionsHomePage: React.FC = () => {
       description: 'Eliminate repetitive tasks and reclaim your time with intelligent process automation that learns and adapts to your workflow patterns.',
       price: 'From $2,997',
       savings: '15+ hours/week',
+      key_savings:"Up Time",
       roi: '2-3 months',
       color: 'from-blue-600 to-cyan-500',
       darkColor: 'from-blue-700 to-cyan-600',
@@ -92,6 +93,7 @@ const SolutionsHomePage: React.FC = () => {
       price: 'From $4,997',
       savings: '$2,400/month',
       roi: '1-2 months',
+      key_savings:"Up Time",
       color: 'from-red-500 to-orange-500',
       darkColor: 'from-red-600 to-orange-600',
       icon: <Shield className="w-8 h-8" />,
@@ -115,6 +117,7 @@ const SolutionsHomePage: React.FC = () => {
       description: 'Enterprise-grade automation platform that scales your operations 10x without additional headcount, powered by advanced AI and machine learning.',
       price: 'From $7,997',
       savings: '24/7 operations',
+      key_savings:"Up Time",
       roi: '1 month',
       color: 'from-purple-600 to-pink-500',
       darkColor: 'from-purple-700 to-pink-600',
@@ -139,6 +142,7 @@ const SolutionsHomePage: React.FC = () => {
       description: 'Fully customized automation solutions built from the ground up to match your exact business requirements and integrate with any system.',
       price: 'Custom Quote',
       savings: 'Unlimited',
+      key_savings:"Up Time",
       roi: 'Variable',
       color: 'from-emerald-600 to-teal-500',
       darkColor: 'from-emerald-700 to-teal-600',
@@ -407,7 +411,7 @@ const SolutionsHomePage: React.FC = () => {
                   <div className="grid grid-cols-3 gap-4">
                     <div className="text-center p-4 bg-gradient-to-br from-blue-50 to-blue-100 rounded-2xl shadow-lg">
                       <div className="text-xl font-bold text-gray-900">{solution.savings}</div>
-                      <div className="text-xs text-gray-600">Time Saved</div>
+                      <div className="text-xs text-gray-600">{solution.key_savings}</div>
                     </div>
                     <div className="text-center p-4 bg-gradient-to-br from-green-50 to-green-100 rounded-2xl shadow-lg">
                       <div className="text-xl font-bold text-gray-900">{solution.roi}</div>

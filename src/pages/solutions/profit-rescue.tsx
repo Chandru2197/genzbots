@@ -39,6 +39,6 @@ export default function ProfitRescue() {
         }
       };
     return (
-                <ProfitRescueKit />
+        <ProfitRescueKit />
     );
 }

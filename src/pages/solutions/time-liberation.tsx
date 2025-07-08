@@ -42,9 +42,7 @@ export default function TimeLiberationRoute() {
       };
     return (
         <main className="min-h-screen">
-            <Navbar addToRefs={addToRefs} />
-                <TimeLiberationPackage />
-            <Footer/>
+          <TimeLiberationPackage />
         </main>
     );
 }

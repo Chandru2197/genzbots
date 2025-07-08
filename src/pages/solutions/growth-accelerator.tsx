@@ -42,9 +42,7 @@ export default function GrowthAccelerator() {
       };
     return (
         <main className="min-h-screen">
-            <Navbar addToRefs={addToRefs} />
-                <GrowthAcceleratorPage />
-            <Footer/>
+          <GrowthAcceleratorPage />
         </main>
     );
 }

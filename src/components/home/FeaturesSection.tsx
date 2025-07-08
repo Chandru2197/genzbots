@@ -224,7 +224,7 @@ export default function FeaturesSection({ addToRefs }: FeaturesSectionProps) {
   };
 
   return (
-    <section className="py-20 bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900 relative overflow-hidden" ref={sectionRef}>
+    <section className="py-20 bg-gradient-to-br from-slate-200 via-orange-300 to-orange-500 relative overflow-hidden" ref={sectionRef}>
       {/* Enhanced background with floating elements */}
       <div className="absolute inset-0">
         <div className="absolute inset-0 bg-gradient-to-r from-blue-600/5 to-cyan-600/5"></div>

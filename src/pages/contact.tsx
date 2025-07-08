@@ -44,11 +44,9 @@ export const metadata: Metadata = {
 const Page = () => {
   return (
     <>
-      <Navbar />
       <Hero {...heroContact} />
       <Contact2 {...contact2Contact} />
       <Features2 {...features2Contact} />
-      <Footer />
     </>
   );
 };

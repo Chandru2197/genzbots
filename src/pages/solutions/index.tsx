@@ -42,9 +42,7 @@ export default function Home() {
       };
     return (
         <main className="min-h-screen">
-            <Navbar addToRefs={addToRefs} />
-                <SolutionsHomepage />
-            <Footer/>
+          <SolutionsHomepage />
         </main>
     );
 }

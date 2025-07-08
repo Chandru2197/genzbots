@@ -375,17 +375,17 @@ export default function Navbar({ addToRefs }: NavbarProps) {
 
   const menuItems: MenuItem[] = [
     { label: 'Home', href: '/' },
-    { 
-      label: 'Services', 
-      href: '/services',
-      dropdown: [
-        { label: 'Bot Blueprint', href: '/services/bot-blueprint' },
-        { label: 'Build & Test', href: '/services/build-and-test' },
-        { label: 'Discovery Call', href: '/services/discovery-call' },
-        { label: 'Hyper Care', href: '/services/hyper-care' },
-        { label: 'Scale & Optimize', href: '/services/scale-optimize' }
-      ]
-    },
+    // { 
+    //   label: 'Services', 
+    //   href: '/services',
+    //   dropdown: [
+    //     { label: 'Bot Blueprint', href: '/services/bot-blueprint' },
+    //     { label: 'Build & Test', href: '/services/build-and-test' },
+    //     { label: 'Discovery Call', href: '/services/discovery-call' },
+    //     { label: 'Hyper Care', href: '/services/hyper-care' },
+    //     { label: 'Scale & Optimize', href: '/services/scale-optimize' }
+    //   ]
+    // },
     { 
       label: 'Solutions', 
       href: '/solutions',
@@ -396,7 +396,7 @@ export default function Navbar({ addToRefs }: NavbarProps) {
         { label: 'Custom Bot Development', href: '/solutions/custombot-development' }
       ]
     },
-    { label: 'Products', href: '/products' },
+    { label: 'Services', href: '/products' },
     { label: 'About', href: '/about' },
     { label: 'Blog', href: '/blog' },
     { label: 'Contact', href: '/contact' }
@@ -503,7 +503,7 @@ export default function Navbar({ addToRefs }: NavbarProps) {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                 >
-                  {item.dropdown || item.label === 'Products' ? (
+                  {item.dropdown || item.label === 'Services' ? (
                     <>
                       <button
                         data-dropdown
@@ -538,7 +538,7 @@ export default function Navbar({ addToRefs }: NavbarProps) {
 
                       {/* Products Dropdown - Compact Vertical Tabs */}
                       <AnimatePresence>
-                        {item.label === 'Products' && activeDropdown === item.label && (
+                        {item.label === 'Services' && activeDropdown === item.label && (
                           <motion.div 
                             data-dropdown-menu
                             className="fixed left-1/2 top-[4.5rem] z-[120] transform -translate-x-1/2"
@@ -672,7 +672,7 @@ export default function Navbar({ addToRefs }: NavbarProps) {
                       </AnimatePresence>
 
                       {/* Services Dropdown with Hero Section */}
-                      <AnimatePresence>
+                      {/* <AnimatePresence>
                         {item.label === 'Services' && activeDropdown === item.label && (
                           <motion.div 
                             data-dropdown-menu
@@ -694,7 +694,6 @@ export default function Navbar({ addToRefs }: NavbarProps) {
                             >
                               <div className="p-6">
                                 <div className="flex flex-col lg:flex-row gap-6 relative z-10">
-                                  {/* Hero Card */}
                                   <div className="lg:w-1/3">
                                     <Card 
                                       className="h-full border-0 text-white overflow-hidden relative"
@@ -770,7 +769,6 @@ export default function Navbar({ addToRefs }: NavbarProps) {
                                     </Card>
                                   </div>
                                   
-                                  {/* Services Grid */}
                                   <div className="lg:w-2/3 grid grid-cols-1 md:grid-cols-2 gap-4">
                                     {item.dropdown?.map((dropdownItem, idx) => {
                                       const IconComponent = getServiceIcon(dropdownItem.label);
@@ -842,7 +840,7 @@ export default function Navbar({ addToRefs }: NavbarProps) {
                             </div>
                           </motion.div>
                         )}
-                      </AnimatePresence>
+                      </AnimatePresence> */}
 
                       {/* Solutions Dropdown with Hero Section */}
                       <AnimatePresence>
@@ -1050,35 +1048,45 @@ export default function Navbar({ addToRefs }: NavbarProps) {
           </div>
           
           {/* Get Started Button */}
-          <div className="absolute right-0 top-0 bottom-0 flex items-center pr-6">
+          <div className="absolute right-0 top-0 bottom-0 flex items-center justify-end pr-6">
             <div className="hidden lg:block">
               <motion.div
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.97 }}
               >
-                <Link
-                  href="/contact"
-                  className="relative px-8 py-3 font-bold rounded-2xl transition-all duration-300 shadow-lg hover:shadow-2xl group overflow-hidden text-white"
-                  style={{
-                    background: 'linear-gradient(135deg, rgba(245, 101, 101, 0.9), rgba(251, 113, 133, 0.9))',
-                    backdropFilter: 'blur(15px)',
-                    WebkitBackdropFilter: 'blur(15px)',
-                    border: '1px solid rgba(255, 255, 255, 0.2)'
-                  }}
+                {/* Uiverse.io Modern Button by Javierrocadev - Reduced size */}
+                <button
+                  onClick={() => window.location.href = '/contact'}
+                  className="relative flex items-center gap-1 bg-neutral-600 px-5 py-2 border-4 border-white text-sm bg-transparent rounded-lg font-semibold text-white cursor-pointer overflow-hidden transition-all duration-600 ease-custom hover:text-orange-400 hover:rounded-2xl group hover:transition-all duration-700 hover:duration-700"
+                  style={{ minWidth: '100px', maxWidth: '150px', justifyContent: 'center' }}
                 >
-                  <div 
-                    className="absolute inset-0 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"
-                    style={{
-                      background: 'rgba(255, 255, 255, 0.2)',
-                      backdropFilter: 'blur(10px)',
-                      WebkitBackdropFilter: 'blur(10px)',
-                    }}
-                  />
-                  <span className="relative flex items-center">
+                  <svg
+                    viewBox="0 0 24 24"
+                    className="absolute w-4 fill-white z-[9] transition-all duration-700 ease-custom -left-1/4 group-hover:left-2 group-hover:fill-[#212121]"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"
+                    ></path>
+                  </svg>
+                  <span
+                    className="relative z-[1] transition-all duration-700 ease-custom -translate-x-2 group-hover:translate-x-2 font-bold"
+                  >
                     Get Started
-                    <ArrowRight className="w-4 h-4 ml-2 transition-transform duration-300 group-hover:translate-x-1" />
                   </span>
-                </Link>
+                  <span
+                    className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3 h-3 bg-white rounded-full opacity-0 transition-all duration-700 ease-custom group-hover:w-[120px] group-hover:h-[120px] group-hover:opacity-100"
+                  ></span>
+                  <svg
+                    viewBox="0 0 24 24"
+                    className="absolute w-4 fill-white z-[9] transition-all duration-700 ease-custom right-2 group-hover:-right-1/4 group-hover:fill-[#212121]"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"
+                    ></path>
+                  </svg>
+                </button>
               </motion.div>
             </div>
             
@@ -1149,7 +1157,7 @@ export default function Navbar({ addToRefs }: NavbarProps) {
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.3, delay: index * 0.1 }}
                 >
-                  {item.dropdown || item.label === 'Products' ? (
+                  {item.dropdown || item.label === 'Services' ? (
                     <div>
                       <button
                         onClick={() => toggleDropdown(item.label)}
@@ -1176,7 +1184,7 @@ export default function Navbar({ addToRefs }: NavbarProps) {
                             exit={{ height: 0, opacity: 0 }}
                             transition={{ duration: 0.3 }}
                           >
-                            {item.label === 'Products' ? (
+                            {item.label === 'Services' ? (
                               <div className="space-y-2 max-h-64 overflow-y-auto">
                                 {productCategories.map((category) => (
                                   <div key={category.id} className="bg-gray-800/30 rounded-xl p-3">

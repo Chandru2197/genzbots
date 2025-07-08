@@ -27,7 +27,7 @@ export default function HeroSection({ addToRefs }: HeroSectionProps) {
   ];
 
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden px-8 py-16 bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900">
+    <section className="relative min-h-screen flex items-center overflow-hidden px-8 py-16 bg-gradient-to-br from-slate-200 via-blue-300 to-indigo-300">
       {/* Enhanced Background with animated elements */}
       <div className="absolute inset-0">
         <div className="absolute inset-0 bg-gradient-to-r from-blue-600/10 to-cyan-600/10"></div>
@@ -179,7 +179,7 @@ export default function HeroSection({ addToRefs }: HeroSectionProps) {
                 <div className="absolute inset-0 bg-gradient-to-r from-[#1e78c1] to-[#f75821] rounded-3xl overflow-hidden transform transition-transform duration-300 group-hover:scale-105 shadow-2xl">
                   <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent"></div>
                   <Image
-                    src="/assets/svgs/herosection.svg"
+                    src="/assets/svgs/undraw_firmware_3fxd.svg"
                     alt="GenZbots Automation"
                     fill
                     className="object-contain p-8 transform transition-transform duration-300 group-hover:scale-110"
