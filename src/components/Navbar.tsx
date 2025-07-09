@@ -50,7 +50,16 @@ import {
 import Image from 'next/image';
 
 // Enhanced Card Components with glassmorphism
-const Card = ({ children, className = '', style, ...props }) => (
+import { ReactNode, CSSProperties } from 'react';
+
+interface CardProps {
+  children: ReactNode;
+  className?: string;
+  style?: CSSProperties;
+  [key: string]: any;
+}
+
+const Card = ({ children, className = '', style, ...props }: CardProps) => ( 
   <div 
     className={`rounded-2xl border backdrop-blur-xl ${className}`} 
     style={{
@@ -67,31 +76,57 @@ const Card = ({ children, className = '', style, ...props }) => (
   </div>
 );
 
-const CardHeader = ({ children, className = '', ...props }) => (
+interface CardHeaderProps {
+  children: ReactNode;
+  className?: string;
+  [key: string]: any;
+}
+const CardHeader = ({ children, className = '', ...props }: CardHeaderProps) => (
   <div className={`p-6 ${className}`} {...props}>
     {children}
   </div>
 );
 
-const CardContent = ({ children, className = '', ...props }) => (
+interface CardContentProps {
+  children: ReactNode;
+  className?: string;
+  [key: string]: any;
+}
+const CardContent = ({ children, className = '', ...props }: CardContentProps) => (
   <div className={`p-6 pt-0 ${className}`} {...props}>
     {children}
   </div>
 );
 
-const CardTitle = ({ children, className = '', ...props }) => (
+interface CardTitleProps {
+  children: ReactNode;
+  className?: string;
+  [key: string]: any;
+}
+const CardTitle = ({ children, className = '', ...props }: CardTitleProps) => (
   <h3 className={`font-bold text-white ${className}`} {...props}>
     {children}
   </h3>
 );
 
-const CardDescription = ({ children, className = '', ...props }) => (
+interface CardDescriptionProps {
+  children: ReactNode;
+  className?: string;
+  [key: string]: any;
+}
+const CardDescription = ({ children, className = '', ...props }: CardDescriptionProps) => (
   <p className={`text-gray-300 ${className}`} {...props}>
     {children}
   </p>
 );
 
-const Badge = ({ children, className = '', style, ...props }) => (
+interface BadgeProps {
+  children: ReactNode;
+  className?: string;
+  style?: CSSProperties;
+  [key: string]: any;
+}
+const Badge = ({ children, className = '', style, ...props }: BadgeProps) => (
   <span 
     className={`px-3 py-1 text-xs font-medium rounded-full backdrop-blur-md ${className}`} 
     style={{
@@ -385,7 +420,7 @@ const AnimatedBackground = () => {
 };
 
 // Enhanced Glow Effect Hook
-const useGlowEffect = (isActive) => {
+const useGlowEffect = (isActive: boolean) => {
   const [glowIntensity, setGlowIntensity] = useState(0);
   
   useEffect(() => {
@@ -401,7 +436,7 @@ const useGlowEffect = (isActive) => {
 };
 
 // Helper functions with enhanced visuals
-function getServiceIcon(label) {
+function getServiceIcon(label: string) {
   const icons = {
     'Bot Blueprint': Layers,
     'Build & Test': Cpu,
@@ -410,10 +445,10 @@ function getServiceIcon(label) {
     'Scale & Optimize': TrendingUp,
     'default': Rocket
   };
-  return icons[label] || icons['default'];
+  return icons[label as keyof typeof icons] || icons['default'];
 }
 
-function getSolutionIcon(label) {
+function getSolutionIcon(label: string) {
   const icons = {
     'Time Liberation': Zap,
     'Growth Accelerator': TrendingUp,
@@ -421,7 +456,7 @@ function getSolutionIcon(label) {
     'Custom Bot Development': Bot,
     'default': Sparkles
   };
-  return icons[label] || icons['default'];
+  return icons[label as keyof typeof icons] || icons['default'];
 }
 
 // Main Enhanced Navbar Component
@@ -439,7 +474,7 @@ export default function EnhancedNavbar() {
   const glowIntensity = useGlowEffect(activeDropdown !== null);
 
   useEffect(() => {
-    const handleMouseMove = (e) => {
+    const handleMouseMove = (e: MouseEvent) => {
       setMousePosition({ x: e.clientX, y: e.clientY });
     };
     
@@ -450,13 +485,14 @@ export default function EnhancedNavbar() {
       }
     };
     
-    const handleClickOutside = (event) => {
+    const handleClickOutside = (event: MouseEvent) => {
       const target = event.target;
       const dropdownButtons = document.querySelectorAll('[data-dropdown]');
       const dropdownMenus = document.querySelectorAll('[data-dropdown-menu]');
       
-      const isClickInsideDropdown = Array.from(dropdownButtons).some(button => button.contains(target)) ||
-                                   Array.from(dropdownMenus).some(menu => menu.contains(target));
+      const nodeTarget = target as Node | null;
+      const isClickInsideDropdown = Array.from(dropdownButtons).some(button => button.contains(nodeTarget)) ||
+                                   Array.from(dropdownMenus).some(menu => menu.contains(nodeTarget));
       
       if (!isClickInsideDropdown) {
         setActiveDropdown(null);
@@ -493,8 +529,8 @@ export default function EnhancedNavbar() {
     { label: 'Contact', href: '/contact', icon: Waves }
   ];
 
-  const toggleDropdown = (label) => {
-    setActiveDropdown(activeDropdown === label ? null : label);
+  const toggleDropdown = (label: string) => {
+    setActiveDropdown(activeDropdown === label ? null : (label as any));
   };
 
   const handleDropdownItemClick = () => {
@@ -502,7 +538,7 @@ export default function EnhancedNavbar() {
     setMobileMenuOpen(false);
   };
 
-  const handleCategoryChange = (categoryId) => {
+  const handleCategoryChange = (categoryId: string) => {
     setActiveCategory(categoryId);
   };
 
