@@ -96,7 +96,7 @@ export default function Home() {
       {/* </SectionWrapper> */}
       
       {/* Contact Section */}
-      <ContactSection/>
+      {/* <ContactSection/> */}
       
       {/* Footer is now included globally via _app.tsx */}
     </main>

@@ -23,17 +23,17 @@ export const ParticlesBackground = () => {
           fpsLimit: 120,
           particles: {
             color: {
-              value: ["#1e3a8a", "#1e40af", "#7c2d12", "#9a3412"], // Tailwind blue-900, blue-800, orange-900, orange-800
+              value: ["#FF5722", "#FF8A65", "#0A6E94", "#1e78c1", "#f75821"],
             },
             links: {
-              color: "#1e3a8a", // Tailwind blue-900
+              color: "#FF5722",
               distance: 200,
               enable: true,
-              opacity: 0.07,
+              opacity: 0.05,
               width: 1,
               triangles: {
                 enable: true,
-                opacity: 0.03,
+                opacity: 0.02,
               },
             },
             move: {

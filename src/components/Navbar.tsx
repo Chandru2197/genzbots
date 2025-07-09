@@ -1,7 +1,9 @@
 "use client";
 
-import { useState, useEffect, useRef } from 'react';
-import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
+import { useState, useEffect } from 'react';
+import Link from 'next/link';
+import Image from 'next/image';
+import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Sparkles, 
   Zap, 
@@ -40,144 +42,172 @@ import {
   Leaf,
   ChevronRight,
   Star,
-  Gem,
-  Palette,
-  Globe,
   Layers,
-  Cpu,
-  Waves
+  Settings
 } from 'lucide-react';
-import Image from 'next/image';
 
-// Enhanced Card Components with glassmorphism
-import { ReactNode, CSSProperties } from 'react';
-
-interface CardProps {
-  children: ReactNode;
-  className?: string;
-  style?: CSSProperties;
-  [key: string]: any;
+// Types
+interface NavbarProps {
+  addToRefs?: (el: HTMLElement | null) => void;
 }
 
-const Card = ({ children, className = '', style, ...props }: CardProps) => ( 
-  <div 
-    className={`rounded-2xl border backdrop-blur-xl ${className}`} 
-    style={{
-      background: 'rgba(255, 255, 255, 0.05)',
-      backdropFilter: 'blur(20px)',
-      WebkitBackdropFilter: 'blur(20px)',
-      border: '1px solid rgba(255, 255, 255, 0.1)',
-      boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.37)',
-      ...style
-    }} 
-    {...props}
-  >
+interface DropdownItem {
+  label: string;
+  href: string;
+}
+
+interface ProductCategory {
+  id: string;
+  title: string;
+  icon: any;
+  color: string;
+  bgGradient: string;
+  services: ProductService[];
+}
+
+interface ProductService {
+  name: string;
+  description: string;
+  tools: string;
+  href: string;
+  icon: any;
+}
+
+interface ServiceItem {
+  label: string;
+  href: string;
+  description: string;
+  icon: any;
+  color: string;
+  bgGradient: string;
+  features: string[];
+}
+
+interface MenuItem {
+  label: string;
+  href: string;
+  dropdown?: DropdownItem[];
+}
+
+// Simple Card Components
+const Card = ({ children, className = '', style, ...props }: any) => (
+  <div className={`rounded-lg border ${className}`} style={style} {...props}>
     {children}
   </div>
 );
 
-interface CardHeaderProps {
-  children: ReactNode;
-  className?: string;
-  [key: string]: any;
-}
-const CardHeader = ({ children, className = '', ...props }: CardHeaderProps) => (
-  <div className={`p-6 ${className}`} {...props}>
+const CardHeader = ({ children, className = '', ...props }: any) => (
+  <div className={`p-4 ${className}`} {...props}>
     {children}
   </div>
 );
 
-interface CardContentProps {
-  children: ReactNode;
-  className?: string;
-  [key: string]: any;
-}
-const CardContent = ({ children, className = '', ...props }: CardContentProps) => (
-  <div className={`p-6 pt-0 ${className}`} {...props}>
+const CardContent = ({ children, className = '', ...props }: any) => (
+  <div className={`p-4 pt-0 ${className}`} {...props}>
     {children}
   </div>
 );
 
-interface CardTitleProps {
-  children: ReactNode;
-  className?: string;
-  [key: string]: any;
-}
-const CardTitle = ({ children, className = '', ...props }: CardTitleProps) => (
-  <h3 className={`font-bold text-white ${className}`} {...props}>
+const CardTitle = ({ children, className = '', ...props }: any) => (
+  <h3 className={`font-semibold ${className}`} {...props}>
     {children}
   </h3>
 );
 
-interface CardDescriptionProps {
-  children: ReactNode;
-  className?: string;
-  [key: string]: any;
-}
-const CardDescription = ({ children, className = '', ...props }: CardDescriptionProps) => (
-  <p className={`text-gray-300 ${className}`} {...props}>
+const CardDescription = ({ children, className = '', ...props }: any) => (
+  <p className={`text-sm ${className}`} {...props}>
     {children}
   </p>
 );
 
-interface BadgeProps {
-  children: ReactNode;
-  className?: string;
-  style?: CSSProperties;
-  [key: string]: any;
-}
-const Badge = ({ children, className = '', style, ...props }: BadgeProps) => (
-  <span 
-    className={`px-3 py-1 text-xs font-medium rounded-full backdrop-blur-md ${className}`} 
-    style={{
-      background: 'rgba(255, 255, 255, 0.15)',
-      backdropFilter: 'blur(10px)',
-      WebkitBackdropFilter: 'blur(10px)',
-      border: '1px solid rgba(255, 255, 255, 0.2)',
-      color: 'white',
-      ...style
-    }} 
-    {...props}
-  >
+const Badge = ({ children, className = '', style, ...props }: any) => (
+  <span className={`px-2 py-1 text-xs rounded-md ${className}`} style={style} {...props}>
     {children}
   </span>
 );
 
-// Enhanced Data with more visual appeal
-const productCategories = [
+// Data
+const servicesData: ServiceItem[] = [
+  {
+    label: 'Bot Blueprint',
+    href: '/services/bot-blueprint',
+    description: 'Strategic planning and architecture design for your automation infrastructure.',
+    icon: FileText,
+    color: 'text-blue-600',
+    bgGradient: 'linear-gradient(135deg, rgba(59, 130, 246, 0.8), rgba(147, 197, 253, 0.8))',
+    features: ['Strategic Planning', 'Architecture Design', 'ROI Analysis', 'Risk Assessment']
+  },
+  {
+    label: 'Build & Test',
+    href: '/services/build-and-test',
+    description: 'Development, testing, and quality assurance for robust automation solutions.',
+    icon: Wrench,
+    color: 'text-green-600',
+    bgGradient: 'linear-gradient(135deg, rgba(16, 185, 129, 0.8), rgba(110, 231, 183, 0.8))',
+    features: ['Development', 'Testing', 'Quality Assurance', 'Performance Optimization']
+  },
+  {
+    label: 'Discovery Call',
+    href: '/services/discovery-call',
+    description: 'Consultation session to identify automation opportunities and requirements.',
+    icon: Users,
+    color: 'text-purple-600',
+    bgGradient: 'linear-gradient(135deg, rgba(139, 92, 246, 0.8), rgba(196, 181, 253, 0.8))',
+    features: ['Process Analysis', 'Opportunity Assessment', 'Custom Solutions', 'Expert Consultation']
+  },
+  {
+    label: 'Hyper Care',
+    href: '/services/hyper-care',
+    description: 'Comprehensive support, monitoring, and continuous optimization services.',
+    icon: Shield,
+    color: 'text-red-600',
+    bgGradient: 'linear-gradient(135deg, rgba(245, 101, 101, 0.8), rgba(252, 165, 165, 0.8))',
+    features: ['24/7 Monitoring', 'Proactive Support', 'Performance Tuning', 'Issue Resolution']
+  },
+  {
+    label: 'Scale & Optimize',
+    href: '/services/scale-optimize',
+    description: 'Performance enhancement and scalability solutions for growing businesses.',
+    icon: TrendingUp,
+    color: 'text-orange-600',
+    bgGradient: 'linear-gradient(135deg, rgba(251, 146, 60, 0.8), rgba(254, 215, 170, 0.8))',
+    features: ['Scalability Planning', 'Performance Enhancement', 'Cost Optimization', 'Growth Strategy']
+  }
+];
+
+const productCategories: ProductCategory[] = [
   {
     id: 'bsfi',
     title: 'Banking & Financial Services',
     icon: Building2,
-    color: 'text-blue-400',
-    bgGradient: 'linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(147, 197, 253, 0.2))',
-    glowColor: 'rgba(59, 130, 246, 0.3)',
+    color: 'text-blue-600',
+    bgGradient: 'linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(147, 197, 253, 0.1))',
     services: [
       {
         name: 'Loan Application Processing',
-        description: 'AI-powered auto-extraction of KYC data with instant credit scoring and approval workflow',
-        tools: 'UiPath + Abbyy + ML',
+        description: 'Auto-extract KYC data → Credit scoring → Approval',
+        tools: 'UiPath + Abbyy',
         href: '/product/bsfi/loan',
         icon: FileText
       },
       {
         name: 'AML Monitoring',
-        description: 'Real-time transaction scanning with advanced anomaly detection and suspicious activity flagging',
-        tools: 'AI: Deep Learning',
+        description: 'Scan transactions → Flag suspicious activity',
+        tools: 'AI: Anomaly detection',
         href: '/product/bsfi/aml',
         icon: Eye
       },
       {
         name: 'Card Dispute Resolution',
-        description: 'Automated dispute form generation from transaction logs with intelligent routing',
-        tools: 'Blue Prism + AI',
+        description: 'Auto-fill dispute forms from transaction logs',
+        tools: 'Blue Prism + SQL',
         href: '/product/bsfi/card-dispute',
         icon: CreditCard
       },
       {
         name: 'Bank Reconciliation',
-        description: 'Smart statement matching with ERP systems using advanced fuzzy logic',
-        tools: 'AI: Neural Networks',
+        description: 'Match statements with ERP entries',
+        tools: 'AI: Fuzzy matching',
         href: '/product/bsfi/bank-reconciliation',
         icon: BarChart3
       }
@@ -187,35 +217,34 @@ const productCategories = [
     id: 'healthcare',
     title: 'Healthcare & Pharma',
     icon: Heart,
-    color: 'text-red-400',
-    bgGradient: 'linear-gradient(135deg, rgba(239, 68, 68, 0.2), rgba(252, 165, 165, 0.2))',
-    glowColor: 'rgba(239, 68, 68, 0.3)',
+    color: 'text-red-600',
+    bgGradient: 'linear-gradient(135deg, rgba(239, 68, 68, 0.1), rgba(252, 165, 165, 0.1))',
     services: [
       {
         name: 'Patient Onboarding',
-        description: 'Seamless ID scanning to EHR population with automated appointment scheduling',
-        tools: 'UiPath + OCR + AI',
+        description: 'Scan IDs → Populate EHR → Schedule appointments',
+        tools: 'UiPath + OCR',
         href: '/product/healthcare&pharma/patient-onboarding',
         icon: UserPlus
       },
       {
         name: 'Claims Processing',
-        description: 'Intelligent insurance claim validation with automated TPA submission',
-        tools: 'AI: Rule Engine',
+        description: 'Validate insurance claims → Submit to TPAs',
+        tools: 'AI: Rule-based validation',
         href: '/product/healthcare&pharma/claims',
         icon: HeartHandshake
       },
       {
         name: 'Clinical Trial Data Entry',
-        description: 'Automated lab report data extraction into trial databases with validation',
-        tools: 'Python + AI + API',
+        description: 'Extract lab report data → Trial databases',
+        tools: 'Python + AA',
         href: '/product/healthcare&pharma/clinical',
         icon: Clipboard
       },
       {
         name: 'Pharmacy Inventory Sync',
-        description: 'Smart inventory management with automated purchase order generation',
-        tools: 'SAP + RPA + IoT',
+        description: 'Auto-generate purchase orders',
+        tools: 'SAP + RPA',
         href: '/product/healthcare&pharma/inventory',
         icon: Pill
       }
@@ -225,28 +254,27 @@ const productCategories = [
     id: 'retail',
     title: 'Retail & E-Commerce',
     icon: ShoppingCart,
-    color: 'text-purple-400',
-    bgGradient: 'linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(196, 181, 253, 0.2))',
-    glowColor: 'rgba(139, 92, 246, 0.3)',
+    color: 'text-purple-600',
+    bgGradient: 'linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(196, 181, 253, 0.1))',
     services: [
       {
         name: 'Dynamic Pricing',
-        description: 'Real-time competitor price scraping with intelligent Shopify/Amazon listing adjustments',
-        tools: 'AI: ML Models',
+        description: 'Scrape competitor prices → Adjust Shopify/Amazon listings',
+        tools: 'AI: Regression models',
         href: '/product/retail&ecommerce/pricing',
         icon: TrendingUp
       },
       {
         name: 'Returns Processing',
-        description: 'Automated return request validation with instant shipping label generation',
-        tools: 'UiPath + APIs',
+        description: 'Validate requests → Generate labels',
+        tools: 'UiPath + USPS API',
         href: '/product/retail&ecommerce/returns',
         icon: RotateCcw
       },
       {
         name: 'Order Reconciliation',
-        description: 'Smart order matching across Amazon/Flipkart with warehouse management',
-        tools: 'SQL + RPA + AI',
+        description: 'Match Amazon/Flipkart orders with warehouses',
+        tools: 'SQL + RPA',
         href: '/product/retail&ecommerce/order',
         icon: ShoppingBag
       }
@@ -256,28 +284,27 @@ const productCategories = [
     id: 'manufacturing',
     title: 'Manufacturing & Logistics',
     icon: Factory,
-    color: 'text-orange-400',
-    bgGradient: 'linear-gradient(135deg, rgba(251, 146, 60, 0.2), rgba(254, 215, 170, 0.2))',
-    glowColor: 'rgba(251, 146, 60, 0.3)',
+    color: 'text-orange-600',
+    bgGradient: 'linear-gradient(135deg, rgba(251, 146, 60, 0.1), rgba(254, 215, 170, 0.1))',
     services: [
       {
         name: 'BOM Validation',
-        description: 'Intelligent cross-checking of supplier invoices against CAD design specifications',
-        tools: 'SolidWorks + AI',
+        description: 'Cross-check supplier invoices vs. CAD designs',
+        tools: 'SolidWorks + RPA',
         href: '/product/manufacturing&logistics/bom',
         icon: Wrench
       },
       {
         name: 'Shipment Tracking',
-        description: 'Real-time courier API monitoring with automated customer notifications',
-        tools: 'Python + Twilio + AI',
+        description: 'Monitor courier APIs → Alert customers',
+        tools: 'Python + Twilio',
         href: '/product/manufacturing&logistics/shipment',
         icon: Truck
       },
       {
         name: 'Predictive Maintenance',
-        description: 'IoT sensor data analysis for machine failure prediction and prevention',
-        tools: 'AI: Time Series + IoT',
+        description: 'IoT sensors → Forecast machine failures',
+        tools: 'AI: Time-series forecasting',
         href: '/product/manufacturing&logistics/maintenance',
         icon: Activity
       }
@@ -287,27 +314,26 @@ const productCategories = [
     id: 'hr',
     title: 'Human Resources',
     icon: UserCheck,
-    color: 'text-green-400',
-    bgGradient: 'linear-gradient(135deg, rgba(34, 197, 94, 0.2), rgba(134, 239, 172, 0.2))',
-    glowColor: 'rgba(34, 197, 94, 0.3)',
+    color: 'text-green-600',
+    bgGradient: 'linear-gradient(135deg, rgba(34, 197, 94, 0.1), rgba(134, 239, 172, 0.1))',
     services: [
       {
         name: 'Resume Screening',
-        description: 'AI-powered resume parsing with intelligent candidate ranking and matching',
+        description: 'Parse resumes → Rank candidates',
         tools: 'AI: NLP + ChatGPT',
         href: '/product/hr/resume',
         icon: FileSearch
       },
       {
         name: 'Payroll Processing',
-        description: 'Automated salary calculations with direct bank transfer integration',
-        tools: 'Tally + RPA + API',
+        description: 'Calculate salaries → Bank transfers',
+        tools: 'Tally + RPA',
         href: '/product/hr/payroll',
         icon: Calculator
       },
       {
         name: 'Employee Offboarding',
-        description: 'Seamless access revocation and asset recovery automation',
+        description: 'Revoke access → Asset recovery',
         tools: 'Active Directory + RPA',
         href: '/product/hr/offboarding',
         icon: UserCheck
@@ -318,20 +344,19 @@ const productCategories = [
     id: 'government',
     title: 'Government & Public Sector',
     icon: Landmark,
-    color: 'text-indigo-400',
-    bgGradient: 'linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(196, 181, 253, 0.2))',
-    glowColor: 'rgba(99, 102, 241, 0.3)',
+    color: 'text-indigo-600',
+    bgGradient: 'linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(196, 181, 253, 0.1))',
     services: [
       {
         name: 'Grievance Redressal',
-        description: 'Intelligent complaint routing with automated status updates and resolution tracking',
-        tools: 'AI: Text Classification',
+        description: 'Route complaints → Send updates',
+        tools: 'AI: Text classification',
         href: '/product/gov&public/grievance-redressal',
         icon: HeartHandshake
       },
       {
         name: 'Pension Processing',
-        description: 'Automated eligibility verification with secure payment disbursement',
+        description: 'Verify eligibility → Disburse payments',
         tools: 'RPA + Aadhaar API',
         href: '/product/gov&public/pension',
         icon: Calculator
@@ -340,144 +365,46 @@ const productCategories = [
   }
 ];
 
-// Enhanced Floating Particles Component
-const FloatingParticles = () => {
-  const particles = Array.from({ length: 50 }, (_, i) => ({
-    id: i,
-    x: Math.random() * 100,
-    y: Math.random() * 100,
-    size: Math.random() * 4 + 1,
-    duration: Math.random() * 20 + 10,
-    delay: Math.random() * 5,
-    opacity: Math.random() * 0.5 + 0.1
-  }));
-
-  return (
-    <div className="fixed inset-0 pointer-events-none overflow-hidden">
-      {particles.map(particle => (
-        <motion.div
-          key={particle.id}
-          className="absolute rounded-full bg-gradient-to-r from-blue-400 to-purple-400"
-          style={{
-            left: `${particle.x}%`,
-            top: `${particle.y}%`,
-            width: `${particle.size}px`,
-            height: `${particle.size}px`,
-            opacity: particle.opacity,
-            filter: 'blur(0.5px)',
-            boxShadow: '0 0 6px rgba(59, 130, 246, 0.5)'
-          }}
-          animate={{
-            y: [0, -30, 0],
-            x: [0, Math.random() * 20 - 10, 0],
-            opacity: [particle.opacity, particle.opacity * 0.3, particle.opacity]
-          }}
-          transition={{
-            duration: particle.duration,
-            delay: particle.delay,
-            repeat: Infinity,
-            ease: "easeInOut"
-          }}
-        />
-      ))}
-    </div>
-  );
-};
-
-// Enhanced Animated Background
-const AnimatedBackground = () => {
-  return (
-    <div className="fixed inset-0 overflow-hidden pointer-events-none">
-      {/* Animated Gradient Mesh */}
-      <div className="absolute inset-0 opacity-30">
-        <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-blue-600/20 via-purple-600/20 to-pink-600/20 animate-pulse" />
-        <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-bl from-cyan-400/30 to-blue-600/30 rounded-full blur-3xl animate-bounce" 
-             style={{ animationDuration: '6s' }} />
-        <div className="absolute bottom-0 left-0 w-96 h-96 bg-gradient-to-tr from-purple-400/30 to-pink-600/30 rounded-full blur-3xl animate-bounce" 
-             style={{ animationDuration: '8s', animationDelay: '2s' }} />
-      </div>
-      
-      {/* Geometric Shapes */}
-      <div className="absolute inset-0">
-        <motion.div
-          className="absolute top-20 left-20 w-32 h-32 border border-blue-400/20 rounded-full"
-          animate={{ rotate: 360 }}
-          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-        />
-        <motion.div
-          className="absolute top-40 right-40 w-24 h-24 border border-purple-400/20 rounded-lg"
-          animate={{ rotate: -360 }}
-          transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-        />
-        <motion.div
-          className="absolute bottom-32 left-32 w-16 h-16 bg-gradient-to-r from-pink-400/10 to-purple-400/10 rounded-full blur-sm"
-          animate={{ scale: [1, 1.5, 1], opacity: [0.3, 0.8, 0.3] }}
-          transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-        />
-      </div>
-    </div>
-  );
-};
-
-// Enhanced Glow Effect Hook
-const useGlowEffect = (isActive: boolean) => {
-  const [glowIntensity, setGlowIntensity] = useState(0);
-  
-  useEffect(() => {
-    if (isActive) {
-      const interval = setInterval(() => {
-        setGlowIntensity(prev => (prev + 0.1) % 1);
-      }, 50);
-      return () => clearInterval(interval);
-    }
-  }, [isActive]);
-  
-  return glowIntensity;
-};
-
-// Helper functions with enhanced visuals
+// Helper functions
 function getServiceIcon(label: string) {
-  const icons = {
-    'Bot Blueprint': Layers,
-    'Build & Test': Cpu,
-    'Discovery Call': Globe,
+  const icons: Record<string, any> = {
+    'Bot Blueprint': FileText,
+    'Build & Test': Wrench,
+    'Discovery Call': Users,
     'Hyper Care': Shield,
     'Scale & Optimize': TrendingUp,
     'default': Rocket
   };
-  return icons[label as keyof typeof icons] || icons['default'];
+  return icons[label] || icons['default'];
 }
 
 function getSolutionIcon(label: string) {
-  const icons = {
+  const icons: Record<string, any> = {
     'Time Liberation': Zap,
     'Growth Accelerator': TrendingUp,
     'Profit Rescue': Shield,
     'Custom Bot Development': Bot,
     'default': Sparkles
   };
-  return icons[label as keyof typeof icons] || icons['default'];
+  return icons[label] || icons['default'];
 }
 
-// Main Enhanced Navbar Component
-export default function EnhancedNavbar() {
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [activeDropdown, setActiveDropdown] = useState(null);
-  const [activeCategory, setActiveCategory] = useState('bsfi');
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const navRef = useRef(null);
-  const { scrollY } = useScroll();
-  const navOpacity = useTransform(scrollY, [0, 100], [0.9, 1]);
-  const navBlur = useTransform(scrollY, [0, 100], [12, 25]);
-  
-  const glowIntensity = useGlowEffect(activeDropdown !== null);
+// Main Component
+export default function Navbar({ addToRefs }: NavbarProps) {
+  const [isScrolled, setIsScrolled] = useState<boolean>(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
+  const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
+  const [activeCategory, setActiveCategory] = useState<string>('bsfi');
+  const [isMobile, setIsMobile] = useState<boolean>(false);
 
   useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      setMousePosition({ x: e.clientX, y: e.clientY });
-    };
-    
+    const checkScreenSize = () => setIsMobile(window.innerWidth < 1024);
+    checkScreenSize();
+    window.addEventListener('resize', checkScreenSize);
+    return () => window.removeEventListener('resize', checkScreenSize);
+  }, []);
+
+  useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
       if (window.scrollY > 20) {
@@ -486,51 +413,58 @@ export default function EnhancedNavbar() {
     };
     
     const handleClickOutside = (event: MouseEvent) => {
-      const target = event.target;
+      const target = event.target as HTMLElement;
       const dropdownButtons = document.querySelectorAll('[data-dropdown]');
       const dropdownMenus = document.querySelectorAll('[data-dropdown-menu]');
       
-      const nodeTarget = target as Node | null;
-      const isClickInsideDropdown = Array.from(dropdownButtons).some(button => button.contains(nodeTarget)) ||
-                                   Array.from(dropdownMenus).some(menu => menu.contains(nodeTarget));
+      const isClickInsideDropdown = Array.from(dropdownButtons).some(button => button.contains(target)) ||
+                                   Array.from(dropdownMenus).some(menu => menu.contains(target));
       
       if (!isClickInsideDropdown) {
         setActiveDropdown(null);
       }
     };
     
-    window.addEventListener('mousemove', handleMouseMove);
     window.addEventListener('scroll', handleScroll);
     document.addEventListener('mousedown', handleClickOutside);
     
     return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('scroll', handleScroll);
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, []);
 
-  const menuItems = [
-    { label: 'Home', href: '/', icon: Globe },
+  const menuItems: MenuItem[] = [
+    { label: 'Home', href: '/' },
+    { 
+      label: 'Services', 
+      href: '/services',
+      // dropdown: [
+      //   { label: 'Bot Blueprint', href: '/services/bot-blueprint' },
+      //   { label: 'Build & Test', href: '/services/build-and-test' },
+      //   { label: 'Discovery Call', href: '/services/discovery-call' },
+      //   { label: 'Hyper Care', href: '/services/hyper-care' },
+      //   { label: 'Scale & Optimize', href: '/services/scale-optimize' }
+      // ]
+    },
     { 
       label: 'Solutions', 
       href: '/solutions',
-      icon: Gem,
       dropdown: [
-        { label: 'Time Liberation', href: '/solutions/time-liberation', icon: Zap },
-        { label: 'Growth Accelerator', href: '/solutions/growth-accelerator', icon: TrendingUp },
-        { label: 'Profit Rescue', href: '/solutions/profit-rescue', icon: Shield },
-        { label: 'Custom Bot Development', href: '/solutions/custombot-development', icon: Bot }
+        { label: 'Time Liberation', href: '/solutions/time-liberation' },
+        { label: 'Growth Accelerator', href: '/solutions/growth-accelerator' },
+        { label: 'Profit Rescue', href: '/solutions/profit-rescue' },
+        { label: 'Custom Bot Development', href: '/solutions/custombot-development' }
       ]
     },
-    { label: 'Services', href: '/products', icon: Cpu },
-    { label: 'About', href: '/about', icon: Star },
-    { label: 'Blog', href: '/blog', icon: Palette },
-    { label: 'Contact', href: '/contact', icon: Waves }
+    // { label: 'Products', href: '/products' },
+    { label: 'About', href: '/about' },
+    { label: 'Blog', href: '/blog' },
+    { label: 'Contact', href: '/contact' }
   ];
 
   const toggleDropdown = (label: string) => {
-    setActiveDropdown(activeDropdown === label ? null : (label as any));
+    setActiveDropdown(activeDropdown === label ? null : label);
   };
 
   const handleDropdownItemClick = () => {
@@ -544,1217 +478,1047 @@ export default function EnhancedNavbar() {
 
   return (
     <>
-      {/* Enhanced Background Effects */}
-      <AnimatedBackground />
-      <FloatingParticles />
-      
-      {/* Dynamic Cursor Effect */}
-      <motion.div
-        className="fixed top-0 left-0 w-6 h-6 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full pointer-events-none z-[999] mix-blend-screen"
-        animate={{
-          x: mousePosition.x - 12,
-          y: mousePosition.y - 12,
-        }}
-        transition={{
-          type: "spring",
-          stiffness: 150,
-          damping: 15,
-          mass: 0.1,
-        }}
+      {/* Background blur overlay */}
+      <div 
+        className={`fixed top-0 left-0 right-0 transition-all duration-500 z-[99] ${
+          isScrolled 
+            ? 'bg-white/10 backdrop-blur-2xl shadow-2xl border-b border-white/20' 
+            : 'bg-white/5 backdrop-blur-xl'
+        }`}
         style={{
-          boxShadow: '0 0 20px rgba(59, 130, 246, 0.6)',
-          filter: 'blur(1px)',
+          backdropFilter: isScrolled ? 'blur(20px) saturate(180%)' : 'blur(12px) saturate(150%)',
+          WebkitBackdropFilter: isScrolled ? 'blur(20px) saturate(180%)' : 'blur(12px) saturate(150%)',
         }}
       />
 
-      {/* Enhanced Navbar */}
       <motion.nav 
-        ref={navRef}
-        className="fixed top-0 left-0 right-0 w-full z-[100] transition-all duration-700"
-        initial={{ y: -100, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.8, ease: "easeOut" }}
-        style={{
-          backdropFilter: `blur(${navBlur.get()}px) saturate(180%)`,
-          WebkitBackdropFilter: `blur(${navBlur.get()}px) saturate(180%)`,
-        }}
+        className="fixed top-0 left-0 right-0 w-full z-[100] transition-all duration-500"
+        initial={{ y: -100 }}
+        animate={{ y: 0 }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
       >
-        {/* Ultra-Premium Glassmorphism Container */}
-        <motion.div 
-          className="relative w-full max-w-[1920px] mx-auto"
+        {/* Enhanced glassmorphism container */}
+        <div 
+          className={`relative w-full max-w-[1920px] mx-auto transition-all duration-500 ${
+            isScrolled ? 'h-16' : 'h-18'
+          }`}
           style={{
-            height: isScrolled ? '70px' : '80px',
-            background: `rgba(0, 0, 0, ${0.3 + glowIntensity * 0.2})`,
-            backdropFilter: 'blur(30px) saturate(200%)',
-            WebkitBackdropFilter: 'blur(30px) saturate(200%)',
-            border: '1px solid rgba(255, 255, 255, 0.1)',
-            borderRadius: '0 0 24px 24px',
-            boxShadow: `0 8px 32px 0 rgba(0, 0, 0, 0.3), 
-                       0 0 80px 0 rgba(59, 130, 246, ${0.1 + glowIntensity * 0.3}), 
-                       inset 0 1px 0 rgba(255, 255, 255, 0.2)`,
-            transition: 'all 0.7s cubic-bezier(0.4, 0, 0.2, 1)',
+            background: isScrolled 
+              ? 'rgba(255, 255, 255, 0.15)' 
+              : 'rgba(255, 255, 255, 0.08)',
+            backdropFilter: 'blur(25px) saturate(200%)',
+            WebkitBackdropFilter: 'blur(25px) saturate(200%)',
+            borderBottom: isScrolled ? '1px solid rgba(255, 255, 255, 0.2)' : '1px solid rgba(255, 255, 255, 0.1)',
+            boxShadow: isScrolled 
+              ? '0 8px 32px 0 rgba(31, 38, 135, 0.15)' 
+              : '0 4px 16px 0 rgba(31, 38, 135, 0.1)'
           }}
         >
-          {/* Animated Border Gradients */}
-          <div className="absolute inset-0 rounded-b-3xl overflow-hidden">
-            <motion.div 
-              className="absolute top-0 left-0 right-0 h-0.5"
-              style={{
-                background: 'linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.8), rgba(139, 92, 246, 0.8), rgba(236, 72, 153, 0.8), rgba(16, 185, 129, 0.8), transparent)',
-              }}
-              animate={{
-                backgroundPosition: ['0% 0%', '100% 0%', '0% 0%'],
-              }}
-              transition={{
-                duration: 8,
-                repeat: Infinity,
-                ease: "linear"
-              }}
-            />
-            <motion.div 
-              className="absolute bottom-0 left-0 right-0 h-0.5"
-              style={{
-                background: 'linear-gradient(90deg, transparent, rgba(236, 72, 153, 0.6), rgba(59, 130, 246, 0.6), rgba(16, 185, 129, 0.6), transparent)',
-              }}
-              animate={{
-                backgroundPosition: ['100% 0%', '0% 0%', '100% 0%'],
-              }}
-              transition={{
-                duration: 10,
-                repeat: Infinity,
-                ease: "linear"
-              }}
-            />
-          </div>
+          {/* Animated gradient border */}
+          <div 
+            className={`absolute top-0 left-0 right-0 h-0.5 transition-opacity duration-500 ${
+              isScrolled ? 'opacity-80' : 'opacity-40'
+            }`}
+            style={{
+              background: 'linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.8), rgba(16, 185, 129, 0.8), rgba(245, 101, 101, 0.8), transparent)',
+              animation: 'shimmer 3s ease-in-out infinite'
+            }}
+          />
 
-          {/* Enhanced Logo with Holographic Effect */}
+          {/* Enhanced Logo */}
           <motion.div 
-            className="absolute left-0 top-0 bottom-0 flex items-center pl-8"
-            whileHover={{ scale: 1.08 }}
-            transition={{ type: "spring", stiffness: 400, damping: 25 }}
+            className="absolute left-0 top-0 bottom-0 flex items-center pl-6"
+            whileHover={{ scale: 1.05 }}
+            transition={{ duration: 0.2 }}
           >
-            <div className="flex items-center relative group cursor-pointer">
+            <Link href="/" className="flex items-center relative group">
               <div 
-                className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-500"
+                className="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-all duration-300"
                 style={{
-                  background: 'radial-gradient(circle, rgba(59, 130, 246, 0.3) 0%, rgba(139, 92, 246, 0.2) 50%, transparent 100%)',
-                  filter: 'blur(20px)',
-                  transform: 'scale(2)',
+                  background: 'radial-gradient(circle, rgba(59, 130, 246, 0.15) 0%, transparent 70%)',
+                  filter: 'blur(10px)'
                 }}
               />
-              <motion.div
-                className="relative z-10 flex items-center gap-3"
-                // whileHover={{ rotate: [0, -5, 5, 0] }}
-                transition={{ duration: 0.6 }}
-              >
-                <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-blue-400 via-amber-500 to-orange-500 p-0.5 shadow-2xl">
-                  <div className="w-full h-full rounded-2xl bg-white/50 backdrop-blur-sm flex items-center justify-center">
-                    {/* <Bot className="w-6 h-6 text-white" /> */}
-                    <Image
-                      src={'/assets/svgs/GenZBotLogo.svg'}
-                      alt="GenZBot Logo"
-                      height={50}
-                      width={120}
-                      className="h-10 w-auto relative z-10"
-                      style={{ maxHeight: '40px' }}
-                      priority
-                      unoptimized
-                    />
-                  </div>
-                </div>
-                <div className="text-white">
-                  <motion.h1 
-                    className="text-2xl font-black bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent"
-                    style={{ textShadow: '0 0 20px rgba(59, 130, 246, 0.5)' }}
-                  >
-                    GenZBot
-                  </motion.h1>
-                  {/* <motion.div 
-                    className="text-xs text-gray-300 font-medium"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ delay: 0.5 }}
-                  >
-                    AI Automation
-                  </motion.div> */}
-                </div>
-              </motion.div>
-            </div>
+              {/* SVG Logo */}
+              <Image
+                src={'/assets/svgs/GenZBotLogo.svg'}
+                alt="GenZBot Logo"
+                height={40}
+                width={120}
+                className="h-10 w-auto relative z-10"
+                style={{ maxHeight: '40px' }}
+                priority
+                unoptimized
+              />
+            </Link>
           </motion.div>
           
-          {/* Ultra-Enhanced Menu */}
+          {/* Enhanced Menu */}
           <div className="flex h-full w-full justify-center items-center">
-            <div className="hidden lg:flex items-center justify-center space-x-2">
-              {menuItems.map((item, index) => {
-                const IconComponent = item.icon;
-                return (
-                  <motion.div 
-                    key={item.label} 
-                    className="relative group"
-                    initial={{ opacity: 0, y: -20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: index * 0.1 }}
-                  >
-                    {item.dropdown || item.label === 'Services' ? (
-                      <>
-                        <motion.button
-                          data-dropdown
-                          onClick={() => toggleDropdown(item.label)}
-                          className="flex items-center gap-2 px-4 py-2 rounded-2xl font-semibold transition-all duration-500 relative overflow-hidden"
+            <div className="hidden lg:flex items-center justify-center space-x-8 xl:space-x-10">
+              {menuItems.map((item, index) => (
+                <motion.div 
+                  key={item.label} 
+                  className="relative group"
+                  initial={{ opacity: 0, y: -20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                >
+                  {item.dropdown || item.label === 'Services' ? (
+                    <>
+                      <button
+                        data-dropdown
+                        onClick={() => toggleDropdown(item.label)}
+                        className={`flex text-white items-center font-semibold transition-all duration-300 relative px-4 py-2 rounded-2xl group ${
+                          activeDropdown === item.label 
+                            ? 'text-blue-600 bg-white/20 backdrop-blur-sm shadow-lg' 
+                            : 'text-gray-700 hover:text-blue-600 hover:bg-white/10'
+                        }`}
+                        style={{
+                          backdropFilter: activeDropdown === item.label ? 'blur(10px)' : undefined,
+                          WebkitBackdropFilter: activeDropdown === item.label ? 'blur(10px)' : undefined,
+                        }}
+                      >
+                        <span className="relative z-10 font-medium">{item.label}</span>
+                        <ChevronDown
+                          className={`ml-2 w-4 h-4 transition-transform duration-300 ${
+                            activeDropdown === item.label ? 'rotate-180' : ''
+                          }`}
+                        />
+                        
+                        {/* Enhanced hover effect */}
+                        <div 
+                          className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                           style={{
-                            background: activeDropdown === item.label 
-                              ? 'rgba(59, 130, 246, 0.2)' 
-                              : 'rgba(255, 255, 255, 0.05)',
+                            background: 'rgba(255, 255, 255, 0.1)',
                             backdropFilter: 'blur(10px)',
                             WebkitBackdropFilter: 'blur(10px)',
-                            border: activeDropdown === item.label 
-                              ? '1px solid rgba(59, 130, 246, 0.3)' 
-                              : '1px solid rgba(255, 255, 255, 0.1)',
-                            color: activeDropdown === item.label ? '#60a5fa' : 'white',
-                            boxShadow: activeDropdown === item.label 
-                              ? '0 0 20px rgba(59, 130, 246, 0.3)' 
-                              : 'none',
                           }}
-                          whileHover={{ scale: 1.05 }}
-                          whileTap={{ scale: 0.95 }}
-                        >
-                          <IconComponent className="w-4 h-4" />
-                          <span className="relative z-10 text-sm font-bold">{item.label}</span>
-                          <motion.div
-                            className="w-4 h-4"
-                            animate={{ rotate: activeDropdown === item.label ? 180 : 0 }}
-                            transition={{ duration: 0.3 }}
+                        />
+                      </button>
+
+                      {/* Products Dropdown with Hero Section - Matching Style */}
+                      <AnimatePresence>
+                        {item.label === 'Services' && activeDropdown === item.label && (
+                          <motion.div 
+                            data-dropdown-menu
+                            className="fixed left-1/2 top-[4.5rem] z-[120] transform -translate-x-1/2 w-full max-w-5xl"
+                            initial={{ opacity: 0, y: -20, scale: 0.95 }}
+                            animate={{ opacity: 1, y: 0, scale: 1 }}
+                            exit={{ opacity: 0, y: -20, scale: 0.95 }}
+                            transition={{ duration: 0.3, ease: "easeOut" }}
                           >
-                            <ChevronDown className="w-4 h-4" />
-                          </motion.div>
-                          
-                          {/* Hover particles */}
-                          <div className="absolute inset-0 pointer-events-none">
-                            {Array.from({ length: 8 }).map((_, i) => (
-                              <motion.div
-                                key={i}
-                                className="absolute w-1 h-1 bg-blue-400 rounded-full opacity-0 group-hover:opacity-100"
-                                style={{
-                                  left: `${Math.random() * 100}%`,
-                                  top: `${Math.random() * 100}%`,
-                                }}
-                                animate={{
-                                  scale: [0, 1, 0],
-                                  opacity: [0, 1, 0],
-                                }}
-                                transition={{
-                                  duration: 2,
-                                  repeat: Infinity,
-                                  delay: i * 0.2,
-                                }}
-                              />
-                            ))}
-                          </div>
-                        </motion.button>
-
-                        {/* Ultra-Enhanced Products Dropdown */}
-                        <AnimatePresence>
-                          {item.label === 'Services' && activeDropdown === item.label && (
-                            <motion.div 
-                              data-dropdown-menu
-                              className="fixed left-1/2 top-[85px] z-[120] transform -translate-x-1/2"
-                              initial={{ opacity: 0, y: -30, scale: 0.9 }}
-                              animate={{ opacity: 1, y: 0, scale: 1 }}
-                              exit={{ opacity: 0, y: -30, scale: 0.9 }}
-                              transition={{ duration: 0.4, ease: "easeOut" }}
+                            <div 
+                              className="rounded-3xl shadow-2xl border overflow-hidden"
+                              style={{
+                                background: 'rgba(255, 255, 255, 0.75)',
+                                backdropFilter: 'blur(15px) saturate(150%)',
+                                WebkitBackdropFilter: 'blur(15px) saturate(150%)',
+                                border: '1px solid rgba(255, 255, 255, 0.3)',
+                                boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(255, 255, 255, 0.2) inset'
+                              }}
                             >
-                              <div 
-                                className="rounded-3xl shadow-2xl border overflow-hidden"
-                                style={{
-                                  width: '1000px',
-                                  height: '550px',
-                                  background: 'rgba(0, 0, 0, 0.95)',
-                                  backdropFilter: 'blur(40px) saturate(150%)',
-                                  WebkitBackdropFilter: 'blur(40px) saturate(150%)',
-                                  border: '1px solid rgba(255, 255, 255, 0.1)',
-                                  boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.8), 0 0 100px rgba(59, 130, 246, 0.3)',
-                                }}
-                              >
-                                {/* Animated background gradient */}
-                                <div className="absolute inset-0 opacity-30">
-                                  <motion.div
-                                    className="absolute inset-0 bg-gradient-to-br from-blue-600/20 via-purple-600/20 to-pink-600/20"
-                                    animate={{
-                                      backgroundPosition: ['0% 0%', '100% 100%', '0% 0%'],
-                                    }}
-                                    transition={{
-                                      duration: 15,
-                                      repeat: Infinity,
-                                      ease: "linear"
-                                    }}
-                                  />
-                                </div>
-
-                                <div className="relative z-10 flex h-full">
-                                  {/* Enhanced Vertical Tabs */}
-                                  <div className="w-72 border-r border-gray-700/50 bg-gradient-to-b from-gray-900/50 to-gray-800/50 backdrop-blur-md">
-                                    <div className="p-4 border-b border-gray-700/50 bg-gradient-to-r from-blue-600/20 to-purple-600/20">
-                                      <div className="flex items-center gap-3 mb-2">
-                                        <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-blue-400 to-purple-500 flex items-center justify-center">
-                                          <Cpu className="w-4 h-4 text-white" />
+                              <div className="p-6">
+                                <div className="flex flex-col lg:flex-row gap-6 relative z-10">
+                                  {/* Hero Card - Reduced Width */}
+                                  <div className="lg:w-1/4">
+                                    <Card 
+                                      className="h-full border-0 text-white overflow-hidden relative"
+                                      style={{
+                                        background: 'linear-gradient(135deg, rgba(99, 102, 241, 0.8) 0%, rgba(139, 92, 246, 0.8) 50%, rgba(168, 85, 247, 0.8) 100%)',
+                                        backdropFilter: 'blur(5px)',
+                                        WebkitBackdropFilter: 'blur(5px)',
+                                      }}
+                                    >
+                                      <div 
+                                        className="absolute inset-0"
+                                        style={{
+                                          background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, transparent 100%)'
+                                        }}
+                                      />
+                                      <CardHeader className="relative z-10 pb-3 p-3">
+                                        <div className="flex items-center gap-2 mb-3">
+                                          <div 
+                                            className="w-10 h-10 rounded-2xl flex items-center justify-center border relative overflow-hidden"
+                                            style={{
+                                              background: 'rgba(255, 255, 255, 0.2)',
+                                              backdropFilter: 'blur(10px)',
+                                              WebkitBackdropFilter: 'blur(10px)',
+                                              border: '1px solid rgba(255, 255, 255, 0.3)'
+                                            }}
+                                          >
+                                            <div 
+                                              className="absolute inset-0 animate-pulse"
+                                              style={{
+                                                background: 'linear-gradient(45deg, rgba(168, 85, 247, 0.3) 0%, rgba(99, 102, 241, 0.3) 100%)'
+                                              }}
+                                            />
+                                            <Layers className="w-5 h-5 text-white relative z-10" />
+                                          </div>
+                                          <Badge 
+                                            className="text-white border-white/30 text-xs"
+                                            style={{
+                                              background: 'rgba(255, 255, 255, 0.2)',
+                                              backdropFilter: 'blur(10px)',
+                                              WebkitBackdropFilter: 'blur(10px)',
+                                            }}
+                                          >
+                                            Services 🏭
+                                          </Badge>
                                         </div>
-                                        <div>
-                                          <h3 className="text-sm font-bold text-white">Industry Solutions</h3>
-                                          <p className="text-xs text-gray-300">Choose your domain</p>
+                                        <CardTitle className="text-lg font-bold mb-2">
+                                          Industry Services
+                                        </CardTitle>
+                                        <CardDescription className="text-white/90 leading-relaxed text-sm">
+                                          Specialized automation products tailored for your industry needs
+                                        </CardDescription>
+                                      </CardHeader>
+                                      <CardContent className="relative z-10 p-3 pt-0">
+                                        <div className="grid grid-cols-2 gap-2">
+                                          {[
+                                            { emoji: "🏭", text: "Industry Focused" },
+                                            { emoji: "⚙️", text: "Customizable" },
+                                            { emoji: "📊", text: "Analytics" },
+                                            { emoji: "🔗", text: "Integration" }
+                                          ].map((feature, idx) => (
+                                            <div 
+                                              key={idx} 
+                                              className="rounded-xl p-2 border"
+                                              style={{
+                                                background: 'rgba(255, 255, 255, 0.1)',
+                                                backdropFilter: 'blur(10px)',
+                                                WebkitBackdropFilter: 'blur(10px)',
+                                                border: '1px solid rgba(255, 255, 255, 0.2)'
+                                              }}
+                                            >
+                                              <div className="text-center">
+                                                <div className="text-sm mb-1">{feature.emoji}</div>
+                                                <div className="text-xs font-medium">{feature.text}</div>
+                                              </div>
+                                            </div>
+                                          ))}
+                                        </div>
+                                      </CardContent>
+                                    </Card>
+                                  </div>
+                                  
+                                  {/* Categories and Services - Increased Width */}
+                                  <div className="lg:w-3/4 flex gap-4 min-w-0">
+                                    <div className="w-40 flex-shrink-0">
+                                      <div className="max-h-96 overflow-y-auto custom-scrollbar">
+                                        <div className="space-y-2">
+                                          {productCategories.map((category, categoryIdx) => {
+                                            const IconComponent = category.icon;
+                                            const categoryColors = [
+                                              { bg: 'linear-gradient(135deg, rgba(59, 130, 246, 0.8), rgba(147, 197, 253, 0.8))', border: 'rgba(59, 130, 246, 0.3)' },
+                                              { bg: 'linear-gradient(135deg, rgba(239, 68, 68, 0.8), rgba(252, 165, 165, 0.8))', border: 'rgba(239, 68, 68, 0.3)' },
+                                              { bg: 'linear-gradient(135deg, rgba(139, 92, 246, 0.8), rgba(196, 181, 253, 0.8))', border: 'rgba(139, 92, 246, 0.3)' },
+                                              { bg: 'linear-gradient(135deg, rgba(251, 146, 60, 0.8), rgba(254, 215, 170, 0.8))', border: 'rgba(251, 146, 60, 0.3)' },
+                                              { bg: 'linear-gradient(135deg, rgba(34, 197, 94, 0.8), rgba(134, 239, 172, 0.8))', border: 'rgba(34, 197, 94, 0.3)' },
+                                              { bg: 'linear-gradient(135deg, rgba(99, 102, 241, 0.8), rgba(196, 181, 253, 0.8))', border: 'rgba(99, 102, 241, 0.3)' }
+                                            ];
+                                            const categoryColor = categoryColors[categoryIdx % categoryColors.length];
+                                            
+                                            return (
+                                              <motion.button
+                                                key={category.id}
+                                                onClick={() => handleCategoryChange(category.id)}
+                                                className={`w-full text-left p-2 rounded-lg transition-all duration-300 group relative overflow-hidden ${
+                                                  activeCategory === category.id ? 'scale-105' : 'hover:scale-102'
+                                                }`}
+                                                style={{
+                                                  background: activeCategory === category.id 
+                                                    ? categoryColor.bg 
+                                                    : 'rgba(255, 255, 255, 0.1)',
+                                                  border: `1px solid ${categoryColor.border}`,
+                                                  backdropFilter: 'blur(8px)',
+                                                  WebkitBackdropFilter: 'blur(8px)',
+                                                }}
+                                                initial={{ opacity: 0, x: -20 }}
+                                                animate={{ opacity: 1, x: 0 }}
+                                                transition={{ duration: 0.3, delay: categoryIdx * 0.1 }}
+                                              >
+                                                <div className="flex items-start gap-2 relative z-10">
+                                                  <div 
+                                                    className={`w-7 h-7 rounded-lg flex items-center justify-center flex-shrink-0 ${
+                                                      activeCategory === category.id ? 'bg-white/20' : 'bg-gray-200/20'
+                                                    }`}
+                                                  >
+                                                    <IconComponent className={`w-4 h-4 ${
+                                                      activeCategory === category.id ? 'text-white' : category.color
+                                                    }`} />
+                                                  </div>
+                                                  <div className="flex-1 min-w-0 overflow-hidden">
+                                                    <div className={`font-semibold text-xs leading-tight mb-0.5 ${
+                                                      activeCategory === category.id ? 'text-white' : 'text-gray-700'
+                                                    }`} style={{ 
+                                                      wordBreak: 'break-word',
+                                                      hyphens: 'auto',
+                                                      lineHeight: '1.2'
+                                                    }}>
+                                                      {category.title.replace('&', '&\u200B')}
+                                                    </div>
+                                                    <div className={`text-xs ${
+                                                      activeCategory === category.id ? 'text-white/80' : 'text-gray-500'
+                                                    }`}>
+                                                      {category.services.length} items
+                                                    </div>
+                                                  </div>
+                                                  {activeCategory === category.id && (
+                                                    <ChevronRight className="w-3 h-3 text-white flex-shrink-0" />
+                                                  )}
+                                                </div>
+                                              </motion.button>
+                                            );
+                                          })}
                                         </div>
                                       </div>
                                     </div>
-                                    
-                                    <div className="overflow-y-auto p-3" style={{ height: 'calc(550px - 80px)' }}>
-                                      {productCategories.map((category) => {
-                                        const IconComponent = category.icon;
-                                        const isActive = activeCategory === category.id;
-                                        return (
-                                          <motion.button
-                                            key={category.id}
-                                            onClick={() => handleCategoryChange(category.id)}
-                                            className="w-full text-left p-3 rounded-xl mb-2 transition-all duration-300 flex items-center gap-3 relative overflow-hidden group"
-                                            style={{
-                                              background: isActive 
-                                                ? 'rgba(59, 130, 246, 0.2)' 
-                                                : 'rgba(255, 255, 255, 0.05)',
-                                              border: isActive 
-                                                ? '1px solid rgba(59, 130, 246, 0.3)' 
-                                                : '1px solid rgba(255, 255, 255, 0.1)',
-                                              boxShadow: isActive 
-                                                ? '0 0 20px rgba(59, 130, 246, 0.2)' 
-                                                : 'none',
-                                            }}
-                                            whileHover={{ scale: 1.02 }}
-                                            whileTap={{ scale: 0.98 }}
-                                          >
-                                            {/* Animated background */}
-                                            <motion.div
-                                              className="absolute inset-0 opacity-0 group-hover:opacity-100"
-                                              style={{
-                                                background: category.bgGradient,
-                                              }}
-                                              initial={{ scale: 0 }}
-                                              animate={{ scale: isActive ? 1 : 0 }}
-                                              transition={{ duration: 0.3 }}
-                                            />
+
+                                    {/* Services Grid - Flexible Width */}
+                                    <div className="flex-1 min-w-0">
+                                      <div className="max-h-96 overflow-y-auto pr-2 custom-scrollbar">
+                                        <AnimatePresence mode="wait">
+                                          {productCategories.map((category) => {
+                                            if (category.id !== activeCategory) return null;
                                             
-                                            <div 
-                                              className="relative z-10 w-10 h-10 rounded-xl flex items-center justify-center transition-all duration-300"
-                                              style={{
-                                                background: isActive 
-                                                  ? 'rgba(59, 130, 246, 0.3)' 
-                                                  : 'rgba(255, 255, 255, 0.1)',
-                                                boxShadow: isActive 
-                                                  ? `0 0 15px ${category.glowColor}` 
-                                                  : 'none',
-                                              }}
-                                            >
-                                              <IconComponent className={`w-5 h-5 ${isActive ? 'text-blue-300' : 'text-gray-400'} transition-colors`} />
-                                            </div>
-                                            
-                                            <div className="flex-1 min-w-0 relative z-10">
-                                              <div className={`font-semibold text-sm ${isActive ? 'text-white' : 'text-gray-300'} transition-colors`}>
-                                                {category.title}
-                                              </div>
-                                              <div className={`text-xs ${isActive ? 'text-blue-300' : 'text-gray-500'} transition-colors`}>
-                                                {category.services.length} automation solutions
-                                              </div>
-                                            </div>
-                                            
-                                            {isActive && (
-                                              <motion.div
-                                                className="relative z-10"
-                                                initial={{ opacity: 0, x: -10 }}
-                                                animate={{ opacity: 1, x: 0 }}
+                                            return (
+                                              <motion.div 
+                                                key={category.id}
+                                                initial={{ opacity: 0, y: 20 }}
+                                                animate={{ opacity: 1, y: 0 }}
+                                                exit={{ opacity: 0, y: -20 }}
                                                 transition={{ duration: 0.3 }}
+                                                className="grid grid-cols-1 md:grid-cols-2 gap-3"
                                               >
-                                                <ChevronRight className="w-4 h-4 text-blue-400" />
-                                              </motion.div>
-                                            )}
-                                          </motion.button>
-                                        );
-                                      })}
-                                    </div>
-                                  </div>
-
-                                  {/* Enhanced Content Area */}
-                                  <div className="flex-1 p-6 overflow-y-auto">
-                                    <AnimatePresence mode="wait">
-                                      {productCategories.map((category) => {
-                                        if (category.id !== activeCategory) return null;
-                                        
-                                        const CategoryIcon = category.icon;
-                                        
-                                        return (
-                                          <motion.div 
-                                            key={category.id} 
-                                            className="h-full"
-                                            initial={{ opacity: 0, x: 20 }}
-                                            animate={{ opacity: 1, x: 0 }}
-                                            exit={{ opacity: 0, x: -20 }}
-                                            transition={{ duration: 0.4 }}
-                                          >
-                                            {/* Enhanced Header */}
-                                            <div className="mb-6">
-                                              <div className="flex items-center gap-4 mb-4">
-                                                <div 
-                                                  className="w-16 h-16 rounded-2xl flex items-center justify-center relative overflow-hidden"
-                                                  style={{ 
-                                                    background: category.bgGradient,
-                                                    boxShadow: `0 0 30px ${category.glowColor}`,
-                                                  }}
-                                                >
-                                                  <CategoryIcon className={`w-8 h-8 ${category.color} relative z-10`} />
-                                                  <motion.div
-                                                    className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
-                                                    animate={{ x: [-100, 100] }}
-                                                    transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-                                                  />
-                                                </div>
-                                                <div>
-                                                  <h2 className="text-2xl font-bold text-white mb-1">{category.title}</h2>
-                                                  <p className="text-gray-300 text-sm">Advanced automation solutions tailored for {category.title.toLowerCase()}</p>
-                                                  <Badge style={{ marginTop: '8px' }}>
-                                                    {category.services.length} Solutions Available
-                                                  </Badge>
-                                                </div>
-                                              </div>
-                                            </div>
-
-                                            {/* Enhanced Services Grid */}
-                                            <div className="grid grid-cols-2 gap-4">
-                                              {category.services.map((service, idx) => {
-                                                const ServiceIcon = service.icon;
-                                                return (
-                                                  <motion.div
-                                                    key={service.name}
-                                                    initial={{ opacity: 0, y: 20 }}
-                                                    animate={{ opacity: 1, y: 0 }}
-                                                    transition={{ duration: 0.4, delay: idx * 0.1 }}
-                                                    onClick={() => {
-                                                      window.location.href = service.href;
-                                                      handleDropdownItemClick();
-                                                    }}
-                                                    className="cursor-pointer"
-                                                  >
-                                                    <Card className="h-full transition-all duration-300 hover:scale-105 group relative overflow-hidden">
-                                                      {/* Animated background on hover */}
-                                                      <motion.div
-                                                        className="absolute inset-0 opacity-0 group-hover:opacity-100"
-                                                        style={{
-                                                          background: `linear-gradient(135deg, ${category.glowColor}, rgba(255, 255, 255, 0.1))`,
-                                                        }}
-                                                        initial={{ scale: 0 }}
-                                                        whileHover={{ scale: 1 }}
-                                                        transition={{ duration: 0.3 }}
-                                                      />
-                                                      
-                                                      <CardHeader className="pb-3 relative z-10">
-                                                        <div className="flex items-start gap-3">
+                                                {category.services.map((service, idx) => {
+                                                  const ServiceIcon = service.icon;
+                                                  return (
+                                                    <motion.div
+                                                      key={service.name}
+                                                      initial={{ opacity: 0, y: 20 }}
+                                                      animate={{ opacity: 1, y: 0 }}
+                                                      transition={{ duration: 0.3, delay: idx * 0.1 }}
+                                                    >
+                                                      <Link href={service.href} onClick={handleDropdownItemClick}>
+                                                        <Card 
+                                                          className="transition-all duration-300 cursor-pointer group hover:scale-105 border relative overflow-hidden h-full min-h-[120px]"
+                                                          style={{
+                                                            background: 'rgba(255, 255, 255, 0.2)',
+                                                            backdropFilter: 'blur(8px)',
+                                                            WebkitBackdropFilter: 'blur(8px)',
+                                                            border: `1px solid ${category.color.includes('blue') ? 'rgba(59, 130, 246, 0.3)' : 
+                                                                      category.color.includes('red') ? 'rgba(239, 68, 68, 0.3)' : 
+                                                                      category.color.includes('purple') ? 'rgba(139, 92, 246, 0.3)' : 
+                                                                      category.color.includes('orange') ? 'rgba(251, 146, 60, 0.3)' : 
+                                                                      category.color.includes('green') ? 'rgba(34, 197, 94, 0.3)' : 
+                                                                      'rgba(99, 102, 241, 0.3)'}`,
+                                                          }}
+                                                        >
                                                           <div 
-                                                            className="w-12 h-12 rounded-xl flex items-center justify-center transition-all duration-300 group-hover:scale-110 relative overflow-hidden"
-                                                            style={{
-                                                              background: 'rgba(59, 130, 246, 0.2)',
-                                                              boxShadow: '0 0 20px rgba(59, 130, 246, 0.3)',
-                                                            }}
-                                                          >
-                                                            <ServiceIcon className="w-6 h-6 text-blue-400 relative z-10" />
-                                                            <motion.div
-                                                              className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent"
-                                                              animate={{ x: [-50, 50] }}
-                                                              transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
-                                                            />
-                                                          </div>
-                                                          <div className="flex-1">
-                                                            <CardTitle className="text-lg font-bold group-hover:text-blue-300 transition-colors leading-tight">
-                                                              {service.name}
-                                                            </CardTitle>
-                                                            <Badge 
-                                                              className="mt-2"
-                                                              style={{
-                                                                background: 'rgba(59, 130, 246, 0.2)',
-                                                                color: '#60a5fa',
-                                                                border: '1px solid rgba(59, 130, 246, 0.3)',
-                                                              }}
-                                                            >
-                                                              {service.tools}
-                                                            </Badge>
-                                                          </div>
-                                                        </div>
-                                                      </CardHeader>
-                                                      <CardContent className="pt-0 relative z-10">
-                                                        <CardDescription className="text-sm leading-relaxed group-hover:text-gray-200 transition-colors">
-                                                          {service.description}
-                                                        </CardDescription>
-                                                      </CardContent>
-                                                    </Card>
-                                                  </motion.div>
-                                                );
-                                              })}
-                                            </div>
-                                          </motion.div>
-                                        );
-                                      })}
-                                    </AnimatePresence>
+                                                            className="absolute top-0 left-0 right-0 h-1 group-hover:h-2 transition-all duration-300"
+                                                            style={{ background: category.bgGradient }}
+                                                          />
+                                                          
+                                                          <CardHeader className="pb-2 pt-3 px-3">
+                                                            <div className="flex items-start gap-2.5">
+                                                              <div 
+                                                                className="w-8 h-8 rounded-lg text-white flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg flex-shrink-0"
+                                                                style={{ background: category.bgGradient }}
+                                                              >
+                                                                <ServiceIcon size={14} />
+                                                              </div>
+                                                              <div className="flex-1 min-w-0">
+                                                                <CardTitle className={`text-sm font-semibold ${category.color} group-hover:text-gray-700 transition-colors leading-tight mb-1.5 break-words`}>
+                                                                  {service.name}
+                                                                </CardTitle>
+                                                                <Badge 
+                                                                  className="text-white/80 border text-xs px-2 py-0.5 inline-block"
+                                                                  style={{
+                                                                    background: 'rgba(255, 255, 255, 0.15)',
+                                                                    border: '1px solid rgba(255, 255, 255, 0.25)'
+                                                                  }}
+                                                                >
+                                                                  {service.tools}
+                                                                </Badge>
+                                                              </div>
+                                                            </div>
+                                                          </CardHeader>
+                                                          <CardContent className="pt-0 pb-3 px-3">
+                                                            <CardDescription className="text-gray-600 text-xs leading-relaxed group-hover:text-gray-700 transition-colors break-words">
+                                                              {service.description}
+                                                            </CardDescription>
+                                                          </CardContent>
+                                                        </Card>
+                                                      </Link>
+                                                    </motion.div>
+                                                  );
+                                                })}
+                                              </motion.div>
+                                            );
+                                          })}
+                                        </AnimatePresence>
+                                      </div>
+                                    </div>
                                   </div>
                                 </div>
                               </div>
-                            </motion.div>
-                          )}
-                        </AnimatePresence>
+                            </div>
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
 
-                        {/* Ultra-Enhanced Solutions Dropdown */}
-                        <AnimatePresence>
-                          {item.label === 'Solutions' && activeDropdown === item.label && (
-                            <motion.div 
-                              data-dropdown-menu
-                              className="fixed left-1/2 top-[85px] z-[120] transform -translate-x-1/2"
-                              initial={{ opacity: 0, y: -30, scale: 0.9 }}
-                              animate={{ opacity: 1, y: 0, scale: 1 }}
-                              exit={{ opacity: 0, y: -30, scale: 0.9 }}
-                              transition={{ duration: 0.4, ease: "easeOut" }}
+                      {/* Services Dropdown with Hero Section - Matching Solutions Style */}
+                      {/* <AnimatePresence>
+                        {item.label === 'Services' && activeDropdown === item.label && (
+                          <motion.div 
+                            data-dropdown-menu
+                            className="fixed left-1/2 top-[4.5rem] z-[120] transform -translate-x-1/2 w-full max-w-4xl"
+                            initial={{ opacity: 0, y: -20, scale: 0.95 }}
+                            animate={{ opacity: 1, y: 0, scale: 1 }}
+                            exit={{ opacity: 0, y: -20, scale: 0.95 }}
+                            transition={{ duration: 0.3, ease: "easeOut" }}
+                          >
+                            <div 
+                              className="rounded-3xl shadow-2xl border overflow-hidden"
+                              style={{
+                                background: 'rgba(255, 255, 255, 0.75)',
+                                backdropFilter: 'blur(15px) saturate(150%)',
+                                WebkitBackdropFilter: 'blur(15px) saturate(150%)',
+                                border: '1px solid rgba(255, 255, 255, 0.3)',
+                                boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(255, 255, 255, 0.2) inset'
+                              }}
                             >
-                              <div 
-                                className="rounded-3xl shadow-2xl border overflow-hidden"
-                                style={{
-                                  width: '900px',
-                                  background: 'rgba(0, 0, 0, 0.95)',
-                                  backdropFilter: 'blur(40px) saturate(150%)',
-                                  WebkitBackdropFilter: 'blur(40px) saturate(150%)',
-                                  border: '1px solid rgba(255, 255, 255, 0.1)',
-                                  boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.8), 0 0 100px rgba(139, 92, 246, 0.3)',
-                                }}
-                              >
-                                {/* Animated background */}
-                                <div className="absolute inset-0 opacity-20">
-                                  <motion.div
-                                    className="absolute inset-0 bg-gradient-to-br from-purple-600/30 via-pink-600/30 to-blue-600/30"
-                                    animate={{
-                                      backgroundPosition: ['0% 0%', '100% 100%', '0% 0%'],
-                                    }}
-                                    transition={{
-                                      duration: 12,
-                                      repeat: Infinity,
-                                      ease: "linear"
-                                    }}
-                                  />
-                                </div>
-
-                                <div className="relative z-10 p-8">
-                                  <div className="flex gap-8">
-                                    {/* Hero Section */}
-                                    <div className="w-1/3">
-                                      <Card 
-                                        className="h-full border-0 text-white overflow-hidden relative"
+                              <div className="p-6">
+                                <div className="flex flex-col lg:flex-row gap-6 relative z-10">
+                                  <div className="lg:w-1/3">
+                                    <Card 
+                                      className="h-full border-0 text-white overflow-hidden relative"
+                                      style={{
+                                        background: 'linear-gradient(135deg, rgba(59, 130, 246, 0.8) 0%, rgba(16, 185, 129, 0.8) 100%)',
+                                        backdropFilter: 'blur(5px)',
+                                        WebkitBackdropFilter: 'blur(5px)',
+                                      }}
+                                    >
+                                      <div 
+                                        className="absolute inset-0"
                                         style={{
-                                          background: 'linear-gradient(135deg, rgba(139, 92, 246, 0.3), rgba(59, 130, 246, 0.3))',
-                                          boxShadow: '0 0 40px rgba(139, 92, 246, 0.4)',
+                                          background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, transparent 100%)'
                                         }}
-                                      >
-                                        <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent" />
-                                        
-                                        <CardHeader className="relative z-10 pb-4">
-                                          <div className="flex items-center gap-3 mb-4">
-                                            <div 
-                                              className="w-14 h-14 rounded-2xl flex items-center justify-center relative overflow-hidden"
-                                              style={{
-                                                background: 'rgba(255, 255, 255, 0.2)',
-                                                backdropFilter: 'blur(10px)',
-                                                WebkitBackdropFilter: 'blur(10px)',
-                                                border: '1px solid rgba(255, 255, 255, 0.3)',
-                                                boxShadow: '0 0 30px rgba(255, 255, 255, 0.2)',
-                                              }}
-                                            >
-                                              <Sparkles className="w-7 h-7 text-white relative z-10" />
-                                              <motion.div
-                                                className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent"
-                                                animate={{ x: [-100, 100] }}
-                                                transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-                                              />
-                                            </div>
-                                            <Badge 
-                                              style={{
-                                                background: 'rgba(255, 255, 255, 0.2)',
-                                                backdropFilter: 'blur(10px)',
-                                                WebkitBackdropFilter: 'blur(10px)',
-                                                border: '1px solid rgba(255, 255, 255, 0.3)',
-                                              }}
-                                            >
-                                              SOLUTIONS ✨
-                                            </Badge>
-                                          </div>
-                                          <CardTitle className="text-2xl font-bold mb-3">
-                                            Business Transformation
-                                          </CardTitle>
-                                          <CardDescription className="text-white/90 leading-relaxed">
-                                            Revolutionary solutions that redefine productivity and accelerate growth
-                                          </CardDescription>
-                                        </CardHeader>
-                                        <CardContent className="relative z-10">
-                                          <div className="grid grid-cols-2 gap-3">
-                                            {[
-                                              { emoji: "⚡", text: "Instant Setup", color: "from-yellow-400 to-orange-500" },
-                                              { emoji: "🎯", text: "Precision AI", color: "from-blue-400 to-purple-500" },
-                                              { emoji: "🚀", text: "Hyper Scale", color: "from-green-400 to-blue-500" },
-                                              { emoji: "💎", text: "Premium", color: "from-purple-400 to-pink-500" }
-                                            ].map((feature, idx) => (
-                                              <motion.div 
-                                                key={idx} 
-                                                className="rounded-xl p-3 border relative overflow-hidden"
-                                                style={{
-                                                  background: 'rgba(255, 255, 255, 0.1)',
-                                                  backdropFilter: 'blur(10px)',
-                                                  WebkitBackdropFilter: 'blur(10px)',
-                                                  border: '1px solid rgba(255, 255, 255, 0.2)'
-                                                }}
-                                                whileHover={{ scale: 1.05 }}
-                                                transition={{ duration: 0.2 }}
-                                              >
-                                                <div className="text-center relative z-10">
-                                                  <motion.div 
-                                                    className="text-xl mb-1"
-                                                    animate={{ rotate: [0, 10, -10, 0] }}
-                                                    transition={{ duration: 2, repeat: Infinity, delay: idx * 0.5 }}
-                                                  >
-                                                    {feature.emoji}
-                                                  </motion.div>
-                                                  <div className="text-xs font-semibold">{feature.text}</div>
-                                                </div>
-                                                <motion.div
-                                                  className={`absolute inset-0 bg-gradient-to-r ${feature.color} opacity-0 hover:opacity-20 transition-opacity`}
-                                                  whileHover={{ opacity: 0.2 }}
-                                                />
-                                              </motion.div>
-                                            ))}
-                                          </div>
-                                        </CardContent>
-                                      </Card>
-                                    </div>
-                                    
-                                    {/* Solutions Grid */}
-                                    <div className="w-2/3 grid grid-cols-2 gap-4">
-                                      {item.dropdown?.map((dropdownItem, idx) => {
-                                        const IconComponent = getSolutionIcon(dropdownItem.label);
-                                        const solutions = [
-                                          { 
-                                            bg: 'linear-gradient(135deg, rgba(251, 191, 36, 0.3), rgba(252, 211, 77, 0.3))', 
-                                            emoji: '⏰', 
-                                            color: 'text-amber-300', 
-                                            glow: 'rgba(251, 191, 36, 0.4)',
-                                            particles: 'from-yellow-400 to-orange-400'
-                                          },
-                                          { 
-                                            bg: 'linear-gradient(135deg, rgba(236, 72, 153, 0.3), rgba(251, 113, 133, 0.3))', 
-                                            emoji: '📈', 
-                                            color: 'text-pink-300', 
-                                            glow: 'rgba(236, 72, 153, 0.4)',
-                                            particles: 'from-pink-400 to-red-400'
-                                          },
-                                          { 
-                                            bg: 'linear-gradient(135deg, rgba(16, 185, 129, 0.3), rgba(110, 231, 183, 0.3))', 
-                                            emoji: '💰', 
-                                            color: 'text-green-300', 
-                                            glow: 'rgba(16, 185, 129, 0.4)',
-                                            particles: 'from-green-400 to-emerald-400'
-                                          },
-                                          { 
-                                            bg: 'linear-gradient(135deg, rgba(139, 92, 246, 0.3), rgba(196, 181, 253, 0.3))', 
-                                            emoji: '🤖', 
-                                            color: 'text-purple-300', 
-                                            glow: 'rgba(139, 92, 246, 0.4)',
-                                            particles: 'from-purple-400 to-indigo-400'
-                                          }
-                                        ];
-                                        const solution = solutions[idx % solutions.length];
-                                        
-                                        return (
-                                          <motion.div
-                                            key={dropdownItem.label}
-                                            initial={{ opacity: 0, y: 20 }}
-                                            animate={{ opacity: 1, y: 0 }}
-                                            transition={{ duration: 0.4, delay: idx * 0.15 }}
-                                            className="cursor-pointer"
-                                            onClick={() => {
-                                              window.location.href = dropdownItem.href;
-                                              handleDropdownItemClick();
+                                      />
+                                      <CardHeader className="relative z-10 pb-4">
+                                        <div className="flex items-center gap-3 mb-4">
+                                          <div 
+                                            className="w-12 h-12 rounded-2xl flex items-center justify-center border"
+                                            style={{
+                                              background: 'rgba(255, 255, 255, 0.2)',
+                                              backdropFilter: 'blur(10px)',
+                                              WebkitBackdropFilter: 'blur(10px)',
+                                              border: '1px solid rgba(255, 255, 255, 0.3)'
                                             }}
                                           >
-                                            <Card 
-                                              className="h-full transition-all duration-300 hover:scale-105 group relative overflow-hidden"
+                                            <Rocket className="w-6 h-6 text-white" />
+                                          </div>
+                                          <Badge 
+                                            className="text-white border-white/30"
+                                            style={{
+                                              background: 'rgba(255, 255, 255, 0.2)',
+                                              backdropFilter: 'blur(10px)',
+                                              WebkitBackdropFilter: 'blur(10px)',
+                                            }}
+                                          >
+                                            SERVICES ⚡
+                                          </Badge>
+                                        </div>
+                                        <CardTitle className="text-2xl font-bold mb-2">
+                                          Automation Services
+                                        </CardTitle>
+                                        <CardDescription className="text-white/90 leading-relaxed">
+                                          Enterprise-grade automation solutions designed for scale and efficiency
+                                        </CardDescription>
+                                      </CardHeader>
+                                      <CardContent className="relative z-10">
+                                        <div className="grid grid-cols-2 gap-3">
+                                          {[
+                                            { emoji: "⚡", text: "Fast Setup" },
+                                            { emoji: "🔒", text: "Secure" },
+                                            { emoji: "👥", text: "24/7 Support" },
+                                            { emoji: "💎", text: "Premium" }
+                                          ].map((feature, idx) => (
+                                            <div 
+                                              key={idx} 
+                                              className="rounded-xl p-3 border"
                                               style={{
-                                                background: 'rgba(255, 255, 255, 0.03)',
-                                                backdropFilter: 'blur(20px)',
-                                                WebkitBackdropFilter: 'blur(20px)',
-                                                border: '1px solid rgba(255, 255, 255, 0.1)',
-                                                boxShadow: '0 8px 32px rgba(0, 0, 0, 0.3)',
+                                                background: 'rgba(255, 255, 255, 0.1)',
+                                                backdropFilter: 'blur(10px)',
+                                                WebkitBackdropFilter: 'blur(10px)',
+                                                border: '1px solid rgba(255, 255, 255, 0.2)'
                                               }}
                                             >
-                                              {/* Animated particles */}
-                                              <div className="absolute inset-0 pointer-events-none">
-                                                {Array.from({ length: 5 }).map((_, i) => (
-                                                  <motion.div
-                                                    key={i}
-                                                    className={`absolute w-1 h-1 bg-gradient-to-r ${solution.particles} rounded-full opacity-0 group-hover:opacity-60`}
-                                                    style={{
-                                                      left: `${Math.random() * 100}%`,
-                                                      top: `${Math.random() * 100}%`,
-                                                    }}
-                                                    animate={{
-                                                      y: [0, -20, 0],
-                                                      opacity: [0, 1, 0],
-                                                      scale: [0, 1, 0],
-                                                    }}
-                                                    transition={{
-                                                      duration: 2,
-                                                      repeat: Infinity,
-                                                      delay: i * 0.3,
-                                                    }}
-                                                  />
-                                                ))}
+                                              <div className="text-center">
+                                                <div className="text-lg mb-1">{feature.emoji}</div>
+                                                <div className="text-xs font-medium">{feature.text}</div>
                                               </div>
-
-                                              {/* Floating emoji */}
-                                              <div className="absolute top-4 right-4 text-2xl">
-                                                <motion.div
-                                                  animate={{ 
-                                                    rotate: [0, 10, -10, 0],
-                                                    scale: [1, 1.1, 1],
-                                                  }}
-                                                  transition={{ 
-                                                    duration: 3, 
-                                                    repeat: Infinity,
-                                                    delay: idx * 0.5
+                                            </div>
+                                          ))}
+                                        </div>
+                                      </CardContent>
+                                    </Card>
+                                  </div>
+                                  
+                                  <div className="lg:w-2/3">
+                                    <div className="max-h-96 overflow-y-auto pr-2 custom-scrollbar">
+                                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                        {servicesData.map((service, idx) => {
+                                          const IconComponent = service.icon;
+                                          
+                                          return (
+                                            <motion.div
+                                              key={service.label}
+                                              initial={{ opacity: 0, y: 20 }}
+                                              animate={{ opacity: 1, y: 0 }}
+                                              transition={{ duration: 0.3, delay: idx * 0.1 }}
+                                            >
+                                              <Link href={service.href} onClick={handleDropdownItemClick}>
+                                                <Card 
+                                                  className="transition-all duration-300 cursor-pointer group hover:scale-105 border relative overflow-hidden h-full"
+                                                  style={{
+                                                    background: 'rgba(255, 255, 255, 0.2)',
+                                                    backdropFilter: 'blur(8px)',
+                                                    WebkitBackdropFilter: 'blur(8px)',
+                                                    border: `1px solid rgba(${service.color.includes('blue') ? '59, 130, 246' : 
+                                                              service.color.includes('green') ? '16, 185, 129' : 
+                                                              service.color.includes('purple') ? '139, 92, 246' : 
+                                                              service.color.includes('red') ? '245, 101, 101' : 
+                                                              '251, 146, 60'}, 0.3)`,
                                                   }}
                                                 >
-                                                  {solution.emoji}
-                                                </motion.div>
+                                                  <div 
+                                                    className="absolute top-0 left-0 right-0 h-1 group-hover:h-2 transition-all duration-300"
+                                                    style={{ background: service.bgGradient }}
+                                                  />
+                                                  
+                                                  <CardHeader className="pb-3 pt-4">
+                                                    <div className="flex items-start gap-3">
+                                                      <div 
+                                                        className="w-10 h-10 rounded-xl text-white flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg"
+                                                        style={{ background: service.bgGradient }}
+                                                      >
+                                                        <IconComponent size={16} />
+                                                      </div>
+                                                      <div className="flex-1">
+                                                        <CardTitle className={`text-lg font-bold ${service.color} group-hover:text-gray-700 transition-colors`}>
+                                                          {service.label}
+                                                        </CardTitle>
+                                                        <Badge 
+                                                          className="mt-1 text-white/80 border text-xs"
+                                                          style={{
+                                                            background: 'rgba(255, 255, 255, 0.15)',
+                                                            border: '1px solid rgba(255, 255, 255, 0.25)'
+                                                          }}
+                                                        >
+                                                          {String(idx + 1).padStart(2, '0')}
+                                                        </Badge>
+                                                      </div>
+                                                    </div>
+                                                  </CardHeader>
+                                                  <CardContent className="pt-0 pb-4">
+                                                    <CardDescription className="text-gray-600 text-sm leading-relaxed group-hover:text-gray-700 transition-colors mb-3">
+                                                      {service.description}
+                                                    </CardDescription>
+                                                    
+                                                    <div className="space-y-1">
+                                                      {service.features.slice(0, 2).map((feature, featureIdx) => (
+                                                        <div key={featureIdx} className="flex items-center gap-2 text-xs text-gray-500">
+                                                          <div 
+                                                            className="w-1.5 h-1.5 rounded-full"
+                                                            style={{ background: service.bgGradient }}
+                                                          />
+                                                          <span>{feature}</span>
+                                                        </div>
+                                                      ))}
+                                                      {service.features.length > 2 && (
+                                                        <div className="flex items-center gap-2 text-xs text-gray-400">
+                                                          <div className="w-1.5 h-1.5 rounded-full bg-gray-400" />
+                                                          <span>+{service.features.length - 2} more</span>
+                                                        </div>
+                                                      )}
+                                                    </div>
+                                                  </CardContent>
+                                                </Card>
+                                              </Link>
+                                            </motion.div>
+                                          );
+                                        })}
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </motion.div>
+                        )}
+                      </AnimatePresence> */}
+
+                      {/* Solutions Dropdown with Hero Section */}
+                      <AnimatePresence>
+                        {item.label === 'Solutions' && activeDropdown === item.label && (
+                          <motion.div 
+                            data-dropdown-menu
+                            className="fixed left-1/2 top-[4.5rem] z-[120] transform -translate-x-1/2 w-full max-w-4xl"
+                            initial={{ opacity: 0, y: -20, scale: 0.95 }}
+                            animate={{ opacity: 1, y: 0, scale: 1 }}
+                            exit={{ opacity: 0, y: -20, scale: 0.95 }}
+                            transition={{ duration: 0.3, ease: "easeOut" }}
+                          >
+                            <div 
+                              className="rounded-3xl shadow-2xl border overflow-hidden"
+                              style={{
+                                background: 'rgba(255, 255, 255, 0.75)',
+                                backdropFilter: 'blur(15px) saturate(150%)',
+                                WebkitBackdropFilter: 'blur(15px) saturate(150%)',
+                                border: '1px solid rgba(255, 255, 255, 0.3)',
+                                boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(255, 255, 255, 0.2) inset'
+                              }}
+                            >
+                              <div className="p-6">
+                                <div className="flex flex-col lg:flex-row gap-6 relative z-10">
+                                  {/* Hero Card */}
+                                  <div className="lg:w-1/3">
+                                    <Card 
+                                      className="h-full border-0 text-white overflow-hidden relative"
+                                      style={{
+                                        background: 'linear-gradient(135deg, rgba(236, 72, 153, 0.8) 0%, rgba(139, 92, 246, 0.8) 50%, rgba(59, 130, 246, 0.8) 100%)',
+                                        backdropFilter: 'blur(5px)',
+                                        WebkitBackdropFilter: 'blur(5px)',
+                                      }}
+                                    >
+                                      <div 
+                                        className="absolute inset-0"
+                                        style={{
+                                          background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, transparent 100%)'
+                                        }}
+                                      />
+                                      
+                                      <CardHeader className="relative z-10 pb-4">
+                                        <div className="flex items-center gap-3 mb-4">
+                                          <div 
+                                            className="w-12 h-12 rounded-2xl flex items-center justify-center border relative overflow-hidden"
+                                            style={{
+                                              background: 'rgba(255, 255, 255, 0.2)',
+                                              backdropFilter: 'blur(10px)',
+                                              WebkitBackdropFilter: 'blur(10px)',
+                                              border: '1px solid rgba(255, 255, 255, 0.3)'
+                                            }}
+                                          >
+                                            <div 
+                                              className="absolute inset-0 animate-pulse"
+                                              style={{
+                                                background: 'linear-gradient(45deg, rgba(251, 191, 36, 0.3) 0%, rgba(236, 72, 153, 0.3) 100%)'
+                                              }}
+                                            />
+                                            <Sparkles className="w-6 h-6 text-white relative z-10" />
+                                          </div>
+                                          <Badge 
+                                            className="text-white border-white/30"
+                                            style={{
+                                              background: 'rgba(255, 255, 255, 0.2)',
+                                              backdropFilter: 'blur(10px)',
+                                              WebkitBackdropFilter: 'blur(10px)',
+                                            }}
+                                          >
+                                            SOLUTIONS ✨
+                                          </Badge>
+                                        </div>
+                                        <CardTitle className="text-2xl font-bold mb-2">
+                                          Business Solutions
+                                        </CardTitle>
+                                        <CardDescription className="text-white/90 leading-relaxed">
+                                          Powerful solutions that transform how you work and grow
+                                        </CardDescription>
+                                      </CardHeader>
+                                      <CardContent className="relative z-10">
+                                        <div className="grid grid-cols-2 gap-3">
+                                          {[
+                                            { emoji: "⚡", text: "Fast Setup" },
+                                            { emoji: "🎯", text: "Goal Focused" },
+                                            { emoji: "🚀", text: "Scalable" },
+                                            { emoji: "💎", text: "Premium" }
+                                          ].map((feature, idx) => (
+                                            <div 
+                                              key={idx} 
+                                              className="rounded-xl p-3 border"
+                                              style={{
+                                                background: 'rgba(255, 255, 255, 0.1)',
+                                                backdropFilter: 'blur(10px)',
+                                                WebkitBackdropFilter: 'blur(10px)',
+                                                border: '1px solid rgba(255, 255, 255, 0.2)'
+                                              }}
+                                            >
+                                              <div className="text-center">
+                                                <div className="text-lg mb-1">{feature.emoji}</div>
+                                                <div className="text-xs font-medium">{feature.text}</div>
+                                              </div>
+                                            </div>
+                                          ))}
+                                        </div>
+                                      </CardContent>
+                                    </Card>
+                                  </div>
+                                  
+                                  {/* Solutions Grid */}
+                                  <div className="lg:w-2/3 grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    {item.dropdown?.map((dropdownItem, idx) => {
+                                      const IconComponent = getSolutionIcon(dropdownItem.label);
+                                      const solutions = [
+                                        { bg: 'linear-gradient(135deg, rgba(251, 191, 36, 0.8), rgba(252, 211, 77, 0.8))', emoji: '⏰', color: 'text-amber-600', border: 'rgba(251, 191, 36, 0.3)' },
+                                        { bg: 'linear-gradient(135deg, rgba(236, 72, 153, 0.8), rgba(251, 113, 133, 0.8))', emoji: '📈', color: 'text-pink-600', border: 'rgba(236, 72, 153, 0.3)' },
+                                        { bg: 'linear-gradient(135deg, rgba(16, 185, 129, 0.8), rgba(110, 231, 183, 0.8))', emoji: '💰', color: 'text-green-600', border: 'rgba(16, 185, 129, 0.3)' },
+                                        { bg: 'linear-gradient(135deg, rgba(139, 92, 246, 0.8), rgba(196, 181, 253, 0.8))', emoji: '🤖', color: 'text-purple-600', border: 'rgba(139, 92, 246, 0.3)' }
+                                      ];
+                                      const solution = solutions[idx % solutions.length];
+                                      
+                                      return (
+                                        <motion.div
+                                          key={dropdownItem.label}
+                                          initial={{ opacity: 0, y: 20 }}
+                                          animate={{ opacity: 1, y: 0 }}
+                                          transition={{ duration: 0.3, delay: idx * 0.1 }}
+                                        >
+                                          <Link href={dropdownItem.href} onClick={handleDropdownItemClick}>
+                                            <Card 
+                                              className="transition-all duration-300 cursor-pointer group hover:scale-105 border relative overflow-hidden"
+                                              style={{
+                                                background: 'rgba(255, 255, 255, 0.2)',
+                                                backdropFilter: 'blur(8px)',
+                                                WebkitBackdropFilter: 'blur(8px)',
+                                                border: `1px solid ${solution.border}`,
+                                              }}
+                                            >
+                                              <div className="absolute top-3 right-3 text-xl animate-bounce group-hover:animate-spin transition-all duration-300">
+                                                {solution.emoji}
                                               </div>
                                               
-                                              {/* Animated top border */}
-                                              <motion.div 
+                                              <div 
                                                 className="absolute top-0 left-0 right-0 h-1 group-hover:h-2 transition-all duration-300"
                                                 style={{ background: solution.bg }}
-                                                whileHover={{ 
-                                                  boxShadow: `0 0 20px ${solution.glow}` 
-                                                }}
                                               />
                                               
-                                              <CardHeader className="pb-3 relative z-10">
+                                              <CardHeader className="pb-3">
                                                 <div className="flex items-start gap-3">
                                                   <div 
-                                                    className="w-12 h-12 rounded-xl text-white flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg relative overflow-hidden"
-                                                    style={{ 
-                                                      background: solution.bg,
-                                                      boxShadow: `0 0 20px ${solution.glow}`,
-                                                    }}
+                                                    className="w-10 h-10 rounded-xl text-white flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg"
+                                                    style={{ background: solution.bg }}
                                                   >
-                                                    <IconComponent className="w-6 h-6 relative z-10" />
-                                                    <motion.div
-                                                      className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent"
-                                                      animate={{ x: [-50, 50] }}
-                                                      transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
-                                                    />
+                                                    <IconComponent size={16} />
                                                   </div>
                                                   <div className="flex-1">
-                                                    <CardTitle className={`text-lg font-bold ${solution.color} group-hover:text-white transition-colors`}>
+                                                    <CardTitle className={`text-lg font-bold ${solution.color} group-hover:text-gray-700 transition-colors`}>
                                                       {dropdownItem.label}
                                                     </CardTitle>
                                                   </div>
                                                 </div>
                                               </CardHeader>
-                                              <CardContent className="pt-0 relative z-10">
-                                                <CardDescription className="text-sm leading-relaxed group-hover:text-gray-200 transition-colors">
-                                                  {dropdownItem.label === 'Time Liberation' && 'Eliminate repetitive tasks with intelligent automation—reclaim your time for strategic innovation and creative thinking.'}
-                                                  {dropdownItem.label === 'Growth Accelerator' && 'Supercharge your business expansion with scalable automation that grows with your ambitions and market demands.'}
-                                                  {dropdownItem.label === 'Profit Rescue' && 'Maximize efficiency and reduce operational costs while empowering your team to focus on high-value activities.'}
-                                                  {dropdownItem.label === 'Custom Bot Development' && 'Transform your unique vision into reality with bespoke automation solutions tailored to your specific needs.'}
+                                              <CardContent className="pt-0">
+                                                <CardDescription className="text-gray-600 text-sm leading-relaxed group-hover:text-gray-700 transition-colors">
+                                                  {dropdownItem.label === 'Time Liberation' && 'Automate away the boring stuff—get your time back for what matters most.'}
+                                                  {dropdownItem.label === 'Growth Accelerator' && 'Supercharge your business with smart automation that scales as you grow.'}
+                                                  {dropdownItem.label === 'Profit Rescue' && 'Save money, reduce manual work, and let your team shine at what they do best.'}
+                                                  {dropdownItem.label === 'Custom Bot Development' && 'Build something truly yours—bespoke bots and creative automations.'}
                                                 </CardDescription>
                                               </CardContent>
-
-                                              {/* Hover glow effect */}
-                                              <motion.div
-                                                className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
-                                                style={{
-                                                  background: `radial-gradient(circle at center, ${solution.glow} 0%, transparent 70%)`,
-                                                  filter: 'blur(20px)',
-                                                }}
-                                              />
                                             </Card>
-                                          </motion.div>
-                                        );
-                                      })}
-                                    </div>
+                                          </Link>
+                                        </motion.div>
+                                      );
+                                    })}
                                   </div>
                                 </div>
                               </div>
-                            </motion.div>
-                          )}
-                        </AnimatePresence>
-                      </>
-                    ) : (
-                      <motion.div
-                        className="cursor-pointer"
-                        onClick={() => window.location.href = item.href}
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                      >
-                        <div
-                          className="flex items-center gap-2 px-4 py-2 rounded-2xl font-semibold transition-all duration-500 relative overflow-hidden group"
-                          style={{
-                            background: 'rgba(255, 255, 255, 0.05)',
-                            backdropFilter: 'blur(10px)',
-                            WebkitBackdropFilter: 'blur(10px)',
-                            border: '1px solid rgba(255, 255, 255, 0.1)',
-                            color: 'white',
-                          }}
-                        >
-                          <IconComponent className="w-4 h-4" />
-                          <span className="text-sm font-bold">{item.label}</span>
-                          
-                          {/* Hover effect */}
-                          <motion.div
-                            className="absolute inset-0 bg-gradient-to-r from-blue-600/20 to-purple-600/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                            whileHover={{ scale: 1.1 }}
-                          />
-                        </div>
-                      </motion.div>
-                    )}
-                  </motion.div>
-                );
-              })}
+                            </div>
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    </>
+                  ) : (
+                    <Link
+                      href={item.href}
+                      className="text-white font-semibold transition-all duration-300 relative px-4 py-2 rounded-2xl text-gray-700 hover:text-blue-600 hover:bg-white/10 group"
+                      style={{
+                        backdropFilter: 'blur(10px)',
+                        WebkitBackdropFilter: 'blur(10px)',
+                      }}
+                    >
+                      <span className="relative z-10 font-medium">{item.label}</span>
+                      <div 
+                        className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                        style={{
+                          background: 'rgba(255, 255, 255, 0.1)',
+                          backdropFilter: 'blur(10px)',
+                          WebkitBackdropFilter: 'blur(10px)',
+                        }}
+                      />
+                    </Link>
+                  )}
+                </motion.div>
+              ))}
             </div>
           </div>
           
-          {/* Ultra-Premium Get Started Button */}
-          <div className="absolute right-0 top-0 bottom-0 flex items-center justify-end pr-8">
+          {/* Get Started Button */}
+          <div className="absolute right-0 top-0 bottom-0 flex items-center justify-end pr-6">
             <div className="hidden lg:block">
-              <motion.button
-                onClick={() => window.location.href = '/contact'}
-                className="relative group cursor-pointer"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
+              <motion.div
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.97 }}
               >
-                <div
-                  className="relative flex items-center gap-3 px-4 py-2 rounded-2xl font-bold text-white transition-all duration-500 overflow-hidden"
-                  style={{
-                    background: 'linear-gradient(135deg, rgba(59, 130, 246, 0.8), rgba(139, 92, 246, 0.8))',
-                    backdropFilter: 'blur(20px)',
-                    WebkitBackdropFilter: 'blur(20px)',
-                    border: '1px solid rgba(255, 255, 255, 0.2)',
-                    boxShadow: '0 8px 32px rgba(59, 130, 246, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2)',
-                  }}
+                {/* Uiverse.io Modern Button by Javierrocadev - Reduced size */}
+                <button
+                  onClick={() => window.location.href = '/contact'}
+                  className="relative flex items-center gap-1 bg-neutral-600 px-5 py-2 border-4 border-white text-sm bg-transparent rounded-lg font-semibold text-white cursor-pointer overflow-hidden transition-all duration-600 ease-custom hover:text-orange-400 hover:rounded-2xl group hover:transition-all duration-700 hover:duration-700"
+                  style={{ minWidth: '100px', maxWidth: '150px', justifyContent: 'center' }}
                 >
-                  {/* Animated background gradient */}
-                  <motion.div
-                    className="absolute inset-0 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                    animate={{
-                      backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'],
-                    }}
-                    transition={{
-                      duration: 3,
-                      repeat: Infinity,
-                      ease: "linear"
-                    }}
-                  />
-                  
-                  {/* Left arrow */}
-                  <motion.div
-                    className="relative z-10"
-                    animate={{ x: [0, 5, 0] }}
-                    transition={{ duration: 2, repeat: Infinity }}
+                  <svg
+                    viewBox="0 0 24 24"
+                    className="absolute w-4 fill-white z-[9] transition-all duration-700 ease-custom -left-1/4 group-hover:left-2 group-hover:fill-[#212121]"
+                    xmlns="http://www.w3.org/2000/svg"
                   >
-                    <ArrowRight className="w-5 h-5" />
-                  </motion.div>
-                  
-                  {/* Text */}
-                  <span className="relative z-10 font-black text-sm">Get Started</span>
-                  
-                  {/* Right sparkle */}
-                  <motion.div
-                    className="relative z-10"
-                    animate={{ rotate: [0, 180, 360] }}
-                    transition={{ duration: 4, repeat: Infinity }}
+                    <path
+                      d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"
+                    ></path>
+                  </svg>
+                  <span
+                    className="relative z-[1] transition-all duration-700 ease-custom -translate-x-2 group-hover:translate-x-2 font-bold"
                   >
-                    <Sparkles className="w-5 h-5" />
-                  </motion.div>
-                  
-                  {/* Hover particles */}
-                  <div className="absolute inset-0 pointer-events-none">
-                    {Array.from({ length: 12 }).map((_, i) => (
-                      <motion.div
-                        key={i}
-                        className="absolute w-1 h-1 bg-white rounded-full opacity-0 group-hover:opacity-70"
-                        style={{
-                          left: `${Math.random() * 100}%`,
-                          top: `${Math.random() * 100}%`,
-                        }}
-                        animate={{
-                          scale: [0, 1, 0],
-                          opacity: [0, 1, 0],
-                          y: [0, -10, 0],
-                        }}
-                        transition={{
-                          duration: 2,
-                          repeat: Infinity,
-                          delay: i * 0.1,
-                        }}
-                      />
-                    ))}
-                  </div>
-                </div>
-              </motion.button>
+                    Get Started
+                  </span>
+                  <span
+                    className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3 h-3 bg-white rounded-full opacity-0 transition-all duration-700 ease-custom group-hover:w-[120px] group-hover:h-[120px] group-hover:opacity-100"
+                  ></span>
+                  <svg
+                    viewBox="0 0 24 24"
+                    className="absolute w-4 fill-white z-[9] transition-all duration-700 ease-custom right-2 group-hover:-right-1/4 group-hover:fill-[#212121]"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"
+                    ></path>
+                  </svg>
+                </button>
+              </motion.div>
             </div>
             
-            {/* Enhanced Mobile Menu Button */}
+            {/* Mobile Menu Button */}
             <div className="lg:hidden">
               <motion.button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="w-14 h-14 rounded-2xl flex items-center justify-center transition-all duration-500 relative overflow-hidden group"
+                className="w-12 h-12 rounded-2xl flex items-center justify-center text-gray-700 hover:text-blue-600 transition-all duration-300 border"
                 style={{
                   background: 'rgba(255, 255, 255, 0.1)',
-                  backdropFilter: 'blur(20px)',
-                  WebkitBackdropFilter: 'blur(20px)',
-                  border: '1px solid rgba(255, 255, 255, 0.2)',
-                  boxShadow: '0 8px 32px rgba(0, 0, 0, 0.3)',
+                  backdropFilter: 'blur(15px)',
+                  WebkitBackdropFilter: 'blur(15px)',
+                  border: '1px solid rgba(255, 255, 255, 0.2)'
                 }}
-                whileTap={{ scale: 0.9 }}
+                whileTap={{ scale: 0.95 }}
               >
                 <AnimatePresence mode="wait">
                   {mobileMenuOpen ? (
                     <motion.div
                       key="close"
-                      initial={{ rotate: -180, opacity: 0 }}
+                      initial={{ rotate: -90, opacity: 0 }}
                       animate={{ rotate: 0, opacity: 1 }}
-                      exit={{ rotate: 180, opacity: 0 }}
-                      transition={{ duration: 0.3 }}
-                      className="text-white"
+                      exit={{ rotate: 90, opacity: 0 }}
+                      transition={{ duration: 0.2 }}
                     >
                       <X className="w-6 h-6" />
                     </motion.div>
                   ) : (
                     <motion.div
                       key="menu"
-                      initial={{ rotate: 180, opacity: 0 }}
+                      initial={{ rotate: 90, opacity: 0 }}
                       animate={{ rotate: 0, opacity: 1 }}
-                      exit={{ rotate: -180, opacity: 0 }}
-                      transition={{ duration: 0.3 }}
-                      className="text-white"
+                      exit={{ rotate: -90, opacity: 0 }}
+                      transition={{ duration: 0.2 }}
                     >
                       <Menu className="w-6 h-6" />
                     </motion.div>
                   )}
                 </AnimatePresence>
-                
-                {/* Animated background on hover */}
-                <motion.div
-                  className="absolute inset-0 bg-gradient-to-r from-blue-600/30 to-purple-600/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                  whileHover={{ scale: 1.1 }}
-                />
               </motion.button>
             </div>
           </div>
-        </motion.div>
+        </div>
       </motion.nav>
       
-      {/* Ultra-Enhanced Mobile Menu */}
+      {/* Mobile Menu */}
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
-            className="lg:hidden fixed top-[80px] left-0 right-0 z-[99] border-t"
+            className="lg:hidden fixed top-20 left-0 right-0 z-[99] border-t"
             style={{
-              background: 'rgba(0, 0, 0, 0.95)',
-              backdropFilter: 'blur(40px) saturate(180%)',
-              WebkitBackdropFilter: 'blur(40px) saturate(180%)',
-              border: '1px solid rgba(255, 255, 255, 0.1)',
-              boxShadow: '0 8px 32px 0 rgba(0, 0, 0, 0.5)',
+              background: 'rgba(255, 255, 255, 0.15)',
+              backdropFilter: 'blur(25px) saturate(180%)',
+              WebkitBackdropFilter: 'blur(25px) saturate(180%)',
+              border: '1px solid rgba(255, 255, 255, 0.2)',
+              boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.15)'
             }}
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.4, ease: "easeOut" }}
+            transition={{ duration: 0.3 }}
           >
-            <div className="px-6 py-6 space-y-3">
-              {menuItems.map((item, index) => {
-                const IconComponent = item.icon;
-                return (
-                  <motion.div 
-                    key={item.label}
-                    initial={{ opacity: 0, x: -30 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.4, delay: index * 0.1 }}
-                  >
-                    {item.dropdown || item.label === 'Services' ? (
-                      <div>
-                        <motion.button
-                          onClick={() => toggleDropdown(item.label)}
-                          className="flex justify-between items-center w-full px-6 py-4 rounded-2xl font-semibold transition-all duration-300 text-white relative overflow-hidden group"
-                          style={{
-                            background: activeDropdown === item.label 
-                              ? 'rgba(59, 130, 246, 0.2)' 
-                              : 'rgba(255, 255, 255, 0.05)',
-                            backdropFilter: 'blur(20px)',
-                            WebkitBackdropFilter: 'blur(20px)',
-                            border: '1px solid rgba(255, 255, 255, 0.1)',
-                          }}
-                          whileHover={{ scale: 1.02 }}
-                          whileTap={{ scale: 0.98 }}
-                        >
-                          <div className="flex items-center gap-3 relative z-10">
-                            <IconComponent className="w-5 h-5" />
-                            <span>{item.label}</span>
-                          </div>
+            <div className="px-6 py-4 space-y-2">
+              {menuItems.map((item, index) => (
+                <motion.div 
+                  key={item.label}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.3, delay: index * 0.1 }}
+                >
+                  {item.dropdown || item.label === 'Services' ? (
+                    <div>
+                      <button
+                        onClick={() => toggleDropdown(item.label)}
+                        className="flex justify-between items-center w-full px-4 py-3 rounded-2xl font-semibold text-gray-700 transition-all duration-300"
+                        style={{
+                          background: activeDropdown === item.label ? 'rgba(255, 255, 255, 0.75)' : 'rgba(255, 255, 255, 0.75)',
+                          backdropFilter: 'blur(10px)',
+                          WebkitBackdropFilter: 'blur(10px)',
+                        }}
+                      >
+                        <span>{item.label}</span>
+                        <ChevronDown
+                          className={`w-4 h-4 transition-transform duration-300 ${
+                            activeDropdown === item.label ? 'rotate-180' : ''
+                          }`}
+                        />
+                      </button>
+                      <AnimatePresence>
+                        {activeDropdown === item.label && (
                           <motion.div
-                            className="relative z-10"
-                            animate={{ rotate: activeDropdown === item.label ? 180 : 0 }}
+                            className="pl-4 mt-2"
+                            initial={{ height: 0, opacity: 0 }}
+                            animate={{ height: "auto", opacity: 1 }}
+                            exit={{ height: 0, opacity: 0 }}
                             transition={{ duration: 0.3 }}
                           >
-                            <ChevronDown className="w-5 h-5" />
+                            {item.label === 'Services' ? (
+                              <div className="space-y-2 max-h-64 overflow-y-auto">
+                                {productCategories.map((category) => (
+                                  <div key={category.id} className="bg-gray-800/30 rounded-xl p-3">
+                                    <div className="font-semibold text-white text-sm mb-2">{category.title}</div>
+                                    <div className="space-y-1">
+                                      {category.services.map((service) => (
+                                        <Link
+                                          key={service.name}
+                                          href={service.href}
+                                          className="block px-3 py-2 rounded-lg text-gray-400 hover:text-white hover:bg-gray-700/50 transition-all duration-300 text-sm"
+                                          onClick={handleDropdownItemClick}
+                                        >
+                                          {service.name}
+                                        </Link>
+                                      ))}
+                                    </div>
+                                  </div>
+                                ))}
+                              </div>
+                            ) : (
+                              item.dropdown?.map((dropdownItem, idx) => (
+                                <motion.div
+                                  key={dropdownItem.label}
+                                  initial={{ opacity: 0, x: -10 }}
+                                  animate={{ opacity: 1, x: 0 }}
+                                  transition={{ duration: 0.2, delay: idx * 0.05 }}
+                                >
+                                  <Link
+                                    href={dropdownItem.href}
+                                    className="block px-4 py-2 rounded-xl text-gray-600 hover:text-gray-700 transition-all duration-300"
+                                    style={{
+                                      background: 'rgba(255, 255, 255, 0.05)',
+                                      backdropFilter: 'blur(5px)',
+                                      WebkitBackdropFilter: 'blur(5px)',
+                                    }}
+                                    onClick={handleDropdownItemClick}
+                                  >
+                                    {dropdownItem.label}
+                                  </Link>
+                                </motion.div>
+                              ))
+                            )}
                           </motion.div>
-                          
-                          {/* Animated background */}
-                          <motion.div
-                            className="absolute inset-0 bg-gradient-to-r from-blue-600/20 to-purple-600/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                            initial={{ scale: 0 }}
-                            whileHover={{ scale: 1 }}
-                          />
-                        </motion.button>
-                        
-                        <AnimatePresence>
-                          {activeDropdown === item.label && (
-                            <motion.div
-                              className="mt-3 ml-4 space-y-2"
-                              initial={{ height: 0, opacity: 0 }}
-                              animate={{ height: "auto", opacity: 1 }}
-                              exit={{ height: 0, opacity: 0 }}
-                              transition={{ duration: 0.3 }}
-                            >
-                              {item.label === 'Services' ? (
-                                <div className="space-y-3 max-h-80 overflow-y-auto">
-                                  {productCategories.map((category, catIdx) => {
-                                    const CategoryIcon = category.icon;
-                                    return (
-                                      <motion.div 
-                                        key={category.id} 
-                                        className="rounded-xl p-4 relative overflow-hidden"
-                                        style={{
-                                          background: 'rgba(255, 255, 255, 0.03)',
-                                          backdropFilter: 'blur(10px)',
-                                          WebkitBackdropFilter: 'blur(10px)',
-                                          border: '1px solid rgba(255, 255, 255, 0.1)',
-                                        }}
-                                        initial={{ opacity: 0, y: 10 }}
-                                        animate={{ opacity: 1, y: 0 }}
-                                        transition={{ duration: 0.3, delay: catIdx * 0.05 }}
-                                      >
-                                        <div className="flex items-center gap-3 mb-3">
-                                          <div 
-                                            className="w-8 h-8 rounded-lg flex items-center justify-center"
-                                            style={{ background: category.bgGradient }}
-                                          >
-                                            <CategoryIcon className={`w-4 h-4 ${category.color}`} />
-                                          </div>
-                                          <div className="font-semibold text-white text-sm">{category.title}</div>
-                                        </div>
-                                        <div className="space-y-1">
-                                          {category.services.map((service, serviceIdx) => (
-                                            <motion.div
-                                              key={service.name}
-                                              onClick={() => {
-                                                window.location.href = service.href;
-                                                handleDropdownItemClick();
-                                              }}
-                                              className="block px-4 py-2 rounded-lg text-gray-300 hover:text-white hover:bg-white/10 transition-all duration-300 text-sm cursor-pointer"
-                                              whileHover={{ x: 5 }}
-                                              transition={{ duration: 0.2 }}
-                                            >
-                                              {service.name}
-                                            </motion.div>
-                                          ))}
-                                        </div>
-                                      </motion.div>
-                                    );
-                                  })}
-                                </div>
-                              ) : (
-                                item.dropdown?.map((dropdownItem, idx) => {
-                                  const DropdownIcon = dropdownItem.icon || Star;
-                                  return (
-                                    <motion.div
-                                      key={dropdownItem.label}
-                                      initial={{ opacity: 0, x: -10 }}
-                                      animate={{ opacity: 1, x: 0 }}
-                                      transition={{ duration: 0.3, delay: idx * 0.05 }}
-                                      onClick={() => {
-                                        window.location.href = dropdownItem.href;
-                                        handleDropdownItemClick();
-                                      }}
-                                      className="flex items-center gap-3 px-6 py-3 rounded-xl text-gray-300 hover:text-white transition-all duration-300 cursor-pointer relative overflow-hidden group"
-                                      style={{
-                                        background: 'rgba(255, 255, 255, 0.03)',
-                                        backdropFilter: 'blur(10px)',
-                                        WebkitBackdropFilter: 'blur(10px)',
-                                        border: '1px solid rgba(255, 255, 255, 0.05)',
-                                      }}
-                                    >
-                                      <DropdownIcon className="w-4 h-4" />
-                                      <span className="text-sm relative z-10">{dropdownItem.label}</span>
-                                      
-                                      <motion.div
-                                        className="absolute inset-0 bg-gradient-to-r from-blue-600/10 to-purple-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                                        whileHover={{ scale: 1.02 }}
-                                      />
-                                    </motion.div>
-                                  );
-                                })
-                              )}
-                            </motion.div>
-                          )}
-                        </AnimatePresence>
-                      </div>
-                    ) : (
-                      <motion.div
-                        onClick={() => {
-                          window.location.href = item.href;
-                          setMobileMenuOpen(false);
-                        }}
-                        className="flex items-center gap-3 px-6 py-4 rounded-2xl font-semibold transition-all duration-300 text-white cursor-pointer relative overflow-hidden group"
-                        style={{
-                          background: 'rgba(255, 255, 255, 0.05)',
-                          backdropFilter: 'blur(20px)',
-                          WebkitBackdropFilter: 'blur(20px)',
-                          border: '1px solid rgba(255, 255, 255, 0.1)',
-                        }}
-                        whileHover={{ scale: 1.02 }}
-                        whileTap={{ scale: 0.98 }}
-                      >
-                        <IconComponent className="w-5 h-5 relative z-10" />
-                        <span className="relative z-10">{item.label}</span>
-                        
-                        <motion.div
-                          className="absolute inset-0 bg-gradient-to-r from-blue-600/20 to-purple-600/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                          whileHover={{ scale: 1.1 }}
-                        />
-                      </motion.div>
-                    )}
-                  </motion.div>
-                );
-              })}
+                        )}
+                      </AnimatePresence>
+                    </div>
+                  ) : (
+                    <Link
+                      href={item.href}
+                      className="block px-4 py-3 rounded-2xl font-semibold text-gray-700 transition-all duration-300"
+                      style={{
+                        background: 'rgba(255, 255, 255, 0.1)',
+                        backdropFilter: 'blur(10px)',
+                        WebkitBackdropFilter: 'blur(10px)',
+                      }}
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      {item.label}
+                    </Link>
+                  )}
+                </motion.div>
+              ))}
               
-              {/* Enhanced Mobile CTA Button */}
+              {/* Mobile CTA Button */}
               <motion.div
-                className="pt-6"
+                className="pt-4"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4, delay: 0.8 }}
+                transition={{ duration: 0.3, delay: 0.6 }}
               >
-                <motion.button
-                  onClick={() => {
-                    window.location.href = '/contact';
-                    setMobileMenuOpen(false);
-                  }}
-                  className="w-full px-8 py-4 font-black rounded-2xl text-center transition-all duration-500 text-white relative overflow-hidden group"
+                <Link
+                  href="/contact"
+                  className="block w-full px-6 py-3 font-bold rounded-2xl text-center transition-all duration-300 shadow-lg text-white"
                   style={{
-                    background: 'linear-gradient(135deg, rgba(59, 130, 246, 0.8), rgba(139, 92, 246, 0.8))',
-                    backdropFilter: 'blur(20px)',
-                    WebkitBackdropFilter: 'blur(20px)',
-                    border: '1px solid rgba(255, 255, 255, 0.2)',
-                    boxShadow: '0 8px 32px rgba(59, 130, 246, 0.3)',
+                    background: 'linear-gradient(135deg, rgba(245, 101, 101, 0.9), rgba(251, 113, 133, 0.9))',
+                    backdropFilter: 'blur(15px)',
+                    WebkitBackdropFilter: 'blur(15px)',
+                    border: '1px solid rgba(255, 255, 255, 0.2)'
                   }}
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
+                  onClick={() => setMobileMenuOpen(false)}
                 >
-                  <div className="flex items-center justify-center gap-3 relative z-10">
-                    <Rocket className="w-5 h-5" />
-                    <span>Get Started Now</span>
-                    <Sparkles className="w-5 h-5" />
-                  </div>
-                  
-                  {/* Animated background */}
-                  <motion.div
-                    className="absolute inset-0 bg-gradient-to-r from-pink-600 via-purple-600 to-blue-600 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                    animate={{
-                      backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'],
-                    }}
-                    transition={{
-                      duration: 3,
-                      repeat: Infinity,
-                      ease: "linear"
-                    }}
-                  />
-                  
-                  {/* Hover particles */}
-                  <div className="absolute inset-0 pointer-events-none">
-                    {Array.from({ length: 8 }).map((_, i) => (
-                      <motion.div
-                        key={i}
-                        className="absolute w-1 h-1 bg-white rounded-full opacity-0 group-hover:opacity-70"
-                        style={{
-                          left: `${Math.random() * 100}%`,
-                          top: `${Math.random() * 100}%`,
-                        }}
-                        animate={{
-                          scale: [0, 1, 0],
-                          opacity: [0, 1, 0],
-                          y: [0, -10, 0],
-                        }}
-                        transition={{
-                          duration: 2,
-                          repeat: Infinity,
-                          delay: i * 0.1,
-                        }}
-                      />
-                    ))}
-                  </div>
-                </motion.button>
+                  Get Started
+                </Link>
               </motion.div>
             </div>
           </motion.div>
         )}
       </AnimatePresence>
 
-      {/* Enhanced Global Styles */}
-      <style jsx global>{`
+      <style jsx>{`
         @keyframes shimmer {
           0% { transform: translateX(-100%); }
           100% { transform: translateX(100%); }
         }
         
-        @keyframes float {
-          0%, 100% { transform: translateY(0px); }
-          50% { transform: translateY(-10px); }
+        .custom-scrollbar {
+          scrollbar-width: thin;
+          scrollbar-color: rgba(156, 163, 175, 0.5) transparent;
         }
         
-        @keyframes glow {
-          0%, 100% { box-shadow: 0 0 20px rgba(59, 130, 246, 0.3); }
-          50% { box-shadow: 0 0 40px rgba(59, 130, 246, 0.6); }
-        }
-        
-        .animate-float {
-          animation: float 3s ease-in-out infinite;
-        }
-        
-        .animate-glow {
-          animation: glow 2s ease-in-out infinite;
-        }
-        
-        /* Custom scrollbar for dropdowns */
-        ::-webkit-scrollbar {
+        .custom-scrollbar::-webkit-scrollbar {
           width: 6px;
         }
         
-        ::-webkit-scrollbar-track {
-          background: rgba(255, 255, 255, 0.1);
+        .custom-scrollbar::-webkit-scrollbar-track {
+          background: rgba(0, 0, 0, 0.1);
           border-radius: 3px;
         }
         
-        ::-webkit-scrollbar-thumb {
-          background: rgba(59, 130, 246, 0.5);
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+          background: rgba(156, 163, 175, 0.5);
           border-radius: 3px;
         }
         
-        ::-webkit-scrollbar-thumb:hover {
-          background: rgba(59, 130, 246, 0.7);
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+          background: rgba(156, 163, 175, 0.7);
         }
       `}</style>
     </>

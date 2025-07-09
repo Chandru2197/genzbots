@@ -316,36 +316,36 @@ const ReactFlowSection: React.FC<ReactFlowSectionProps> = ({ addToRefs }) => {
   return (
     <section 
       ref={sectionRef} 
-      className="py-20 bg-gradient-to-br from-blue-100 via-white to-orange-100 relative overflow-hidden"
+      className="py-20 bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900 relative overflow-hidden"
     >
       {/* Enhanced background */}
       <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-50/60 to-orange-50/60"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-blue-900/20 via-slate-900/10 to-transparent"></div>
         <div className="absolute inset-0 opacity-20">
-          <div className="absolute top-10 left-10 w-2 h-2 bg-blue-900 rounded-full animate-pulse"></div>
-          <div className="absolute top-20 right-20 w-3 h-3 bg-orange-900 rounded-full animate-ping"></div>
-          <div className="absolute bottom-20 left-20 w-2 h-2 bg-blue-800 rounded-full animate-bounce"></div>
+          <div className="absolute top-10 left-10 w-2 h-2 bg-cyan-400 rounded-full animate-pulse"></div>
+          <div className="absolute top-20 right-20 w-3 h-3 bg-blue-400 rounded-full animate-ping"></div>
+          <div className="absolute bottom-20 left-20 w-2 h-2 bg-indigo-400 rounded-full animate-bounce"></div>
         </div>
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Header */}
         <div className="text-center mb-16">
-          <div className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-blue-900 to-orange-900 rounded-full text-white mb-8 shadow-lg">
+          <div className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-blue-600/20 to-cyan-600/20 backdrop-blur-xl rounded-full text-cyan-300 mb-8 border border-cyan-500/30">
             <Activity className="w-6 h-6 mr-3" />
             <span className="font-semibold text-lg">Intelligent Process Flow</span>
             <Sparkles className="w-5 h-5 ml-3" />
           </div>
           
-          <h2 className="text-5xl md:text-7xl font-bold mb-6 leading-tight text-gray-900">
+          <h2 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
             Your Automation
             <br />
-            <span className="bg-gradient-to-r from-blue-900 to-orange-900 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
               Journey Visualized
             </span>
           </h2>
           
-          <p className="text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed mb-12">
+          <p className="text-xl text-blue-100 max-w-3xl mx-auto leading-relaxed mb-12">
             Watch our streamlined process transform your business operations from manual chaos 
             to intelligent workflows in just weeks, not months.
           </p>
@@ -609,8 +609,8 @@ const ReactFlowSection: React.FC<ReactFlowSectionProps> = ({ addToRefs }) => {
         {/* CTA Section */}
         <div className="text-center">
           <div className="bg-gradient-to-r from-orange-500/10 to-red-500/10 backdrop-blur-xl rounded-3xl p-12 border border-orange-500/20 shadow-2xl">
-            <h3 className="text-4xl font-bold text-blue-600 mb-6">Ready to Transform Your Business?</h3>
-            <p className="text-xl text-blue-500 mb-10 max-w-3xl mx-auto leading-relaxed">
+            <h3 className="text-4xl font-bold text-white mb-6">Ready to Transform Your Business?</h3>
+            <p className="text-xl text-blue-100 mb-10 max-w-3xl mx-auto leading-relaxed">
               Join hundreds of businesses that have revolutionized their operations with our proven automation process. 
               Start your journey today with a free consultation.
             </p>

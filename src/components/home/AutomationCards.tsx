@@ -207,14 +207,14 @@ export default function AutomationCards({ addToRefs }: { addToRefs?: (el: HTMLEl
   ];
 
   return (
-    <section className="py-20 bg-gradient-to-br from-blue-100 via-white to-orange-100 relative overflow-hidden">
+    <section className="py-20 bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900 relative overflow-hidden">
       {/* Enhanced background with floating elements */}
       <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-50/60 to-orange-50/60"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-blue-600/10 to-cyan-600/10"></div>
         {[...Array(20)].map((_, i) => (
           <div
             key={i}
-            className="absolute opacity-20 animate-float"
+            className="absolute opacity-10 animate-float"
             style={{
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
@@ -222,10 +222,10 @@ export default function AutomationCards({ addToRefs }: { addToRefs?: (el: HTMLEl
               animationDuration: `${8 + Math.random() * 4}s`
             }}
           >
-            {i % 4 === 0 && <Clock className="w-6 h-6 text-blue-900" />}
-            {i % 4 === 1 && <TrendingUp className="w-8 h-8 text-orange-900" />}
-            {i % 4 === 2 && <Zap className="w-5 h-5 text-blue-800" />}
-            {i % 4 === 3 && <Sparkles className="w-7 h-7 text-orange-800" />}
+            {i % 4 === 0 && <Clock className="w-6 h-6 text-blue-400" />}
+            {i % 4 === 1 && <TrendingUp className="w-8 h-8 text-cyan-400" />}
+            {i % 4 === 2 && <Zap className="w-5 h-5 text-green-400" />}
+            {i % 4 === 3 && <Sparkles className="w-7 h-7 text-purple-400" />}
           </div>
         ))}
       </div>
@@ -239,23 +239,23 @@ export default function AutomationCards({ addToRefs }: { addToRefs?: (el: HTMLEl
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
         >
-          <div className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-blue-900 to-orange-900 rounded-full text-white mb-8 shadow-lg">
+          <div className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-orange-600 to-red-600 rounded-full text-white mb-8 shadow-lg">
             <Rocket className="w-6 h-6 mr-3" />
             <span className="font-semibold text-lg">Our Automation Process</span>
             <Sparkles className="w-5 h-5 ml-3" />
           </div>
           
-          <h2 className="text-6xl md:text-7xl font-bold leading-tight mb-6 text-gray-900">
-            <span className="bg-gradient-to-r from-blue-900 to-orange-900 bg-clip-text text-transparent">
+          <h2 className="text-6xl md:text-7xl font-bold leading-tight mb-6">
+            <span className="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
               Transform Your
             </span>
             <br />
-            <span className="bg-gradient-to-r from-orange-900 to-blue-900 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-orange-400 to-red-400 bg-clip-text text-transparent">
               Business Process
             </span>
           </h2>
           
-          <p className="text-xl text-gray-700 max-w-4xl mx-auto leading-relaxed">
+          <p className="text-xl text-blue-100 max-w-4xl mx-auto leading-relaxed">
             Automation is a journey, not a destination. Our ongoing support ensures your solutions 
             evolve with your business, delivering continuous value and innovation.
           </p>
@@ -285,7 +285,7 @@ export default function AutomationCards({ addToRefs }: { addToRefs?: (el: HTMLEl
           className="text-center"
         >
           <div className="bg-white/10 backdrop-blur-xl rounded-3xl p-12 border border-white/20 shadow-2xl">
-            <h3 className="text-4xl font-bold text-cyan-700 mb-4">Ready to Begin Your Transformation?</h3>
+            <h3 className="text-4xl font-bold text-white mb-4">Ready to Begin Your Transformation?</h3>
             <p className="text-blue-200 text-lg mb-8 max-w-2xl mx-auto">
               Join hundreds of forward-thinking businesses that have revolutionized their operations with our proven automation process.
             </p>

@@ -125,14 +125,14 @@ export default function SolutionsShowcase({ addToRefs }: SolutionsShowcaseProps)
   ];
 
   return (
-    <section className="py-20 bg-gradient-to-br from-blue-100 via-white to-orange-100 relative overflow-hidden">
+    <section className="py-20 bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900 relative overflow-hidden">
       {/* Enhanced background elements */}
       <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-50/60 to-orange-50/60"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-blue-600/10 to-cyan-600/10"></div>
         {[...Array(20)].map((_, i) => (
           <div
             key={i}
-            className="absolute opacity-20 animate-float"
+            className="absolute opacity-10 animate-float"
             style={{
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
@@ -140,10 +140,10 @@ export default function SolutionsShowcase({ addToRefs }: SolutionsShowcaseProps)
               animationDuration: `${8 + Math.random() * 4}s`
             }}
           >
-            {i % 4 === 0 && <Target className="w-6 h-6 text-blue-900" />}
-            {i % 4 === 1 && <Brain className="w-8 h-8 text-orange-900" />}
-            {i % 4 === 2 && <Shield className="w-5 h-5 text-blue-800" />}
-            {i % 4 === 3 && <Rocket className="w-7 h-7 text-orange-800" />}
+            {i % 4 === 0 && <Target className="w-6 h-6 text-blue-400" />}
+            {i % 4 === 1 && <Brain className="w-8 h-8 text-cyan-400" />}
+            {i % 4 === 2 && <Shield className="w-5 h-5 text-green-400" />}
+            {i % 4 === 3 && <Rocket className="w-7 h-7 text-purple-400" />}
           </div>
         ))}
       </div>
@@ -157,23 +157,23 @@ export default function SolutionsShowcase({ addToRefs }: SolutionsShowcaseProps)
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
         >
-          <div className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-blue-900 to-orange-900 rounded-full text-white mb-8 shadow-lg">
+          <div className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-blue-600 to-cyan-600 rounded-full text-white mb-8 shadow-lg">
             <Zap className="w-6 h-6 mr-3" />
             <span className="font-semibold text-lg">Our Solutions</span>
             <Sparkles className="w-5 h-5 ml-3" />
           </div>
           
-          <h2 className="text-6xl md:text-7xl font-bold leading-tight mb-6 text-gray-900">
-            <span className="bg-gradient-to-r from-blue-900 to-orange-900 bg-clip-text text-transparent">
+          <h2 className="text-6xl md:text-7xl font-bold leading-tight mb-6">
+            <span className="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
               Comprehensive
             </span>
             <br />
-            <span className="bg-gradient-to-r from-orange-900 to-blue-900 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-orange-400 to-red-400 bg-clip-text text-transparent">
               Automation Suite
             </span>
           </h2>
           
-          <p className="text-xl text-gray-700 max-w-4xl mx-auto leading-relaxed">
+          <p className="text-xl text-blue-100 max-w-4xl mx-auto leading-relaxed">
             Explore our comprehensive suite of automation solutions designed to transform 
             your business operations and drive unprecedented efficiency.
           </p>
@@ -181,15 +181,15 @@ export default function SolutionsShowcase({ addToRefs }: SolutionsShowcaseProps)
 
         {/* Enhanced Tabs Navigation */}
         <div className="w-full max-w-6xl mx-auto mb-12">
-          <div className="bg-white/10 backdrop-blur-xl rounded-2xl p-2 border border-blue-900/30 shadow-2xl">
+          <div className="bg-white/10 backdrop-blur-xl rounded-2xl p-2 border border-white/20 shadow-2xl">
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-2">
               {solutions.map((solution, index) => (
                 <button
                   key={solution.id}
-                  className={`relative px-4 py-6 text-center transition-all duration-300 rounded-xl overflow-hidden group border ${
+                  className={`relative px-4 py-6 text-center transition-all duration-300 rounded-xl overflow-hidden group ${
                     activeTab === solution.id
-                      ? `bg-gradient-to-r ${cardColors[index]} text-white shadow-lg scale-105 border-blue-900`
-                      : "text-gray-700 border-blue-900/30 hover:bg-white/10 hover:text-blue-900"
+                      ? `bg-gradient-to-r ${cardColors[index]} text-white shadow-lg scale-105`
+                      : "text-white/70 hover:bg-white/10 hover:text-white"
                   }`}
                   onClick={() => setActiveTab(solution.id)}
                 >
@@ -219,7 +219,7 @@ export default function SolutionsShowcase({ addToRefs }: SolutionsShowcaseProps)
 
         {/* Enhanced Content Section */}
         <div className="relative z-10">
-          <div className="bg-white/10 backdrop-blur-xl rounded-3xl border border-blue-900/30 shadow-2xl overflow-hidden">
+          <div className="bg-white/10 backdrop-blur-xl rounded-3xl border border-white/20 shadow-2xl overflow-hidden">
             <div className={`grid grid-cols-1 lg:grid-cols-2 gap-0 min-h-[600px]`}>
               {activeIndex % 2 === 0 ? (
                 <>
@@ -271,10 +271,10 @@ export default function SolutionsShowcase({ addToRefs }: SolutionsShowcaseProps)
                             {activeSolution.label}
                           </span>
                         </div>
-                        <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4 leading-tight">
+                        <h2 className="text-3xl lg:text-4xl font-bold text-white mb-4 leading-tight">
                           {activeSolution.title}
                         </h2>
-                        <p className="text-gray-700 text-lg leading-relaxed">
+                        <p className="text-blue-200 text-lg leading-relaxed">
                           {activeSolution.description}
                         </p>
                       </div>
@@ -294,7 +294,7 @@ export default function SolutionsShowcase({ addToRefs }: SolutionsShowcaseProps)
                               transition={{ duration: 0.5, delay: index * 0.1 }}
                             >
                               <div className={`w-2 h-2 rounded-full bg-gradient-to-r ${cardColors[activeIndex]} mr-4 group-hover:scale-125 transition-transform duration-300`}></div>
-                              <span className="text-gray-900/90 group-hover:text-blue-900 transition-colors duration-300">{feature}</span>
+                              <span className="text-white/90 group-hover:text-white transition-colors duration-300">{feature}</span>
                             </motion.li>
                           ))}
                         </ul>
@@ -306,11 +306,11 @@ export default function SolutionsShowcase({ addToRefs }: SolutionsShowcaseProps)
                           <Sparkles className={`w-5 h-5 mr-2 text-yellow-400`} />
                           <span className="text-yellow-400 font-semibold text-sm uppercase tracking-wide">Success Story</span>
                         </div>
-                        <p className="text-gray-900 font-medium">{activeSolution.highlight}</p>
+                        <p className="text-white font-medium">{activeSolution.highlight}</p>
                       </div>
 
                       {/* CTA Button */}
-                        <button className={`w-full lg:w-auto px-8 py-4 bg-gradient-to-r ${cardColors[activeIndex]} text-white font-semibold rounded-2xl border-2 border-blue-900 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-2xl group relative overflow-hidden`}>
+                      <button className={`w-full lg:w-auto px-8 py-4 bg-gradient-to-r ${cardColors[activeIndex]} text-white font-semibold rounded-2xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-2xl group relative overflow-hidden`}>
                         <div className="absolute inset-0 bg-white/20 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
                         <span className="relative flex items-center justify-center lg:justify-start">
                           {activeSolution.button_label}
@@ -340,10 +340,10 @@ export default function SolutionsShowcase({ addToRefs }: SolutionsShowcaseProps)
                             {activeSolution.label}
                           </span>
                         </div>
-                        <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4 leading-tight">
+                        <h2 className="text-3xl lg:text-4xl font-bold text-white mb-4 leading-tight">
                           {activeSolution.title}
                         </h2>
-                        <p className="text-gray-700 text-lg leading-relaxed">
+                        <p className="text-blue-200 text-lg leading-relaxed">
                           {activeSolution.description}
                         </p>
                       </div>
@@ -363,7 +363,7 @@ export default function SolutionsShowcase({ addToRefs }: SolutionsShowcaseProps)
                               transition={{ duration: 0.5, delay: index * 0.1 }}
                             >
                               <div className={`w-2 h-2 rounded-full bg-gradient-to-r ${cardColors[activeIndex]} mr-4 group-hover:scale-125 transition-transform duration-300`}></div>
-                              <span className="text-gray-900/90 group-hover:text-blue-900 transition-colors duration-300">{feature}</span>
+                              <span className="text-white/90 group-hover:text-white transition-colors duration-300">{feature}</span>
                             </motion.li>
                           ))}
                         </ul>
@@ -375,11 +375,11 @@ export default function SolutionsShowcase({ addToRefs }: SolutionsShowcaseProps)
                           <Sparkles className={`w-5 h-5 mr-2 text-yellow-400`} />
                           <span className="text-yellow-400 font-semibold text-sm uppercase tracking-wide">Success Story</span>
                         </div>
-                        <p className="text-gray-900 font-medium">{activeSolution.highlight}</p>
+                        <p className="text-white font-medium">{activeSolution.highlight}</p>
                       </div>
 
                       {/* CTA Button */}
-                        <button className={`w-full lg:w-auto px-8 py-4 bg-gradient-to-r ${cardColors[activeIndex]} text-white font-semibold rounded-2xl border-2 border-blue-900 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-2xl group relative overflow-hidden`}>
+                      <button className={`w-full lg:w-auto px-8 py-4 bg-gradient-to-r ${cardColors[activeIndex]} text-white font-semibold rounded-2xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-2xl group relative overflow-hidden`}>
                         <div className="absolute inset-0 bg-white/20 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
                         <span className="relative flex items-center justify-center lg:justify-start">
                           {activeSolution.button_label}
