@@ -27,15 +27,15 @@ export default function HeroSection({ addToRefs }: HeroSectionProps) {
   ];
 
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden px-8 py-16 bg-gradient-to-br from-slate-200 via-blue-300 to-indigo-300">
+    <section className="relative min-h-screen flex items-center overflow-hidden px-8 py-16 bg-gradient-to-br from-blue-100 via-white to-orange-100">
       {/* Enhanced Background with animated elements */}
       <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-600/10 to-cyan-600/10"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-blue-50/60 to-orange-50/60"></div>
         {/* Floating geometric shapes */}
         {[...Array(20)].map((_, i) => (
           <div
             key={i}
-            className="absolute opacity-10 animate-float"
+            className="absolute opacity-20 animate-float"
             style={{
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
@@ -43,7 +43,7 @@ export default function HeroSection({ addToRefs }: HeroSectionProps) {
               animationDuration: `${8 + Math.random() * 4}s`
             }}
           >
-            <div className={`w-${4 + Math.floor(Math.random() * 8)} h-${4 + Math.floor(Math.random() * 8)} bg-gradient-to-r from-blue-400 to-cyan-400 rounded-full`}></div>
+            <div className={`w-${4 + Math.floor(Math.random() * 8)} h-${4 + Math.floor(Math.random() * 8)} bg-gradient-to-r from-blue-900 to-orange-900 rounded-full`}></div>
           </div>
         ))}
       </div>
@@ -71,36 +71,36 @@ export default function HeroSection({ addToRefs }: HeroSectionProps) {
             </motion.div> */}
 
             <motion.h1 
-              className="text-6xl lg:text-8xl font-bold leading-tight text-white mb-6"
+              className="text-6xl lg:text-8xl font-bold leading-tight mb-6 text-gray-900"
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.8, delay: 0.3 }}
             >
-              <span className="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-blue-900 to-orange-900 bg-clip-text text-transparent">
                 Simplify
               </span>
               <br />
-              <span className="bg-gradient-to-r from-green-400 to-emerald-400 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-green-900 to-emerald-900 bg-clip-text text-transparent">
                 Automate
               </span>
               <br />
-              <span className="bg-gradient-to-r from-orange-400 to-red-400 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-orange-900 to-blue-900 bg-clip-text text-transparent">
                 Elevate
               </span>
             </motion.h1>
 
             <motion.h2 
-              className="text-2xl lg:text-4xl font-bold leading-tight text-blue-100 mb-6 relative"
+              className="text-2xl lg:text-4xl font-bold leading-tight text-gray-700 mb-6 relative"
               initial={{ opacity: 0, x: -30 }}
               animate={isInView ? { opacity: 1, x: 0 } : {}}
               transition={{ duration: 0.8, delay: 0.4 }}
             >
-              <div className="absolute -inset-2 bg-gradient-to-r from-blue-600/20 to-cyan-600/20 blur-xl rounded-lg"></div>
+              <div className="absolute -inset-2 bg-gradient-to-r from-blue-900/10 to-orange-900/10 blur-xl rounded-lg"></div>
               <span className="relative">Digital Workflow Solutions For Forward-Thinking Businesses</span>
             </motion.h2>
 
             <motion.p 
-              className="text-xl text-blue-200 mb-10 leading-relaxed max-w-2xl"
+              className="text-xl text-gray-700 mb-10 leading-relaxed max-w-2xl"
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.8, delay: 0.5 }}
@@ -147,14 +147,14 @@ export default function HeroSection({ addToRefs }: HeroSectionProps) {
               {floatingStats.map((stat, index) => (
                 <motion.div
                   key={index}
-                  className="bg-white/10 backdrop-blur-md rounded-2xl p-4 border border-white/20 hover:bg-white/15 transition-all duration-300 hover:scale-105"
+                  className="bg-blue-500 backdrop-blur-md rounded-2xl p-4 border border-white/20 hover:bg-white/15 transition-all duration-300 hover:scale-105 hover:text-blue-500 text-white border-2 hover:border-blue-500 hover:shadow-lg"
                   whileHover={{ y: -5 }}
                 >
                   <div className={`w-10 h-10 rounded-full bg-gradient-to-r ${stat.color} flex items-center justify-center text-white mb-2 shadow-lg`}>
                     {stat.icon}
                   </div>
-                  <div className="text-2xl font-bold text-white">{stat.value}</div>
-                  <div className="text-blue-200 text-sm">{stat.label}</div>
+                  <div className="text-2xl font-bold">{stat.value}</div>
+                  <div className="text-sm">{stat.label}</div>
                 </motion.div>
               ))}
             </motion.div>

@@ -224,14 +224,14 @@ export default function FeaturesSection({ addToRefs }: FeaturesSectionProps) {
   };
 
   return (
-    <section className="py-20 bg-gradient-to-br from-slate-200 via-orange-300 to-orange-500 relative overflow-hidden" ref={sectionRef}>
+    <section className="py-20 bg-gradient-to-br from-blue-100 via-white to-orange-100 relative overflow-hidden" ref={sectionRef}>
       {/* Enhanced background with floating elements */}
       <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-600/5 to-cyan-600/5"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-blue-50/60 to-orange-50/60"></div>
         {[...Array(25)].map((_, i) => (
           <div
             key={i}
-            className="absolute opacity-10 animate-float"
+            className="absolute opacity-20 animate-float"
             style={{
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
@@ -239,11 +239,11 @@ export default function FeaturesSection({ addToRefs }: FeaturesSectionProps) {
               animationDuration: `${8 + Math.random() * 4}s`
             }}
           >
-            {i % 5 === 0 && <Zap className="w-4 h-4 text-blue-400" />}
-            {i % 5 === 1 && <TrendingUp className="w-6 h-6 text-cyan-400" />}
-            {i % 5 === 2 && <Clock className="w-5 h-5 text-green-400" />}
-            {i % 5 === 3 && <Shield className="w-7 h-7 text-purple-400" />}
-            {i % 5 === 4 && <Sparkles className="w-3 h-3 text-orange-400" />}
+            {i % 5 === 0 && <Zap className="w-4 h-4 text-blue-900" />}
+            {i % 5 === 1 && <TrendingUp className="w-6 h-6 text-orange-900" />}
+            {i % 5 === 2 && <Clock className="w-5 h-5 text-blue-800" />}
+            {i % 5 === 3 && <Shield className="w-7 h-7 text-orange-800" />}
+            {i % 5 === 4 && <Sparkles className="w-3 h-3 text-blue-900" />}
           </div>
         ))}
       </div>
@@ -256,23 +256,23 @@ export default function FeaturesSection({ addToRefs }: FeaturesSectionProps) {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
         >
-          <div className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-blue-600 to-cyan-600 rounded-full text-white mb-8 shadow-lg">
+          <div className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-blue-900 to-orange-900 rounded-full text-white mb-8 shadow-lg">
             <Rocket className="w-6 h-6 mr-3" />
             <span className="font-semibold text-lg">Powerful Features</span>
             <Sparkles className="w-5 h-5 ml-3" />
           </div>
           
-          <h2 className="text-6xl md:text-7xl font-bold leading-tight mb-6">
-            <span className="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
+          <h2 className="text-6xl md:text-7xl font-bold leading-tight mb-6 text-gray-900">
+            <span className="bg-gradient-to-r from-blue-900 to-orange-900 bg-clip-text text-transparent">
               Modern Business
             </span>
             <br />
-            <span className="bg-gradient-to-r from-orange-400 to-red-400 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-orange-900 to-blue-900 bg-clip-text text-transparent">
               Automation
             </span>
           </h2>
           
-          <p className="text-xl text-blue-100 max-w-4xl mx-auto leading-relaxed">
+          <p className="text-xl text-gray-700 max-w-4xl mx-auto leading-relaxed">
             Our platform comes packed with advanced features designed to streamline your operations 
             and boost productivity with intelligent automation that learns and evolves.
           </p>
@@ -299,7 +299,7 @@ export default function FeaturesSection({ addToRefs }: FeaturesSectionProps) {
           transition={{ duration: 0.8, delay: 0.8 }}
         >
           <div className="bg-white/10 backdrop-blur-xl rounded-3xl p-12 border border-white/20 shadow-2xl">
-            <h3 className="text-4xl font-bold text-white mb-8">Trusted by Industry Leaders</h3>
+            <h3 className="text-4xl font-bold text-cyan-700 mb-8">Trusted by Industry Leaders</h3>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
               <div className="text-center">
                 <div className="text-4xl font-bold text-cyan-400 mb-2">500+</div>
