@@ -190,7 +190,7 @@ export default function PartnerShowcase({ addToRefs }: PartnerShowcaseProps) {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
         >
-          <div className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-orange-600 to-red-600 rounded-full text-white mb-8 shadow-lg">
+          <div className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-blue-600 to-cyan-600 rounded-full text-white mb-8 shadow-lg">
             <Users className="w-6 h-6 mr-3" />
             <span className="font-semibold text-lg">Partnership Excellence</span>
             <Sparkles className="w-5 h-5 ml-3" />

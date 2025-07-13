@@ -28,6 +28,125 @@ interface AutomationCardProps {
   servicePath?: string;
 }
 
+// const AutomationCard = ({
+//   title,
+//   description,
+//   icon: Icon,
+//   technologies = [],
+//   delay = 0,
+//   customImage,
+//   servicePath,
+// }: AutomationCardProps) => {
+//   const [isHovered, setIsHovered] = useState(false);
+//   const cardRef = useRef<HTMLDivElement>(null);
+//   const isInView = useInView(cardRef, { once: true, margin: "-100px" });
+
+//   const cardColors = ["from-blue-500 to-cyan-500", "from-green-500 to-emerald-500", "from-purple-500 to-indigo-500", "from-orange-500 to-red-500", "from-pink-500 to-rose-500", "from-yellow-500 to-orange-500"];
+//   const colorIndex = delay % cardColors.length;
+
+//   const handleButtonClick = (e: React.MouseEvent) => {
+//     console.log('Button clicked!', servicePath);
+//     // Don't prevent default - let Next.js Link handle it
+//   };
+//   return (
+//     <motion.div
+//       ref={cardRef}
+//       initial={{ opacity: 0, y: 30, rotateY: -15 }}
+//       animate={isInView ? { opacity: 1, y: 0, rotateY: 0 } : {}}
+//       transition={{ duration: 0.8, delay: delay * 0.1 }}
+//       className="h-full perspective-1000"
+//     >
+//       <div
+//         className={`relative h-full group cursor-pointer transform-gpu transition-all duration-500 hover:scale-105 ${
+//           isHovered ? 'rotate-y-12' : ''
+//         }`}
+//         onMouseEnter={() => setIsHovered(true)}
+//         onMouseLeave={() => setIsHovered(false)}
+//       >
+//         {/* Glowing background */}
+//         <div className={`absolute inset-0 bg-gradient-to-r ${cardColors[colorIndex]} rounded-3xl blur-xl opacity-20 group-hover:opacity-40 transition-opacity duration-500 scale-105`}></div>
+        
+//         {/* Main card */}
+//         <div className="relative h-full bg-white/10 backdrop-blur-xl rounded-3xl border border-white/20 overflow-hidden shadow-2xl">
+//           {/* Animated gradient overlay */}
+//           <div className={`absolute inset-0 bg-gradient-to-br ${cardColors[colorIndex]} opacity-10 group-hover:opacity-20 transition-opacity duration-500`}></div>
+          
+//           {/* Content */}
+//           <div className="relative h-full flex flex-col p-8">
+//             {/* Header with icon */}
+//             <div className="flex items-center justify-between mb-6">
+//               {customImage ? (
+//                 <div className="relative w-16 h-16 rounded-2xl overflow-hidden shadow-lg">
+//                   <Image
+//                     src={customImage}
+//                     alt={title}
+//                     fill
+//                     className="object-cover"
+//                   />
+//                 </div>
+//               ) : Icon ? (
+//                 <div className={`w-16 h-16 rounded-2xl bg-gradient-to-r ${cardColors[colorIndex]} flex items-center justify-center text-white shadow-lg transform transition-transform duration-300 group-hover:scale-110 group-hover:rotate-12`}>
+//                   <Icon size={28} />
+//                 </div>
+//               ) : null}
+              
+//               {/* Floating status indicator */}
+//               <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse shadow-lg"></div>
+//             </div>
+            
+//             {/* Title */}
+//             <h3 className="text-2xl font-bold text-white mb-4 group-hover:text-cyan-300 transition-colors duration-300">
+//               {title}
+//             </h3>
+            
+//             {/* Description */}
+//             <p className="text-blue-200 text-base mb-6 leading-relaxed group-hover:text-white transition-colors duration-300">
+//               {description}
+//             </p>
+            
+//             {/* Technologies/Features */}
+//             <div className="flex-1 space-y-3 mb-6">
+//               {technologies.map((tech, index) => (
+//                 <motion.div 
+//                   key={index}
+//                   className="flex items-center p-3 bg-white/10 rounded-xl border border-white/20 backdrop-blur-sm group-hover:bg-white/20 transition-all duration-300 hover:scale-105"
+//                   initial={{ opacity: 0, x: -20 }}
+//                   animate={isInView ? { opacity: 1, x: 0 } : {}}
+//                   transition={{ duration: 0.5, delay: (delay * 0.1) + (index * 0.1) }}
+//                 >
+//                   <div className={`w-2 h-2 rounded-full bg-gradient-to-r ${cardColors[colorIndex]} mr-3 shadow-lg`}></div>
+//                   <span className="text-white/90 font-medium">{tech}</span>
+//                 </motion.div>
+//               ))}
+//             </div>
+            
+//             {/* CTA Button */}
+//             <Link
+//               href={servicePath ?? "/"}
+//               className={`w-full py-4 px-6 bg-gradient-to-r ${cardColors[colorIndex]} text-white font-semibold rounded-2xl transition-all duration-300 transform hover:scale-105 hover:shadow-2xl relative overflow-hidden group-hover:shadow-[0_0_30px_rgba(59,130,246,0.5)] flex items-center justify-center`}
+//               style={{ textDecoration: "none" }}
+//             >
+//               <div className="absolute inset-0 bg-white/20 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left pointer-events-none"></div>
+//               <span className="relative flex items-center justify-center">
+//                 Learn More
+//                 <ArrowRight className={`w-5 h-5 ml-2 transition-transform duration-300 ${isHovered ? 'translate-x-2' : ''}`} />
+//               </span>
+//             </Link>
+//           </div>
+
+//           {/* Decorative elements */}
+//           <div className="absolute top-4 right-4 w-8 h-8 bg-white/10 rounded-full flex items-center justify-center backdrop-blur-sm">
+//             <Sparkles className="w-4 h-4 text-white/60 group-hover:text-white transition-colors duration-300" />
+//           </div>
+          
+//           {/* Animated border */}
+//           <div className="absolute inset-0 rounded-3xl border-2 border-transparent bg-gradient-to-r from-white/20 via-transparent to-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+//         </div>
+//       </div>
+//     </motion.div>
+//   );
+// };
+
 const AutomationCard = ({
   title,
   description,
@@ -44,6 +163,12 @@ const AutomationCard = ({
   const cardColors = ["from-blue-500 to-cyan-500", "from-green-500 to-emerald-500", "from-purple-500 to-indigo-500", "from-orange-500 to-red-500", "from-pink-500 to-rose-500", "from-yellow-500 to-orange-500"];
   const colorIndex = delay % cardColors.length;
 
+  // Handle button click for debugging
+  const handleButtonClick = (e: React.MouseEvent) => {
+    console.log('Button clicked!', servicePath);
+    // Don't prevent default - let Next.js Link handle it
+  };
+
   return (
     <motion.div
       ref={cardRef}
@@ -53,7 +178,7 @@ const AutomationCard = ({
       className="h-full perspective-1000"
     >
       <div
-        className={`relative h-full group cursor-pointer transform-gpu transition-all duration-500 hover:scale-105 ${
+        className={`relative h-full group transition-all duration-500 hover:scale-105 ${
           isHovered ? 'rotate-y-12' : ''
         }`}
         onMouseEnter={() => setIsHovered(true)}
@@ -116,27 +241,28 @@ const AutomationCard = ({
               ))}
             </div>
             
-            {/* CTA Button */}
-            {servicePath && (
-              <Link href={servicePath} className="block">
-                <button className={`w-full py-4 px-6 bg-gradient-to-r ${cardColors[colorIndex]} text-white font-semibold rounded-2xl transition-all duration-300 transform hover:scale-105 hover:shadow-2xl relative overflow-hidden group-hover:shadow-[0_0_30px_rgba(59,130,246,0.5)]`}>
-                  <div className="absolute inset-0 bg-white/20 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
-                  <span className="relative flex items-center justify-center">
-                    Learn More
-                    <ArrowRight className={`w-5 h-5 ml-2 transition-transform duration-300 ${isHovered ? 'translate-x-2' : ''}`} />
-                  </span>
-                </button>
-              </Link>
-            )}
+            {/* CTA Button - Fixed version */}
+            <Link
+              href={servicePath ?? "/"}
+              onClick={handleButtonClick}
+              className={`relative w-full py-4 px-6 bg-gradient-to-r ${cardColors[colorIndex]} text-white font-semibold rounded-2xl transition-all duration-300 transform hover:scale-105 hover:shadow-2xl overflow-hidden hover:shadow-[0_0_30px_rgba(59,130,246,0.5)] flex items-center justify-center z-10 cursor-pointer`}
+              style={{ textDecoration: "none" }}
+            >
+              <div className="absolute inset-0 bg-white/20 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left pointer-events-none"></div>
+              <span className="relative flex items-center justify-center z-10">
+                Learn More
+                <ArrowRight className={`w-5 h-5 ml-2 transition-transform duration-300 ${isHovered ? 'translate-x-2' : ''}`} />
+              </span>
+            </Link>
           </div>
 
           {/* Decorative elements */}
-          <div className="absolute top-4 right-4 w-8 h-8 bg-white/10 rounded-full flex items-center justify-center backdrop-blur-sm">
+          <div className="absolute top-4 right-4 w-8 h-8 bg-white/10 rounded-full flex items-center justify-center backdrop-blur-sm pointer-events-none">
             <Sparkles className="w-4 h-4 text-white/60 group-hover:text-white transition-colors duration-300" />
           </div>
           
           {/* Animated border */}
-          <div className="absolute inset-0 rounded-3xl border-2 border-transparent bg-gradient-to-r from-white/20 via-transparent to-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+          <div className="absolute inset-0 rounded-3xl border-2 border-transparent bg-gradient-to-r from-white/20 via-transparent to-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
         </div>
       </div>
     </motion.div>
@@ -202,7 +328,7 @@ export default function AutomationCards({ addToRefs }: { addToRefs?: (el: HTMLEl
       customImage: "/assets/images/operator.png",
       icon: MessageSquare,
       technologies: ["AI/ML Integration", "Custom Solutions"],
-      servicePath: "/contactus"
+      servicePath: "/contact"
     },
   ];
 
@@ -246,11 +372,11 @@ export default function AutomationCards({ addToRefs }: { addToRefs?: (el: HTMLEl
           </div>
           
           <h2 className="text-6xl md:text-7xl font-bold leading-tight mb-6">
-            <span className="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-orange-400 to-red-400 bg-clip-text text-transparent">
               Transform Your
             </span>
             <br />
-            <span className="bg-gradient-to-r from-orange-400 to-red-400 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
               Business Process
             </span>
           </h2>

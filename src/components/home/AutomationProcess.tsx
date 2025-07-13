@@ -331,16 +331,18 @@ const ReactFlowSection: React.FC<ReactFlowSectionProps> = ({ addToRefs }) => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Header */}
         <div className="text-center mb-16">
-          <div className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-blue-600/20 to-cyan-600/20 backdrop-blur-xl rounded-full text-cyan-300 mb-8 border border-cyan-500/30">
+          <div className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-blue-600 to-cyan-600 rounded-full text-white mb-8 shadow-lg">
             <Activity className="w-6 h-6 mr-3" />
             <span className="font-semibold text-lg">Intelligent Process Flow</span>
             <Sparkles className="w-5 h-5 ml-3" />
           </div>
           
           <h2 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
-            Your Automation
-            <br />
             <span className="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
+              Your Automation
+            </span>
+            <br />
+            <span className="bg-gradient-to-r from-orange-400 to-red-400 bg-clip-text text-transparent">
               Journey Visualized
             </span>
           </h2>

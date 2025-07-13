@@ -129,7 +129,10 @@ export default function HeroSection({ addToRefs }: HeroSectionProps) {
                 </span>
               </button>
 
-              <button className="group relative px-8 py-4 bg-white/10 text-white font-semibold rounded-xl border-2 border-white/30 hover:bg-white/20 transition-all duration-300 transform hover:scale-105 backdrop-blur-md">
+              <button
+                className="group relative px-8 py-4 bg-white/10 text-white font-semibold rounded-xl border-2 border-white/30 hover:bg-white/20 transition-all duration-300 transform hover:scale-105 backdrop-blur-md"
+                onClick={() => window.location.href = '/contact'}
+              >
                 <span className="relative flex items-center justify-center">
                   Contact Us
                   <Sparkles className="w-5 h-5 ml-2 group-hover:animate-spin" />

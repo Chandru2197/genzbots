@@ -4,12 +4,12 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
-import { 
-  Sparkles, 
-  Zap, 
-  ArrowRight, 
-  Menu, 
-  X, 
+import {
+  Sparkles,
+  Zap,
+  ArrowRight,
+  Menu,
+  X,
   ChevronDown,
   Rocket,
   Shield,
@@ -411,23 +411,23 @@ export default function Navbar({ addToRefs }: NavbarProps) {
         setActiveDropdown(null);
       }
     };
-    
+
     const handleClickOutside = (event: MouseEvent) => {
       const target = event.target as HTMLElement;
       const dropdownButtons = document.querySelectorAll('[data-dropdown]');
       const dropdownMenus = document.querySelectorAll('[data-dropdown-menu]');
-      
+
       const isClickInsideDropdown = Array.from(dropdownButtons).some(button => button.contains(target)) ||
-                                   Array.from(dropdownMenus).some(menu => menu.contains(target));
-      
+        Array.from(dropdownMenus).some(menu => menu.contains(target));
+
       if (!isClickInsideDropdown) {
         setActiveDropdown(null);
       }
     };
-    
+
     window.addEventListener('scroll', handleScroll);
     document.addEventListener('mousedown', handleClickOutside);
-    
+
     return () => {
       window.removeEventListener('scroll', handleScroll);
       document.removeEventListener('mousedown', handleClickOutside);
@@ -436,8 +436,8 @@ export default function Navbar({ addToRefs }: NavbarProps) {
 
   const menuItems: MenuItem[] = [
     { label: 'Home', href: '/' },
-    { 
-      label: 'Services', 
+    {
+      label: 'Services',
       href: '/services',
       // dropdown: [
       //   { label: 'Bot Blueprint', href: '/services/bot-blueprint' },
@@ -447,8 +447,8 @@ export default function Navbar({ addToRefs }: NavbarProps) {
       //   { label: 'Scale & Optimize', href: '/services/scale-optimize' }
       // ]
     },
-    { 
-      label: 'Solutions', 
+    {
+      label: 'Solutions',
       href: '/solutions',
       dropdown: [
         { label: 'Time Liberation', href: '/solutions/time-liberation' },
@@ -479,46 +479,43 @@ export default function Navbar({ addToRefs }: NavbarProps) {
   return (
     <>
       {/* Background blur overlay */}
-      <div 
-        className={`fixed top-0 left-0 right-0 transition-all duration-500 z-[99] ${
-          isScrolled 
-            ? 'bg-white backdrop-blur-sm shadow-2xl border-b border-white/20' 
+      <div
+        className={`fixed top-0 left-0 right-0 transition-all duration-500 z-[99] ${isScrolled
+            ? 'bg-white backdrop-blur-sm shadow-2xl border-b border-white/20'
             : 'bg-white backdrop-blur-sm'
-        }`}
+          }`}
         style={{
           backdropFilter: isScrolled ? 'blur(12px) saturate(150%)' : 'blur(12px) saturate(150%)',
           WebkitBackdropFilter: isScrolled ? 'blur(12px) saturate(150%)' : 'blur(12px) saturate(150%)',
         }}
       />
 
-      <motion.nav 
+      <motion.nav
         className="fixed top-0 left-0 right-0 w-full z-[100] transition-all duration-500"
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
       >
         {/* Enhanced glassmorphism container */}
-        <div 
-          className={`relative w-full max-w-[1920px] mx-auto transition-all duration-500 ${
-            isScrolled ? 'h-16' : 'h-18'
-          }`}
+        <div
+          className={`relative w-full max-w-[1920px] mx-auto transition-all duration-500 ${isScrolled ? 'h-16' : 'h-18'
+            }`}
           style={{
-            background: isScrolled 
-              ? 'rgba(255, 255, 255, 0.15)' 
+            background: isScrolled
+              ? 'rgba(255, 255, 255, 0.15)'
               : 'rgba(255, 255, 255, 0.08)',
             backdropFilter: 'blur(10px) saturate(200%)',
             WebkitBackdropFilter: 'blur(10px) saturate(200%)',
             borderBottom: isScrolled ? '1px solid rgba(255, 255, 255, 0.2)' : '1px solid rgba(255, 255, 255, 0.1)',
-            boxShadow: isScrolled 
-              ? '0 8px 32px 0 rgba(31, 38, 135, 0.15)' 
+            boxShadow: isScrolled
+              ? '0 8px 32px 0 rgba(31, 38, 135, 0.15)'
               : '0 4px 16px 0 rgba(31, 38, 135, 0.1)'
           }}
         >
           {/* Animated gradient border */}
-          <div 
-            className={`absolute top-0 left-0 right-0 h-0.5 transition-opacity duration-500 ${
-              isScrolled ? 'opacity-80' : 'opacity-40'
-            }`}
+          <div
+            className={`absolute top-0 left-0 right-0 h-0.5 transition-opacity duration-500 ${isScrolled ? 'opacity-80' : 'opacity-40'
+              }`}
             style={{
               background: 'linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.8), rgba(16, 185, 129, 0.8), rgba(245, 101, 101, 0.8), transparent)',
               animation: 'shimmer 3s ease-in-out infinite'
@@ -526,13 +523,13 @@ export default function Navbar({ addToRefs }: NavbarProps) {
           />
 
           {/* Enhanced Logo */}
-          <motion.div 
+          <motion.div
             className="absolute left-0 top-0 bottom-0 flex items-center pl-6"
             whileHover={{ scale: 1.05 }}
             transition={{ duration: 0.2 }}
           >
             <Link href="/" className="flex items-center relative group">
-              <div 
+              <div
                 className="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-all duration-300"
                 style={{
                   background: 'radial-gradient(circle, rgba(59, 130, 246, 0.15) 0%, transparent 70%)',
@@ -552,13 +549,13 @@ export default function Navbar({ addToRefs }: NavbarProps) {
               />
             </Link>
           </motion.div>
-          
+
           {/* Enhanced Menu */}
           <div className="flex h-full w-full justify-center items-center">
             <div className="hidden lg:flex items-center justify-center space-x-8 xl:space-x-10">
               {menuItems.map((item, index) => (
-                <motion.div 
-                  key={item.label} 
+                <motion.div
+                  key={item.label}
                   className="relative group"
                   initial={{ opacity: 0, y: -20 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -569,11 +566,10 @@ export default function Navbar({ addToRefs }: NavbarProps) {
                       <button
                         data-dropdown
                         onClick={() => toggleDropdown(item.label)}
-                        className={`flex text-black items-center font-semibold transition-all duration-300 relative px-4 py-2 rounded-2xl group ${
-                          activeDropdown === item.label 
-                            ? 'text-blue-600 bg-white/20 backdrop-blur-sm shadow-lg' 
+                        className={`flex text-black items-center font-semibold transition-all duration-300 relative px-4 py-2 rounded-2xl group ${activeDropdown === item.label
+                            ? 'text-blue-600 bg-white/20 backdrop-blur-sm shadow-lg'
                             : 'text-gray-700 hover:text-blue-600 hover:bg-white/10'
-                        }`}
+                          }`}
                         style={{
                           backdropFilter: activeDropdown === item.label ? 'blur(10px)' : undefined,
                           WebkitBackdropFilter: activeDropdown === item.label ? 'blur(10px)' : undefined,
@@ -581,13 +577,12 @@ export default function Navbar({ addToRefs }: NavbarProps) {
                       >
                         <span className="relative z-10 font-medium">{item.label}</span>
                         <ChevronDown
-                          className={`ml-2 w-4 h-4 transition-transform duration-300 ${
-                            activeDropdown === item.label ? 'rotate-180' : ''
-                          }`}
+                          className={`ml-2 w-4 h-4 transition-transform duration-300 ${activeDropdown === item.label ? 'rotate-180' : ''
+                            }`}
                         />
-                        
+
                         {/* Enhanced hover effect */}
-                        <div 
+                        <div
                           className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                           style={{
                             background: 'rgba(255, 255, 255, 0.1)',
@@ -600,7 +595,7 @@ export default function Navbar({ addToRefs }: NavbarProps) {
                       {/* Products Dropdown with Hero Section - Matching Style */}
                       <AnimatePresence>
                         {item.label === 'Services' && activeDropdown === item.label && (
-                          <motion.div 
+                          <motion.div
                             data-dropdown-menu
                             className="fixed left-1/2 top-[4.5rem] z-[120] transform -translate-x-1/2 w-full max-w-5xl"
                             initial={{ opacity: 0, y: -20, scale: 0.95 }}
@@ -608,7 +603,7 @@ export default function Navbar({ addToRefs }: NavbarProps) {
                             exit={{ opacity: 0, y: -20, scale: 0.95 }}
                             transition={{ duration: 0.3, ease: "easeOut" }}
                           >
-                            <div 
+                            <div
                               className="rounded-3xl shadow-2xl border overflow-hidden"
                               style={{
                                 background: 'rgba(255, 255, 255, 0.97)',
@@ -621,8 +616,8 @@ export default function Navbar({ addToRefs }: NavbarProps) {
                               <div className="p-6">
                                 <div className="flex flex-col lg:flex-row gap-6 relative z-10">
                                   {/* Hero Card - Reduced Width */}
-                                  <div className="lg:w-1/4">
-                                    <Card 
+                                  <div className="lg:w-2/4">
+                                    <Card
                                       className="h-full border-0 text-white overflow-hidden relative"
                                       style={{
                                         background: 'linear-gradient(135deg, rgba(99, 102, 241, 0.8) 0%, rgba(139, 92, 246, 0.8) 50%, rgba(168, 85, 247, 0.8) 100%)',
@@ -630,7 +625,7 @@ export default function Navbar({ addToRefs }: NavbarProps) {
                                         WebkitBackdropFilter: 'blur(5px)',
                                       }}
                                     >
-                                      <div 
+                                      <div
                                         className="absolute inset-0"
                                         style={{
                                           background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, transparent 100%)'
@@ -638,7 +633,7 @@ export default function Navbar({ addToRefs }: NavbarProps) {
                                       />
                                       <CardHeader className="relative z-10 pb-3 p-3">
                                         <div className="flex items-center gap-2 mb-3">
-                                          <div 
+                                          <div
                                             className="w-10 h-10 rounded-2xl flex items-center justify-center border relative overflow-hidden"
                                             style={{
                                               background: 'rgba(255, 255, 255, 0.2)',
@@ -647,7 +642,7 @@ export default function Navbar({ addToRefs }: NavbarProps) {
                                               border: '1px solid rgba(255, 255, 255, 0.3)'
                                             }}
                                           >
-                                            <div 
+                                            <div
                                               className="absolute inset-0 animate-pulse"
                                               style={{
                                                 background: 'linear-gradient(45deg, rgba(168, 85, 247, 0.3) 0%, rgba(99, 102, 241, 0.3) 100%)'
@@ -655,7 +650,7 @@ export default function Navbar({ addToRefs }: NavbarProps) {
                                             />
                                             <Layers className="w-5 h-5 text-white relative z-10" />
                                           </div>
-                                          <Badge 
+                                          <Badge
                                             className="text-white border-white/30 text-xs"
                                             style={{
                                               background: 'rgba(255, 255, 255, 0.2)',
@@ -681,8 +676,8 @@ export default function Navbar({ addToRefs }: NavbarProps) {
                                             { emoji: "📊", text: "Analytics" },
                                             { emoji: "🔗", text: "Integration" }
                                           ].map((feature, idx) => (
-                                            <div 
-                                              key={idx} 
+                                            <div
+                                              key={idx}
                                               className="rounded-xl p-2 border"
                                               style={{
                                                 background: 'rgba(255, 255, 255, 0.1)',
@@ -701,11 +696,11 @@ export default function Navbar({ addToRefs }: NavbarProps) {
                                       </CardContent>
                                     </Card>
                                   </div>
-                                  
+
                                   {/* Categories and Services - Increased Width */}
-                                  <div className="lg:w-3/4 flex gap-4 min-w-0">
-                                    <div className="w-40 flex-shrink-0">
-                                      <div className="max-h-96 overflow-y-auto custom-scrollbar">
+                                  <div className="lg:w-full flex gap-4 min-w-0">
+                                    <div className="w-48 flex-shrink-0">
+                                      <div className="max-h-96 custom-scrollbar">
                                         <div className="space-y-2">
                                           {productCategories.map((category, categoryIdx) => {
                                             const IconComponent = category.icon;
@@ -718,17 +713,16 @@ export default function Navbar({ addToRefs }: NavbarProps) {
                                               { bg: 'linear-gradient(135deg, rgba(99, 102, 241, 0.8), rgba(196, 181, 253, 0.8))', border: 'rgba(99, 102, 241, 0.3)' }
                                             ];
                                             const categoryColor = categoryColors[categoryIdx % categoryColors.length];
-                                            
+
                                             return (
                                               <motion.button
                                                 key={category.id}
                                                 onClick={() => handleCategoryChange(category.id)}
-                                                className={`w-full text-left p-2 rounded-lg transition-all duration-300 group relative overflow-hidden ${
-                                                  activeCategory === category.id ? 'scale-105' : 'hover:scale-102'
-                                                }`}
+                                                className={`w-full p-2 rounded-lg transition-all duration-300 group relative overflow-hidden ${activeCategory === category.id ? 'scale-105' : 'hover:scale-102'
+                                                  }`}
                                                 style={{
-                                                  background: activeCategory === category.id 
-                                                    ? categoryColor.bg 
+                                                  background: activeCategory === category.id
+                                                    ? categoryColor.bg
                                                     : 'rgba(255, 255, 255, 0.1)',
                                                   border: `1px solid ${categoryColor.border}`,
                                                   backdropFilter: 'blur(8px)',
@@ -738,35 +732,36 @@ export default function Navbar({ addToRefs }: NavbarProps) {
                                                 animate={{ opacity: 1, x: 0 }}
                                                 transition={{ duration: 0.3, delay: categoryIdx * 0.1 }}
                                               >
-                                                <div className="flex items-start gap-2 relative z-10">
-                                                  <div 
-                                                    className={`w-7 h-7 rounded-lg flex items-center justify-center flex-shrink-0 ${
-                                                      activeCategory === category.id ? 'bg-white/20' : 'bg-gray-200/20'
-                                                    }`}
-                                                  >
-                                                    <IconComponent className={`w-4 h-4 ${
-                                                      activeCategory === category.id ? 'text-white' : category.color
-                                                    }`} />
-                                                  </div>
-                                                  <div className="flex-1 min-w-0 overflow-hidden">
-                                                    <div className={`font-semibold text-xs leading-tight mb-0.5 ${
-                                                      activeCategory === category.id ? 'text-white' : 'text-gray-700'
-                                                    }`} style={{ 
-                                                      wordBreak: 'break-word',
-                                                      hyphens: 'auto',
-                                                      lineHeight: '1.2'
-                                                    }}>
+                                                <div className="flex items-center justify-between gap-2 w-full relative z-10">
+                                                  {/* Icon and Text */}
+                                                  <div className="flex items-center gap-2 min-w-0">
+                                                    <div
+                                                      className={`w-7 h-7 rounded-lg flex items-center justify-center flex-shrink-0 ${activeCategory === category.id ? 'bg-white/20' : 'bg-gray-200/20'
+                                                        }`}
+                                                    >
+                                                      <IconComponent className={`w-4 h-4 ${activeCategory === category.id ? 'text-white' : category.color
+                                                        }`} />
+                                                    </div>
+                                                    <div className={`font-semibold text-xs leading-tight items-center text-center break-words whitespace-normal ${activeCategory === category.id ? 'text-white' : 'text-gray-700'
+                                                      }`} style={{
+                                                        wordBreak: 'break-word',
+                                                        hyphens: 'auto',
+                                                        lineHeight: '1.0',
+                                                        alignItems: 'center',
+                                                      }}>
                                                       {category.title.replace('&', '&\u200B')}
                                                     </div>
-                                                    <div className={`text-xs ${
-                                                      activeCategory === category.id ? 'text-white/80' : 'text-gray-500'
-                                                    }`}>
-                                                      {category.services.length} items
-                                                    </div>
                                                   </div>
-                                                  {activeCategory === category.id && (
-                                                    <ChevronRight className="w-3 h-3 text-white flex-shrink-0" />
-                                                  )}
+                                                  {/* Number and Arrow (if selected) */}
+                                                  <div className="flex items-center gap-1 flex-shrink-0">
+                                                    <div className={`text-xs font-semibold ${activeCategory === category.id ? 'text-white/80' : 'text-gray-500'
+                                                      }`}>
+                                                      {category.services.length}
+                                                    </div>
+                                                    {activeCategory === category.id && (
+                                                      <ChevronRight className="w-3 h-3 text-white flex-shrink-0" />
+                                                    )}
+                                                  </div>
                                                 </div>
                                               </motion.button>
                                             );
@@ -776,20 +771,28 @@ export default function Navbar({ addToRefs }: NavbarProps) {
                                     </div>
 
                                     {/* Services Grid - Flexible Width */}
-                                    <div className="flex-1 min-w-0">
-                                      <div className="max-h-96 overflow-y-auto pr-2 custom-scrollbar">
+                                    <div className="flex-1 min-w-0 max-h-72 overflow-y-auto custom-scrollbar">
+                                      <div>
                                         <AnimatePresence mode="wait">
                                           {productCategories.map((category) => {
                                             if (category.id !== activeCategory) return null;
-                                            
+                                            // Use a more vibrant dark background and colored border for selected category
+                                            const cardBg = category.bgGradient || 'linear-gradient(135deg, #18181b 60%, #23272f 100%)';
+                                            const cardBorder = category.color?.includes('blue') ? 'rgba(59, 130, 246, 0.7)'
+                                              : category.color?.includes('red') ? 'rgba(239, 68, 68, 0.7)'
+                                                : category.color?.includes('purple') ? 'rgba(139, 92, 246, 0.7)'
+                                                  : category.color?.includes('orange') ? 'rgba(251, 146, 60, 0.7)'
+                                                    : category.color?.includes('green') ? 'rgba(34, 197, 94, 0.7)'
+                                                      : 'rgba(99, 102, 241, 0.7)';
                                             return (
-                                              <motion.div 
+                                              <motion.div
                                                 key={category.id}
                                                 initial={{ opacity: 0, y: 20 }}
                                                 animate={{ opacity: 1, y: 0 }}
                                                 exit={{ opacity: 0, y: -20 }}
                                                 transition={{ duration: 0.3 }}
-                                                className="grid grid-cols-1 md:grid-cols-2 gap-3"
+                                                className="grid grid-cols-1 gap-4 w-full place-items-stretch auto-rows-fr"
+                                                style={{ minHeight: 0 }}
                                               >
                                                 {category.services.map((service, idx) => {
                                                   const ServiceIcon = service.icon;
@@ -799,53 +802,63 @@ export default function Navbar({ addToRefs }: NavbarProps) {
                                                       initial={{ opacity: 0, y: 20 }}
                                                       animate={{ opacity: 1, y: 0 }}
                                                       transition={{ duration: 0.3, delay: idx * 0.1 }}
+                                                      className="h-full"
+                                                      style={{ display: 'flex' }}
                                                     >
-                                                      <Link href={service.href} onClick={handleDropdownItemClick}>
-                                                        <Card 
-                                                          className="transition-all duration-300 cursor-pointer group hover:scale-105 border relative overflow-hidden h-full min-h-[120px]"
+                                                      <Link href={service.href} onClick={handleDropdownItemClick} className="flex flex-1 h-full">
+                                                        <Card
+                                                          className="transition-all duration-300 cursor-pointer group hover:scale-95 border bg-white shadow-md relative overflow-hidden flex flex-col flex-1 h-full min-h-[140px]"
                                                           style={{
-                                                            background: 'rgba(255, 255, 255, 0.2)',
-                                                            backdropFilter: 'blur(8px)',
-                                                            WebkitBackdropFilter: 'blur(8px)',
-                                                            border: `1px solid ${category.color.includes('blue') ? 'rgba(59, 130, 246, 0.3)' : 
-                                                                      category.color.includes('red') ? 'rgba(239, 68, 68, 0.3)' : 
-                                                                      category.color.includes('purple') ? 'rgba(139, 92, 246, 0.3)' : 
-                                                                      category.color.includes('orange') ? 'rgba(251, 146, 60, 0.3)' : 
-                                                                      category.color.includes('green') ? 'rgba(34, 197, 94, 0.3)' : 
-                                                                      'rgba(99, 102, 241, 0.3)'}`,
+                                                            background: '#fff',
+                                                            border: `2px solid ${cardBorder}`,
+                                                            boxShadow: `0 2px 16px 0 ${cardBorder}`,
+                                                            height: '100%',
                                                           }}
                                                         >
-                                                          <div 
-                                                            className="absolute top-0 left-0 right-0 h-1 group-hover:h-2 transition-all duration-300"
-                                                            style={{ background: category.bgGradient }}
-                                                          />
-                                                          
                                                           <CardHeader className="pb-2 pt-3 px-3">
-                                                            <div className="flex items-start gap-2.5">
-                                                              <div 
-                                                                className="w-8 h-8 rounded-lg text-white flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg flex-shrink-0"
-                                                                style={{ background: category.bgGradient }}
+                                                            <div className="flex items-center gap-3">
+                                                              <div
+                                                                className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0 shadow-md"
+                                                                style={activeCategory === category.id ? {
+                                                                  background: cardBg,
+                                                                  color: '#fff',
+                                                                  border: `2px solid ${cardBorder}`,
+                                                                  boxShadow: `0 2px 8px 0 ${cardBorder}`,
+                                                                  backgroundImage: cardBorder.startsWith('linear-gradient') ? cardBorder : undefined,
+                                                                  backgroundColor: cardBorder.startsWith('linear-gradient') ? undefined : cardBorder,
+                                                                } : {
+                                                                  background: '#f3f4f6',
+                                                                }}
                                                               >
-                                                                <ServiceIcon size={14} />
+                                                                <ServiceIcon size={18} className={activeCategory === category.id ? `text-white` : 'text-gray-700'} />
                                                               </div>
-                                                              <div className="flex-1 min-w-0">
-                                                                <CardTitle className={`text-sm font-semibold ${category.color} group-hover:text-gray-700 transition-colors leading-tight mb-1.5 break-words`}>
+                                                              <div className="flex-1 min-w-0 flex flex-col justify-center">
+                                                                <CardTitle className="text-base font-bold text-gray-900 leading-tight mb-1.5 break-words">
                                                                   {service.name}
                                                                 </CardTitle>
-                                                                <Badge 
-                                                                  className="text-white/80 border text-xs px-2 py-0.5 inline-block"
-                                                                  style={{
-                                                                    background: 'rgba(255, 255, 255, 0.15)',
-                                                                    border: '1px solid rgba(255, 255, 255, 0.25)'
-                                                                  }}
-                                                                >
-                                                                  {service.tools}
-                                                                </Badge>
+                                                                <div className="mt-1">
+                                                                  <Badge
+                                                                    className="text-xs px-2 py-0.5 inline-block"
+                                                                    style={activeCategory === category.id ? {
+                                                                      backgroundImage: cardBorder.startsWith('linear-gradient') ? cardBorder : undefined,
+                                                                      backgroundColor: cardBorder.startsWith('linear-gradient') ? undefined : cardBorder,
+                                                                      color: '#fff',
+                                                                      border: `1.5px solid ${cardBorder}`,
+                                                                      boxShadow: `0 1px 6px 0 ${cardBorder}`,
+                                                                    } : {
+                                                                      background: '#f3f4f6',
+                                                                      color: '#374151',
+                                                                      border: '1.5px solid #e5e7eb',
+                                                                    }}
+                                                                  >
+                                                                    {service.tools}
+                                                                  </Badge>
+                                                                </div>
                                                               </div>
                                                             </div>
                                                           </CardHeader>
-                                                          <CardContent className="pt-0 pb-3 px-3">
-                                                            <CardDescription className="text-gray-600 text-xs leading-relaxed group-hover:text-gray-700 transition-colors break-words">
+                                                          <CardContent className="pt-0 pb-3 px-3 flex-1 flex items-end">
+                                                            <CardDescription className="text-gray-700 text-xs font-medium group-hover:text-gray-900 transition-colors break-words whitespace-nowrap overflow-hidden text-ellipsis w-full">
                                                               {service.description}
                                                             </CardDescription>
                                                           </CardContent>
@@ -1063,7 +1076,7 @@ export default function Navbar({ addToRefs }: NavbarProps) {
                       {/* Solutions Dropdown with Hero Section */}
                       <AnimatePresence>
                         {item.label === 'Solutions' && activeDropdown === item.label && (
-                          <motion.div 
+                          <motion.div
                             data-dropdown-menu
                             className="fixed left-1/2 top-[4.5rem] z-[120] transform -translate-x-1/2 w-full max-w-4xl"
                             initial={{ opacity: 0, y: -20, scale: 0.95 }}
@@ -1071,7 +1084,7 @@ export default function Navbar({ addToRefs }: NavbarProps) {
                             exit={{ opacity: 0, y: -20, scale: 0.95 }}
                             transition={{ duration: 0.3, ease: "easeOut" }}
                           >
-                            <div 
+                            <div
                               className="rounded-3xl shadow-2xl border overflow-hidden"
                               style={{
                                 background: 'rgba(255, 255, 255, 0.97)',
@@ -1085,7 +1098,7 @@ export default function Navbar({ addToRefs }: NavbarProps) {
                                 <div className="flex flex-col lg:flex-row gap-6 relative z-10">
                                   {/* Hero Card */}
                                   <div className="lg:w-1/3">
-                                    <Card 
+                                    <Card
                                       className="h-full border-0 text-white overflow-hidden relative"
                                       style={{
                                         background: 'linear-gradient(135deg, rgba(236, 72, 153, 0.8) 0%, rgba(139, 92, 246, 0.8) 50%, rgba(59, 130, 246, 0.8) 100%)',
@@ -1093,16 +1106,16 @@ export default function Navbar({ addToRefs }: NavbarProps) {
                                         WebkitBackdropFilter: 'blur(5px)',
                                       }}
                                     >
-                                      <div 
+                                      <div
                                         className="absolute inset-0"
                                         style={{
                                           background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, transparent 100%)'
                                         }}
                                       />
-                                      
+
                                       <CardHeader className="relative z-10 pb-4">
                                         <div className="flex items-center gap-3 mb-4">
-                                          <div 
+                                          <div
                                             className="w-12 h-12 rounded-2xl flex items-center justify-center border relative overflow-hidden"
                                             style={{
                                               background: 'rgba(255, 255, 255, 0.2)',
@@ -1111,7 +1124,7 @@ export default function Navbar({ addToRefs }: NavbarProps) {
                                               border: '1px solid rgba(255, 255, 255, 0.3)'
                                             }}
                                           >
-                                            <div 
+                                            <div
                                               className="absolute inset-0 animate-pulse"
                                               style={{
                                                 background: 'linear-gradient(45deg, rgba(251, 191, 36, 0.3) 0%, rgba(236, 72, 153, 0.3) 100%)'
@@ -1119,7 +1132,7 @@ export default function Navbar({ addToRefs }: NavbarProps) {
                                             />
                                             <Sparkles className="w-6 h-6 text-white relative z-10" />
                                           </div>
-                                          <Badge 
+                                          <Badge
                                             className="text-white border-white/30"
                                             style={{
                                               background: 'rgba(255, 255, 255, 0.2)',
@@ -1145,8 +1158,8 @@ export default function Navbar({ addToRefs }: NavbarProps) {
                                             { emoji: "🚀", text: "Scalable" },
                                             { emoji: "💎", text: "Premium" }
                                           ].map((feature, idx) => (
-                                            <div 
-                                              key={idx} 
+                                            <div
+                                              key={idx}
                                               className="rounded-xl p-3 border"
                                               style={{
                                                 background: 'rgba(255, 255, 255, 0.1)',
@@ -1165,7 +1178,7 @@ export default function Navbar({ addToRefs }: NavbarProps) {
                                       </CardContent>
                                     </Card>
                                   </div>
-                                  
+
                                   {/* Solutions Grid */}
                                   <div className="lg:w-2/3 grid grid-cols-1 md:grid-cols-2 gap-4">
                                     {item.dropdown?.map((dropdownItem, idx) => {
@@ -1177,7 +1190,7 @@ export default function Navbar({ addToRefs }: NavbarProps) {
                                         { bg: 'linear-gradient(135deg, rgba(139, 92, 246, 0.8), rgba(196, 181, 253, 0.8))', emoji: '🤖', color: 'text-purple-600', border: 'rgba(139, 92, 246, 0.3)' }
                                       ];
                                       const solution = solutions[idx % solutions.length];
-                                      
+
                                       return (
                                         <motion.div
                                           key={dropdownItem.label}
@@ -1186,7 +1199,7 @@ export default function Navbar({ addToRefs }: NavbarProps) {
                                           transition={{ duration: 0.3, delay: idx * 0.1 }}
                                         >
                                           <Link href={dropdownItem.href} onClick={handleDropdownItemClick}>
-                                            <Card 
+                                            <Card
                                               className="transition-all duration-300 cursor-pointer group hover:scale-105 border relative overflow-hidden"
                                               style={{
                                                 background: 'rgba(255, 255, 255, 0.2)',
@@ -1198,15 +1211,15 @@ export default function Navbar({ addToRefs }: NavbarProps) {
                                               <div className="absolute top-3 right-3 text-xl animate-bounce group-hover:animate-spin transition-all duration-300">
                                                 {solution.emoji}
                                               </div>
-                                              
-                                              <div 
+
+                                              <div
                                                 className="absolute top-0 left-0 right-0 h-1 group-hover:h-2 transition-all duration-300"
                                                 style={{ background: solution.bg }}
                                               />
-                                              
+
                                               <CardHeader className="pb-3">
                                                 <div className="flex items-start gap-3">
-                                                  <div 
+                                                  <div
                                                     className="w-10 h-10 rounded-xl text-white flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg"
                                                     style={{ background: solution.bg }}
                                                   >
@@ -1250,7 +1263,7 @@ export default function Navbar({ addToRefs }: NavbarProps) {
                       }}
                     >
                       <span className="relative z-10 font-medium">{item.label}</span>
-                      <div 
+                      <div
                         className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                         style={{
                           background: 'rgba(255, 255, 255, 0.1)',
@@ -1264,7 +1277,7 @@ export default function Navbar({ addToRefs }: NavbarProps) {
               ))}
             </div>
           </div>
-          
+
           {/* Get Started Button */}
           <div className="absolute right-0 top-0 bottom-0 flex items-center justify-end pr-6">
             <div className="hidden lg:block">
@@ -1307,7 +1320,7 @@ export default function Navbar({ addToRefs }: NavbarProps) {
                 </button>
               </motion.div>
             </div>
-            
+
             {/* Mobile Menu Button */}
             <div className="lg:hidden">
               <motion.button
@@ -1349,7 +1362,7 @@ export default function Navbar({ addToRefs }: NavbarProps) {
           </div>
         </div>
       </motion.nav>
-      
+
       {/* Mobile Menu */}
       <AnimatePresence>
         {mobileMenuOpen && (
@@ -1369,7 +1382,7 @@ export default function Navbar({ addToRefs }: NavbarProps) {
           >
             <div className="px-6 py-4 space-y-2">
               {menuItems.map((item, index) => (
-                <motion.div 
+                <motion.div
                   key={item.label}
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
@@ -1388,9 +1401,8 @@ export default function Navbar({ addToRefs }: NavbarProps) {
                       >
                         <span>{item.label}</span>
                         <ChevronDown
-                          className={`w-4 h-4 transition-transform duration-300 ${
-                            activeDropdown === item.label ? 'rotate-180' : ''
-                          }`}
+                          className={`w-4 h-4 transition-transform duration-300 ${activeDropdown === item.label ? 'rotate-180' : ''
+                            }`}
                         />
                       </button>
                       <AnimatePresence>
@@ -1465,7 +1477,7 @@ export default function Navbar({ addToRefs }: NavbarProps) {
                   )}
                 </motion.div>
               ))}
-              
+
               {/* Mobile CTA Button */}
               <motion.div
                 className="pt-4"

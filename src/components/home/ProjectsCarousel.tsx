@@ -206,15 +206,15 @@ const ProjectsCarousel = ({ addToRefs }: ProjectsCarouselProps) => {
   return (
     <section 
       ref={carouselRef}
-      className="py-20 bg-gradient-to-br from-blue-100 via-white to-orange-100 relative overflow-hidden"
+      className="py-20 bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900 relative overflow-hidden"
     >
       {/* Enhanced background elements */}
       <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-50/60 to-orange-50/60"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-blue-600/10 to-cyan-600/10"></div>
         {[...Array(25)].map((_, i) => (
           <div
             key={i}
-            className="absolute opacity-20 animate-float"
+            className="absolute opacity-10 animate-float"
             style={{
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
@@ -222,12 +222,12 @@ const ProjectsCarousel = ({ addToRefs }: ProjectsCarouselProps) => {
               animationDuration: `${8 + Math.random() * 4}s`
             }}
           >
-            {i % 6 === 0 && <Target className="w-4 h-4 text-blue-900" />}
-            {i % 6 === 1 && <Brain className="w-6 h-6 text-orange-900" />}
-            {i % 6 === 2 && <Shield className="w-5 h-5 text-blue-800" />}
-            {i % 6 === 3 && <Rocket className="w-7 h-7 text-orange-800" />}
-            {i % 6 === 4 && <Database className="w-5 h-5 text-blue-900" />}
-            {i % 6 === 5 && <Lock className="w-4 h-4 text-orange-900" />}
+            {i % 6 === 0 && <Target className="w-4 h-4 text-blue-400" />}
+            {i % 6 === 1 && <Brain className="w-6 h-6 text-cyan-400" />}
+            {i % 6 === 2 && <Shield className="w-5 h-5 text-green-400" />}
+            {i % 6 === 3 && <Rocket className="w-7 h-7 text-purple-400" />}
+            {i % 6 === 4 && <Database className="w-5 h-5 text-pink-400" />}
+            {i % 6 === 5 && <Lock className="w-4 h-4 text-orange-400" />}
           </div>
         ))}
       </div>
@@ -240,23 +240,23 @@ const ProjectsCarousel = ({ addToRefs }: ProjectsCarouselProps) => {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
         >
-          <div className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-blue-900 to-orange-900 rounded-full text-white mb-8 shadow-lg">
+          <div className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-blue-600 to-cyan-600 rounded-full text-white mb-8 shadow-lg">
             <Rocket className="w-6 h-6 mr-3" />
             <span className="font-semibold text-lg">Our Projects</span>
             <Sparkles className="w-5 h-5 ml-3" />
           </div>
           
-          <h2 className="text-6xl md:text-7xl font-bold leading-tight mb-6 text-gray-900">
-            <span className="bg-gradient-to-r from-blue-900 to-orange-900 bg-clip-text text-transparent">
+          <h2 className="text-6xl md:text-7xl font-bold leading-tight mb-6">
+            <span className="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
               Cutting-Edge
             </span>
             <br />
-            <span className="bg-gradient-to-r from-orange-900 to-blue-900 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-orange-400 to-red-400 bg-clip-text text-transparent">
               Automation Solutions
             </span>
           </h2>
           
-          <p className="text-xl text-gray-700 max-w-4xl mx-auto leading-relaxed mb-8">
+          <p className="text-xl text-blue-100 max-w-4xl mx-auto leading-relaxed mb-8">
             Explore our portfolio of intelligent automation solutions that have transformed 
             businesses across industries with measurable results and cutting-edge technology.
           </p>
@@ -289,15 +289,15 @@ const ProjectsCarousel = ({ addToRefs }: ProjectsCarouselProps) => {
         >
           <div className="relative">
             {/* Embla Carousel */}
-            <div className="embla overflow-hidden mx-16" ref={emblaRef}>
-              <div className="embla__container">
+            <div className="embla overflow-hidden mx-24" ref={emblaRef}>
+              <div className="embla__container p-4 flex gap-4">
                 {projects.map((project, index) => (
-                  <div key={index} className="embla__slide px-4 pb-6">
+                  <div key={index} className="embla__slide px-2 pb-3">
                     <motion.div 
                       className="relative h-[550px] group cursor-pointer"
                       onMouseEnter={() => setIsHovered(index)}
                       onMouseLeave={() => setIsHovered(-1)}
-                      whileHover={{ y: -10 }}
+                      whileHover={{ y: -5 }}
                     >
                       {/* Glowing background */}
                       <div className={`absolute inset-0 bg-gradient-to-r ${project.gradient} opacity-20 rounded-3xl blur-xl transform transition-all duration-500 group-hover:opacity-40 group-hover:scale-110`}></div>
@@ -308,9 +308,9 @@ const ProjectsCarousel = ({ addToRefs }: ProjectsCarouselProps) => {
                         <div className={`absolute inset-0 bg-gradient-to-br ${project.gradient} opacity-10 group-hover:opacity-20 transition-opacity duration-500`}></div>
                         
                         {/* Content */}
-                        <div className="relative h-full flex flex-col p-8">
+                        <div className="relative h-full flex flex-col p-4">
                           {/* Header */}
-                          <div className="flex items-center justify-between mb-6">
+                          <div className="flex items-center justify-between mb-1">
                             <div className={`w-16 h-16 bg-gradient-to-r ${project.gradient} rounded-2xl flex items-center justify-center text-white shadow-lg transform transition-transform duration-300 group-hover:scale-110 group-hover:rotate-12`}>
                               {project.icon}
                             </div>
@@ -321,16 +321,16 @@ const ProjectsCarousel = ({ addToRefs }: ProjectsCarouselProps) => {
                           </div>
                           
                           {/* Title and subtitle */}
-                          <div className="mb-6">
-                            <h3 className="text-2xl font-bold text-white mb-2 group-hover:text-cyan-300 transition-colors duration-300">
+                          <div className="mb-1">
+                            <h3 className="text-xl font-bold text-white mb-1 group-hover:text-cyan-300 transition-colors duration-300">
                               {project.title}
                             </h3>
                             <p className="text-blue-200 text-lg font-medium">{project.subtitle}</p>
-                            <p className="text-blue-300 text-sm mt-2 opacity-80">{project.description}</p>
+                            <p className="text-blue-300 text-sm mt-1 opacity-80">{project.description}</p>
                           </div>
                           
                           {/* Stats */}
-                          <div className="grid grid-cols-3 gap-4 mb-6">
+                          <div className="grid grid-cols-3 gap-2 mb-2">
                             <div className="bg-white/10 rounded-xl p-3 text-center border border-white/20">
                               <div className="text-lg font-bold text-cyan-400">{project.stats.accuracy}</div>
                               <div className="text-xs text-blue-200">Accuracy</div>
@@ -346,7 +346,7 @@ const ProjectsCarousel = ({ addToRefs }: ProjectsCarouselProps) => {
                           </div>
                           
                           {/* Features list */}
-                          <div className="flex-1 space-y-3 mb-6">
+                          <div className="flex-1 space-y-3 mb-4">
                             {project.features.map((feature, i) => (
                               <motion.div 
                                 key={i} 

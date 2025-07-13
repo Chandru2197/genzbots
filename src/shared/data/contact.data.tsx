@@ -1,7 +1,7 @@
-import { IconClock, IconHeadset, IconHelp, IconMapPin, IconMessages, IconPhoneCall } from '@tabler/icons-react';
+// import { IconClock, IconHeadset, IconHelp, IconMapPin, IconMessages, IconPhoneCall } from '@tabler/icons-react';
 import { ContactProps, FeaturesProps } from '../types';
 import { HeroProps } from '../types';
-
+import { MapPin, PhoneCall, Clock, HelpCircle, MessagesSquare, Headset } from 'lucide-react';
 // Hero data on Contact page *******************
 // export const heroContact: HeroProps = {
 //   title: 'Get in touch with us',
@@ -136,18 +136,23 @@ export const contact2Contact: ContactProps = {
   items: [
     {
       title: 'Our Address',
-      description: ['1230 Business District', 'New York, NY 10001'],
-      icon: IconMapPin,
+      description: [
+        '8 The Green, Suite A',
+        'Dover, Delaware 19901',
+        'United States',
+        // '1230 Business District', 'New York, NY 10001'
+      ],
+      icon: MapPin,
     },
     {
       title: 'Contact',
-      description: ['Phone: +1 (555) 123-4567', 'Email: automation@company.com'],
-      icon: IconPhoneCall,
+      description: ['Phone: +1 (508) 501 6411', 'Email: info@genzbots.com'],
+      icon: PhoneCall,
     },
     {
       title: 'Working hours',
       description: ['Monday - Friday: 09:00 - 18:00', 'Saturday: 10:00 - 14:00'],
-      icon: IconClock,
+      icon: Clock,
     },
   ],
   form: {
@@ -243,7 +248,7 @@ export const features2Contact: FeaturesProps = {
     {
       title: 'Expert Consultation',
       description: 'Get personalized advice from our automation specialists',
-      icon: IconHelp,
+      icon: HelpCircle,
       callToAction: {
         text: 'Learn More',
         href: '/services',
@@ -252,7 +257,7 @@ export const features2Contact: FeaturesProps = {
     {
       title: '24/7 Support',
       description: 'Round-the-clock technical support and maintenance',
-      icon: IconMessages,
+      icon: MessagesSquare,
       callToAction: {
         text: 'Contact Support',
         href: '/support',
@@ -261,7 +266,7 @@ export const features2Contact: FeaturesProps = {
     {
       title: 'Proven Results',
       description: 'Join 500+ companies that have transformed their operations',
-      icon: IconHeadset,
+      icon: Headset,
       callToAction: {
         text: 'View Case Studies',
         href: '/case-studies',
