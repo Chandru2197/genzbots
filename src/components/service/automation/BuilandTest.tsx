@@ -93,7 +93,7 @@ export default function BuildAndTest() {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-purple-50 to-indigo-50">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-purple-50 to-indigo-50 px-4 py-8">
       <div className="relative overflow-hidden">
         <div 
           className="absolute inset-0" 
@@ -112,7 +112,7 @@ export default function BuildAndTest() {
       </div>
 
       {/* Development Approach */}
-      <div className="container mx-auto px-4 py-16">
+      <div className="container mx-auto px-4 py-4">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {developmentApproach.map((approach, index) => (
             <Card key={index} className="relative overflow-hidden">

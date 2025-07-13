@@ -308,7 +308,7 @@ export default function AutomationCards({ addToRefs }: { addToRefs?: (el: HTMLEl
       icon: Rocket,
       customImage: "/assets/images/healthcare.png",
       technologies: ["24/7 priority support", "Performance analytics", "3 free tweaks"],
-      servicePath: "/services/time-liberation"
+      servicePath: "/services/hyper-care"
     },
     {
       title: "Scale & Optimize (Ongoing)",
@@ -320,7 +320,7 @@ export default function AutomationCards({ addToRefs }: { addToRefs?: (el: HTMLEl
         "Provide quarterly health checks",
         "Celebrate your time savings!"
       ],
-      servicePath: "/services/hyper-care"
+      servicePath: "/services/scale-optimize"
     },
     {
       title: "Contact Us",
