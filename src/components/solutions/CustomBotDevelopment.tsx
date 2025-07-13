@@ -268,16 +268,16 @@ const CustomBotDevelopment: React.FC = () => {
         </div>
       </div>
 
-      {/* Navigation */}
+
+      {/* Hero Section */}
       <div className="relative z-10 max-w-7xl mx-auto px-4 py-6">
+      {/* Navigation */}
+      <div className="relative z-10 max-w-7xl mx-auto px-4 py-8">
         <button className="flex items-center px-4 py-2 bg-white/10 backdrop-blur-sm hover:bg-white/20 border border-gray-600 text-white rounded-lg transition-colors cursor-pointer" onClick={()=>router.push('/solutions')}>
           <ArrowLeft className="w-4 h-4 mr-2" />
           Back to Solutions
         </button>
       </div>
-
-      {/* Hero Section */}
-      <div className="relative z-10 max-w-7xl mx-auto px-4 pb-16">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           {/* Left Content */}
           <div className="space-y-8">

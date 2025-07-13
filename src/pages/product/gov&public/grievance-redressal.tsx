@@ -217,7 +217,7 @@ const GrievanceRedressalScreen = () => {
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 py-8">
         {/* Government Header */}
-        <div className="mb-12">
+        <div className="">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-6">
               <Button variant="outline" className="bg-black/30 backdrop-blur-md text-white border-blue-500/30 hover:bg-blue-500/20">
@@ -225,7 +225,7 @@ const GrievanceRedressalScreen = () => {
                 Back to Dashboard
               </Button>
               
-              <div className="flex items-center space-x-8">
+              <div className="flex items-center space-x-8 py-16">
                 <div className="relative">
                   <div className="w-24 h-24 rounded-full bg-gradient-to-br from-blue-600 to-purple-600 flex items-center justify-center border-4 border-white/20">
                     <Flag className="w-12 h-12 text-white" />

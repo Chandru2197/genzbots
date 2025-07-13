@@ -148,9 +148,9 @@ const PredictiveMaintenanceScreen = () => {
         ))}
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-6 py-8">
+      <div className="relative z-10 max-w-7xl mx-auto px-6 py-20">
         {/* Futuristic Header */}
-        <div className="relative mb-12">
+        <div className="relative mb-6">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-6">
               <Button variant="outline" className="bg-black/30 backdrop-blur-md text-white border-cyan-500/30 hover:bg-cyan-500/20">

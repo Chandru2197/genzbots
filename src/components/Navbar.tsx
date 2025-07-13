@@ -482,12 +482,12 @@ export default function Navbar({ addToRefs }: NavbarProps) {
       <div 
         className={`fixed top-0 left-0 right-0 transition-all duration-500 z-[99] ${
           isScrolled 
-            ? 'bg-white/10 backdrop-blur-2xl shadow-2xl border-b border-white/20' 
-            : 'bg-white/5 backdrop-blur-xl'
+            ? 'bg-white backdrop-blur-sm shadow-2xl border-b border-white/20' 
+            : 'bg-white backdrop-blur-sm'
         }`}
         style={{
-          backdropFilter: isScrolled ? 'blur(20px) saturate(180%)' : 'blur(12px) saturate(150%)',
-          WebkitBackdropFilter: isScrolled ? 'blur(20px) saturate(180%)' : 'blur(12px) saturate(150%)',
+          backdropFilter: isScrolled ? 'blur(12px) saturate(150%)' : 'blur(12px) saturate(150%)',
+          WebkitBackdropFilter: isScrolled ? 'blur(12px) saturate(150%)' : 'blur(12px) saturate(150%)',
         }}
       />
 
@@ -506,8 +506,8 @@ export default function Navbar({ addToRefs }: NavbarProps) {
             background: isScrolled 
               ? 'rgba(255, 255, 255, 0.15)' 
               : 'rgba(255, 255, 255, 0.08)',
-            backdropFilter: 'blur(25px) saturate(200%)',
-            WebkitBackdropFilter: 'blur(25px) saturate(200%)',
+            backdropFilter: 'blur(10px) saturate(200%)',
+            WebkitBackdropFilter: 'blur(10px) saturate(200%)',
             borderBottom: isScrolled ? '1px solid rgba(255, 255, 255, 0.2)' : '1px solid rgba(255, 255, 255, 0.1)',
             boxShadow: isScrolled 
               ? '0 8px 32px 0 rgba(31, 38, 135, 0.15)' 
@@ -543,10 +543,10 @@ export default function Navbar({ addToRefs }: NavbarProps) {
               <Image
                 src={'/assets/svgs/GenZBotLogo.svg'}
                 alt="GenZBot Logo"
-                height={40}
-                width={120}
-                className="h-10 w-auto relative z-10"
-                style={{ maxHeight: '40px' }}
+                height={75}
+                width={200}
+                className="relative z-10"
+                // style={{ maxHeight: '40px' }}
                 priority
                 unoptimized
               />
@@ -569,7 +569,7 @@ export default function Navbar({ addToRefs }: NavbarProps) {
                       <button
                         data-dropdown
                         onClick={() => toggleDropdown(item.label)}
-                        className={`flex text-white items-center font-semibold transition-all duration-300 relative px-4 py-2 rounded-2xl group ${
+                        className={`flex text-black items-center font-semibold transition-all duration-300 relative px-4 py-2 rounded-2xl group ${
                           activeDropdown === item.label 
                             ? 'text-blue-600 bg-white/20 backdrop-blur-sm shadow-lg' 
                             : 'text-gray-700 hover:text-blue-600 hover:bg-white/10'
@@ -611,7 +611,7 @@ export default function Navbar({ addToRefs }: NavbarProps) {
                             <div 
                               className="rounded-3xl shadow-2xl border overflow-hidden"
                               style={{
-                                background: 'rgba(255, 255, 255, 0.75)',
+                                background: 'rgba(255, 255, 255, 0.97)',
                                 backdropFilter: 'blur(15px) saturate(150%)',
                                 WebkitBackdropFilter: 'blur(15px) saturate(150%)',
                                 border: '1px solid rgba(255, 255, 255, 0.3)',
@@ -1074,7 +1074,7 @@ export default function Navbar({ addToRefs }: NavbarProps) {
                             <div 
                               className="rounded-3xl shadow-2xl border overflow-hidden"
                               style={{
-                                background: 'rgba(255, 255, 255, 0.75)',
+                                background: 'rgba(255, 255, 255, 0.97)',
                                 backdropFilter: 'blur(15px) saturate(150%)',
                                 WebkitBackdropFilter: 'blur(15px) saturate(150%)',
                                 border: '1px solid rgba(255, 255, 255, 0.3)',
@@ -1243,7 +1243,7 @@ export default function Navbar({ addToRefs }: NavbarProps) {
                   ) : (
                     <Link
                       href={item.href}
-                      className="text-white font-semibold transition-all duration-300 relative px-4 py-2 rounded-2xl text-gray-700 hover:text-blue-600 hover:bg-white/10 group"
+                      className="text-black font-semibold transition-all duration-300 relative px-4 py-2 rounded-2xl text-gray-700 hover:text-blue-600 hover:bg-white/10 group"
                       style={{
                         backdropFilter: 'blur(10px)',
                         WebkitBackdropFilter: 'blur(10px)',
@@ -1275,12 +1275,12 @@ export default function Navbar({ addToRefs }: NavbarProps) {
                 {/* Uiverse.io Modern Button by Javierrocadev - Reduced size */}
                 <button
                   onClick={() => window.location.href = '/contact'}
-                  className="relative flex items-center gap-1 bg-neutral-600 px-5 py-2 border-4 border-white text-sm bg-transparent rounded-lg font-semibold text-white cursor-pointer overflow-hidden transition-all duration-600 ease-custom hover:text-orange-400 hover:rounded-2xl group hover:transition-all duration-700 hover:duration-700"
+                  className="relative flex items-center gap-1 bg-neutral-600 px-5 py-2 border-4 border-black hover:border-orange-500 text-sm bg-transparent rounded-lg font-semibold text-black cursor-pointer overflow-hidden transition-all duration-600 ease-custom hover:text-orange-400 hover:rounded-2xl group hover:transition-all duration-700 hover:duration-700"
                   style={{ minWidth: '100px', maxWidth: '150px', justifyContent: 'center' }}
                 >
                   <svg
                     viewBox="0 0 24 24"
-                    className="absolute w-4 fill-white z-[9] transition-all duration-700 ease-custom -left-1/4 group-hover:left-2 group-hover:fill-[#212121]"
+                    className="absolute w-4 fill-white z-[9] transition-all duration-700 ease-custom -left-1/4 group-hover:left-2 group-hover:fill-[#ff8904]"
                     xmlns="http://www.w3.org/2000/svg"
                   >
                     <path
@@ -1297,7 +1297,7 @@ export default function Navbar({ addToRefs }: NavbarProps) {
                   ></span>
                   <svg
                     viewBox="0 0 24 24"
-                    className="absolute w-4 fill-white z-[9] transition-all duration-700 ease-custom right-2 group-hover:-right-1/4 group-hover:fill-[#212121]"
+                    className="absolute w-4 fill-black z-[9] transition-all duration-700 ease-custom right-2 group-hover:-right-1/4 group-hover:fill-[#ff8904]"
                     xmlns="http://www.w3.org/2000/svg"
                   >
                     <path

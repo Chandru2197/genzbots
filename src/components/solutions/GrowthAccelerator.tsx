@@ -315,6 +315,9 @@ const GrowthAccelerator: React.FC = () => {
         </div>
       </div>
 
+
+      {/* Hero Section - Futuristic Dashboard */}
+      <div className="relative z-10 max-w-7xl mx-auto px-4 py-6">
       {/* Navigation */}
       <div className="relative z-10 max-w-7xl mx-auto px-4 py-6">
         <Button variant="outline" className="bg-white/80 backdrop-blur-sm hover:bg-white border-purple-200 cursor-pointer" onClick={()=>router.push('/solutions')}>
@@ -322,9 +325,6 @@ const GrowthAccelerator: React.FC = () => {
           Back to Solutions
         </Button>
       </div>
-
-      {/* Hero Section - Futuristic Dashboard */}
-      <div className="relative z-10 max-w-7xl mx-auto px-4 pb-16">
         <div className="text-center mb-16">
           <Badge className="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-8 py-3 text-lg mb-8 shadow-lg">
             <Rocket className="w-6 h-6 mr-2" />

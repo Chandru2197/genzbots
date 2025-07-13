@@ -207,6 +207,9 @@ const TimeLiberationPackage: React.FC = () => {
         <div className="absolute bottom-20 right-1/3 w-40 h-40 bg-gradient-to-br from-purple-400 to-pink-500 rounded-full opacity-10 animate-pulse delay-2000"></div>
       </div>
 
+
+      {/* Hero Section */}
+      <div className="relative z-10 max-w-7xl mx-auto px-4 py-6">
       {/* Navigation */}
       <div className="relative z-10 max-w-7xl mx-auto px-4 py-6">
         <Button variant="outline" className="bg-white/80 backdrop-blur-sm hover:bg-white cursor-pointer" onClick={()=>router.push('/solutions')}> 
@@ -214,9 +217,6 @@ const TimeLiberationPackage: React.FC = () => {
           Back to Solutions
         </Button>
       </div>
-
-      {/* Hero Section */}
-      <div className="relative z-10 max-w-7xl mx-auto px-4 pb-20">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           {/* Left Content */}
           <div className="space-y-8">

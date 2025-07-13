@@ -274,6 +274,9 @@ const ProfitRescueKit: React.FC = () => {
         </div>
       </div>
 
+
+      {/* Hero Section - Dashboard Style */}
+      <div className="relative z-10 max-w-7xl mx-auto px-4 py-6">
       {/* Navigation */}
       <div className="relative z-10 max-w-7xl mx-auto px-4 py-6">
         <Button variant="outline" className="bg-white/80 backdrop-blur-sm hover:bg-white border-red-200 cursor-pointer" onClick={()=>router.push('/solutions')}>
@@ -281,9 +284,6 @@ const ProfitRescueKit: React.FC = () => {
           Back to Solutions
         </Button>
       </div>
-
-      {/* Hero Section - Dashboard Style */}
-      <div className="relative z-10 max-w-7xl mx-auto px-4 pb-12">
         <div className="text-center mb-12">
           <Badge className="bg-gradient-to-r from-red-500 to-orange-500 text-white px-6 py-3 text-lg mb-6">
             <Shield className="w-5 h-5 mr-2" />

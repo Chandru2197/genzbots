@@ -239,16 +239,15 @@ const PensionProcessingScreen = () => {
         </div>
       ))}
 
-      <div className="relative z-10 max-w-7xl mx-auto px-6 py-8">
+      <div className="relative z-10 max-w-7xl mx-auto px-6 py-20">
         {/* Financial Header */}
-        <div className="mb-12">
+        <div className="mb-2">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-6">
               <Button variant="outline" className="bg-black/30 backdrop-blur-md text-white border-emerald-500/30 hover:bg-emerald-500/20">
                 <ArrowLeft className="w-4 h-4 mr-2" />
                 Back to Government
-              </Button>
-              
+              </Button>              
               <div className="flex items-center space-x-8">
                 <div className="relative">
                   <div className="w-28 h-28 rounded-full bg-gradient-to-br from-green-600 to-emerald-600 flex items-center justify-center border-4 border-emerald-400/30 shadow-2xl">

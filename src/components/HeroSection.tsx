@@ -27,7 +27,7 @@ export default function HeroSection({ addToRefs }: HeroSectionProps) {
   ];
 
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden px-4 py-8 bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900">
+    <section className="relative min-h-screen flex items-center overflow-hidden px-4 py-12 bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900">
       {/* Enhanced Background with animated elements */}
       <div className="absolute inset-0">
         <div className="absolute inset-0 bg-gradient-to-r from-blue-600/10 to-cyan-600/10"></div>

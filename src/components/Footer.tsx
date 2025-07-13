@@ -72,7 +72,7 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="relative bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900 text-white overflow-hidden">
+    <footer className="relative bg-gradient-to-br from-white via-blue-50 to-orange-50 text-white overflow-hidden">
       {/* Enhanced background elements */}
       <div className="absolute inset-0">
         <div className="absolute inset-0 bg-gradient-to-r from-blue-600/5 to-cyan-600/5"></div>
@@ -112,20 +112,20 @@ export default function Footer() {
             >
               <div className="mb-8">
                 <div className="relative group">
-                  <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-cyan-500/20 rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-cyan-500/20 rounded-3xl blur-xl opacity-0 transition-opacity duration-300"></div>
                   <Image
                     src={'/assets/svgs/GenZBotLogo.svg'}
                     alt="GenZBot Logo"
                     width={280}
                     height={200}
                     priority
-                    className="relative z-10 transition-transform duration-300 group-hover:scale-105"
+                    className="relative z-10 transition-transform duration-300"
                   />
                 </div>
               </div>
               
               {/* Enhanced description */}
-              <p className="text-blue-200 text-lg leading-relaxed mb-8">
+              <p className="text-gray-500 text-lg leading-relaxed mb-8">
                 Pioneering the future of automation with AI-driven solutions. We transform 
                 manual processes into intelligent workflows, empowering businesses to scale 
                 efficiently and focus on what matters most.
@@ -178,7 +178,7 @@ export default function Footer() {
                     >
                       <Link 
                         href={link.href} 
-                        className="text-blue-200 hover:text-white transition-all duration-300 flex items-center group"
+                        className="text-gray-500 hover:text-orange-400 transition-all duration-300 flex items-center group"
                       >
                         <ArrowRight className="w-4 h-4 mr-2 opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:translate-x-1" />
                         <span className="group-hover:translate-x-1 transition-transform duration-300">{link.label}</span>
@@ -209,7 +209,7 @@ export default function Footer() {
                     >
                       <Link 
                         href={service.href} 
-                        className="text-blue-200 hover:text-white transition-all duration-300 flex items-center group"
+                        className="text-gray-500 hover:text-orange-400 transition-all duration-300 flex items-center group"
                       >
                         <ArrowRight className="w-4 h-4 mr-2 opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:translate-x-1" />
                         <span className="group-hover:translate-x-1 transition-transform duration-300">{service.label}</span>
@@ -240,7 +240,7 @@ export default function Footer() {
                     >
                       <Link 
                         href={solution.href} 
-                        className="text-blue-200 hover:text-white transition-all duration-300 flex items-center group"
+                        className="text-gray-500 hover:text-orange-400 transition-all duration-300 flex items-center group"
                       >
                         <ArrowRight className="w-4 h-4 mr-2 opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:translate-x-1" />
                         <span className="group-hover:translate-x-1 transition-transform duration-300">{solution.label}</span>
@@ -276,10 +276,10 @@ export default function Footer() {
                   <div className={`w-12 h-12 mx-auto mb-4 rounded-xl bg-gradient-to-r ${stat.gradient} flex items-center justify-center text-white shadow-lg group-hover:scale-110 transition-transform duration-300`}>
                     {stat.icon}
                   </div>
-                  <div className="text-3xl font-bold text-white mb-2 group-hover:text-cyan-300 transition-colors duration-300">
+                  <div className="text-3xl font-bold text-black mb-2 group-hover:text-cyan-300 transition-colors duration-300">
                     {stat.value}
                   </div>
-                  <div className="text-blue-200 text-sm">{stat.label}</div>
+                  <div className="text-gray-500 text-sm">{stat.label}</div>
                 </div>
               </motion.div>
             ))}
@@ -301,8 +301,8 @@ export default function Footer() {
                   <Mail className="w-6 h-6" />
                 </div>
                 <div>
-                  <h5 className="font-bold text-white mb-1">Email Us</h5>
-                  <a href="mailto:info@genzbots.com" className="text-blue-200 hover:text-white transition-colors">
+                  <h5 className="font-bold text-black mb-1">Email Us</h5>
+                  <a href="mailto:info@genzbots.com" className="text-gray-500 hover:text-orange-500 transition-colors">
                     info@genzbots.com
                   </a>
                 </div>
@@ -313,8 +313,8 @@ export default function Footer() {
                   <Phone className="w-6 h-6" />
                 </div>
                 <div>
-                  <h5 className="font-bold text-white mb-1">Call Us</h5>
-                  <a href="tel:+15085016411" className="text-blue-200 hover:text-white transition-colors">
+                  <h5 className="font-bold text-black mb-1">Call Us</h5>
+                  <a href="tel:+15085016411" className="text-gray-500 hover:text-orange-500 transition-colors">
                     +1 (508) 501 6411
                   </a>
                 </div>
@@ -325,8 +325,8 @@ export default function Footer() {
                   <MapPin className="w-6 h-6" />
                 </div>
                 <div>
-                  <h5 className="font-bold text-white mb-1">Visit Us</h5>
-                  <div className="text-blue-200 text-sm leading-relaxed">
+                  <h5 className="font-bold text-black mb-1">Visit Us</h5>
+                  <div className="text-gray-500 hover:text-orange-500 text-sm leading-relaxed">
                     8 The Green, Suite A<br />
                     Dover, Delaware 19901<br />
                     United States
@@ -346,20 +346,20 @@ export default function Footer() {
           viewport={{ once: true }}
         >
           <div className="flex flex-col md:flex-row justify-between items-center gap-6">
-            <div className="flex items-center gap-2 text-blue-200">
+            <div className="flex items-center gap-2 text-black">
               <span>© 2025 GenZBot. All rights reserved.</span>
-              <Heart className="w-4 h-4 text-red-400 animate-pulse" />
+              <Heart className="w-4 h-4 text-red-600 animate-pulse" />
               <span>Made with passion for automation</span>
             </div>
             
             <div className="flex items-center gap-8">
-              <Link href="/privacy" className="text-blue-200 hover:text-white transition-colors duration-300">
+              <Link href="/privacy" className="text-black hover:text-amber-400 transition-colors duration-300">
                 Privacy Policy
               </Link>
-              <Link href="/terms" className="text-blue-200 hover:text-white transition-colors duration-300">
+              <Link href="/terms" className="text-black hover:text-orange-400 transition-colors duration-300">
                 Terms of Service
               </Link>
-              <Link href="/cookies" className="text-blue-200 hover:text-white transition-colors duration-300">
+              <Link href="/cookies" className="text-black hover:text-blue-400 transition-colors duration-300">
                 Cookie Policy
               </Link>
             </div>
