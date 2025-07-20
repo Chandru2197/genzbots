@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { ArrowLeft, MessageSquare, Send, Users, MapPin, Clock, CheckCircle, AlertTriangle, Building, Flag, BookOpen, Zap, TrendingUp, Star, BarChart3, Shield } from 'lucide-react';
+import { BackToParent } from '@/components/ui/BackToParent';
+import { useNavigation } from '@/utils/navigation';
+import { ROUTES } from '@/utils/routes';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
 
 const GrievanceRedressalScreen = () => {
+  const { navigateTo } = useNavigation();
   const [totalGrievances, setTotalGrievances] = useState(8947);
   const [todayReceived, setTodayReceived] = useState(142);
   const [resolved, setResolved] = useState(7823);
@@ -220,10 +224,11 @@ const GrievanceRedressalScreen = () => {
         <div className="">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-6">
-              <Button variant="outline" className="bg-black/30 backdrop-blur-md text-white border-blue-500/30 hover:bg-blue-500/20">
-                <ArrowLeft className="w-4 h-4 mr-2" />
-                Back to Dashboard
-              </Button>
+              <BackToParent
+                text="Back to Dashboard"
+                route="/product"
+                variant="gov"
+              />
               
               <div className="flex items-center space-x-8 py-16">
                 <div className="relative">

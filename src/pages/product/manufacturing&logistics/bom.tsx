@@ -4,6 +4,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
+import { useNavigation } from '@/utils/navigation';
 
 const BOMValidationScreen = () => {
   const [totalBOMs, setTotalBOMs] = useState(145);
@@ -94,6 +95,8 @@ const BOMValidationScreen = () => {
     { metric: 'Processing Speed', value: '45s', trend: '-12%', status: 'excellent' }
   ];
 
+  const { navigateTo } = useNavigation();
+
   return (
     <div className="mt-16 min-h-screen bg-gradient-to-tr from-slate-900 via-gray-800 to-zinc-900 relative overflow-hidden">
       {/* Industrial 3D Blueprint Background */}
@@ -158,7 +161,9 @@ const BOMValidationScreen = () => {
         <div className="relative mb-12">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-6">
-              <Button variant="outline" className="bg-black/30 backdrop-blur-md text-white border-blue-500/30 hover:bg-blue-500/20">
+              <Button 
+                onClick={() => navigateTo('/product')}
+                variant="outline" className="bg-black/30 backdrop-blur-md text-white border-blue-500/30 hover:bg-blue-500/20">
                 <ArrowLeft className="w-4 h-4 mr-2" />
                 Back to Manufacturing
               </Button>

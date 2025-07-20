@@ -4,6 +4,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
+import { useNavigation } from '@/utils/navigation';
 
 const ResumeScreeningScreen = () => {
   const [totalResumes, setTotalResumes] = useState(567);
@@ -113,6 +114,8 @@ const ResumeScreeningScreen = () => {
     { metric: 'Processing Speed', value: '2.3s', trend: '-15%', icon: Zap }
   ];
 
+  const { navigateTo } = useNavigation();
+
   return (
     <div className="mt-16 min-h-screen bg-gradient-to-br from-rose-950 via-pink-900 to-purple-950 relative overflow-hidden">
       {/* Neural Network Background */}
@@ -179,7 +182,9 @@ const ResumeScreeningScreen = () => {
         <div className="relative mb-12">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-6">
-              <Button variant="outline" className="bg-black/30 backdrop-blur-md text-white border-pink-500/30 hover:bg-pink-500/20">
+              <Button 
+              onClick={() => navigateTo('/product')}
+              variant="outline" className="bg-black/30 backdrop-blur-md text-white border-pink-500/30 hover:bg-pink-500/20">
                 <ArrowLeft className="w-4 h-4 mr-2" />
                 Back to HR
               </Button>

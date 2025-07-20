@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { ArrowLeft, CreditCard, FileText, CheckCircle, Clock, AlertCircle, Zap, Search, Filter, Download, Upload, MessageSquare, Calendar, User, DollarSign, MapPin, Phone } from 'lucide-react';
+import ReadyToTransform from '@/components/ReadyToTransform';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { useNavigation } from '@/utils/navigation';
 
 const CardDisputeScreen = () => {
   const [activeDisputes, setActiveDisputes] = useState(89);
@@ -89,8 +91,10 @@ const CardDisputeScreen = () => {
     { step: 'Submission', icon: CheckCircle, status: 'pending', time: '5s' }
   ];
 
+  const { navigateTo } = useNavigation();
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-emerald-950 via-teal-900 to-cyan-900 relative overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-emerald-950 via-teal-900 to-cyan-900 relative overflow-hidden px-4 py-10">
       {/* Modern Financial Background */}
       <div className="absolute inset-0">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,rgba(16,185,129,0.15),transparent_50%)]"></div>
@@ -146,11 +150,14 @@ const CardDisputeScreen = () => {
         ))}
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-6 py-8">
+      <div className="relative z-10 max-w-7xl mx-auto px-6 py-16">
         {/* Header */}
-        <div className="flex items-center justify-between mb-12">
+        <div className="flex items-center justify-between mb-6">
           <div className="flex items-center space-x-6">
-            <Button variant="outline" className="bg-white/10 backdrop-blur-md text-white border-white/20 hover:bg-white/20">
+            <Button 
+              onClick={() => navigateTo('/product')}
+              variant="outline" 
+              className="bg-white/10 backdrop-blur-md text-white border-white/20 hover:bg-white/20 hover:text-white">
               <ArrowLeft className="w-4 h-4 mr-2" />
               Back to BFSI
             </Button>
@@ -645,6 +652,14 @@ const CardDisputeScreen = () => {
             </Card>
           </TabsContent>
         </Tabs>
+      </div>
+
+      {/* Ready to Transform Section */}
+      <div className="max-w-7xl mx-auto px-6 mb-16">
+        <ReadyToTransform 
+          productName="Card Dispute Resolution" 
+          description="Experience how our automated dispute resolution can save time and improve customer satisfaction"
+        />
       </div>
 
       <style jsx>{`

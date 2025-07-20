@@ -333,7 +333,7 @@ export default function AutomationCards({ addToRefs }: { addToRefs?: (el: HTMLEl
   ];
 
   return (
-    <section className="py-20 bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900 relative overflow-hidden">
+    <section id="automation" className="py-20 bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900 relative overflow-hidden">
       {/* Enhanced background with floating elements */}
       <div className="absolute inset-0">
         <div className="absolute inset-0 bg-gradient-to-r from-blue-600/10 to-cyan-600/10"></div>

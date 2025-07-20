@@ -4,6 +4,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
+import { useNavigation } from '@/utils/navigation';
 
 const ReturnsProcessingScreen = () => {
   const [totalReturns, setTotalReturns] = useState(234);
@@ -105,6 +106,8 @@ const ReturnsProcessingScreen = () => {
     { platform: 'Etsy', returns: 19, processed: 0, rate: '2.9%', avgTime: '15min' }
   ];
 
+  const { navigateTo } = useNavigation();
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-cyan-950 via-blue-900 to-indigo-900 relative overflow-hidden">
       {/* Returns Processing Background */}
@@ -165,7 +168,9 @@ const ReturnsProcessingScreen = () => {
         {/* Header */}
         <div className="flex items-center justify-between mb-12">
           <div className="flex items-center space-x-6">
-            <Button variant="outline" className="bg-white/10 backdrop-blur-md text-white border-white/20 hover:bg-white/20">
+            <Button 
+              onClick={() => navigateTo('/product')}
+              variant="outline" className="bg-white/10 backdrop-blur-md text-white border-white/20 hover:bg-white/20">
               <ArrowLeft className="w-4 h-4 mr-2" />
               Back to Retail
             </Button>

@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { ArrowLeft, CreditCard, Shield, TrendingDown, Database, CheckCircle, Clock, Users, Zap, BarChart3, AlertTriangle, DollarSign, FileText, Scan, Brain, Lock, Sparkles, ArrowRight, Play, Pause, Activity } from 'lucide-react';
+import { useNavigation } from '@/utils/navigation';
+import { ROUTES } from '@/utils/routes';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';

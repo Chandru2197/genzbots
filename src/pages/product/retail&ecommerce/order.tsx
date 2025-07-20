@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { ArrowLeft, ShoppingBag, Warehouse, CheckCircle, Clock, AlertTriangle, BarChart3, Truck, Package, Users, Calendar, Database, ArrowUpDown, Search, Filter, Download, RefreshCw, Target } from 'lucide-react';
+import { BackToParent } from '@/components/ui/BackToParent';
+import { ROUTES } from '@/utils/routes';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -178,10 +180,11 @@ const OrderReconciliationScreen = () => {
         {/* Header */}
         <div className="flex items-center justify-between mb-12">
           <div className="flex items-center space-x-6">
-            <Button variant="outline" className="bg-white/10 backdrop-blur-md text-white border-white/20 hover:bg-white/20">
-              <ArrowLeft className="w-4 h-4 mr-2" />
-              Back to Retail
-            </Button>
+            <BackToParent 
+              text="Back to Products"
+              route={ROUTES.PRODUCT.INDEX}
+              variant="retail"
+            />
             <div>
               <h1 className="text-5xl font-bold text-white mb-2">
                 Order Reconciliation

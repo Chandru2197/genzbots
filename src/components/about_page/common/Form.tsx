@@ -1,312 +1,3 @@
-// import React, { useState } from 'react';
-// import { motion } from 'framer-motion';
-
-// interface FormInput {
-//   type: string;
-//   label: string;
-//   name: string;
-//   placeholder: string;
-//   required?: boolean;
-//   autocomplete?: string;
-//   options?: { value: string; label: string }[];
-//   defaultValue?: string;
-// }
-
-// interface CheckboxGroup {
-//   label: string;
-//   name: string;
-//   options: { value: string; label: string }[];
-// }
-
-// interface RadioGroup {
-//   label: string;
-//   name: string;
-//   radios: { label: string; value: string }[];
-// }
-
-// interface Checkbox {
-//   label: string;
-//   value: string;
-//   name: string;
-// }
-
-// interface FormButton {
-//   title: string;
-//   type: 'submit' | 'button';
-// }
-
-// interface FormProps {
-//   title?: string;
-//   inputs?: FormInput[];
-//   checkboxGroups?: CheckboxGroup[];
-//   radioBtns?: RadioGroup;
-//   checkboxes?: Checkbox[];
-//   btn?: FormButton;
-//   containerClass?: string;
-//   btnPosition?: 'left' | 'center' | 'right';
-// }
-
-// const Form: React.FC<FormProps> = ({
-//   title,
-//   inputs = [],
-//   checkboxGroups = [],
-//   radioBtns,
-//   checkboxes = [],
-//   btn,
-//   containerClass = '',
-//   btnPosition = 'left',
-// }) => {
-//   const [formData, setFormData] = useState<Record<string, any>>({});
-//   const [errors, setErrors] = useState<Record<string, string>>({});
-
-//   const handleInputChange = (name: string, value: string) => {
-//     setFormData(prev => ({ ...prev, [name]: value }));
-//     if (errors[name]) {
-//       setErrors(prev => ({ ...prev, [name]: '' }));
-//     }
-//   };
-
-//   const handleCheckboxChange = (name: string, value: string, checked: boolean) => {
-//     setFormData(prev => {
-//       const currentValues = prev[name] || [];
-//       if (checked) {
-//         return { ...prev, [name]: [...currentValues, value] };
-//       } else {
-//         return { ...prev, [name]: currentValues.filter((v: string) => v !== value) };
-//       }
-//     });
-//   };
-
-//   const handleSubmit = (e: React.FormEvent) => {
-//     e.preventDefault();
-    
-//     // Basic validation
-//     const newErrors: Record<string, string> = {};
-//     inputs.forEach(input => {
-//       if (input.required && !formData[input.name]) {
-//         newErrors[input.name] = `${input.label} is required`;
-//       }
-//     });
-
-//     if (Object.keys(newErrors).length > 0) {
-//       setErrors(newErrors);
-//       return;
-//     }
-
-//     console.log('Form submitted:', formData);
-//     alert('Thank you! We will contact you soon.');
-//   };
-
-//   const getBtnAlignClass = () => {
-//     switch (btnPosition) {
-//       case 'center':
-//         return 'justify-center';
-//       case 'right':
-//         return 'justify-end';
-//       default:
-//         return 'justify-start';
-//     }
-//   };
-
-//   return (
-//     <motion.div
-//       initial={{ opacity: 0, y: 20 }}
-//       animate={{ opacity: 1, y: 0 }}
-//       transition={{ duration: 0.6 }}
-//       className={containerClass}
-//     >
-//       {title && (
-//         <motion.h3
-//           initial={{ opacity: 0, y: -10 }}
-//           animate={{ opacity: 1, y: 0 }}
-//           transition={{ duration: 0.5, delay: 0.2 }}
-//           className="text-2xl font-bold text-gray-900 dark:text-white mb-8 text-center"
-//         >
-//           {title}
-//         </motion.h3>
-//       )}
-      
-//       <form onSubmit={handleSubmit} className="space-y-8">
-//         {/* Basic Input Fields */}
-//         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-//           {inputs.map((input, index) => (
-//             <motion.div
-//               key={input.name}
-//               initial={{ opacity: 0, x: index % 2 === 0 ? -20 : 20 }}
-//               animate={{ opacity: 1, x: 0 }}
-//               transition={{ duration: 0.5, delay: index * 0.1 }}
-//               className={input.type === 'email' || input.name === 'companyName' ? 'md:col-span-2' : ''}
-//             >
-//               <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
-//                 {input.label}
-//                 {input.required && <span className="text-red-500 ml-1">*</span>}
-//               </label>
-              
-//               {input.type === 'select' ? (
-//                 <select
-//                   name={input.name}
-//                   value={formData[input.name] || input.defaultValue || ''}
-//                   onChange={(e) => handleInputChange(input.name, e.target.value)}
-//                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 bg-white dark:bg-gray-800 dark:border-gray-600 dark:text-white"
-//                 >
-//                   <option value="">{input.placeholder}</option>
-//                   {input.options?.map(option => (
-//                     <option key={option.value} value={option.value}>
-//                       {option.label}
-//                     </option>
-//                   ))}
-//                 </select>
-//               ) : input.type === 'tel' ? (
-//                 <div className="flex">
-//                   <div className="flex items-center px-3 border border-r-0 border-gray-300 rounded-l-lg bg-gray-50 dark:bg-gray-700 dark:border-gray-600">
-//                     <span className="text-sm text-gray-600 dark:text-gray-400">🇮🇳 +91</span>
-//                   </div>
-//                   <input
-//                     type="tel"
-//                     name={input.name}
-//                     placeholder={input.placeholder}
-//                     value={formData[input.name] || ''}
-//                     onChange={(e) => handleInputChange(input.name, e.target.value)}
-//                     className="flex-1 px-4 py-3 border border-gray-300 rounded-r-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 bg-white dark:bg-gray-800 dark:border-gray-600 dark:text-white"
-//                   />
-//                 </div>
-//               ) : (
-//                 <input
-//                   type={input.type}
-//                   name={input.name}
-//                   placeholder={input.placeholder}
-//                   value={formData[input.name] || ''}
-//                   onChange={(e) => handleInputChange(input.name, e.target.value)}
-//                   autoComplete={input.autocomplete}
-//                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 bg-white dark:bg-gray-800 dark:border-gray-600 dark:text-white"
-//                 />
-//               )}
-              
-//               {errors[input.name] && (
-//                 <p className="text-red-500 text-sm mt-1">{errors[input.name]}</p>
-//               )}
-//             </motion.div>
-//           ))}
-//         </div>
-
-//         {/* Checkbox Groups */}
-//         {checkboxGroups.map((group, groupIndex) => (
-//           <motion.div
-//             key={group.name}
-//             initial={{ opacity: 0, y: 20 }}
-//             animate={{ opacity: 1, y: 0 }}
-//             transition={{ duration: 0.5, delay: 0.3 + groupIndex * 0.1 }}
-//             className="space-y-4"
-//           >
-//             <h4 className="text-lg font-semibold text-gray-900 dark:text-white border-b border-gray-200 dark:border-gray-700 pb-2">
-//               {group.label}
-//             </h4>
-//             <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-//               {group.options.map((option) => (
-//                 <label
-//                   key={option.value}
-//                   className="flex items-center p-3 border border-gray-200 rounded-lg hover:bg-gray-50 dark:border-gray-700 dark:hover:bg-gray-800 transition-colors duration-200 cursor-pointer group"
-//                 >
-//                   <input
-//                     type="checkbox"
-//                     name={group.name}
-//                     value={option.value}
-//                     onChange={(e) => handleCheckboxChange(group.name, option.value, e.target.checked)}
-//                     className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-//                   />
-//                   <span className="ml-3 text-sm text-gray-700 dark:text-gray-300 group-hover:text-gray-900 dark:group-hover:text-white">
-//                     {option.label}
-//                   </span>
-//                 </label>
-//               ))}
-//             </div>
-//           </motion.div>
-//         ))}
-
-//         {/* Radio Button Group */}
-//         {radioBtns && (
-//           <motion.div
-//             initial={{ opacity: 0, y: 20 }}
-//             animate={{ opacity: 1, y: 0 }}
-//             transition={{ duration: 0.5, delay: 0.4 }}
-//             className="space-y-4"
-//           >
-//             <h4 className="text-lg font-semibold text-gray-900 dark:text-white border-b border-gray-200 dark:border-gray-700 pb-2">
-//               {radioBtns.label}
-//             </h4>
-//             <div className="space-y-3">
-//               {radioBtns.radios.map((radio) => (
-//                 <label
-//                   key={radio.value}
-//                   className="flex items-center p-3 border border-gray-200 rounded-lg hover:bg-gray-50 dark:border-gray-700 dark:hover:bg-gray-800 transition-colors duration-200 cursor-pointer group"
-//                 >
-//                   <input
-//                     type="radio"
-//                     name={radioBtns.name}
-//                     value={radio.value}
-//                     onChange={(e) => handleInputChange(radioBtns.name, e.target.value)}
-//                     className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-//                   />
-//                   <span className="ml-3 text-sm text-gray-700 dark:text-gray-300 group-hover:text-gray-900 dark:group-hover:text-white">
-//                     {radio.label}
-//                   </span>
-//                 </label>
-//               ))}
-//             </div>
-//           </motion.div>
-//         )}
-
-//         {/* Additional Checkboxes */}
-//         {checkboxes.length > 0 && (
-//           <motion.div
-//             initial={{ opacity: 0, y: 20 }}
-//             animate={{ opacity: 1, y: 0 }}
-//             transition={{ duration: 0.5, delay: 0.5 }}
-//             className="space-y-3"
-//           >
-//             {checkboxes.map((checkbox) => (
-//               <label
-//                 key={checkbox.name}
-//                 className="flex items-start p-4 bg-gray-50 dark:bg-gray-800 rounded-lg cursor-pointer group hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-200"
-//               >
-//                 <input
-//                   type="checkbox"
-//                   name={checkbox.name}
-//                   value={checkbox.value}
-//                   onChange={(e) => handleInputChange(checkbox.name, e.target.checked ? 'true' : 'false')}
-//                   className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 mt-1"
-//                 />
-//                 <span className="ml-3 text-sm text-gray-600 dark:text-gray-400 group-hover:text-gray-800 dark:group-hover:text-gray-200">
-//                   {checkbox.label}
-//                 </span>
-//               </label>
-//             ))}
-//           </motion.div>
-//         )}
-
-//         {/* Submit Button */}
-//         {btn && (
-//           <motion.div
-//             initial={{ opacity: 0, y: 20 }}
-//             animate={{ opacity: 1, y: 0 }}
-//             transition={{ duration: 0.5, delay: 0.6 }}
-//             className={`flex ${getBtnAlignClass()}`}
-//           >
-//             <button
-//               type={btn.type}
-//               className="px-8 py-4 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 focus:outline-none focus:ring-4 focus:ring-blue-500 focus:ring-opacity-50"
-//             >
-//               {btn.title}
-//             </button>
-//           </motion.div>
-//         )}
-//       </form>
-//     </motion.div>
-//   );
-// };
-
-// export default Form;
-
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import PhoneInput from "react-phone-input-2";
@@ -464,27 +155,61 @@ const Form: React.FC<FormProps> = ({
     setPhoneCountry(value.toLowerCase());
     const phoneWithoutCode = phone.replace(/^\+\d+/, '');
     setPhone(phoneWithoutCode);
+    // Clear country selection error if exists
+    if (errors['country']) {
+      setErrors(prev => ({ ...prev, ['country']: '' }));
+    }
   };
 
   const handlePhoneChange = (value: string, country: any) => {
     setPhone(value);
     setPhoneCountry(country.countryCode);
+    // Clear phone error if exists
+    if (errors['phone']) {
+      setErrors(prev => ({ ...prev, ['phone']: '' }));
+    }
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
     const newErrors: Record<string, string> = {};
+    
+    // Validate all inputs
     inputs.forEach(input => {
-      if (input.required && !formData[input.name]) {
+      if (!formData[input.name]) {
         newErrors[input.name] = `${input.label} is required`;
       }
     });
 
-    // Check phone number if required
+    // Validate phone number
     const phoneInput = inputs.find(input => input.type === 'tel');
-    if (phoneInput?.required && !phone) {
-      newErrors[phoneInput.name] = `${phoneInput.label} is required`;
+    if (phoneInput && !phone) {
+      newErrors['phone'] = `${phoneInput.label} is required`;
+    }
+
+    // Validate country selection
+    const countryInput = inputs.find(input => input.type === 'select');
+    if (countryInput && !selectedCountry) {
+      newErrors['country'] = `${countryInput.label} is required`;
+    }
+
+    // Validate checkbox groups (at least one selection required)
+    checkboxGroups.forEach(group => {
+      const groupSelections = formData[group.name] || [];
+      if (groupSelections.length === 0) {
+        newErrors[group.name] = `Please select at least one option for ${group.label}`;
+      }
+    });
+
+    // Validate radio button group
+    if (radioBtns && !formData[radioBtns.name]) {
+      newErrors[radioBtns.name] = `${radioBtns.label} selection is required`;
+    }
+
+    // Validate consent checkbox
+    if (checkboxes.length > 0 && !consent) {
+      newErrors['consent'] = 'You must agree to the terms and conditions';
     }
 
     if (Object.keys(newErrors).length > 0) {
@@ -546,69 +271,79 @@ const Form: React.FC<FormProps> = ({
             >
               <label className="block font-medium text-gray-700 dark:text-gray-300 mb-1">
                 {input.label}
-                {input.required && <span className="text-orange-500 ml-1">*</span>}
+                <span className="text-orange-500 ml-1">*</span>
               </label>
               
               {input.type === 'select' ? (
-                <Select value={selectedCountry} onValueChange={handleCountryChange}>
-                  <SelectTrigger className="w-full">
-                    <SelectValue>
-                      {countries.find(c => c.value === selectedCountry)?.text || "Select a country"}
-                    </SelectValue>
-                  </SelectTrigger>
-                  <SelectContent>
-                    <div className="sticky top-0 bg-white p-2">
-                      <div className="flex items-center border rounded-md px-3 py-1">
-                        <Search className="h-4 w-4 text-gray-500 mr-2" />
-                        <Input
-                          className="h-8 border-0 p-0 focus-visible:ring-0 placeholder:text-gray-400 text-sm"
-                          placeholder="Search countries..."
-                          value={searchQuery}
-                          onChange={(e) => setSearchQuery(e.target.value)}
-                        />
-                      </div>
-                    </div>
-                    <SelectGroup className="max-h-[300px] overflow-y-auto">
-                      {filteredCountries.length > 0 ? (
-                        filteredCountries.map((country) => (
-                          <SelectItem key={country.value} value={country.value}>
-                            {country.text}
-                          </SelectItem>
-                        ))
-                      ) : (
-                        <div className="py-6 text-center text-sm text-gray-500">
-                          No countries found
+                <>
+                  <Select value={selectedCountry} onValueChange={handleCountryChange}>
+                    <SelectTrigger className="w-full">
+                      <SelectValue>
+                        {countries.find(c => c.value === selectedCountry)?.text || "Select a country"}
+                      </SelectValue>
+                    </SelectTrigger>
+                    <SelectContent>
+                      <div className="sticky top-0 bg-white p-2">
+                        <div className="flex items-center border rounded-md px-3 py-1">
+                          <Search className="h-4 w-4 text-gray-500 mr-2" />
+                          <Input
+                            className="h-8 border-0 p-0 focus-visible:ring-0 placeholder:text-gray-400 text-sm"
+                            placeholder="Search countries..."
+                            value={searchQuery}
+                            onChange={(e) => setSearchQuery(e.target.value)}
+                          />
                         </div>
-                      )}
-                    </SelectGroup>
-                  </SelectContent>
-                </Select>
+                      </div>
+                      <SelectGroup className="max-h-[300px] overflow-y-auto">
+                        {filteredCountries.length > 0 ? (
+                          filteredCountries.map((country) => (
+                            <SelectItem key={country.value} value={country.value}>
+                              {country.text}
+                            </SelectItem>
+                          ))
+                        ) : (
+                          <div className="py-6 text-center text-sm text-gray-500">
+                            No countries found
+                          </div>
+                        )}
+                      </SelectGroup>
+                    </SelectContent>
+                  </Select>
+                  {errors['country'] && (
+                    <p className="text-red-500 text-sm mt-1">{errors['country']}</p>
+                  )}
+                </>
               ) : input.type === 'tel' ? (
-                <PhoneInput
-                  country={phoneCountry}
-                  value={phone}
-                  onChange={handlePhoneChange}
-                  inputStyle={{
-                    width: "100%",
-                    padding: "20px 0px",
-                    borderRadius: "8px", 
-                    border: "1px solid #d1d5db",
-                    outline: "none",
-                    transition: "border-color 0.2s ease-in-out",
-                  }}
-                  inputClass="!w-full !pl-14 !pr-4 !rounded-lg !border !border-gray-300 focus:!border-orange-400 focus:!ring-2 focus:!ring-orange-100 !outline-none !transition"
-                  buttonClass="!border-none !bg-transparent"
-                  dropdownClass="!rounded-lg !shadow-lg !bg-white"
-                  containerClass="!w-full"
-                  enableSearch
-                  countryCodeEditable={true}
-                  inputProps={{
-                    name: "phone",
-                    required: input.required,
-                    autoFocus: false,
-                    autoComplete: "tel",
-                  }}
-                />
+                <>
+                  <PhoneInput
+                    country={phoneCountry}
+                    value={phone}
+                    onChange={handlePhoneChange}
+                    inputStyle={{
+                      width: "100%",
+                      padding: "20px 0px",
+                      borderRadius: "8px", 
+                      border: "1px solid #d1d5db",
+                      outline: "none",
+                      transition: "border-color 0.2s ease-in-out",
+                    }}
+                    inputClass="!w-full !pl-14 !pr-4 !rounded-lg !border !border-gray-300 focus:!border-orange-400 focus:!ring-2 focus:!ring-orange-100 !outline-none !transition"
+                    buttonClass="!border-none !bg-transparent"
+                    dropdownClass="!rounded-lg !shadow-lg !bg-white"
+                    containerClass="!w-full"
+                    enableSearch
+                    countryCodeEditable={true}
+                    inputProps={{
+                      name: "phone",
+                      required: true,
+                      autoFocus: false,
+                      autoComplete: "tel",
+                    }}
+                  />
+                  {errors['phone'] && (
+                    <p className="text-red-500 text-sm mt-1">{errors['phone']}</p>
+                  )}
+                </>
               ) : (
                 <input
                   type={input.type}
@@ -617,7 +352,7 @@ const Form: React.FC<FormProps> = ({
                   value={formData[input.name] || ''}
                   onChange={(e) => handleInputChange(input.name, e.target.value)}
                   autoComplete={input.autocomplete}
-                  required={input.required}
+                  required={true}
                   className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:border-orange-400 focus:ring-2 focus:ring-orange-100 outline-none transition"
                 />
               )}
@@ -640,6 +375,7 @@ const Form: React.FC<FormProps> = ({
           >
             <p className="block font-medium text-gray-700 dark:text-white mb-2 text-lg">
               {group.label}
+              <span className="text-orange-500 ml-1">*</span>
             </p>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {group.options.map((option) => (
@@ -673,6 +409,9 @@ const Form: React.FC<FormProps> = ({
                 </label>
               ))}
             </div>
+            {errors[group.name] && (
+              <p className="text-red-500 text-sm mt-1">{errors[group.name]}</p>
+            )}
           </motion.div>
         ))}
 
@@ -686,6 +425,7 @@ const Form: React.FC<FormProps> = ({
           >
             <p className="block font-medium text-gray-700 dark:text-white mb-2 text-lg">
               {radioBtns.label}
+              <span className="text-orange-500 ml-1">*</span>
             </p>
             <div className="space-y-3">
               {radioBtns.radios.map((radio) => (
@@ -712,6 +452,9 @@ const Form: React.FC<FormProps> = ({
                 </label>
               ))}
             </div>
+            {errors[radioBtns.name] && (
+              <p className="text-red-500 text-sm mt-1">{errors[radioBtns.name]}</p>
+            )}
           </motion.div>
         )}
 
@@ -724,31 +467,37 @@ const Form: React.FC<FormProps> = ({
             className="space-y-3"
           >
             {checkboxes.map((checkbox) => (
-              <label key={checkbox.name} className="flex items-center gap-2 cursor-pointer">
-                <div className="relative inline-flex">
-                  <input
-                    type="checkbox"
-                    checked={consent}
-                    onChange={() => setConsent((c) => !c)}
-                    className="peer appearance-none w-5 h-5 border-2 border-orange-500 bg-white rounded-sm checked:bg-white checked:border-orange-500 focus:outline-none focus:ring-2 focus:ring-orange-500/20 transition-colors cursor-pointer"
-                  />
-                  <svg
-                    className="absolute inset-0 w-full h-full pointer-events-none invisible peer-checked:visible text-orange-500 p-0.5"
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="3"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <polyline points="20 6 9 17 4 12" />
-                  </svg>
-                </div>
-                <span className="text-gray-700 dark:text-gray-300 text-sm">
-                  {checkbox.label}
-                </span>
-              </label>
+              <div key={checkbox.name}>
+                <label className="flex items-center gap-2 cursor-pointer">
+                  <div className="relative inline-flex">
+                    <input
+                      type="checkbox"
+                      checked={consent}
+                      onChange={() => setConsent((c) => !c)}
+                      className="peer appearance-none w-5 h-5 border-2 border-orange-500 bg-white rounded-sm checked:bg-white checked:border-orange-500 focus:outline-none focus:ring-2 focus:ring-orange-500/20 transition-colors cursor-pointer"
+                    />
+                    <svg
+                      className="absolute inset-0 w-full h-full pointer-events-none invisible peer-checked:visible text-orange-500 p-0.5"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="3"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <polyline points="20 6 9 17 4 12" />
+                    </svg>
+                  </div>
+                  <span className="text-gray-700 dark:text-gray-300 text-sm">
+                    {checkbox.label}
+                    <span className="text-orange-500 ml-1">*</span>
+                  </span>
+                </label>
+                {errors['consent'] && (
+                  <p className="text-red-500 text-sm mt-1">{errors['consent']}</p>
+                )}
+              </div>
             ))}
           </motion.div>
         )}

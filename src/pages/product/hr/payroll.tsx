@@ -4,6 +4,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
+import { useNavigation } from '@/utils/navigation';
 
 const PayrollProcessingScreen = () => {
   const [totalEmployees, setTotalEmployees] = useState(1234);
@@ -95,6 +96,8 @@ const PayrollProcessingScreen = () => {
     }
   };
 
+  const { navigateTo } = useNavigation();
+
   return (
     <div className="mt-16 min-h-screen bg-gradient-to-br from-blue-950 via-indigo-900 to-slate-900 relative overflow-hidden">
       {/* Financial Grid Background */}
@@ -137,7 +140,9 @@ const PayrollProcessingScreen = () => {
         <div className="mb-12">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-6">
-              <Button variant="outline" className="bg-black/30 backdrop-blur-md text-white border-blue-500/30 hover:bg-blue-500/20">
+              <Button 
+              onClick={() => navigateTo('/product')}
+              variant="outline" className="bg-black/30 backdrop-blur-md text-white border-blue-500/30 hover:bg-blue-500/20">
                 <ArrowLeft className="w-4 h-4 mr-2" />
                 Back to HR
               </Button>

@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { ArrowLeft, Calculator, BarChart3, CheckCircle, AlertTriangle, RefreshCw, Database, FileSpreadsheet, Brain, Zap, TrendingUp, Download, Filter, Search, ArrowUpDown, DollarSign, Calendar, Target } from 'lucide-react';
+import ReadyToTransform from '@/components/ReadyToTransform';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
+import { useNavigation } from '@/utils/navigation';
 
 const BankReconciliationScreen = () => {
   const [totalEntries, setTotalEntries] = useState(15247);
@@ -82,6 +84,8 @@ const BankReconciliationScreen = () => {
     { metric: 'Cost Reduction', value: '90%', target: '70%', status: 'excellent' }
   ];
 
+    const { navigateTo } = useNavigation();
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-violet-950 via-purple-900 to-indigo-900 relative overflow-hidden mt-16">
       {/* Financial Data Visualization Background */}
@@ -122,7 +126,11 @@ const BankReconciliationScreen = () => {
         {/* Header */}
         <div className="flex items-center justify-between mb-12">
           <div className="flex items-center space-x-6">
-            <Button variant="outline" className="bg-white/10 backdrop-blur-md text-white border-white/20 hover:bg-white/20">
+            <Button 
+              onClick={()=> navigateTo('/product')} 
+              variant="outline" 
+              className="bg-white/10 backdrop-blur-md text-white border-white/20 hover:bg-white/20 hover:text-white"
+            >
               <ArrowLeft className="w-4 h-4 mr-2" />
               Back to BFSI
             </Button>
@@ -513,6 +521,14 @@ const BankReconciliationScreen = () => {
             </div>
           </CardContent>
         </Card>
+      </div>
+
+      {/* Ready to Transform Section */}
+      <div className="max-w-7xl mx-auto px-6 mb-16">
+        <ReadyToTransform 
+          productName="Bank Reconciliation" 
+          description="Discover how our AI-powered reconciliation can streamline your financial operations"
+        />
       </div>
 
       <style jsx>{`

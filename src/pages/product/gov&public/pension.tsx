@@ -4,6 +4,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
+import { useNavigation } from '@/utils/navigation';
 
 const PensionProcessingScreen = () => {
   const [totalApplications, setTotalApplications] = useState(12847);
@@ -199,6 +200,8 @@ const PensionProcessingScreen = () => {
     }).format(amount);
   };
 
+  const { navigateTo } = useNavigation();
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-emerald-950 via-teal-900 to-cyan-950 relative overflow-hidden">
       {/* Currency Pattern Background */}
@@ -244,7 +247,9 @@ const PensionProcessingScreen = () => {
         <div className="mb-2">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-6">
-              <Button variant="outline" className="bg-black/30 backdrop-blur-md text-white border-emerald-500/30 hover:bg-emerald-500/20">
+              <Button
+                onClick={() => navigateTo('/product')}
+                variant="outline" className="bg-black/30 backdrop-blur-md text-white border-emerald-500/30 hover:bg-emerald-500/20">
                 <ArrowLeft className="w-4 h-4 mr-2" />
                 Back to Government
               </Button>              

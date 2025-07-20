@@ -4,6 +4,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
+import { useNavigation } from '@/utils/navigation';
 
 const ShipmentTrackingScreen = () => {
   const [activeShipments, setActiveShipments] = useState(2340);
@@ -85,6 +86,8 @@ const ShipmentTrackingScreen = () => {
     { id: 5, angle: 15, distance: 90, type: 'plane', status: 'normal' }
   ];
 
+  const { navigateTo } = useNavigation();
+
   return (
     <div className="mt-16 min-h-screen bg-gradient-to-br from-slate-950 via-blue-950 to-indigo-950 relative overflow-hidden">
       {/* Control Room Background */}
@@ -142,7 +145,9 @@ const ShipmentTrackingScreen = () => {
         <div className="relative mb-12">
           <div className="flex items-center justify-between mb-8">
             <div className="flex items-center space-x-6">
-              <Button variant="outline" className="bg-black/40 backdrop-blur-md text-white border-blue-500/30 hover:bg-blue-500/20">
+              <Button 
+                onClick={() => navigateTo('/product')}
+                variant="outline" className="bg-black/40 backdrop-blur-md text-white border-blue-500/30 hover:bg-blue-500/20">
                 <ArrowLeft className="w-4 h-4 mr-2" />
                 Back to Manufacturing
               </Button>

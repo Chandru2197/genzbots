@@ -4,6 +4,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
+import { useNavigation } from '@/utils/navigation';
 
 const DynamicPricingScreen = () => {
   const [totalProducts, setTotalProducts] = useState(5670);
@@ -108,6 +109,8 @@ const DynamicPricingScreen = () => {
     { category: 'Accessories', products: 894, avgIncrease: '+15.1%', topPerformer: 'Cases' }
   ];
 
+  const { navigateTo } = useNavigation();
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-orange-950 via-red-900 to-pink-900 relative overflow-hidden">
       {/* E-commerce Dynamic Background */}
@@ -166,7 +169,9 @@ const DynamicPricingScreen = () => {
         {/* Header */}
         <div className="flex items-center justify-between mb-12">
           <div className="flex items-center space-x-6">
-            <Button variant="outline" className="bg-white/10 backdrop-blur-md text-white border-white/20 hover:bg-white/20">
+            <Button
+             onClick={() => navigateTo('/product')}
+             variant="outline" className="bg-white/10 backdrop-blur-md text-white border-white/20 hover:bg-white/20">
               <ArrowLeft className="w-4 h-4 mr-2" />
               Back to Retail
             </Button>

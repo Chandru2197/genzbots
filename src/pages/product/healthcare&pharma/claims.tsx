@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { ArrowLeft, ClipboardCheck, Shield, CheckCircle, Clock, AlertTriangle, FileText, DollarSign, TrendingUp, Download, Filter, Search, Users, Calendar, Building, Receipt } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import ReadyToTransform from '@/components/ReadyToTransform';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
+import { useNavigation } from '@/utils/navigation';
 
 const ClaimsProcessingScreen = () => {
   const [totalClaims, setTotalClaims] = useState(789);
@@ -93,6 +95,8 @@ const ClaimsProcessingScreen = () => {
     { name: 'UnitedHealth', claims: 199, approved: 178, rate: 89.4, avgTime: '20h' }
   ];
 
+  const { navigateTo } = useNavigation();
+
   return (
     <div className="mt-16 min-h-screen bg-gradient-to-br from-emerald-950 via-green-900 to-teal-900 relative overflow-hidden">
       {/* Healthcare Claims Background */}
@@ -137,7 +141,9 @@ const ClaimsProcessingScreen = () => {
         {/* Header */}
         <div className="flex items-center justify-between mb-12">
           <div className="flex items-center space-x-6">
-            <Button variant="outline" className="bg-white/10 backdrop-blur-md text-white border-white/20 hover:bg-white/20">
+            <Button 
+              onClick={() => navigateTo('/product')}
+              variant="outline" className="bg-white/10 backdrop-blur-md text-white border-white/20 hover:bg-white/20">
               <ArrowLeft className="w-4 h-4 mr-2" />
               Back to Healthcare
             </Button>
@@ -399,6 +405,14 @@ const ClaimsProcessingScreen = () => {
             </div>
           </CardContent>
         </Card>
+
+        {/* Ready to Transform Section */}
+        <div className="mb-8">
+          <ReadyToTransform 
+            productName="Claims Processing" 
+            description="Accelerate your claims processing with AI-powered automation and validation"
+          />
+        </div>
 
         {/* Recent Claims */}
         <Card className="bg-white/10 backdrop-blur-md border-white/20">

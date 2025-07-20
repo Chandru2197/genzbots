@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { ArrowLeft, User, Scan, Calendar, FileText, CheckCircle, Clock, AlertCircle, Heart, Shield, Camera, UserCheck, Phone, MapPin, CreditCard, Stethoscope } from 'lucide-react';
+import { BackToParent } from '@/components/ui/BackToParent';
+import ReadyToTransform from '@/components/ReadyToTransform';
+import { ROUTES } from '@/utils/routes';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -142,10 +145,11 @@ const PatientOnboardingScreen = () => {
         {/* Header */}
         <div className="flex items-center justify-between mb-12">
           <div className="flex items-center space-x-6">
-            <Button variant="outline" className="bg-white/10 backdrop-blur-md text-white border-white/20 hover:bg-white/20">
-              <ArrowLeft className="w-4 h-4 mr-2" />
-              Back to Healthcare
-            </Button>
+            <BackToParent 
+              text="Back to Products"
+              route={ROUTES.PRODUCT.INDEX}
+              variant="healthcare"
+            />
             <div>
               <h1 className="text-5xl font-bold text-white mb-2">
                 Patient Onboarding
@@ -545,6 +549,10 @@ const PatientOnboardingScreen = () => {
             </div>
           </CardContent>
         </Card>
+      </div>
+
+      <div className="mb-8">
+        <ReadyToTransform productName="Patient Onboarding" />
       </div>
 
       <style jsx>{`

@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { ArrowLeft, FileText, Scan, Brain, CheckCircle, Clock, AlertCircle, Zap, Users, TrendingUp, Download, Upload, Eye, Calendar, DollarSign } from 'lucide-react';
+import ReadyToTransform from '@/components/ReadyToTransform';
+import { useNavigation } from '@/utils/navigation';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
 
 const LoanProcessingScreen = () => {
+  const { navigateTo } = useNavigation();
   const [activeApplications, setActiveApplications] = useState(247);
   const [processingStage, setProcessingStage] = useState(0);
   const [documentProgress, setDocumentProgress] = useState(0);
@@ -73,7 +76,11 @@ const LoanProcessingScreen = () => {
         {/* Header */}
         <div className="flex items-center justify-between mb-12">
           <div className="flex items-center space-x-6">
-            <Button variant="outline" className="bg-white/10 backdrop-blur-md text-white border-white/20 hover:bg-white/20">
+            <Button 
+              variant="outline" 
+              className="bg-white/10 backdrop-blur-md text-white border-white/20 hover:bg-white/20 hover:text-white"
+              onClick={() => navigateTo('/product')}
+            >
               <ArrowLeft className="w-4 h-4 mr-2" />
               Back to BFSI
             </Button>
@@ -323,6 +330,14 @@ const LoanProcessingScreen = () => {
             </div>
           </CardContent>
         </Card>
+      </div>
+
+      {/* Ready to Transform Section */}
+      <div className="max-w-7xl mx-auto px-6 mb-16">
+        <ReadyToTransform 
+          productName="Loan Processing" 
+          description="Transform your loan processing with our AI-powered automation solution"
+        />
       </div>
 
       <style jsx>{`

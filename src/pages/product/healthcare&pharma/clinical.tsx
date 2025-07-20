@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { ArrowLeft, FlaskConical, Database, FileText, CheckCircle, Clock, AlertTriangle, BarChart3, Users, Calendar, Microscope, Activity, TrendingUp, Download, Filter } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import ReadyToTransform from '@/components/ReadyToTransform';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
+import { useNavigation } from '@/utils/navigation';
 
 const ClinicalTrialScreen = () => {
   const [totalReports, setTotalReports] = useState(123);
@@ -104,6 +106,8 @@ const ClinicalTrialScreen = () => {
     { area: 'Immunology', trials: 3, reports: 10, color: 'from-yellow-500 to-yellow-600' }
   ];
 
+  const { navigateTo } = useNavigation();
+
   return (
     <div className="mt-16 min-h-screen bg-gradient-to-br from-indigo-950 via-purple-900 to-violet-900 relative overflow-hidden">
       {/* Scientific Research Background */}
@@ -163,7 +167,9 @@ const ClinicalTrialScreen = () => {
         {/* Header */}
         <div className="flex items-center justify-between mb-12">
           <div className="flex items-center space-x-6">
-            <Button variant="outline" className="bg-white/10 backdrop-blur-md text-white border-white/20 hover:bg-white/20">
+            <Button 
+              onClick={() => navigateTo('/product')}
+              variant="outline" className="bg-white/10 backdrop-blur-md text-white border-white/20 hover:bg-white/20">
               <ArrowLeft className="w-4 h-4 mr-2" />
               Back to Healthcare
             </Button>
@@ -416,6 +422,14 @@ const ClinicalTrialScreen = () => {
             </div>
           </CardContent>
         </Card>
+
+        {/* Ready to Transform Section */}
+        <div className="mb-8">
+          <ReadyToTransform 
+            productName="Clinical Trial Data Entry" 
+            description="Transform your clinical trial data management with automated data extraction and processing"
+          />
+        </div>
 
         {/* Recent Lab Reports */}
         <Card className="bg-white/10 backdrop-blur-md border-white/20">

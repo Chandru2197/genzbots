@@ -256,6 +256,10 @@ const ScaleOptimizePage: React.FC = () => {
     }
   ];
 
+  const handleBackToProcess = () => {
+    router.push('/#automation');
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-green-50 to-emerald-50">
       {/* Hero Section */}
@@ -264,7 +268,11 @@ const ScaleOptimizePage: React.FC = () => {
         <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width=&quot;60&quot; height=&quot;60&quot; viewBox=&quot;0 0 60 60&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;%3E%3Cg fill=&quot;%23ffffff&quot; fill-opacity=&quot;0.1&quot;%3E%3Cpath d=&quot;M20 20c0 11.046-8.954 20-20 20s-20-8.954-20-20 8.954-20 20-20 20 8.954 20 20z&quot;/%3E%3C/g%3E%3C/svg%3E')] opacity-20"></div>
         
         <div className="relative max-w-7xl mx-auto px-4 py-20">
-          <Button variant="ghost" className="text-green-200 hover:text-white mb-6 p-0" onClick={() => router.push('/') }>
+          <Button
+            variant="outline"
+            className="p-1 text-white border-white bg-tansparent hover:text-blue-600 mb-6"
+            onClick={handleBackToProcess}
+          >
             <ArrowLeft className="w-4 h-4 mr-2" />
             Back to Process
           </Button>

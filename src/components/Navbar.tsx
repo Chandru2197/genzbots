@@ -718,8 +718,7 @@ export default function Navbar({ addToRefs }: NavbarProps) {
                                               <motion.button
                                                 key={category.id}
                                                 onClick={() => handleCategoryChange(category.id)}
-                                                className={`w-full p-2 rounded-lg transition-all duration-300 group relative overflow-hidden ${activeCategory === category.id ? 'scale-105' : 'hover:scale-102'
-                                                  }`}
+                                                className={`w-full p-2 rounded-lg transition-all duration-300 group relative overflow-hidden ${activeCategory === category.id ? 'scale-105' : 'hover:scale-102'}`}
                                                 style={{
                                                   background: activeCategory === category.id
                                                     ? categoryColor.bg
@@ -727,23 +726,23 @@ export default function Navbar({ addToRefs }: NavbarProps) {
                                                   border: `1px solid ${categoryColor.border}`,
                                                   backdropFilter: 'blur(8px)',
                                                   WebkitBackdropFilter: 'blur(8px)',
+                                                  position: 'relative',
                                                 }}
                                                 initial={{ opacity: 0, x: -20 }}
                                                 animate={{ opacity: 1, x: 0 }}
                                                 transition={{ duration: 0.3, delay: categoryIdx * 0.1 }}
                                               >
+                                                <div className="absolute top-0 left-0 right-0 h-2 rounded-t-lg" style={{ background: categoryColor.border, zIndex: 2 }} />
                                                 <div className="flex items-center justify-between gap-2 w-full relative z-10">
                                                   {/* Icon and Text */}
                                                   <div className="flex items-center gap-2 min-w-0">
                                                     <div
-                                                      className={`w-7 h-7 rounded-lg flex items-center justify-center flex-shrink-0 ${activeCategory === category.id ? 'bg-white/20' : 'bg-gray-200/20'
-                                                        }`}
+                                                      className={`w-7 h-7 rounded-lg flex items-center justify-center flex-shrink-0 ${activeCategory === category.id ? 'bg-white/20' : 'bg-gray-200/20'}`}
                                                     >
-                                                      <IconComponent className={`w-4 h-4 ${activeCategory === category.id ? 'text-white' : category.color
-                                                        }`} />
+                                                      <IconComponent className={`w-4 h-4 ${activeCategory === category.id ? 'text-white' : category.color}`} />
                                                     </div>
-                                                    <div className={`font-semibold text-xs leading-tight items-center text-center break-words whitespace-normal ${activeCategory === category.id ? 'text-white' : 'text-gray-700'
-                                                      }`} style={{
+                                                    <div className={`font-semibold text-xs leading-tight items-center text-center break-words whitespace-normal ${activeCategory === category.id ? 'text-white' : 'text-gray-700'}`}
+                                                      style={{
                                                         wordBreak: 'break-word',
                                                         hyphens: 'auto',
                                                         lineHeight: '1.0',
@@ -754,8 +753,7 @@ export default function Navbar({ addToRefs }: NavbarProps) {
                                                   </div>
                                                   {/* Number and Arrow (if selected) */}
                                                   <div className="flex items-center gap-1 flex-shrink-0">
-                                                    <div className={`text-xs font-semibold ${activeCategory === category.id ? 'text-white/80' : 'text-gray-500'
-                                                      }`}>
+                                                    <div className={`text-xs font-semibold ${activeCategory === category.id ? 'text-white/80' : 'text-gray-500'}`}>
                                                       {category.services.length}
                                                     </div>
                                                     {activeCategory === category.id && (
@@ -807,14 +805,23 @@ export default function Navbar({ addToRefs }: NavbarProps) {
                                                     >
                                                       <Link href={service.href} onClick={handleDropdownItemClick} className="flex flex-1 h-full">
                                                         <Card
-                                                          className="transition-all duration-300 cursor-pointer group hover:scale-95 border bg-white shadow-md relative overflow-hidden flex flex-col flex-1 h-full min-h-[140px]"
+                                                          className="transition-all duration-300 cursor-pointer group hover:scale-95 bg-white shadow-md relative overflow-hidden flex flex-col flex-1 h-full min-h-[140px] rounded-xl"
                                                           style={{
                                                             background: '#fff',
-                                                            border: `2px solid ${cardBorder}`,
-                                                            boxShadow: `0 2px 16px 0 ${cardBorder}`,
                                                             height: '100%',
+                                                            border: '1px solid rgba(0,0,0,0.1)',
+                                                            boxShadow: `0 2px 8px 0 ${cardBorder}`,
+                                                            position: 'relative',
                                                           }}
                                                         >
+                                                          <div
+                                                            className="absolute top-0 left-0 right-0 h-2 rounded-t-xl"
+                                                            style={{
+                                                              background: cardBorder,
+                                                              boxShadow: `0 2px 4px 0 ${cardBorder}`,
+                                                              zIndex: 2,
+                                                            }}
+                                                          />
                                                           <CardHeader className="pb-2 pt-3 px-3">
                                                             <div className="flex items-center gap-3">
                                                               <div

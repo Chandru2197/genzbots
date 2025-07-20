@@ -257,6 +257,10 @@ export default function TimeLiberation() {
     }
   ];
 
+  const handleBackToProcess = () => {
+    router.push('/#automation');
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-cyan-50">
       {/* Hero Section */}
@@ -265,9 +269,13 @@ export default function TimeLiberation() {
         <DotPatternCircle className="opacity-20" />
         
         <div className="relative max-w-7xl mx-auto px-4 py-20">
-          <Button variant="ghost" className="text-blue-200 hover:text-white mb-6 p-0" onClick={() => router.push('/') }>
+          <Button
+            variant="outline"
+            className="p-1 text-white border-white bg-tansparent hover:text-blue-600 mb-6"
+            onClick={handleBackToProcess}
+          >
             <ArrowLeft className="w-4 h-4 mr-2" />
-            Back to Services
+            Back to Process
           </Button>
           
           <div className="grid lg:grid-cols-2 gap-12 items-center">

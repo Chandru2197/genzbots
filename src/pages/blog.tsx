@@ -285,9 +285,11 @@ const BlogListing = () => {
             
             <h1 className="text-6xl md:text-7xl font-bold leading-tight mb-6">
               <span className="bg-gradient-to-r from-orange-400 to-red-400 bg-clip-text text-transparent">
-                Insights &
+                Insights{" "}
               </span>
-              <br />
+              <span className="bg-gradient-to-r from-orange-400 to-blue-400 bg-clip-text text-transparent">
+                &{" "}
+              </span>
               <span className="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
                 Innovation
               </span>

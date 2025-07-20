@@ -4,6 +4,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
+import { useNavigation } from '@/utils/navigation';
 
 const PredictiveMaintenanceScreen = () => {
   const [totalMachines, setTotalMachines] = useState(89);
@@ -77,6 +78,8 @@ const PredictiveMaintenanceScreen = () => {
     { date: '2024-01-18', machine: 'Hydraulic Press Beta', type: 'Preventive', technician: 'Mike Johnson', duration: '3h' },
     { date: '2024-01-20', machine: 'Paint Booth Eta', type: 'Scheduled', technician: 'Lisa Wong', duration: '2h' }
   ];
+
+  const { navigateTo } = useNavigation();
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-emerald-950 via-teal-900 to-cyan-950 relative overflow-hidden">
@@ -153,7 +156,9 @@ const PredictiveMaintenanceScreen = () => {
         <div className="relative mb-6">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-6">
-              <Button variant="outline" className="bg-black/30 backdrop-blur-md text-white border-cyan-500/30 hover:bg-cyan-500/20">
+              <Button 
+              onClick={() => navigateTo('/product') }
+              variant="outline" className="bg-black/30 backdrop-blur-md text-white border-cyan-500/30 hover:bg-cyan-500/20">
                 <ArrowLeft className="w-4 h-4 mr-2" />
                 Back to Manufacturing
               </Button>

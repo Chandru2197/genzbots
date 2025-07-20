@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { ArrowLeft, ShoppingCart, TrendingUp, Package, RefreshCw, DollarSign, BarChart3, Zap, Target, Star, Globe, Clock, Users, Eye, Brain, Sparkles, ArrowRight, Play, Pause, AlertCircle, CheckCircle, Timer, Activity, ShoppingBag, Tag, Truck, MousePointer } from 'lucide-react';
+import { useNavigation } from '@/utils/navigation';
+import { ROUTES } from '@/utils/routes';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { EnhancedGlass3DCard } from '@/components/enhanced/EnhancedGlass3DCard';
 import { Badge } from '@/components/ui/badge';

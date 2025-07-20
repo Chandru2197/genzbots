@@ -389,6 +389,10 @@ const HypercareLaunchPage: React.FC = () => {
     setActiveSupport(activeSupport === index ? null : index);
   };
 
+  const handleBackToProcess = () => {
+    router.push('/#automation');
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-pink-50 to-red-50">
       {/* Hero Section */}
@@ -397,10 +401,14 @@ const HypercareLaunchPage: React.FC = () => {
         <DotPatternCircle className="opacity-20" />
         
         <div className="relative max-w-7xl mx-auto px-4 py-20">
-          <Button variant="ghost" className="text-red-200 hover:text-white mb-6 p-0" onClick={() => router.push('/') }>
-            <ArrowLeft className="w-4 h-4 mr-2" />
-            Back to Process
-          </Button>
+        <Button
+          variant="outline"
+          className="p-1 text-white border-white bg-tansparent hover:text-blue-600 mb-6"
+          onClick={handleBackToProcess}
+        >
+          <ArrowLeft className="w-4 h-4 mr-2" />
+          Back to Process
+        </Button>
           
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="text-white">

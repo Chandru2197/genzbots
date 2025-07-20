@@ -4,6 +4,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
+import { useNavigation } from '@/utils/navigation';
 
 const EmployeeOffboardingScreen = () => {
   const [totalOffboardings, setTotalOffboardings] = useState(89);
@@ -137,6 +138,8 @@ const EmployeeOffboardingScreen = () => {
     }
   };
 
+  const { navigateTo } = useNavigation();
+
   return (
     <div className="mt-16 min-h-screen bg-gradient-to-br from-slate-900 via-gray-900 to-zinc-900 relative overflow-hidden">
       {/* Security Grid Background */}
@@ -178,7 +181,9 @@ const EmployeeOffboardingScreen = () => {
         <div className="mb-12">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-6">
-              <Button variant="outline" className="bg-black/40 backdrop-blur-md text-white border-red-500/30 hover:bg-red-500/20">
+              <Button 
+                onClick={() => navigateTo('/product')}
+                variant="outline" className="bg-black/40 backdrop-blur-md text-white border-red-500/30 hover:bg-red-500/20">
                 <ArrowLeft className="w-4 h-4 mr-2" />
                 Back to HR
               </Button>

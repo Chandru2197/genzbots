@@ -50,7 +50,7 @@ const MiniCard = ({
   >
     {/* Glowing background */}
     <div 
-      className="absolute inset-0 rounded-2xl blur-xl opacity-60 group-hover:opacity-80 transition-opacity duration-300"
+      className="absolute inset-0 rounded-2xl blur-xl opacity-5 group-hover:opacity-20 transition-opacity duration-300"
       style={{
         background: `linear-gradient(135deg, ${gradientStart}, ${gradientEnd})`
       }}

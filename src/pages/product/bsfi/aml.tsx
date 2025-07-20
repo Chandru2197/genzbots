@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { ArrowLeft, Shield, AlertTriangle, Activity, Eye, Zap, Globe, Users, TrendingUp, Search, Filter, Bell, Lock, Database, Radar } from 'lucide-react';
+import ReadyToTransform from '@/components/ReadyToTransform';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
+import { useNavigation } from '@/utils/navigation';
 
 const AMLMonitoringScreen = () => {
   const [transactionVolume, setTransactionVolume] = useState(47832);
@@ -43,6 +45,8 @@ const AMLMonitoringScreen = () => {
     { region: 'Middle East', transactions: 4200, alerts: 3, status: 'watch' },
     { region: 'Latin America', transactions: 2932, alerts: 0, status: 'stable' }
   ];
+
+  const { navigateTo } = useNavigation();
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-red-900 to-orange-900 relative overflow-hidden mt-16">
@@ -91,7 +95,9 @@ const AMLMonitoringScreen = () => {
         {/* Header */}
         <div className="flex items-center justify-between mb-12">
           <div className="flex items-center space-x-6">
-            <Button variant="outline" className="bg-white/10 backdrop-blur-md text-white border-white/20 hover:bg-white/20">
+            <Button variant="outline" className="bg-white/10 backdrop-blur-md text-white border-white/20 hover:bg-white/20 hover:text-white"
+              onClick={() => navigateTo('/product')}
+            >
               <ArrowLeft className="w-4 h-4 mr-2" />
               Back to BFSI
             </Button>
@@ -423,6 +429,11 @@ const AMLMonitoringScreen = () => {
             </Card>
           </div>
         </div>
+      </div>
+
+      {/* Ready to Transform Section */}
+      <div className="max-w-7xl mx-auto px-6 mb-16">
+        <ReadyToTransform productName="AML Monitoring" />
       </div>
 
       <style jsx>{`

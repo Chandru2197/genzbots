@@ -1,4 +1,5 @@
 import { useRef, useEffect } from 'react';
+import { useRouter } from 'next/router';
 import { ParticlesBackground } from '@/components/enhanced/ParticlesBackground';
 import HeroSection from '@/components/HeroSection';
 import FeaturesSection from '@/components/home/FeaturesSection';
@@ -14,6 +15,19 @@ import SectionWrapper from '@/components/SectionWrapper';
 
 export default function Home() {
   const parallaxRefs = useRef<HTMLElement[]>([]);
+  const router = useRouter();
+
+  useEffect(() => {
+    // Handle hash navigation
+    if (router.asPath.includes('#automation')) {
+      setTimeout(() => {
+        const el = document.getElementById('automation');
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
+    }
+  }, [router.asPath]);
 
   useEffect(() => {
     const handleScroll = () => {

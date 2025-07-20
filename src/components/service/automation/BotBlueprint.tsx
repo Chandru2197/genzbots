@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import { Target, CheckCircle, ArrowRight, Clock, FileText, BarChart3, MessageCircle, ArrowLeft, Star, Users, Zap, Calendar, Settings, TrendingUp } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
 interface Deliverable {
   icon: React.ReactNode;
@@ -222,18 +223,24 @@ export default function BotBlueprint() {
     }
   ];
 
+  const handleBackToProcess = () => {
+    router.push('/#automation');
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-green-50 to-emerald-50">
       {/* Hero Section */}
       <div className="relative overflow-hidden bg-gradient-to-r from-green-600 via-emerald-600 to-teal-700 text-white">
         <div className="absolute inset-0 bg-black/20"></div>
         <div className="relative max-w-7xl mx-auto px-4 py-20">
-          <div className="flex items-center mb-6">
-            <button className="flex items-center text-green-200 hover:text-white transition-colors mr-6" onClick={() => router.push('/') }>
-              <ArrowLeft className="w-5 h-5 mr-2" />
-              Back to Process
-            </button>
-          </div>
+          <Button
+            variant="outline"
+            className="p-1 text-white border-white bg-tansparent hover:text-blue-600 mb-6"
+            onClick={handleBackToProcess}
+          >
+            <ArrowLeft className="w-4 h-4 mr-2" />
+            Back to Process
+          </Button>
           
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>

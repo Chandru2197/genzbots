@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Phone, CheckCircle, ArrowRight, Clock, Target, BarChart3, MessageCircle, ArrowLeft, Star, Users, Zap, Calendar, FileText, TrendingUp, Play, ChevronDown } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '../../ui/card';
 import { Badge } from '../../ui/badge';
@@ -59,6 +59,28 @@ const DiscoveryCallPage: React.FC = () => {
   const router = useRouter();
   const [expandedCard, setExpandedCard] = useState<number | null>(null);
   const [selectedTimeSlot, setSelectedTimeSlot] = useState<string | null>(null);
+
+  useEffect(() => {
+    const handleRouteChange = (url: string) => {
+      if (url === '/' || url === '/#automation') {
+        setTimeout(() => {
+          const el = document.getElementById('automation');
+          if (el) {
+            window.scrollTo({
+              top: el.offsetTop,
+              behavior: 'smooth'
+            });
+          }
+        }, 100);
+      }
+    };
+
+    router.events.on('routeChangeComplete', handleRouteChange);
+
+    return () => {
+      router.events.off('routeChangeComplete', handleRouteChange);
+    };
+  }, [router]);
 
   const callBenefits: CallBenefit[] = [
     {
@@ -267,6 +289,10 @@ const DiscoveryCallPage: React.FC = () => {
     setSelectedTimeSlot(null);
   };
 
+  const handleBackToProcess = () => {
+    router.push('/#automation');
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50">
       {/* Hero Section */}
@@ -274,7 +300,11 @@ const DiscoveryCallPage: React.FC = () => {
         <div className="absolute inset-0 bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-700 opacity-90"></div>
         <DotPattern className="opacity-20" />
         <div className="relative max-w-7xl mx-auto px-4 py-20">
-          <Button variant="outline" className="p-1 text-white border-white bg-tansparent hover:text-blue-600 mb-6" onClick={() => router.push('/') }>
+          <Button
+            variant="outline"
+            className="p-1 text-white border-white bg-tansparent hover:text-blue-600 mb-6"
+            onClick={handleBackToProcess}
+          >
             <ArrowLeft className="w-4 h-4 mr-2" />
             Back to Process
           </Button>
