@@ -187,28 +187,28 @@ const productCategories: ProductCategory[] = [
         name: 'Loan Application Processing',
         description: 'Auto-extract KYC data → Credit scoring → Approval',
         tools: 'UiPath + Abbyy',
-        href: '/product/bsfi/loan',
+        href: '/services/bsfi/loan',
         icon: FileText
       },
       {
         name: 'AML Monitoring',
         description: 'Scan transactions → Flag suspicious activity',
         tools: 'AI: Anomaly detection',
-        href: '/product/bsfi/aml',
+        href: '/services/bsfi/aml',
         icon: Eye
       },
       {
         name: 'Card Dispute Resolution',
         description: 'Auto-fill dispute forms from transaction logs',
         tools: 'Blue Prism + SQL',
-        href: '/product/bsfi/card-dispute',
+        href: '/services/bsfi/card-dispute',
         icon: CreditCard
       },
       {
         name: 'Bank Reconciliation',
         description: 'Match statements with ERP entries',
         tools: 'AI: Fuzzy matching',
-        href: '/product/bsfi/bank-reconciliation',
+        href: '/services/bsfi/bank-reconciliation',
         icon: BarChart3
       }
     ]
@@ -224,28 +224,28 @@ const productCategories: ProductCategory[] = [
         name: 'Patient Onboarding',
         description: 'Scan IDs → Populate EHR → Schedule appointments',
         tools: 'UiPath + OCR',
-        href: '/product/healthcare&pharma/patient-onboarding',
+        href: '/services/healthcare&pharma/patient-onboarding',
         icon: UserPlus
       },
       {
         name: 'Claims Processing',
         description: 'Validate insurance claims → Submit to TPAs',
         tools: 'AI: Rule-based validation',
-        href: '/product/healthcare&pharma/claims',
+        href: '/services/healthcare&pharma/claims',
         icon: HeartHandshake
       },
       {
         name: 'Clinical Trial Data Entry',
         description: 'Extract lab report data → Trial databases',
         tools: 'Python + AA',
-        href: '/product/healthcare&pharma/clinical',
+        href: '/services/healthcare&pharma/clinical',
         icon: Clipboard
       },
       {
         name: 'Pharmacy Inventory Sync',
         description: 'Auto-generate purchase orders',
         tools: 'SAP + RPA',
-        href: '/product/healthcare&pharma/inventory',
+        href: '/services/healthcare&pharma/inventory',
         icon: Pill
       }
     ]
@@ -261,21 +261,21 @@ const productCategories: ProductCategory[] = [
         name: 'Dynamic Pricing',
         description: 'Scrape competitor prices → Adjust Shopify/Amazon listings',
         tools: 'AI: Regression models',
-        href: '/product/retail&ecommerce/pricing',
+        href: '/services/retail&ecommerce/pricing',
         icon: TrendingUp
       },
       {
         name: 'Returns Processing',
         description: 'Validate requests → Generate labels',
         tools: 'UiPath + USPS API',
-        href: '/product/retail&ecommerce/returns',
+        href: '/services/retail&ecommerce/returns',
         icon: RotateCcw
       },
       {
         name: 'Order Reconciliation',
         description: 'Match Amazon/Flipkart orders with warehouses',
         tools: 'SQL + RPA',
-        href: '/product/retail&ecommerce/order',
+        href: '/services/retail&ecommerce/order',
         icon: ShoppingBag
       }
     ]
@@ -291,21 +291,21 @@ const productCategories: ProductCategory[] = [
         name: 'BOM Validation',
         description: 'Cross-check supplier invoices vs. CAD designs',
         tools: 'SolidWorks + RPA',
-        href: '/product/manufacturing&logistics/bom',
+        href: '/services/manufacturing&logistics/bom',
         icon: Wrench
       },
       {
         name: 'Shipment Tracking',
         description: 'Monitor courier APIs → Alert customers',
         tools: 'Python + Twilio',
-        href: '/product/manufacturing&logistics/shipment',
+        href: '/services/manufacturing&logistics/shipment',
         icon: Truck
       },
       {
         name: 'Predictive Maintenance',
         description: 'IoT sensors → Forecast machine failures',
         tools: 'AI: Time-series forecasting',
-        href: '/product/manufacturing&logistics/maintenance',
+        href: '/services/manufacturing&logistics/maintenance',
         icon: Activity
       }
     ]
@@ -321,21 +321,21 @@ const productCategories: ProductCategory[] = [
         name: 'Resume Screening',
         description: 'Parse resumes → Rank candidates',
         tools: 'AI: NLP + ChatGPT',
-        href: '/product/hr/resume',
+        href: '/services/hr/resume',
         icon: FileSearch
       },
       {
         name: 'Payroll Processing',
         description: 'Calculate salaries → Bank transfers',
         tools: 'Tally + RPA',
-        href: '/product/hr/payroll',
+        href: '/services/hr/payroll',
         icon: Calculator
       },
       {
         name: 'Employee Offboarding',
         description: 'Revoke access → Asset recovery',
         tools: 'Active Directory + RPA',
-        href: '/product/hr/offboarding',
+        href: '/services/hr/offboarding',
         icon: UserCheck
       }
     ]
@@ -351,14 +351,14 @@ const productCategories: ProductCategory[] = [
         name: 'Grievance Redressal',
         description: 'Route complaints → Send updates',
         tools: 'AI: Text classification',
-        href: '/product/gov&public/grievance-redressal',
+        href: '/services/gov&public/grievance-redressal',
         icon: HeartHandshake
       },
       {
         name: 'Pension Processing',
         description: 'Verify eligibility → Disburse payments',
         tools: 'RPA + Aadhaar API',
-        href: '/product/gov&public/pension',
+        href: '/services/gov&public/pension',
         icon: Calculator
       }
     ]
@@ -568,13 +568,14 @@ export default function Navbar({ addToRefs }: NavbarProps) {
                         onClick={() => toggleDropdown(item.label)}
                         className={`flex text-black items-center font-semibold transition-all duration-300 relative px-4 py-2 rounded-2xl group ${activeDropdown === item.label
                             ? 'text-blue-600 bg-white/20 backdrop-blur-sm shadow-lg'
-                            : 'text-gray-700 hover:text-blue-600 hover:bg-white/10'
+                            : 'text-gray-700 hover:text-blue-600'
                           }`}
                         style={{
                           backdropFilter: activeDropdown === item.label ? 'blur(10px)' : undefined,
                           WebkitBackdropFilter: activeDropdown === item.label ? 'blur(10px)' : undefined,
                         }}
                       >
+                        <div className="absolute inset-x-0 bottom-0 h-0.5 bg-gradient-to-r from-blue-500 via-purple-500 to-orange-500 transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></div>
                         <span className="relative z-10 font-medium">{item.label}</span>
                         <ChevronDown
                           className={`ml-2 w-4 h-4 transition-transform duration-300 ${activeDropdown === item.label ? 'rotate-180' : ''
@@ -769,8 +770,8 @@ export default function Navbar({ addToRefs }: NavbarProps) {
                                     </div>
 
                                     {/* Services Grid - Flexible Width */}
-                                    <div className="flex-1 min-w-0 max-h-72 overflow-y-auto custom-scrollbar">
-                                      <div>
+                                    <div className="flex-1 min-w-0 max-h-[500px] overflow-y-auto custom-scrollbar">
+                                      <div className="p-4">
                                         <AnimatePresence mode="wait">
                                           {productCategories.map((category) => {
                                             if (category.id !== activeCategory) return null;
@@ -1263,13 +1264,15 @@ export default function Navbar({ addToRefs }: NavbarProps) {
                   ) : (
                     <Link
                       href={item.href}
-                      className="text-black font-semibold transition-all duration-300 relative px-4 py-2 rounded-2xl text-gray-700 hover:text-blue-600 hover:bg-white/10 group"
+                      className="text-black font-semibold transition-all duration-300 relative px-4 py-2 rounded-2xl text-gray-700 hover:text-blue-600 group"
                       style={{
                         backdropFilter: 'blur(10px)',
                         WebkitBackdropFilter: 'blur(10px)',
                       }}
                     >
                       <span className="relative z-10 font-medium">{item.label}</span>
+                      <div className="absolute inset-x-0 bottom-0 h-0.5 bg-gradient-to-r from-blue-500 via-purple-500 to-orange-500 transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></div>
+                      <div className="absolute bottom-0 left-1/2 w-1 h-1 bg-blue-500 rounded-full transform -translate-x-1/2 scale-0 group-hover:scale-100 transition-transform duration-300 delay-150"></div>
                       <div
                         className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                         style={{

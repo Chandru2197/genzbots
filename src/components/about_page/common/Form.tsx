@@ -271,7 +271,7 @@ const Form: React.FC<FormProps> = ({
             >
               <label className="block font-medium text-gray-700 dark:text-gray-300 mb-1">
                 {input.label}
-                <span className="text-orange-500 ml-1">*</span>
+                {input.name !== 'lastName' && <span className="text-orange-500 ml-1">*</span>}
               </label>
               
               {input.type === 'select' ? (
@@ -352,7 +352,7 @@ const Form: React.FC<FormProps> = ({
                   value={formData[input.name] || ''}
                   onChange={(e) => handleInputChange(input.name, e.target.value)}
                   autoComplete={input.autocomplete}
-                  required={true}
+                  required={input.name !== 'lastName'}
                   className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:border-orange-400 focus:ring-2 focus:ring-orange-100 outline-none transition"
                 />
               )}
