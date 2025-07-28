@@ -426,8 +426,6 @@ const ClinicalTrialScreen = () => {
         {/* Ready to Transform Section */}
         <div className="mb-8">
           <ReadyToTransform 
-            productName="Clinical Trial Data Entry" 
-            description="Transform your clinical trial data management with automated data extraction and processing"
           />
         </div>
 

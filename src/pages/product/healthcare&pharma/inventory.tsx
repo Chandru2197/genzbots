@@ -516,7 +516,7 @@ const PharmacyInventoryScreen = () => {
       </div>
 
       <div className="mb-8">
-        <ReadyToTransform productName="Inventory Management" />
+        <ReadyToTransform  />
       </div>
 
       <style jsx>{`

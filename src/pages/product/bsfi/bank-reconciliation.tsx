@@ -525,9 +525,7 @@ const BankReconciliationScreen = () => {
 
       {/* Ready to Transform Section */}
       <div className="max-w-7xl mx-auto px-6 mb-16">
-        <ReadyToTransform 
-          productName="Bank Reconciliation" 
-          description="Discover how our AI-powered reconciliation can streamline your financial operations"
+        <ReadyToTransform
         />
       </div>
 

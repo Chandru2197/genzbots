@@ -552,7 +552,7 @@ const PatientOnboardingScreen = () => {
       </div>
 
       <div className="mb-8">
-        <ReadyToTransform productName="Patient Onboarding" />
+        <ReadyToTransform  />
       </div>
 
       <style jsx>{`

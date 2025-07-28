@@ -409,8 +409,6 @@ const ClaimsProcessingScreen = () => {
         {/* Ready to Transform Section */}
         <div className="mb-8">
           <ReadyToTransform 
-            productName="Claims Processing" 
-            description="Accelerate your claims processing with AI-powered automation and validation"
           />
         </div>
 

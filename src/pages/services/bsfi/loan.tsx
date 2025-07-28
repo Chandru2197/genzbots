@@ -335,8 +335,7 @@ const LoanProcessingScreen = () => {
       {/* Ready to Transform Section */}
       <div className="max-w-7xl mx-auto px-6 mb-16">
         <ReadyToTransform 
-          productName="Loan Processing" 
-          description="Transform your loan processing with our AI-powered automation solution"
+          
         />
       </div>
 

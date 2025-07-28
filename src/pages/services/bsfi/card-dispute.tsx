@@ -657,9 +657,7 @@ const CardDisputeScreen = () => {
       {/* Ready to Transform Section */}
       <div className="max-w-7xl mx-auto px-6 mb-16">
         <ReadyToTransform 
-          productName="Card Dispute Resolution" 
-          description="Experience how our automated dispute resolution can save time and improve customer satisfaction"
-        />
+          />
       </div>
 
       <style jsx>{`
