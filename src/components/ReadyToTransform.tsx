@@ -56,6 +56,7 @@ const ReadyToTransform: React.FC = () => {
     }
   ];
 
+  
   const callBenefits: CallBenefit[] = [
     { icon: <CheckCircle className="w-5 h-5" />, text: "Free 30-minute consultation" },
     { icon: <CheckCircle className="w-5 h-5" />, text: "Process audit and analysis" },
