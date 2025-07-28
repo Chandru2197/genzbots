@@ -768,7 +768,6 @@ export default function Navbar({ addToRefs }: NavbarProps) {
                                         </div>
                                       </div>
                                     </div>
-
                                     {/* Services Grid - Flexible Width */}
                                     <div className="flex-1 min-w-0 max-h-[500px] overflow-y-auto custom-scrollbar">
                                       <div className="p-4">
