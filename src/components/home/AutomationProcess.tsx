@@ -25,6 +25,7 @@ import {
   ChevronRight,
   X
 } from 'lucide-react';
+import SafeLink from '@/components/ui/SafeLink';
 
 interface NodeDetails {
   duration: string;
@@ -617,18 +618,22 @@ const ReactFlowSection: React.FC<ReactFlowSectionProps> = ({ addToRefs }) => {
               Start your journey today with a free consultation.
             </p>
             <div className="flex flex-col sm:flex-row gap-6 justify-center">
-              <button className="group px-10 py-4 bg-gradient-to-r from-orange-500 to-red-500 text-white font-bold text-lg rounded-2xl hover:from-orange-600 hover:to-red-600 transition-all duration-300 transform hover:scale-105 shadow-xl shadow-orange-500/25">
-                <span className="flex items-center justify-center">
-                  <Rocket className="w-6 h-6 mr-3 group-hover:rotate-12 transition-transform" />
-                  Start Your Free Discovery Call
-                </span>
-              </button>
-              <button className="group px-10 py-4 bg-slate-700/50 backdrop-blur-xl text-white font-bold text-lg rounded-2xl hover:bg-slate-600/50 transition-all duration-300 transform hover:scale-105 border border-slate-600 shadow-xl">
-                <span className="flex items-center justify-center">
-                  <FileText className="w-6 h-6 mr-3 group-hover:rotate-12 transition-transform" />
-                  View Case Studies
-                </span>
-              </button>
+              <SafeLink href="/services/discovery-call">
+                <button className="group px-10 py-4 bg-gradient-to-r from-orange-500 to-red-500 text-white font-bold text-lg rounded-2xl hover:from-orange-600 hover:to-red-600 transition-all duration-300 transform hover:scale-105 shadow-xl shadow-orange-500/25">
+                  <span className="flex items-center justify-center">
+                    <Rocket className="w-6 h-6 mr-3 group-hover:rotate-12 transition-transform" />
+                    Start Your Free Discovery Call
+                  </span>
+                </button>
+              </SafeLink>
+              <SafeLink href="/blog">
+                <button className="group px-10 py-4 bg-slate-700/50 backdrop-blur-xl text-white font-bold text-lg rounded-2xl hover:bg-slate-600/50 transition-all duration-300 transform hover:scale-105 border border-slate-600 shadow-xl">
+                  <span className="flex items-center justify-center">
+                    <FileText className="w-6 h-6 mr-3 group-hover:rotate-12 transition-transform" />
+                    View Case Studies
+                  </span>
+                </button>
+              </SafeLink>
             </div>
           </div>
         </div>
@@ -718,12 +723,14 @@ const ReactFlowSection: React.FC<ReactFlowSectionProps> = ({ addToRefs }) => {
 
               {/* Action Buttons */}
               <div className="flex flex-col sm:flex-row gap-4 pt-6 border-t border-slate-700">
-                <button className="flex-1 px-6 py-3 bg-gradient-to-r from-blue-600 to-cyan-600 text-white font-semibold rounded-xl hover:from-blue-700 hover:to-cyan-700 transition-all duration-300 transform hover:scale-105 shadow-lg">
-                  <span className="flex items-center justify-center">
-                    <MessageSquare className="w-5 h-5 mr-2" />
-                    Discuss This Step
-                  </span>
-                </button>
+                <SafeLink href="/contact">
+                  <button className="flex-1 px-6 py-3 bg-gradient-to-r from-blue-600 to-cyan-600 text-white font-semibold rounded-xl hover:from-blue-700 hover:to-cyan-700 transition-all duration-300 transform hover:scale-105 shadow-lg">
+                    <span className="flex items-center justify-center">
+                      <MessageSquare className="w-5 h-5 mr-2" />
+                      Discuss This Step
+                    </span>
+                  </button>
+                </SafeLink>
                 <button 
                   onClick={() => setShowModal(false)}
                   className="flex-1 px-6 py-3 bg-slate-600/50 backdrop-blur-sm text-white font-semibold rounded-xl hover:bg-slate-500/50 transition-all duration-300 border border-slate-500"

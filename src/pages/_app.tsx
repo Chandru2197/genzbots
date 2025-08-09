@@ -3,6 +3,8 @@
 import { AppProps } from 'next/app';
 import { Inter } from 'next/font/google';
 import { MantineProvider } from '@mantine/core';
+import NavigationOptimizer from '@/components/performance/NavigationOptimizer';
+import NavigationMonitor from '@/components/performance/NavigationMonitor';
 import { useEffect, useState } from 'react';
 import Head from 'next/head';
 import { AnimatePresence, motion } from 'framer-motion';
@@ -36,6 +38,13 @@ export default function App({ Component, pageProps, router }: AppProps) {
         {/* Hide Navbar, Footer, and ParticlesBackground on /cookies, /privacy, /terms */}
         {['/cookies', '/privacy', '/terms'].includes(router.pathname) ? null : <ParticlesBackground />}
         {['/cookies', '/privacy', '/terms'].includes(router.pathname) ? null : <Navbar />}
+        
+        {/* Global Navigation Optimizer */}
+        <NavigationOptimizer />
+        
+        {/* Navigation Performance Monitor (Development) */}
+        {process.env.NODE_ENV === 'development' && <NavigationMonitor />}
+        
         <MantineProvider theme={{ primaryColor: 'blue' }}>
           <AnimatePresence mode="wait">
             <motion.div

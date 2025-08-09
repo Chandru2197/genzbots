@@ -17,6 +17,7 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import Link from 'next/link';
+import SafeLink from '@/components/ui/SafeLink';
 
 interface AutomationCardProps {
   title: string;
@@ -242,7 +243,7 @@ const AutomationCard = ({
             </div>
             
             {/* CTA Button - Fixed version */}
-            <Link
+            <SafeLink
               href={servicePath ?? "/"}
               onClick={handleButtonClick}
               className={`relative w-full py-4 px-6 bg-gradient-to-r ${cardColors[colorIndex]} text-white font-semibold rounded-2xl transition-all duration-300 transform hover:scale-105 hover:shadow-2xl overflow-hidden hover:shadow-[0_0_30px_rgba(59,130,246,0.5)] flex items-center justify-center z-10 cursor-pointer`}
@@ -253,7 +254,7 @@ const AutomationCard = ({
                 Learn More
                 <ArrowRight className={`w-5 h-5 ml-2 transition-transform duration-300 ${isHovered ? 'translate-x-2' : ''}`} />
               </span>
-            </Link>
+            </SafeLink>
           </div>
 
           {/* Decorative elements */}
@@ -415,10 +416,12 @@ export default function AutomationCards({ addToRefs }: { addToRefs?: (el: HTMLEl
             <p className="text-blue-200 text-lg mb-8 max-w-2xl mx-auto">
               Join hundreds of forward-thinking businesses that have revolutionized their operations with our proven automation process.
             </p>
-            <button className="px-12 py-4 bg-gradient-to-r from-orange-500 to-red-500 text-white font-bold text-xl rounded-2xl hover:from-orange-600 hover:to-red-600 transition-all duration-300 transform hover:scale-110 shadow-2xl hover:shadow-[0_0_40px_rgba(251,146,60,0.5)]">
-              Contact Us Today
-              <ArrowRight className="w-6 h-6 ml-3 inline" />
-            </button>
+            <SafeLink href="/contact">
+              <button className="px-12 py-4 bg-gradient-to-r from-orange-500 to-red-500 text-white font-bold text-xl rounded-2xl hover:from-orange-600 hover:to-red-600 transition-all duration-300 transform hover:scale-110 shadow-2xl hover:shadow-[0_0_40px_rgba(251,146,60,0.5)]">
+                Contact Us Today
+                <ArrowRight className="w-6 h-6 ml-3 inline" />
+              </button>
+            </SafeLink>
           </div>
         </motion.div>
       </div>

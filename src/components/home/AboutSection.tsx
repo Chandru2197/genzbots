@@ -22,6 +22,7 @@ import {
   Layers,
   Database
 } from 'lucide-react';
+import SafeLink from '@/components/ui/SafeLink';
 
 interface AboutSectionProps {
   addToRefs?: (el: HTMLElement | null) => void;
@@ -502,21 +503,25 @@ export default function AboutSection({ addToRefs }: AboutSectionProps) {
 
               {/* Enhanced call to action */}
               <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-                <button className="group relative px-12 py-5 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-black text-xl rounded-2xl transition-all duration-500 transform hover:scale-110 shadow-2xl hover:shadow-blue-500/50 border-2 border-transparent hover:border-white/20 overflow-hidden">
-                  <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent transform -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
-                  <span className="relative flex items-center justify-center">
-                    Start Your Journey
-                    <Rocket className="w-6 h-6 ml-3 transition-transform duration-300 group-hover:translate-x-2" />
-                  </span>
-                </button>
+                <SafeLink href="/contact">
+                  <button className="group relative px-12 py-5 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-black text-xl rounded-2xl transition-all duration-500 transform hover:scale-110 shadow-2xl hover:shadow-blue-500/50 border-2 border-transparent hover:border-white/20 overflow-hidden">
+                    <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent transform -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
+                    <span className="relative flex items-center justify-center">
+                      Start Your Journey
+                      <Rocket className="w-6 h-6 ml-3 transition-transform duration-300 group-hover:translate-x-2" />
+                    </span>
+                  </button>
+                </SafeLink>
                 
-                <button className="group px-12 py-5 bg-white/80 backdrop-blur-xl text-gray-800 font-black text-xl rounded-2xl transition-all duration-300 transform hover:scale-105 shadow-xl hover:shadow-2xl border-2 border-gray-200 hover:border-gray-300 hover:bg-white">
-                  <span className="flex items-center justify-center">
-                    <Star className="w-6 h-6 mr-3 text-yellow-500" />
-                    Explore Solutions
-                  </span>
-                </button>
+                <SafeLink href="/solutions">
+                  <button className="group px-12 py-5 bg-white/80 backdrop-blur-xl text-gray-800 font-black text-xl rounded-2xl transition-all duration-300 transform hover:scale-105 shadow-xl hover:shadow-2xl border-2 border-gray-200 hover:border-gray-300 hover:bg-white">
+                    <span className="flex items-center justify-center">
+                      <Star className="w-6 h-6 mr-3 text-yellow-500" />
+                      Explore Solutions
+                    </span>
+                  </button>
+                </SafeLink>
               </div>
             </div>
           </ModernCard>

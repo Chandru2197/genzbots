@@ -17,6 +17,7 @@ import {
   Users,
   CheckCircle
 } from 'lucide-react';
+import SafeLink from '@/components/ui/SafeLink';
 
 interface TestimonialsSectionProps {
   addToRefs: (el: HTMLElement | null) => void;
@@ -446,10 +447,12 @@ export default function TestimonialsSection({ addToRefs }: TestimonialsSectionPr
             Let's discuss how we can transform your business operations and deliver the same 
             game-changing results for your organization.
           </p>
-          <button className="px-12 py-4 bg-gradient-to-r from-orange-500 to-red-500 text-white font-bold text-xl rounded-2xl hover:from-orange-600 hover:to-red-600 transition-all duration-300 transform hover:scale-110 shadow-2xl hover:shadow-[0_0_40px_rgba(251,146,60,0.5)]">
-            Start Your Success Story
-            <ArrowRight className="w-6 h-6 ml-3 inline" />
-          </button>
+          <SafeLink href="/contact">
+            <button className="px-12 py-4 bg-gradient-to-r from-orange-500 to-red-500 text-white font-bold text-xl rounded-2xl hover:from-orange-600 hover:to-red-600 transition-all duration-300 transform hover:scale-110 shadow-2xl hover:shadow-[0_0_40px_rgba(251,146,60,0.5)]">
+              Start Your Success Story
+              <ArrowRight className="w-6 h-6 ml-3 inline" />
+            </button>
+          </SafeLink>
         </motion.div>
       </div>
 

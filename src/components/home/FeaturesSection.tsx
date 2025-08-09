@@ -2,6 +2,7 @@
 
 import React,{ useRef, useEffect, useState } from "react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
+import SafeLink from '@/components/ui/SafeLink';
 import { CloudLightning, Rocket, Shield, Brain, Sparkles, Zap, TrendingUp, Clock } from 'lucide-react';
 
 interface FeaturesSectionProps {
@@ -195,14 +196,16 @@ const FeatureCard = ({ feature, index, isActive, onClick }: {
             </div>
             
             {/* Action button */}
-            <button className={`mt-6 w-full py-3 px-6 bg-gradient-to-r ${
-              feature.glowColor === 'blue' ? 'from-blue-500 to-cyan-500' :
-              feature.glowColor === 'orange' ? 'from-orange-500 to-red-500' :
-              feature.glowColor === 'purple' ? 'from-purple-500 to-pink-500' :
-              'from-green-500 to-emerald-500'
-            } text-white font-semibold rounded-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105`}>
-              Learn More
-            </button>
+            <SafeLink href="/services">
+              <button className={`mt-6 w-full py-3 px-6 bg-gradient-to-r ${
+                feature.glowColor === 'blue' ? 'from-blue-500 to-cyan-500' :
+                feature.glowColor === 'orange' ? 'from-orange-500 to-red-500' :
+                feature.glowColor === 'purple' ? 'from-purple-500 to-pink-500' :
+                'from-green-500 to-emerald-500'
+              } text-white font-semibold rounded-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105`}>
+                Learn More
+              </button>
+            </SafeLink>
           </div>
         </div>
       </div>

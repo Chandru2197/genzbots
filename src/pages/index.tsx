@@ -1,6 +1,7 @@
 import { useRef, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { ParticlesBackground } from '@/components/enhanced/ParticlesBackground';
+import NavigationOptimizer from '@/components/performance/NavigationOptimizer';
 import HeroSection from '@/components/HeroSection';
 import FeaturesSection from '@/components/home/FeaturesSection';
 import AboutSection from '@/components/home/AboutSection';
@@ -63,6 +64,9 @@ export default function Home() {
 
   return (
     <main className="min-h-screen relative">
+      {/* Navigation Performance Optimizer */}
+      <NavigationOptimizer />
+      
       {/* Enhanced Particles Background */}
       <ParticlesBackground />
       

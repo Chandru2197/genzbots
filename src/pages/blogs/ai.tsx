@@ -356,7 +356,7 @@ const AIBlogPost = () => {
                 
                 <div className="flex items-center justify-center">
                   <Link
-                    href="/contactus"
+                    href="/contact"
                     className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-purple-500 to-indigo-500 text-white font-bold text-lg rounded-2xl hover:from-purple-600 hover:to-indigo-600 transition-all duration-300 transform hover:scale-105 shadow-2xl"
                   >
                     Explore AI Solutions

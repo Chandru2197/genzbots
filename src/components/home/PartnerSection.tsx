@@ -1,6 +1,8 @@
 "use client";
 
 import Image from 'next/image';
+import Link from 'next/link';
+import SafeLink from '@/components/ui/SafeLink';
 import { useState, useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { 
@@ -46,43 +48,90 @@ const MiniCard = ({
     initial={{ opacity: 0, scale: 0.8 }}
     animate={{ opacity: 1, scale: 1 }}
     transition={{ duration: 0.5, delay: index * 0.1 }}
-    whileHover={{ scale: 1.05, y: -5 }}
+    whileHover={{ scale: 1.02, y: -8 }}
   >
-    {/* Glowing background */}
+    {/* Enhanced glowing background */}
     <div 
-      className="absolute inset-0 rounded-2xl blur-xl opacity-5 group-hover:opacity-20 transition-opacity duration-300"
+      className="absolute inset-0 rounded-3xl blur-2xl opacity-10 group-hover:opacity-30 transition-all duration-500"
       style={{
-        background: `linear-gradient(135deg, ${gradientStart}, ${gradientEnd})`
+        background: `linear-gradient(135deg, ${gradientStart}, ${gradientEnd})`,
+        transform: 'scale(1.1)'
       }}
     ></div>
     
-    {/* Main card */}
-    <div className="relative h-full bg-white/20 backdrop-blur-xl rounded-2xl border border-white/30 p-6 shadow-2xl overflow-hidden">
+    {/* Main card with enhanced glassmorphism */}
+    <div 
+      className="relative h-full rounded-3xl border shadow-2xl overflow-hidden transition-all duration-500 group-hover:shadow-3xl"
+      style={{
+        background: 'rgba(255, 255, 255, 0.12)',
+        backdropFilter: 'blur(20px) saturate(180%)',
+        WebkitBackdropFilter: 'blur(20px) saturate(180%)',
+        border: '1px solid rgba(255, 255, 255, 0.25)',
+        boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(255, 255, 255, 0.1) inset'
+      }}
+    >
       {/* Animated gradient overlay */}
       <div 
-        className="absolute inset-0 opacity-20 group-hover:opacity-30 transition-opacity duration-300"
+        className="absolute inset-0 opacity-0 group-hover:opacity-20 transition-all duration-500"
         style={{
-          background: `linear-gradient(135deg, ${gradientStart}, ${gradientEnd})`
+          background: `linear-gradient(135deg, ${gradientStart}40, ${gradientEnd}40)`,
+          backdropFilter: 'blur(5px)',
+          WebkitBackdropFilter: 'blur(5px)'
+        }}
+      ></div>
+
+      {/* Shimmer effect */}
+      <div 
+        className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700"
+        style={{
+          background: 'linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.1) 50%, transparent 70%)',
+          transform: 'translateX(-100%)',
+          animation: 'shimmer 2s ease-in-out infinite'
         }}
       ></div>
       
-      <div className="relative z-10 h-full flex flex-col">
-        <h4 className="text-white font-bold text-lg mb-3 group-hover:text-cyan-200 transition-colors duration-300">
+      <div className="relative z-10 h-full flex flex-col p-6">
+        {/* Icon container */}
+        <div className="mb-4">
+          <div 
+            className="w-12 h-12 rounded-2xl flex items-center justify-center border transition-all duration-300 group-hover:scale-110"
+            style={{
+              background: `linear-gradient(135deg, ${gradientStart}60, ${gradientEnd}60)`,
+              backdropFilter: 'blur(10px)',
+              WebkitBackdropFilter: 'blur(10px)',
+              border: '1px solid rgba(255, 255, 255, 0.3)',
+              boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.2)'
+            }}
+          >
+            <Star className="w-6 h-6 text-white" />
+          </div>
+        </div>
+
+        <h4 className="text-white font-bold text-lg mb-3 group-hover:text-cyan-200 transition-colors duration-300 leading-tight">
           {title}
         </h4>
-        <p className="text-white/80 text-sm leading-relaxed flex-1 group-hover:text-white transition-colors duration-300">
+        <p className="text-white/85 text-sm leading-relaxed flex-1 group-hover:text-white/95 transition-colors duration-300">
           {description}
         </p>
         
-        {/* Decorative icon */}
-        <div className="mt-4 flex justify-end">
-          <div 
-            className="w-8 h-8 rounded-full flex items-center justify-center"
-            style={{
-              background: `linear-gradient(135deg, ${gradientStart}, ${gradientEnd})`
-            }}
-          >
-            <Star className="w-4 h-4 text-white" />
+        {/* Enhanced bottom accent */}
+        <div className="mt-4 pt-4 border-t border-white/20">
+          <div className="flex justify-between items-center">
+            <div 
+              className="h-1 rounded-full flex-1 mr-3 transition-all duration-300 group-hover:shadow-lg"
+              style={{
+                background: `linear-gradient(90deg, ${gradientStart}, ${gradientEnd})`
+              }}
+            ></div>
+            <div 
+              className="w-6 h-6 rounded-full flex items-center justify-center transition-all duration-300 group-hover:rotate-12"
+              style={{
+                background: `linear-gradient(135deg, ${gradientStart}, ${gradientEnd})`,
+                boxShadow: '0 4px 12px 0 rgba(0, 0, 0, 0.15)'
+              }}
+            >
+              <div className="w-2 h-2 bg-white rounded-full"></div>
+            </div>
           </div>
         </div>
       </div>
@@ -258,23 +307,27 @@ export default function PartnerShowcase({ addToRefs }: PartnerShowcaseProps) {
 
               {/* Enhanced Action Buttons */}
               <div className="flex flex-col sm:flex-row gap-4">
-                <button className="flex-1 py-4 px-6 bg-gradient-to-r from-blue-500 to-cyan-500 text-white font-semibold rounded-2xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-2xl group relative overflow-hidden">
-                  <div className="absolute inset-0 bg-white/20 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
-                  <span className="relative flex items-center justify-center">
-                    <IconHandFingerRight size={24} className="mr-3" />
-                    Free Audit
-                    <ArrowRight className="w-5 h-5 ml-2 transition-transform duration-300 group-hover:translate-x-1" />
-                  </span>
-                </button>
+                <SafeLink href="/contact">
+                  <button className="w-full flex-1 py-4 px-6 bg-gradient-to-r from-blue-500 to-cyan-500 text-white font-semibold rounded-2xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-2xl group relative overflow-hidden">
+                    <div className="absolute inset-0 bg-white/20 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
+                    <span className="relative flex items-center justify-center">
+                      <IconHandFingerRight size={24} className="mr-3" />
+                      Free Audit
+                      <ArrowRight className="w-5 h-5 ml-2 transition-transform duration-300 group-hover:translate-x-1" />
+                    </span>
+                  </button>
+                </SafeLink>
                 
-                <button className="flex-1 py-4 px-6 bg-gradient-to-r from-green-500 to-emerald-500 text-white font-semibold rounded-2xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-2xl group relative overflow-hidden">
-                  <div className="absolute inset-0 bg-white/20 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
-                  <span className="relative flex items-center justify-center">
-                    <IconPhoneCall size={24} className="mr-3" />
-                    Schedule Call
-                    <ArrowRight className="w-5 h-5 ml-2 transition-transform duration-300 group-hover:translate-x-1" />
-                  </span>
-                </button>
+                <SafeLink href="/services/discovery-call">
+                  <button className="w-full flex-1 py-4 px-6 bg-gradient-to-r from-green-500 to-emerald-500 text-white font-semibold rounded-2xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-2xl group relative overflow-hidden">
+                    <div className="absolute inset-0 bg-white/20 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
+                    <span className="relative flex items-center justify-center">
+                      <IconPhoneCall size={24} className="mr-3" />
+                      Schedule Call
+                      <ArrowRight className="w-5 h-5 ml-2 transition-transform duration-300 group-hover:translate-x-1" />
+                    </span>
+                  </button>
+                </SafeLink>
               </div>
             </motion.div>
 
@@ -392,6 +445,10 @@ export default function PartnerShowcase({ addToRefs }: PartnerShowcaseProps) {
         }
         .animate-float {
           animation: float 12s ease-in-out infinite;
+        }
+        @keyframes shimmer {
+          0% { transform: translateX(-100%); }
+          100% { transform: translateX(100%); }
         }
       `}</style>
     </section>

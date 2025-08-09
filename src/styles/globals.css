@@ -18,6 +18,30 @@
   --radius: 0.625rem;
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
+}
+
+/* Ensure Lucide icons are properly displayed */
+svg[data-lucide] {
+  display: block !important;
+  width: 1em !important;
+  height: 1em !important;
+  stroke: currentColor !important;
+  fill: none !important;
+  stroke-width: 2 !important;
+  stroke-linecap: round !important;
+  stroke-linejoin: round !important;
+}
+
+/* Service menu icon fixes */
+.service-icon {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.service-icon svg {
+  display: block !important;
+  flex-shrink: 0 !important;
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.145 0 0);
   --popover: oklch(1 0 0);

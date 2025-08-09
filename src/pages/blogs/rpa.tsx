@@ -296,7 +296,7 @@ const RPABlogPost = () => {
                 
                 <div className="flex items-center justify-center">
                   <Link
-                    href="/contactus"
+                    href="/contact"
                     className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-cyan-500 to-blue-500 text-white font-bold text-lg rounded-2xl hover:from-cyan-600 hover:to-blue-600 transition-all duration-300 transform hover:scale-105 shadow-2xl"
                   >
                     Start Your RPA Journey

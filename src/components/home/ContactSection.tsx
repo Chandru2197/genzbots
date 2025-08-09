@@ -13,6 +13,7 @@ import {
 import PhoneInput from "react-phone-input-2";
 import { ParallaxProvider, Parallax } from "react-scroll-parallax";
 import "react-phone-input-2/lib/style.css";
+import SafeLink from '@/components/ui/SafeLink';
 import { Check, ChevronDown, Search, Sparkles, Zap, TrendingUp, Shield } from "lucide-react";
 import { cn } from "../../lib/utils";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -271,7 +272,11 @@ export default function ContactSection() {
                     animate={isInView ? { opacity: 1, y: 0 } : {}}
                     transition={{ duration: 0.5, delay: 0.6 + idx * 0.1 }}
                   >
-                    <a href={info.link} className="flex items-center gap-4 p-4 bg-white/10 rounded-2xl border border-white/20 hover:bg-white/15 transition-all duration-300 hover:scale-105">
+                    {info.link.startsWith('mailto:') || info.link.startsWith('tel:') ? (
+                      <a href={info.link} className="flex items-center gap-4 p-4 bg-white/10 rounded-2xl border border-white/20 hover:bg-white/15 transition-all duration-300 hover:scale-105">
+                    ) : (
+                      <SafeLink href={info.link} className="flex items-center gap-4 p-4 bg-white/10 rounded-2xl border border-white/20 hover:bg-white/15 transition-all duration-300 hover:scale-105">
+                    )}
                       <div className={`w-14 h-14 bg-gradient-to-r ${info.gradient} rounded-2xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300`}>
                         {React.cloneElement(info.icon, { className: "w-7 h-7 text-white" })}
                       </div>
@@ -286,7 +291,11 @@ export default function ContactSection() {
                           {info.value}
                         </div>
                       </div>
-                    </a>
+                    {info.link.startsWith('mailto:') || info.link.startsWith('tel:') ? (
+                      </a>
+                    ) : (
+                      </SafeLink>
+                    )}
                   </motion.div>
                 ))}
               </div>
