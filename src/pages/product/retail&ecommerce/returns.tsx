@@ -170,7 +170,7 @@ const ReturnsProcessingScreen = () => {
         <div className="flex items-center justify-between mb-12">
           <div className="flex items-center space-x-6">
             <Button 
-              onClick={() => navigateTo('/product')}
+              onClick={() => navigateTo('/service')}
               variant="outline" className="bg-white/10 backdrop-blur-md text-white border-white/20 hover:bg-white/20">
               <ArrowLeft className="w-4 h-4 mr-2" />
               Back to Retail

@@ -5,7 +5,7 @@ import { motion, useInView } from "framer-motion";
 import { 
   IconMail, 
   IconMapPin, 
-  IconPhone,
+  IconPhone, 
   IconBrandLinkedin,
   IconBrandTwitter,
   IconCalendar,
@@ -58,7 +58,33 @@ const contactInfo = [
   }
 ];
 
-const ContactSection: React.FC = () => {
+const ProcessAutomationList = [
+  "Invoice Processing Automation",
+  "HR Onboarding/Offboarding Bots",
+  "Customer Data Entry Automation",
+  "ERP/CRM Integration Bots",
+];
+
+const AdvancedCapabilitiesList = [
+  "AI + RPA (Chatbots/NLP/OCR)",
+  "Legacy System Automation",
+  "Cross-Platform Workflow Bots",
+];
+
+const SupportModelsList = [
+  "End-to-End Implementation",
+  "Managed Automation Services",
+  "Training for In-House Teams",
+  "Other/Custom Bot",
+];
+
+const ProjectTimelineList = [
+  "Immediate (Within 1 month)",
+  "Planning Phase (1-3 months)",
+  "Researching Options (3-6 months)"
+];
+
+export default function ContactSection() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(sectionRef, { once: true });
   
@@ -121,6 +147,13 @@ const ContactSection: React.FC = () => {
           ))}
         </div>
 
+        <Parallax speed={-20}>
+          <div className="absolute -top-32 -left-40 w-96 h-96 bg-orange-400 bg-opacity-20 rounded-full blur-3xl z-0" />
+        </Parallax>
+        <Parallax speed={10}>
+          <div className="absolute -bottom-40 -right-44 w-[28rem] h-[28rem] bg-blue-400 bg-opacity-20 rounded-full blur-3xl z-0" />
+        </Parallax>
+
         <div className="relative max-w-7xl mx-auto flex flex-col lg:flex-row gap-12 px-4 z-10">
           <motion.div 
             className="lg:w-2/5 bg-white/10 backdrop-blur-xl shadow-2xl rounded-3xl p-8 border border-white/20 flex flex-col justify-between"
@@ -149,6 +182,27 @@ const ContactSection: React.FC = () => {
                   and create a custom solution that drives results.
                 </p>
               </motion.div>
+
+              <div className="space-y-6 mb-8">
+                {[
+                  { icon: <IconCircle className="w-6 h-6" />, text: "Fast, friendly responses", color: "from-green-500 to-emerald-500" },
+                  { icon: <IconClock className="w-6 h-6" />, text: "Expert advice & support", color: "from-blue-500 to-cyan-500" },
+                  { icon: <Sparkles className="w-6 h-6" />, text: "Free consultation", color: "from-purple-500 to-indigo-500" }
+                ].map((item, index) => (
+                  <motion.div 
+                    key={index}
+                    className="flex items-center gap-4 p-4 bg-white/10 rounded-2xl border border-white/20 hover:bg-white/15 transition-all duration-300"
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={isInView ? { opacity: 1, x: 0 } : {}}
+                    transition={{ duration: 0.5, delay: 0.4 + index * 0.1 }}
+                  >
+                    <div className={`w-12 h-12 bg-gradient-to-r ${item.color} rounded-xl flex items-center justify-center text-white shadow-lg`}>
+                      {item.icon}
+                    </div>
+                    <span className="text-white font-medium">{item.text}</span>
+                  </motion.div>
+                ))}
+              </div>
             </div>
 
             <div>
@@ -225,6 +279,4 @@ const ContactSection: React.FC = () => {
       </section>
     </ParallaxProvider>
   );
-};
-
-export default ContactSection;
+}

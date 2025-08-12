@@ -25,6 +25,13 @@ import {
   ChevronRight,
   X
 } from 'lucide-react';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogTitle,
+  DialogClose,
+} from "@/components/ui/dialog";
 import SafeLink from '@/components/ui/SafeLink';
 
 interface NodeDetails {
@@ -39,6 +46,7 @@ interface NodeData {
   description: string;
   icon: React.ReactNode;
   color: string;
+  link: string; // Optional link for SafeLink
   status: 'idle' | 'processing' | 'completed' | 'error';
   details: NodeDetails;
 }
@@ -65,7 +73,7 @@ const ReactFlowSection: React.FC<ReactFlowSectionProps> = ({ addToRefs }) => {
   const [selectedNode, setSelectedNode] = useState<Node | null>(null);
   const [showModal, setShowModal] = useState<boolean>(false);
   const sectionRef = useRef<HTMLDivElement>(null);
-
+ 
   useEffect(() => {
     if (addToRefs && sectionRef.current) {
       addToRefs(sectionRef.current);
@@ -82,6 +90,7 @@ const ReactFlowSection: React.FC<ReactFlowSectionProps> = ({ addToRefs }) => {
         description: 'Free 30-min consultation',
         icon: <Search className="w-5 h-5" />,
         color: 'from-blue-500 to-cyan-500',
+        link: '/services/discovery-call',
         status: 'idle',
         details: {
           duration: '30 minutes',
@@ -101,6 +110,7 @@ const ReactFlowSection: React.FC<ReactFlowSectionProps> = ({ addToRefs }) => {
         icon: <Activity className="w-5 h-5" />,
         color: 'from-green-500 to-emerald-500',
         status: 'idle',
+        link:'/services/discovery-call',
         details: {
           duration: '3-5 days',
           deliverables: ['Process Maps', 'Inefficiency Report', 'Automation Opportunities'],
@@ -119,6 +129,7 @@ const ReactFlowSection: React.FC<ReactFlowSectionProps> = ({ addToRefs }) => {
         icon: <DollarSign className="w-5 h-5" />,
         color: 'from-yellow-500 to-orange-500',
         status: 'idle',
+        link:'/services/discovery-call',
         details: {
           duration: '2-3 days',
           deliverables: ['ROI Analysis', 'Cost-Benefit Report', 'Timeline Projection'],
@@ -137,6 +148,7 @@ const ReactFlowSection: React.FC<ReactFlowSectionProps> = ({ addToRefs }) => {
         icon: <Code className="w-5 h-5" />,
         color: 'from-purple-500 to-indigo-500',
         status: 'idle',
+        link: '/services/bot-blueprint',
         details: {
           duration: '1-2 weeks',
           deliverables: ['Technical Specification', 'UI/UX Mockups', 'Integration Plan'],
@@ -155,6 +167,7 @@ const ReactFlowSection: React.FC<ReactFlowSectionProps> = ({ addToRefs }) => {
         icon: <Zap className="w-5 h-5" />,
         color: 'from-red-500 to-pink-500',
         status: 'idle',
+        link: '/services/build-and-test',
         details: {
           duration: '2-6 weeks',
           deliverables: ['Working Bot', 'Admin Dashboard', 'User Training'],
@@ -173,6 +186,7 @@ const ReactFlowSection: React.FC<ReactFlowSectionProps> = ({ addToRefs }) => {
         icon: <CheckCircle className="w-5 h-5" />,
         color: 'from-teal-500 to-cyan-500',
         status: 'idle',
+        link:'/services/build-and-test',
         details: {
           duration: '1-2 weeks',
           deliverables: ['Test Reports', 'Bug Fixes', 'Performance Optimization'],
@@ -191,6 +205,7 @@ const ReactFlowSection: React.FC<ReactFlowSectionProps> = ({ addToRefs }) => {
         icon: <Rocket className="w-5 h-5" />,
         color: 'from-orange-500 to-red-500',
         status: 'idle',
+        link: '/services/hyper-care',
         details: {
           duration: '1 week',
           deliverables: ['Live System', 'Documentation', 'Support Package'],
@@ -639,112 +654,118 @@ const ReactFlowSection: React.FC<ReactFlowSectionProps> = ({ addToRefs }) => {
         </div>
       </div>
 
-      {/* Enhanced Modal for Node Details */}
-      {showModal && selectedNode && (
-        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <div className="bg-slate-800 rounded-3xl border border-slate-700 shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
-            {/* Modal Header */}
-            <div className={`bg-gradient-to-r ${selectedNode.data.color} p-6 rounded-t-3xl text-white relative`}>
-              <button
-                onClick={() => setShowModal(false)}
-                className="absolute top-4 right-4 w-10 h-10 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white/30 transition-colors"
-              >
-                <X className="w-6 h-6" />
-              </button>
-              
-              <div className="flex items-center mb-4">
-                <div className="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center mr-4">
-                  {selectedNode.data.icon}
+      {/* Enhanced Dialog for Node Details */}
+      <Dialog open={showModal} onOpenChange={setShowModal}>
+        {selectedNode && (
+          <>
+            <DialogContent className="max-w-2xl bg-slate-800 border-slate-700 h-[85vh] p-0 flex flex-col mx-auto my-auto font-sans antialiased" showCloseButton={false}>
+              {/* Dialog Header - Fixed */}
+              <div className={`bg-gradient-to-r ${selectedNode.data.color} p-6 rounded-t-lg text-white`}>
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center">
+                    {selectedNode.data.icon}
+                  </div>
+                  <div className="flex-1">
+                    <DialogTitle className="text-2xl font-semibold text-white mb-1 tracking-tight">{selectedNode.data.label}</DialogTitle>
+                    <DialogDescription className="text-white/80 text-base font-normal">
+                      {selectedNode.data.description}
+                    </DialogDescription>
+                  </div>
+                  <DialogClose className="w-10 h-10 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white/30 transition-colors self-start flex-shrink-0">
+                    <X className="w-6 h-6" />
+                  </DialogClose>
                 </div>
+                
+                <div className="flex items-center gap-4">
+                  <div className="flex items-center bg-white/20 backdrop-blur-sm rounded-full px-4 py-2">
+                    <Clock className="w-5 h-5 mr-2" />
+                    <span className="font-semibold">{selectedNode.data.details.duration}</span>
+                  </div>
+                  <div className="flex items-center bg-white/20 backdrop-blur-sm rounded-full px-4 py-2">
+                    <Target className="w-5 h-5 mr-2" />
+                    <span className="font-semibold">Step {parseInt(selectedNode.id)}</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Dialog Content - Scrollable */}
+              <div className="flex-1 overflow-y-auto custom-scrollbar">
+                <div className="space-y-8 p-6">
+                  {/* Description */}
+                  <div>
+                    <h3 className="text-lg font-semibold text-white mb-3 flex items-center tracking-tight">
+                      <FileText className="w-5 h-5 mr-2 text-cyan-400" />
+                      Overview
+                    </h3>
+                  <p className="text-slate-300 leading-relaxed text-base font-normal">
+                    {selectedNode.data.details.description}
+                  </p>
+                </div>
+
+                {/* Deliverables */}
                 <div>
-                  <h2 className="text-3xl font-bold">{selectedNode.data.label}</h2>
-                  <p className="text-white/80 text-lg">{selectedNode.data.description}</p>
-                </div>
-              </div>
-              
-              <div className="flex items-center gap-4">
-                <div className="flex items-center bg-white/20 backdrop-blur-sm rounded-full px-4 py-2">
-                  <Clock className="w-5 h-5 mr-2" />
-                  <span className="font-semibold">{selectedNode.data.details.duration}</span>
-                </div>
-                <div className="flex items-center bg-white/20 backdrop-blur-sm rounded-full px-4 py-2">
-                  <Target className="w-5 h-5 mr-2" />
-                  <span className="font-semibold">Step {parseInt(selectedNode.id)}</span>
-                </div>
-              </div>
-            </div>
-
-            {/* Modal Content */}
-            <div className="p-8 space-y-8">
-              {/* Description */}
-              <div>
-                <h3 className="text-xl font-bold text-white mb-4 flex items-center">
-                  <FileText className="w-6 h-6 mr-3 text-cyan-400" />
-                  Overview
-                </h3>
-                <p className="text-slate-300 leading-relaxed text-lg">
-                  {selectedNode.data.details.description}
-                </p>
-              </div>
-
-              {/* Deliverables */}
-              <div>
-                <h3 className="text-xl font-bold text-white mb-4 flex items-center">
-                  <CheckCircle className="w-6 h-6 mr-3 text-green-400" />
-                  Key Deliverables
-                </h3>
-                <div className="grid gap-3">
-                  {selectedNode.data.details.deliverables.map((deliverable, index) => (
-                    <div key={index} className="flex items-center bg-slate-700/50 rounded-xl p-4 border border-slate-600/50">
-                      <div className="w-2 h-2 bg-green-400 rounded-full mr-4 flex-shrink-0"></div>
-                      <span className="text-slate-200 font-medium">{deliverable}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Benefits */}
-              <div>
-                <h3 className="text-xl font-bold text-white mb-4 flex items-center">
-                  <TrendingUp className="w-6 h-6 mr-3 text-blue-400" />
-                  Key Benefits
-                </h3>
-                <div className="grid gap-3">
-                  {selectedNode.data.details.benefits.map((benefit, index) => (
-                    <div key={index} className="flex items-center bg-blue-500/10 rounded-xl p-4 border border-blue-500/20">
-                      <div className="w-8 h-8 bg-blue-500/20 rounded-lg flex items-center justify-center mr-4 flex-shrink-0">
-                        <Sparkles className="w-4 h-4 text-blue-400" />
+                  <h3 className="text-lg font-semibold text-white mb-3 flex items-center tracking-tight">
+                    <CheckCircle className="w-5 h-5 mr-2 text-green-400" />
+                    Key Deliverables
+                  </h3>
+                  <div className="grid gap-3">
+                    {selectedNode.data.details.deliverables.map((deliverable, index) => (
+                      <div key={index} className="flex items-center bg-slate-700/50 rounded-xl p-4 border border-slate-600/50">
+                        <div className="w-2 h-2 bg-green-400 rounded-full mr-4 flex-shrink-0"></div>
+                        <span className="text-slate-200 font-medium">{deliverable}</span>
                       </div>
-                      <span className="text-blue-200 font-medium">{benefit}</span>
-                    </div>
-                  ))}
+                    ))}
+                  </div>
+                </div>
+
+                {/* Benefits */}
+                <div>
+                  <h3 className="text-lg font-semibold text-white mb-3 flex items-center tracking-tight">
+                    <TrendingUp className="w-5 h-5 mr-2 text-blue-400" />
+                    Key Benefits
+                  </h3>
+                  <div className="grid gap-3">
+                    {selectedNode.data.details.benefits.map((benefit, index) => (
+                      <div key={index} className="flex items-center bg-blue-500/10 rounded-xl p-4 border border-blue-500/20">
+                        <div className="w-8 h-8 bg-blue-500/20 rounded-lg flex items-center justify-center mr-4 flex-shrink-0">
+                          <Sparkles className="w-4 h-4 text-blue-400" />
+                        </div>
+                        <span className="text-blue-200 font-medium">{benefit}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
                 </div>
               </div>
-
-              {/* Action Buttons */}
-              <div className="flex flex-col sm:flex-row gap-4 pt-6 border-t border-slate-700">
-                <SafeLink href="/contact">
-                  <button className="flex-1 px-6 py-3 bg-gradient-to-r from-blue-600 to-cyan-600 text-white font-semibold rounded-xl hover:from-blue-700 hover:to-cyan-700 transition-all duration-300 transform hover:scale-105 shadow-lg">
-                    <span className="flex items-center justify-center">
-                      <MessageSquare className="w-5 h-5 mr-2" />
-                      Discuss This Step
-                    </span>
-                  </button>
-                </SafeLink>
-                <button 
-                  onClick={() => setShowModal(false)}
-                  className="flex-1 px-6 py-3 bg-slate-600/50 backdrop-blur-sm text-white font-semibold rounded-xl hover:bg-slate-500/50 transition-all duration-300 border border-slate-500"
-                >
-                  <span className="flex items-center justify-center">
-                    <ChevronRight className="w-5 h-5 mr-2" />
-                    Continue Exploring
-                  </span>
-                </button>
+              {/* Action Buttons - Fixed */}
+              <div className="p-6 border-t border-slate-700 bg-slate-800">
+                <div className="flex flex-col sm:flex-row gap-4">
+                  <SafeLink href="/contact" className="flex-1">
+                    <button className="w-full px-6 py-3 bg-gradient-to-r from-blue-600 to-cyan-600 text-white font-semibold rounded-xl hover:from-blue-700 hover:to-cyan-700 transition-all duration-300 transform hover:scale-105 shadow-lg">
+                      <span className="flex items-center justify-center">
+                        <MessageSquare className="w-5 h-5 mr-2" />
+                        Discuss This Step
+                      </span>
+                    </button>
+                  </SafeLink>
+                  <SafeLink href={selectedNode.data.link} className="flex-1" context="feature">
+                    <button 
+                      onClick={() => setShowModal(false)}
+                      className="flex-1 px-6 py-3 bg-slate-600/50 backdrop-blur-sm text-white font-semibold rounded-xl hover:bg-slate-500/50 transition-all duration-300 border border-slate-500"
+                    >
+                      <span className="flex items-center justify-center">
+                        <ChevronRight className="w-5 h-5 mr-2" />
+                        Continue Exploring
+                      </span>
+                    </button>
+                  </SafeLink>
+                </div>
               </div>
-            </div>
-          </div>
-        </div>
-      )}
+            </DialogContent>
+          </>
+        )}
+      </Dialog>
     </section>
   );
 };

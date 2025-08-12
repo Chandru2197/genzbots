@@ -142,7 +142,7 @@ const PayrollProcessingScreen = () => {
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-6">
               <Button 
-              onClick={() => navigateTo('/product')}
+              onClick={() => navigateTo('/service')}
               variant="outline" className="bg-black/30 backdrop-blur-md text-white border-blue-500/30 hover:bg-blue-500/20">
                 <ArrowLeft className="w-4 h-4 mr-2" />
                 Back to HR

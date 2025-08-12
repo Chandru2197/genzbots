@@ -7,7 +7,7 @@ interface SafeLinkProps {
   href: string;
   children: React.ReactNode;
   className?: string;
-  onClick?: () => void;
+  onClick?: (e: React.MouseEvent) => void; // Event parameter is required when onClick is provided
   context?: 'feature' | 'maintenance' | 'development';
   prefetch?: boolean;
   [key: string]: any;
@@ -32,8 +32,8 @@ const SafeLink: React.FC<SafeLinkProps> = ({
     }
   };
   
-  const handleClick = () => {
-    if (onClick) onClick();
+  const handleClick = (e: React.MouseEvent) => { // Event parameter is required
+    if (onClick) onClick(e); // Pass the event to the onClick handler
   };
 
   // For external links, use regular anchor tag
@@ -42,7 +42,7 @@ const SafeLink: React.FC<SafeLinkProps> = ({
       <a 
         href={safeHref} 
         className={className}
-        onClick={handleClick}
+        onClick={handleClick} // Pass the event directly
         {...props}
       >
         {children}
@@ -54,7 +54,7 @@ const SafeLink: React.FC<SafeLinkProps> = ({
     <Link 
       href={safeHref} 
       className={className}
-      onClick={handleClick}
+      onClick={handleClick} // Pass the event directly
       onMouseEnter={handleMouseEnter}
       prefetch={prefetch}
       {...props}

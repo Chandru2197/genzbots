@@ -1,12 +1,10 @@
+import ServicesHomepage from '@/components/service/ServicesHomepage';
+import { useEffect, useRef } from 'react';
 
-import { FC } from 'react';
-
-const Service: FC = () => {
-  return (
-    <div>
-      <h1>Service</h1>
-    </div>
-  );
-};
-
-export default Service;
+export default function Services() {
+    return (
+        <main className="min-h-screen mt-8">
+          <ServicesHomepage />
+        </main>
+    );
+}

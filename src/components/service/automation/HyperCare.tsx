@@ -403,7 +403,7 @@ const HypercareLaunchPage: React.FC = () => {
         <div className="relative max-w-7xl mx-auto px-4 py-20">
         <Button
           variant="outline"
-          className="p-1 text-white border-white bg-tansparent hover:text-blue-600 mb-6"
+          className="p-1 text-white border-white bg-tansparent hover:text-red-600 hover:bg-white mb-6"
           onClick={handleBackToProcess}
         >
           <ArrowLeft className="w-4 h-4 mr-2" />
@@ -437,7 +437,7 @@ const HypercareLaunchPage: React.FC = () => {
                   <BarChart3 className="w-5 h-5 mr-2" />
                   View Support Dashboard
                 </Button>
-                <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-red-600">
+                <Button size="lg" variant="outline" className="border-white text-white bg-transparent hover:bg-white hover:text-red-600">
                   <Phone className="w-5 h-5 mr-2" />
                   Get Immediate Support
                 </Button>

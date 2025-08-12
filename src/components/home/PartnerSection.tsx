@@ -42,102 +42,147 @@ const MiniCard = ({
   gradientStart: string; 
   gradientEnd: string; 
   index: number;
-}) => (
-  <motion.div
-    className="relative group cursor-pointer h-full"
-    initial={{ opacity: 0, scale: 0.8 }}
-    animate={{ opacity: 1, scale: 1 }}
-    transition={{ duration: 0.5, delay: index * 0.1 }}
-    whileHover={{ scale: 1.02, y: -8 }}
-  >
-    {/* Enhanced glowing background */}
-    <div 
-      className="absolute inset-0 rounded-3xl blur-2xl opacity-10 group-hover:opacity-30 transition-all duration-500"
-      style={{
-        background: `linear-gradient(135deg, ${gradientStart}, ${gradientEnd})`,
-        transform: 'scale(1.1)'
-      }}
-    ></div>
-    
-    {/* Main card with enhanced glassmorphism */}
-    <div 
-      className="relative h-full rounded-3xl border shadow-2xl overflow-hidden transition-all duration-500 group-hover:shadow-3xl"
-      style={{
-        background: 'rgba(255, 255, 255, 0.12)',
-        backdropFilter: 'blur(20px) saturate(180%)',
-        WebkitBackdropFilter: 'blur(20px) saturate(180%)',
-        border: '1px solid rgba(255, 255, 255, 0.25)',
-        boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(255, 255, 255, 0.1) inset'
+}) => {
+  const [isHovered, setIsHovered] = useState(-1);
+  
+  return (
+    <motion.div 
+      className="relative h-full min-h-[400px] group cursor-pointer perspective-1000"
+      onMouseEnter={() => setIsHovered(index)}
+      onMouseLeave={() => setIsHovered(-1)}
+      initial={{ opacity: 0, scale: 0.8 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.5, delay: index * 0.1 }}
+      whileHover={{ 
+        y: -5,
+        rotateX: 2,
+        rotateY: 2,
       }}
     >
-      {/* Animated gradient overlay */}
+      {/* Enhanced glowing background with stronger blur */}
       <div 
-        className="absolute inset-0 opacity-0 group-hover:opacity-20 transition-all duration-500"
+        className="absolute inset-0 rounded-3xl blur-2xl transform transition-all duration-500 group-hover:scale-110"
         style={{
-          background: `linear-gradient(135deg, ${gradientStart}40, ${gradientEnd}40)`,
-          backdropFilter: 'blur(5px)',
-          WebkitBackdropFilter: 'blur(5px)'
-        }}
-      ></div>
-
-      {/* Shimmer effect */}
-      <div 
-        className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700"
-        style={{
-          background: 'linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.1) 50%, transparent 70%)',
-          transform: 'translateX(-100%)',
-          animation: 'shimmer 2s ease-in-out infinite'
+          background: `radial-gradient(circle at center, ${gradientStart}40, ${gradientEnd}20)`,
+          opacity: isHovered === index ? '0.6' : '0.3'
         }}
       ></div>
       
-      <div className="relative z-10 h-full flex flex-col p-6">
-        {/* Icon container */}
-        <div className="mb-4">
-          <div 
-            className="w-12 h-12 rounded-2xl flex items-center justify-center border transition-all duration-300 group-hover:scale-110"
-            style={{
-              background: `linear-gradient(135deg, ${gradientStart}60, ${gradientEnd}60)`,
-              backdropFilter: 'blur(10px)',
-              WebkitBackdropFilter: 'blur(10px)',
-              border: '1px solid rgba(255, 255, 255, 0.3)',
-              boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.2)'
-            }}
-          >
-            <Star className="w-6 h-6 text-white" />
-          </div>
-        </div>
+      {/* Glass card container with enhanced blur and transparency */}
+      <div 
+        className="relative h-full overflow-hidden rounded-3xl transition-all duration-500 group-hover:shadow-[0_0_40px_rgba(0,0,0,0.3)]"
+        style={{
+          background: `linear-gradient(135deg, rgba(0,0,0,0.4), rgba(0,0,0,0.2))`,
+          backdropFilter: 'blur(8px) saturate(150%)',
+          WebkitBackdropFilter: 'blur(8px) saturate(150%)',
+          border: '1px solid rgba(255,255,255,0.12)',
+          boxShadow: isHovered === index 
+            ? '0 8px 32px rgba(0,0,0,0.4), inset 0 0 0 1px rgba(255,255,255,0.1), inset 0 0 32px rgba(0,0,0,0.3)'
+            : '0 4px 16px rgba(0,0,0,0.3), inset 0 0 0 1px rgba(255,255,255,0.08)'
+        }}
+      >
+        {/* Animated light effect */}
+        <div 
+          className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700"
+          style={{
+            background: `linear-gradient(105deg, 
+              transparent 20%, 
+              rgba(255,255,255,0.1) 40%,
+              rgba(255,255,255,0.1) 60%,
+              transparent 80%)`,
+            transform: isHovered === index ? 'translateX(100%)' : 'translateX(-100%)',
+            transition: 'transform 0.75s ease-in-out'
+          }}
+        ></div>
 
-        <h4 className="text-white font-bold text-lg mb-3 group-hover:text-cyan-200 transition-colors duration-300 leading-tight">
-          {title}
-        </h4>
-        <p className="text-white/85 text-sm leading-relaxed flex-1 group-hover:text-white/95 transition-colors duration-300">
-          {description}
-        </p>
-        
-        {/* Enhanced bottom accent */}
-        <div className="mt-4 pt-4 border-t border-white/20">
-          <div className="flex justify-between items-center">
+        {/* Content container with glass effect */}
+        <div className="relative h-full flex flex-col p-6 z-10">
+          {/* Enhanced header with glass effect */}
+          <div className="flex items-center justify-between mb-4">
             <div 
-              className="h-1 rounded-full flex-1 mr-3 transition-all duration-300 group-hover:shadow-lg"
+              className="w-12 h-12 rounded-2xl flex items-center justify-center transform transition-all duration-500 group-hover:scale-110 group-hover:rotate-12"
               style={{
-                background: `linear-gradient(90deg, ${gradientStart}, ${gradientEnd})`
-              }}
-            ></div>
-            <div 
-              className="w-6 h-6 rounded-full flex items-center justify-center transition-all duration-300 group-hover:rotate-12"
-              style={{
-                background: `linear-gradient(135deg, ${gradientStart}, ${gradientEnd})`,
-                boxShadow: '0 4px 12px 0 rgba(0, 0, 0, 0.15)'
+                background: `linear-gradient(135deg, ${gradientStart}90, ${gradientEnd}90)`,
+                backdropFilter: 'blur(4px)',
+                border: '1px solid rgba(255,255,255,0.2)',
+                boxShadow: `0 4px 12px ${gradientStart}30`
               }}
             >
-              <div className="w-2 h-2 bg-white rounded-full"></div>
+              <Star className="w-6 h-6 text-white" />
             </div>
+            <div className="flex items-center space-x-2">
+              <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse shadow-[0_0_8px_rgba(74,222,128,0.6)]"></div>
+              <span className="text-green-400 text-xs font-semibold">NEW</span>
+            </div>
+          </div>
+          
+          {/* Enhanced content section */}
+          <div className="mb-6">
+            <h3 className="text-xl font-bold mb-3 transition-colors duration-300 line-clamp-2"
+              style={{
+                color: 'white',
+                textShadow: '0 2px 4px rgba(0,0,0,0.3)',
+                WebkitTextStroke: '0.5px rgba(0,0,0,0.1)'
+              }}
+            >
+              {title}
+            </h3>
+            <p className="text-gray-100 text-sm leading-relaxed line-clamp-4 font-medium tracking-wide" 
+              style={{
+                textShadow: '0 1px 2px rgba(0,0,0,0.2)'
+              }}
+            >
+              {description}
+            </p>
+          </div>
+          
+          {/* Enhanced stats with glass effect */}
+          <div className="grid grid-cols-3 gap-2 mt-auto">
+            {[
+              { value: '99%', label: 'Success', color: gradientStart },
+              { value: '24/7', label: 'Support', color: gradientEnd },
+              { value: 'Fast', label: 'Deploy', color: 'white' }
+            ].map((stat, i) => (
+              <div 
+                key={i}
+                className="relative overflow-hidden rounded-xl transition-all duration-300 group-hover:shadow-lg"
+                style={{
+                  background: 'rgba(255,255,255,0.05)',
+                  backdropFilter: 'blur(4px)',
+                  border: '1px solid rgba(255,255,255,0.1)'
+                }}
+              >
+                <div className="p-2 relative z-10">
+                  <div className="text-sm font-bold tracking-wide" 
+                    style={{ 
+                      color: stat.color,
+                      textShadow: '0 1px 2px rgba(0,0,0,0.2)'
+                    }}
+                  >
+                    {stat.value}
+                  </div>
+                  <div className="text-xs text-white font-medium tracking-wide"
+                    style={{
+                      textShadow: '0 1px 2px rgba(0,0,0,0.2)'
+                    }}
+                  >
+                    {stat.label}
+                  </div>
+                </div>
+                <div 
+                  className="absolute inset-0 opacity-0 group-hover:opacity-20 transition-opacity duration-300"
+                  style={{
+                    background: `linear-gradient(135deg, ${gradientStart}40, ${gradientEnd}40)`
+                  }}
+                ></div>
+              </div>
+            ))}
           </div>
         </div>
       </div>
-    </div>
-  </motion.div>
-);
+    </motion.div>
+  );
+};
 
 export default function PartnerShowcase({ addToRefs }: PartnerShowcaseProps) {
   const [activeTab, setActiveTab] = useState('automation');

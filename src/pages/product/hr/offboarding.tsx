@@ -183,7 +183,7 @@ const EmployeeOffboardingScreen = () => {
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-6">
               <Button 
-                onClick={() => navigateTo('/product')}
+                onClick={() => navigateTo('/service')}
                 variant="outline" className="bg-black/40 backdrop-blur-md text-white border-red-500/30 hover:bg-red-500/20">
                 <ArrowLeft className="w-4 h-4 mr-2" />
                 Back to HR

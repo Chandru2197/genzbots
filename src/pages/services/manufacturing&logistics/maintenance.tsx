@@ -158,7 +158,7 @@ const PredictiveMaintenanceScreen = () => {
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-6">
               <Button 
-              onClick={() => navigateTo('/product') }
+              onClick={() => navigateTo('/service') }
               variant="outline" className="bg-black/30 backdrop-blur-md text-white border-cyan-500/30 hover:bg-cyan-500/20">
                 <ArrowLeft className="w-4 h-4 mr-2" />
                 Back to Manufacturing

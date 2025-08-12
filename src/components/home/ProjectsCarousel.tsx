@@ -18,6 +18,7 @@ import {
   Database,
   Lock
 } from 'lucide-react';
+import SafeLink from '../ui/SafeLink';
 
 const EMBLA_STYLES = `
   .embla { overflow: hidden; }
@@ -362,6 +363,7 @@ const ProjectsCarousel = ({ addToRefs }: ProjectsCarouselProps) => {
                           </div>
                           
                           {/* CTA Button */}
+                          <SafeLink href={'/maintenance'} className="flex flex-1 h-full">
                           <button
                             className={`w-full py-4 px-6 bg-gradient-to-r ${project.gradient} text-white font-semibold rounded-2xl transition-all duration-300 transform hover:scale-105 hover:shadow-2xl relative overflow-hidden group-hover:shadow-[0_0_30px_rgba(59,130,246,0.5)]`}
                           >
@@ -373,6 +375,7 @@ const ProjectsCarousel = ({ addToRefs }: ProjectsCarouselProps) => {
                               }`} />
                             </span>
                           </button>
+                          </SafeLink>
                         </div>
                       </div>
                     </motion.div>

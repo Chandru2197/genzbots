@@ -302,7 +302,7 @@ const DiscoveryCallPage: React.FC = () => {
         <div className="relative max-w-7xl mx-auto px-4 py-20">
           <Button
             variant="outline"
-            className="p-1 text-white border-white bg-tansparent hover:text-blue-600 mb-6"
+            className="p-1 text-white border-white bg-tansparent hover:text-blue-600 hover:bg-white mb-6"
             onClick={handleBackToProcess}
           >
             <ArrowLeft className="w-4 h-4 mr-2" />

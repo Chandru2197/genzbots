@@ -11,6 +11,7 @@ const EXISTING_PAGES = [
   '/cookies',
   '/maintenance',
   '/work-in-progress',
+  '/service',
   '/services',
   '/services/bot-blueprint',
   '/services/build-and-test',

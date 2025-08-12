@@ -673,8 +673,8 @@ nav .flex.h-full.w-full {
   }
 }
 
-/* Make sure content doesn't shift */
-.fixed + div, .fixed + main {
+/* Make sure content doesn't shift (except in modals) */
+.fixed + div:not([role="dialog"]), .fixed + main:not([role="dialog"]) {
   padding-top: 4rem;
 }
 

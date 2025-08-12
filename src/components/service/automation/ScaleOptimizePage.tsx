@@ -270,7 +270,7 @@ const ScaleOptimizePage: React.FC = () => {
         <div className="relative max-w-7xl mx-auto px-4 py-20">
           <Button
             variant="outline"
-            className="p-1 text-white border-white bg-tansparent hover:text-blue-600 mb-6"
+            className="p-1 text-white border-white bg-tansparent hover:text-emerald-600 hover:bg-white mb-6"
             onClick={handleBackToProcess}
           >
             <ArrowLeft className="w-4 h-4 mr-2" />
@@ -304,7 +304,7 @@ const ScaleOptimizePage: React.FC = () => {
                   <BarChart3 className="w-5 h-5 mr-2" />
                   View Growth Dashboard
                 </Button>
-                <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-emerald-600">
+                <Button size="lg" variant="outline" className="border-white text-white bg-transparent hover:bg-white hover:text-emerald-600">
                   <Lightbulb className="w-5 h-5 mr-2" />
                   Suggest New Automation
                 </Button>

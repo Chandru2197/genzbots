@@ -119,6 +119,7 @@ export default function HeroSection({ addToRefs }: HeroSectionProps) {
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.8, delay: 0.6 }}
             >
+              <SafeLink href="/service">
               <button
                 className="group relative px-8 py-4 bg-gradient-to-r from-blue-600 to-cyan-600 text-white font-semibold rounded-xl hover:from-blue-700 hover:to-cyan-700 transition-all duration-300 transform hover:scale-105 shadow-xl hover:shadow-2xl"
                 onMouseEnter={() => setIsHovered(true)}
@@ -130,7 +131,7 @@ export default function HeroSection({ addToRefs }: HeroSectionProps) {
                   <ArrowRight className={`w-5 h-5 ml-2 transition-transform duration-300 ${isHovered ? 'translate-x-1' : ''}`} />
                 </span>
               </button>
-
+              </SafeLink>
               <SafeLink href="/contact">
                 <button className="group relative px-8 py-4 bg-white/10 text-white font-semibold rounded-xl border-2 border-white/30 hover:bg-white/20 transition-all duration-300 transform hover:scale-105 backdrop-blur-md">
                   <span className="relative flex items-center justify-center">

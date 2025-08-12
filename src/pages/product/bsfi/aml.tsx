@@ -96,7 +96,7 @@ const AMLMonitoringScreen = () => {
         <div className="flex items-center justify-between mb-12">
           <div className="flex items-center space-x-6">
             <Button variant="outline" className="bg-white/10 backdrop-blur-md text-white border-white/20 hover:bg-white/20 hover:text-white"
-              onClick={() => navigateTo('/product')}
+              onClick={() => navigateTo('/service')}
             >
               <ArrowLeft className="w-4 h-4 mr-2" />
               Back to BFSI
