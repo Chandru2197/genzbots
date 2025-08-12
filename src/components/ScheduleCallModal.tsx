@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Calendar, Clock, User, Mail, Phone, Building, CheckCircle, ArrowLeft, ArrowRight } from 'lucide-react';
 import './ScheduleCallModal.css';
 import { Card, CardContent } from '@/components/ui/card';
@@ -11,6 +11,18 @@ import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogOverlay } from '@/components/ui/dialog';
 import '@/styles/dialog.css';
+import PhoneInput from 'react-phone-input-2';
+import 'react-phone-input-2/lib/style.css';
+import { 
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectTrigger,
+  SelectValue
+} from '@/components/ui/select';
+import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
+import { Checkbox } from '@/components/ui/checkbox';
 
 interface TimeSlot {
   day: string;
@@ -33,6 +45,9 @@ interface BookingForm {
   phone: string;
   company: string;
   message: string;
+  country: string;
+  projectTimeline: string;
+  consent: boolean;
 }
 
 interface ScheduleCallModalProps {
@@ -51,8 +66,331 @@ const ScheduleCallModal: React.FC<ScheduleCallModalProps> = ({ isOpen, onClose }
     email: '',
     phone: '',
     company: '',
-    message: ''
+    message: '',
+    country: 'IN',
+    projectTimeline: '',
+    consent: false,
   });
+  const [phoneCountry, setPhoneCountry] = useState('in');
+  const [countryDropdownOpen, setCountryDropdownOpen] = useState(false);
+  const [countrySearchQuery, setCountrySearchQuery] = useState('');
+  const [formErrors, setFormErrors] = useState<Record<string, string>>({});
+  const [isFormValidState, setIsFormValidState] = useState(false);
+  const countryDropdownRef = useRef<HTMLDivElement>(null);
+
+  // Comprehensive country list
+  const countries = [
+    { value: 'AF', label: 'Afghanistan' },
+    { value: 'AL', label: 'Albania' },
+    { value: 'DZ', label: 'Algeria' },
+    { value: 'AD', label: 'Andorra' },
+    { value: 'AO', label: 'Angola' },
+    { value: 'AG', label: 'Antigua and Barbuda' },
+    { value: 'AR', label: 'Argentina' },
+    { value: 'AM', label: 'Armenia' },
+    { value: 'AU', label: 'Australia' },
+    { value: 'AT', label: 'Austria' },
+    { value: 'AZ', label: 'Azerbaijan' },
+    { value: 'BS', label: 'Bahamas' },
+    { value: 'BH', label: 'Bahrain' },
+    { value: 'BD', label: 'Bangladesh' },
+    { value: 'BB', label: 'Barbados' },
+    { value: 'BY', label: 'Belarus' },
+    { value: 'BE', label: 'Belgium' },
+    { value: 'BZ', label: 'Belize' },
+    { value: 'BJ', label: 'Benin' },
+    { value: 'BT', label: 'Bhutan' },
+    { value: 'BO', label: 'Bolivia' },
+    { value: 'BA', label: 'Bosnia and Herzegovina' },
+    { value: 'BW', label: 'Botswana' },
+    { value: 'BR', label: 'Brazil' },
+    { value: 'BN', label: 'Brunei' },
+    { value: 'BG', label: 'Bulgaria' },
+    { value: 'BF', label: 'Burkina Faso' },
+    { value: 'BI', label: 'Burundi' },
+    { value: 'CV', label: 'Cabo Verde' },
+    { value: 'KH', label: 'Cambodia' },
+    { value: 'CM', label: 'Cameroon' },
+    { value: 'CA', label: 'Canada' },
+    { value: 'CF', label: 'Central African Republic' },
+    { value: 'TD', label: 'Chad' },
+    { value: 'CL', label: 'Chile' },
+    { value: 'CN', label: 'China' },
+    { value: 'CO', label: 'Colombia' },
+    { value: 'KM', label: 'Comoros' },
+    { value: 'CG', label: 'Congo' },
+    { value: 'CR', label: 'Costa Rica' },
+    { value: 'HR', label: 'Croatia' },
+    { value: 'CU', label: 'Cuba' },
+    { value: 'CY', label: 'Cyprus' },
+    { value: 'CZ', label: 'Czech Republic' },
+    { value: 'CD', label: 'Democratic Republic of the Congo' },
+    { value: 'DK', label: 'Denmark' },
+    { value: 'DJ', label: 'Djibouti' },
+    { value: 'DM', label: 'Dominica' },
+    { value: 'DO', label: 'Dominican Republic' },
+    { value: 'EC', label: 'Ecuador' },
+    { value: 'EG', label: 'Egypt' },
+    { value: 'SV', label: 'El Salvador' },
+    { value: 'GQ', label: 'Equatorial Guinea' },
+    { value: 'ER', label: 'Eritrea' },
+    { value: 'EE', label: 'Estonia' },
+    { value: 'ET', label: 'Ethiopia' },
+    { value: 'FJ', label: 'Fiji' },
+    { value: 'FI', label: 'Finland' },
+    { value: 'FR', label: 'France' },
+    { value: 'GA', label: 'Gabon' },
+    { value: 'GM', label: 'Gambia' },
+    { value: 'GE', label: 'Georgia' },
+    { value: 'DE', label: 'Germany' },
+    { value: 'GH', label: 'Ghana' },
+    { value: 'GR', label: 'Greece' },
+    { value: 'GD', label: 'Grenada' },
+    { value: 'GT', label: 'Guatemala' },
+    { value: 'GN', label: 'Guinea' },
+    { value: 'GW', label: 'Guinea-Bissau' },
+    { value: 'GY', label: 'Guyana' },
+    { value: 'HT', label: 'Haiti' },
+    { value: 'HN', label: 'Honduras' },
+    { value: 'HU', label: 'Hungary' },
+    { value: 'IS', label: 'Iceland' },
+    { value: 'IN', label: 'India' },
+    { value: 'ID', label: 'Indonesia' },
+    { value: 'IR', label: 'Iran' },
+    { value: 'IQ', label: 'Iraq' },
+    { value: 'IE', label: 'Ireland' },
+    { value: 'IL', label: 'Israel' },
+    { value: 'IT', label: 'Italy' },
+    { value: 'JM', label: 'Jamaica' },
+    { value: 'JP', label: 'Japan' },
+    { value: 'JO', label: 'Jordan' },
+    { value: 'KZ', label: 'Kazakhstan' },
+    { value: 'KE', label: 'Kenya' },
+    { value: 'KI', label: 'Kiribati' },
+    { value: 'KP', label: 'North Korea' },
+    { value: 'KR', label: 'South Korea' },
+    { value: 'KW', label: 'Kuwait' },
+    { value: 'KG', label: 'Kyrgyzstan' },
+    { value: 'LA', label: 'Laos' },
+    { value: 'LV', label: 'Latvia' },
+    { value: 'LB', label: 'Lebanon' },
+    { value: 'LS', label: 'Lesotho' },
+    { value: 'LR', label: 'Liberia' },
+    { value: 'LY', label: 'Libya' },
+    { value: 'LI', label: 'Liechtenstein' },
+    { value: 'LT', label: 'Lithuania' },
+    { value: 'LU', label: 'Luxembourg' },
+    { value: 'MG', label: 'Madagascar' },
+    { value: 'MW', label: 'Malawi' },
+    { value: 'MY', label: 'Malaysia' },
+    { value: 'MV', label: 'Maldives' },
+    { value: 'ML', label: 'Mali' },
+    { value: 'MT', label: 'Malta' },
+    { value: 'MH', label: 'Marshall Islands' },
+    { value: 'MR', label: 'Mauritania' },
+    { value: 'MU', label: 'Mauritius' },
+    { value: 'MX', label: 'Mexico' },
+    { value: 'FM', label: 'Micronesia' },
+    { value: 'MD', label: 'Moldova' },
+    { value: 'MC', label: 'Monaco' },
+    { value: 'MN', label: 'Mongolia' },
+    { value: 'ME', label: 'Montenegro' },
+    { value: 'MA', label: 'Morocco' },
+    { value: 'MZ', label: 'Mozambique' },
+    { value: 'MM', label: 'Myanmar' },
+    { value: 'NA', label: 'Namibia' },
+    { value: 'NR', label: 'Nauru' },
+    { value: 'NP', label: 'Nepal' },
+    { value: 'NL', label: 'Netherlands' },
+    { value: 'NZ', label: 'New Zealand' },
+    { value: 'NI', label: 'Nicaragua' },
+    { value: 'NE', label: 'Niger' },
+    { value: 'NG', label: 'Nigeria' },
+    { value: 'MK', label: 'North Macedonia' },
+    { value: 'NO', label: 'Norway' },
+    { value: 'OM', label: 'Oman' },
+    { value: 'PK', label: 'Pakistan' },
+    { value: 'PW', label: 'Palau' },
+    { value: 'PS', label: 'Palestine' },
+    { value: 'PA', label: 'Panama' },
+    { value: 'PG', label: 'Papua New Guinea' },
+    { value: 'PY', label: 'Paraguay' },
+    { value: 'PE', label: 'Peru' },
+    { value: 'PH', label: 'Philippines' },
+    { value: 'PL', label: 'Poland' },
+    { value: 'PT', label: 'Portugal' },
+    { value: 'QA', label: 'Qatar' },
+    { value: 'RO', label: 'Romania' },
+    { value: 'RU', label: 'Russia' },
+    { value: 'RW', label: 'Rwanda' },
+    { value: 'KN', label: 'Saint Kitts and Nevis' },
+    { value: 'LC', label: 'Saint Lucia' },
+    { value: 'VC', label: 'Saint Vincent and the Grenadines' },
+    { value: 'WS', label: 'Samoa' },
+    { value: 'SM', label: 'San Marino' },
+    { value: 'ST', label: 'Sao Tome and Principe' },
+    { value: 'SA', label: 'Saudi Arabia' },
+    { value: 'SN', label: 'Senegal' },
+    { value: 'RS', label: 'Serbia' },
+    { value: 'SC', label: 'Seychelles' },
+    { value: 'SL', label: 'Sierra Leone' },
+    { value: 'SG', label: 'Singapore' },
+    { value: 'SK', label: 'Slovakia' },
+    { value: 'SI', label: 'Slovenia' },
+    { value: 'SB', label: 'Solomon Islands' },
+    { value: 'SO', label: 'Somalia' },
+    { value: 'ZA', label: 'South Africa' },
+    { value: 'SS', label: 'South Sudan' },
+    { value: 'ES', label: 'Spain' },
+    { value: 'LK', label: 'Sri Lanka' },
+    { value: 'SD', label: 'Sudan' },
+    { value: 'SR', label: 'Suriname' },
+    { value: 'SZ', label: 'Eswatini' },
+    { value: 'SE', label: 'Sweden' },
+    { value: 'CH', label: 'Switzerland' },
+    { value: 'SY', label: 'Syria' },
+    { value: 'TW', label: 'Taiwan' },
+    { value: 'TJ', label: 'Tajikistan' },
+    { value: 'TZ', label: 'Tanzania' },
+    { value: 'TH', label: 'Thailand' },
+    { value: 'TL', label: 'Timor-Leste' },
+    { value: 'TG', label: 'Togo' },
+    { value: 'TO', label: 'Tonga' },
+    { value: 'TT', label: 'Trinidad and Tobago' },
+    { value: 'TN', label: 'Tunisia' },
+    { value: 'TR', label: 'Turkey' },
+    { value: 'TM', label: 'Turkmenistan' },
+    { value: 'TV', label: 'Tuvalu' },
+    { value: 'UG', label: 'Uganda' },
+    { value: 'UA', label: 'Ukraine' },
+    { value: 'AE', label: 'United Arab Emirates' },
+    { value: 'GB', label: 'United Kingdom' },
+    { value: 'US', label: 'United States' },
+    { value: 'UY', label: 'Uruguay' },
+    { value: 'UZ', label: 'Uzbekistan' },
+    { value: 'VU', label: 'Vanuatu' },
+    { value: 'VA', label: 'Vatican City' },
+    { value: 'VE', label: 'Venezuela' },
+    { value: 'VN', label: 'Vietnam' },
+    { value: 'YE', label: 'Yemen' },
+    { value: 'ZM', label: 'Zambia' },
+    { value: 'ZW', label: 'Zimbabwe' }
+  ];
+
+  // Filtered countries based on search query
+  const filteredCountries = countries.filter(country =>
+    country.label.toLowerCase().includes(countrySearchQuery.toLowerCase())
+  );
+
+  // Handle clicking outside dropdown to close it
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (countryDropdownRef.current && !countryDropdownRef.current.contains(event.target as Node)) {
+        setCountryDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
+  // Form validation effect
+  useEffect(() => {
+    const errors: Record<string, string> = {};
+    
+    // Check first name
+    if (bookingForm.firstName.trim() === '') {
+      errors.firstName = 'First name is required';
+    }
+    
+    // Check email
+    if (bookingForm.email.trim() === '') {
+      errors.email = 'Email is required';
+    } else if (!isValidEmail(bookingForm.email)) {
+      errors.email = 'Please enter a valid email address';
+    }
+    
+    // Check company
+    if (bookingForm.company.trim() === '') {
+      errors.company = 'Company name is required';
+    }
+    
+    // Check phone
+    if (bookingForm.phone.trim() === '') {
+      errors.phone = 'Phone number is required';
+    }
+    
+    // Check country
+    if (bookingForm.country.trim() === '') {
+      errors.country = 'Please select your country';
+    }
+    
+    // Check project timeline
+    if (bookingForm.projectTimeline.trim() === '') {
+      errors.projectTimeline = 'Please select a project timeline';
+    }
+    
+    // Check consent
+    if (!bookingForm.consent) {
+      errors.consent = 'You must agree to receive marketing communications';
+    }
+    
+    setFormErrors(errors);
+    setIsFormValidState(Object.keys(errors).length === 0);
+  }, [bookingForm]);
+
+  // Detect user's current location and set default country
+  useEffect(() => {
+    const detectUserLocation = async () => {
+      try {
+        if (!navigator.geolocation) return;
+        
+        navigator.geolocation.getCurrentPosition(async (position) => {
+          const { latitude, longitude } = position.coords;
+          
+          try {
+            const response = await fetch(
+              `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${latitude}&longitude=${longitude}&localityLanguage=en`
+            );
+            
+            if (response.ok) {
+              const data = await response.json();
+              const countryCode = data.countryCode;
+              
+              const foundCountry = countries.find(c => c.value === countryCode);
+              if (foundCountry) {
+                setBookingForm(prev => ({ ...prev, country: countryCode }));
+                setPhoneCountry(countryCode.toLowerCase());
+              }
+            }
+          } catch (error) {
+            // Fallback: detect from timezone
+            const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+            const timezoneToCountry: { [key: string]: string } = {
+              'America/New_York': 'US', 'America/Chicago': 'US', 'America/Denver': 'US',
+              'America/Los_Angeles': 'US', 'Europe/London': 'GB', 'Europe/Paris': 'FR',
+              'Europe/Berlin': 'DE', 'Asia/Tokyo': 'JP', 'Asia/Shanghai': 'CN',
+              'Asia/Singapore': 'SG', 'Asia/Kolkata': 'IN', 'Australia/Sydney': 'AU'
+            };
+            
+            const countryCode = timezoneToCountry[timezone];
+            if (countryCode) {
+              setBookingForm(prev => ({ ...prev, country: countryCode }));
+              setPhoneCountry(countryCode.toLowerCase());
+            }
+          }
+        });
+      } catch (error) {
+        console.log('Location detection error:', error);
+      }
+    };
+
+    if (!bookingForm.country || bookingForm.country === 'IN') {
+      detectUserLocation();
+    }
+  }, []);
 
   // Generate realistic time slots for the next few weeks
   const generateTimeSlots = () => {
@@ -112,8 +450,26 @@ const ScheduleCallModal: React.FC<ScheduleCallModalProps> = ({ isOpen, onClose }
     setSelectedSlot({ day, date, time });
   };
 
-  const handleFormChange = (field: keyof BookingForm, value: string): void => {
+  const handleFormChange = (field: keyof BookingForm, value: any): void => {
     setBookingForm(prev => ({ ...prev, [field]: value }));
+    setFormErrors(prev => ({ ...prev, [field]: '' })); // Clear previous errors
+  };
+
+  const handlePhoneChange = (value: string, countryData: any) => {
+    handleFormChange('phone', value);
+    if (countryData?.countryCode) {
+      setPhoneCountry(countryData.countryCode);
+    }
+  };
+
+  const handleCountryChange = (value: string) => {
+    handleFormChange('country', value);
+    setPhoneCountry(value.toLowerCase());
+    // remove any leading country code from phone when changing
+    if (bookingForm.phone) {
+      const phoneWithoutCode = bookingForm.phone.replace(/^\+\d+/, '');
+      handleFormChange('phone', phoneWithoutCode);
+    }
   };
 
   const handleNextStep = (): void => {
@@ -143,14 +499,22 @@ const ScheduleCallModal: React.FC<ScheduleCallModalProps> = ({ isOpen, onClose }
     setSelectedSlot(null);
     setSelectedWeek(0);
     setShowSuccessModal(false);
+    setCountrySearchQuery('');
+    setCountryDropdownOpen(false);
+    setFormErrors({});
+    setIsFormValidState(false);
     setBookingForm({
       firstName: '',
       lastName: '',
       email: '',
       phone: '',
       company: '',
-      message: ''
+      message: '',
+      country: 'IN',
+      projectTimeline: '',
+      consent: false,
     });
+    setPhoneCountry('in');
   };
 
   const handleSuccessClose = (): void => {
@@ -158,11 +522,10 @@ const ScheduleCallModal: React.FC<ScheduleCallModalProps> = ({ isOpen, onClose }
     onClose();
   };
 
-  const isFormValid = (): boolean => {
-    return bookingForm.firstName.trim() !== '' && 
-           bookingForm.lastName.trim() !== '' && 
-           bookingForm.email.trim() !== '' && 
-           bookingForm.phone.trim() !== '';
+  // Email validation function
+  const isValidEmail = (email: string): boolean => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
   };
 
   return (
@@ -197,24 +560,24 @@ const ScheduleCallModal: React.FC<ScheduleCallModalProps> = ({ isOpen, onClose }
           {/* Progress Indicator */}
           <div className="flex items-center mt-4">
             <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold ${
-              currentStep === 'schedule' ? 'bg-blue-500 text-white' : 'bg-green-500 text-white'
+              currentStep === 'schedule' ? 'bg-blue-500 text-white' : 'bg-orange-500 text-white'
             }`}>
               1
             </div>
             <div className={`flex-1 h-2 mx-2 rounded ${
-              currentStep === 'schedule' ? 'bg-gray-200' : 'bg-green-500'
+              currentStep === 'schedule' ? 'bg-gray-200' : 'bg-orange-500'
             }`}></div>
             <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold ${
               currentStep === 'schedule' ? 'bg-gray-200 text-gray-600' : 
-              currentStep === 'details' ? 'bg-blue-500 text-white' : 'bg-green-500 text-white'
+              currentStep === 'details' ? 'bg-blue-500 text-white' : 'bg-orange-500 text-white'
             }`}>
               2
             </div>
             <div className={`flex-1 h-2 mx-2 rounded ${
-              currentStep === 'confirmation' ? 'bg-green-500' : 'bg-gray-200'
+              currentStep === 'confirmation' ? 'bg-orange-500' : 'bg-gray-200'
             }`}></div>
             <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold ${
-              currentStep === 'confirmation' ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-600'
+              currentStep === 'confirmation' ? 'bg-orange-500 text-white' : 'bg-gray-200 text-gray-600'
             }`}>
               3
             </div>
@@ -356,6 +719,7 @@ const ScheduleCallModal: React.FC<ScheduleCallModalProps> = ({ isOpen, onClose }
           {/* Step 2: Contact Details */}
           {currentStep === 'details' && (
             <div className="space-y-6">
+              {/* Row: First/Last Name */}
               <div className="grid md:grid-cols-2 gap-6">
                 <div>
                   <Label htmlFor="firstName" className="text-sm font-semibold text-gray-700">
@@ -366,68 +730,200 @@ const ScheduleCallModal: React.FC<ScheduleCallModalProps> = ({ isOpen, onClose }
                     type="text"
                     value={bookingForm.firstName}
                     onChange={(e) => handleFormChange('firstName', e.target.value)}
-                    className="mt-2"
+                    className={`mt-2 ${formErrors.firstName ? 'border-red-500 focus:border-red-500 focus:ring-red-200' : ''}`}
                     placeholder="Enter your first name"
                   />
+                  {formErrors.firstName && (
+                    <p className="text-red-500 text-xs mt-1">{formErrors.firstName}</p>
+                  )}
                 </div>
                 <div>
                   <Label htmlFor="lastName" className="text-sm font-semibold text-gray-700">
-                    Last Name *
+                    Last Name
                   </Label>
                   <Input
                     id="lastName"
                     type="text"
                     value={bookingForm.lastName}
                     onChange={(e) => handleFormChange('lastName', e.target.value)}
-                    className="mt-2"
+                    className={`mt-2 ${formErrors.lastName ? 'border-red-500 focus:border-red-500 focus:ring-red-200' : ''}`}
                     placeholder="Enter your last name"
                   />
+                  {formErrors.lastName && (
+                    <p className="text-red-500 text-xs mt-1">{formErrors.lastName}</p>
+                  )}
                 </div>
               </div>
 
+              {/* Row: Country / Phone */}
               <div className="grid md:grid-cols-2 gap-6">
                 <div>
+                  <Label className="text-sm font-semibold text-gray-700">Country *</Label>
+                  <div className="mt-2">
+                    <div className="relative" ref={countryDropdownRef}>
+                      <button
+                        type="button"
+                        onClick={() => setCountryDropdownOpen(!countryDropdownOpen)}
+                        className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:outline-none transition text-left bg-white flex items-center justify-between ${
+                          formErrors.country 
+                            ? 'border-red-500 focus:border-red-500 focus:ring-red-200' 
+                            : 'border-gray-300 focus:border-indigo-400 focus:ring-indigo-100'
+                        }`}
+                      >
+                        <span className={bookingForm.country ? 'text-gray-900' : 'text-gray-500'}>
+                          {(() => {
+                            const country = countries.find(c => c.value === bookingForm.country);
+                            return country ? country.label : 'Select your country';
+                          })()}
+                        </span>
+                        <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                        </svg>
+                      </button>
+                      
+                      {countryDropdownOpen && (
+                        <div className="absolute top-full left-0 right-0 mt-1 bg-white border border-gray-300 rounded-lg shadow-lg z-[9999999] max-h-60 overflow-y-auto">
+                          <div className="p-2">
+                            <input
+                              type="text"
+                              placeholder="Search countries..."
+                              className="w-full px-2 py-1 border border-gray-300 rounded-md text-sm"
+                              value={countrySearchQuery}
+                              onChange={(e) => setCountrySearchQuery(e.target.value)}
+                            />
+                          </div>
+                          {filteredCountries.map((country) => (
+                            <button
+                              key={country.value}
+                              type="button"
+                              onClick={() => {
+                                handleCountryChange(country.value);
+                                setCountryDropdownOpen(false);
+                                setCountrySearchQuery(''); // Clear search query after selection
+                              }}
+                              className="w-full px-3 py-2 text-left hover:bg-gray-100 focus:bg-gray-100 focus:outline-none transition-colors"
+                            >
+                              {country.label}
+                            </button>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                  {formErrors.country && (
+                    <p className="text-red-500 text-xs mt-1">{formErrors.country}</p>
+                  )}
+                </div>
+                <div>
+                  <Label className="text-sm font-semibold text-gray-700">Phone Number *</Label>
+                  <div className="mt-2">
+                    <PhoneInput
+                      country={phoneCountry}
+                      value={bookingForm.phone}
+                      onChange={handlePhoneChange}
+                      inputClass={`!w-full !py-2 !pl-14 !pr-4 !rounded-lg !border !outline-none !transition ${
+                        formErrors.phone 
+                          ? '!border-red-500 focus:!border-red-500 focus:!ring-red-200' 
+                          : '!border-gray-300 focus:!border-indigo-400 focus:!ring-indigo-100'
+                      }`}
+                      buttonClass="!border-none !bg-transparent"
+                      dropdownClass="!rounded-lg !shadow-lg !bg-white"
+                      containerClass="!w-full"
+                      enableSearch
+                      countryCodeEditable={true}
+                      inputProps={{
+                        name: 'phone',
+                        required: true,
+                        autoFocus: false,
+                        autoComplete: 'tel',
+                      }}
+                    />
+                  </div>
+                  {formErrors.phone && (
+                    <p className="text-red-500 text-xs mt-1">{formErrors.phone}</p>
+                  )}
+                </div>
+              </div>
+
+              {/* Row: Company / Business Email */}
+              <div className="grid md:grid-cols-2 gap-6">
+                <div>
+                  <Label htmlFor="company" className="text-sm font-semibold text-gray-700">
+                    Company Name *
+                  </Label>
+                  <Input
+                    id="company"
+                    type="text"
+                    value={bookingForm.company}
+                    onChange={(e) => handleFormChange('company', e.target.value)}
+                    className={`mt-2 ${formErrors.company ? 'border-red-500 focus:border-red-500 focus:ring-red-200' : ''}`}
+                    placeholder="Your company name"
+                  />
+                  {formErrors.company && (
+                    <p className="text-red-500 text-xs mt-1">{formErrors.company}</p>
+                  )}
+                </div>
+                <div>
                   <Label htmlFor="email" className="text-sm font-semibold text-gray-700">
-                    Email Address *
+                    Business Email *
                   </Label>
                   <Input
                     id="email"
                     type="email"
                     value={bookingForm.email}
                     onChange={(e) => handleFormChange('email', e.target.value)}
-                    className="mt-2"
+                    className={`mt-2 ${formErrors.email ? 'border-red-500 focus:border-red-500 focus:ring-red-200' : ''}`}
                     placeholder="your.email@company.com"
                   />
-                </div>
-                <div>
-                  <Label htmlFor="phone" className="text-sm font-semibold text-gray-700">
-                    Phone Number *
-                  </Label>
-                  <Input
-                    id="phone"
-                    type="tel"
-                    value={bookingForm.phone}
-                    onChange={(e) => handleFormChange('phone', e.target.value)}
-                    className="mt-2"
-                    placeholder="+1 (555) 123-4567"
-                  />
+                  {formErrors.email && (
+                    <p className="text-red-500 text-xs mt-1">{formErrors.email}</p>
+                  )}
                 </div>
               </div>
 
+              {/* Project Timeline (Radio) */}
               <div>
-                <Label htmlFor="company" className="text-sm font-semibold text-gray-700">
-                  Company Name
-                </Label>
-                <Input
-                  id="company"
-                  type="text"
-                  value={bookingForm.company}
-                  onChange={(e) => handleFormChange('company', e.target.value)}
-                  className="mt-2"
-                  placeholder="Your company name"
-                />
+                <Label className="text-sm font-semibold text-gray-700">Project Timeline *</Label>
+                <RadioGroup
+                  className="mt-2 space-y-3"
+                  value={bookingForm.projectTimeline}
+                  onValueChange={(val) => handleFormChange('projectTimeline', val)}
+                >
+                  <div className="flex items-center space-x-3 p-3 rounded-lg border border-gray-200">
+                    <RadioGroupItem value="immediate" id="timeline-immediate" />
+                    <Label htmlFor="timeline-immediate" className="text-sm">Immediate (Within 1 month)</Label>
+                  </div>
+                  <div className="flex items-center space-x-3 p-3 rounded-lg border border-gray-200">
+                    <RadioGroupItem value="planned" id="timeline-planned" />
+                    <Label htmlFor="timeline-planned" className="text-sm">Planned (1-3 months)</Label>
+                  </div>
+                  <div className="flex items-center space-x-3 p-3 rounded-lg border border-gray-200">
+                    <RadioGroupItem value="researching" id="timeline-researching" />
+                    <Label htmlFor="timeline-researching" className="text-sm">Researching Options (3-6 months)</Label>
+                  </div>
+                </RadioGroup>
+                {formErrors.projectTimeline && (
+                  <p className="text-red-500 text-xs mt-1">{formErrors.projectTimeline}</p>
+                )}
               </div>
 
+              {/* Consent */}
+              <div>
+                <label className="flex items-center gap-2 cursor-pointer">
+                  <Checkbox
+                    checked={bookingForm.consent}
+                    onCheckedChange={(checked) => handleFormChange('consent', Boolean(checked))}
+                  />
+                  <span className="text-gray-700 text-sm">
+                    By submitting your personal data you agree to receive marketing communications. *
+                  </span>
+                </label>
+                {formErrors.consent && (
+                  <p className="text-red-500 text-xs mt-1">{formErrors.consent}</p>
+                )}
+              </div>
+
+              {/* Additional Information (optional) */}
               <div>
                 <Label htmlFor="message" className="text-sm font-semibold text-gray-700">
                   Additional Information
@@ -509,6 +1005,14 @@ const ScheduleCallModal: React.FC<ScheduleCallModalProps> = ({ isOpen, onClose }
                             <span>{bookingForm.company}</span>
                           </div>
                         )}
+                        <div className="flex items-center">
+                          <span className="w-4 h-4 mr-2" />
+                          <span>Country: {bookingForm.country}</span>
+                        </div>
+                        <div className="flex items-center">
+                          <span className="w-4 h-4 mr-2" />
+                          <span>Timeline: {bookingForm.projectTimeline}</span>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -543,7 +1047,7 @@ const ScheduleCallModal: React.FC<ScheduleCallModalProps> = ({ isOpen, onClose }
               onClick={currentStep === 'confirmation' ? handleBookingSubmit : handleNextStep}
               disabled={
                 (currentStep === 'schedule' && !selectedSlot) ||
-                (currentStep === 'details' && !isFormValid())
+                (currentStep === 'details' && !isFormValidState)
               }
               className="min-w-[140px] bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white shadow-md hover:shadow-lg"
             >

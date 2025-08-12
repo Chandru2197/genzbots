@@ -352,7 +352,7 @@ export default function PartnerShowcase({ addToRefs }: PartnerShowcaseProps) {
 
               {/* Enhanced Action Buttons */}
               <div className="flex flex-col sm:flex-row gap-4">
-                <SafeLink href="/contact">
+                <SafeLink href="/services/discovery-call">
                   <button className="w-full flex-1 py-4 px-6 bg-gradient-to-r from-blue-500 to-cyan-500 text-white font-semibold rounded-2xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-2xl group relative overflow-hidden">
                     <div className="absolute inset-0 bg-white/20 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
                     <span className="relative flex items-center justify-center">
@@ -363,7 +363,7 @@ export default function PartnerShowcase({ addToRefs }: PartnerShowcaseProps) {
                   </button>
                 </SafeLink>
                 
-                <SafeLink href="/services/discovery-call">
+                <SafeLink href="/contact">
                   <button className="w-full flex-1 py-4 px-6 bg-gradient-to-r from-green-500 to-emerald-500 text-white font-semibold rounded-2xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-2xl group relative overflow-hidden">
                     <div className="absolute inset-0 bg-white/20 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
                     <span className="relative flex items-center justify-center">
