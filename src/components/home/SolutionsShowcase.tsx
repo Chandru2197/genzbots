@@ -392,7 +392,8 @@ export default function SolutionsShowcase({ addToRefs }: SolutionsShowcaseProps)
                         <button className={`w-full lg:w-auto px-8 py-4 bg-gradient-to-r ${cardColors[activeIndex]} text-white font-semibold rounded-2xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-2xl group relative overflow-hidden`}>
                           <div className="absolute inset-0 bg-white/20 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
                           <span className="relative flex items-center justify-center lg:justify-start">
-                            {activeSolution.button_label}
+                            {/* {activeSolution.button_label} */}
+                            Learn More
                             <ArrowRight className="w-5 h-5 ml-2 transition-transform duration-300 group-hover:translate-x-1" />
                           </span>
                         </button>
