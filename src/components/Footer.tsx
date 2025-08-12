@@ -95,45 +95,38 @@ export default function Footer() {
     }
   ];
 
-  const stats = [
-    { icon: <Users className="w-6 h-6" />, value: '500+', label: 'Happy Clients', gradient: 'from-blue-500 to-cyan-500' },
-    { icon: <Award className="w-6 h-6" />, value: '1000+', label: 'Projects Completed', gradient: 'from-green-500 to-emerald-500' },
-    { icon: <Globe className="w-6 h-6" />, value: '15+', label: 'Countries Served', gradient: 'from-purple-500 to-indigo-500' },
-    { icon: <Shield className="w-6 h-6" />, value: '99.9%', label: 'Uptime Guarantee', gradient: 'from-orange-500 to-red-500' }
-  ];
-
   return (
-    <footer className="relative bg-gradient-to-br from-white via-blue-50 to-orange-50 text-white overflow-hidden">
-      {/* Enhanced background elements */}
-      <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-600/5 to-cyan-600/5"></div>
-        {[...Array(15)].map((_, i) => (
-          <div
-            key={i}
-            className="absolute opacity-10 animate-float"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animationDelay: `${Math.random() * 5}s`,
-              animationDuration: `${8 + Math.random() * 4}s`
-            }}
-          >
-            {i % 4 === 0 && <Sparkles className="w-4 h-4 text-blue-400" />}
-            {i % 4 === 1 && <Zap className="w-6 h-6 text-cyan-400" />}
-            {i % 4 === 2 && <Users className="w-5 h-5 text-green-400" />}
-            {i % 4 === 3 && <Award className="w-7 h-7 text-purple-400" />}
-          </div>
-        ))}
+    <footer className="relative bg-gradient-to-b from-gray-950 via-gray-900 to-gray-950 text-white overflow-hidden">
+      {/* Grid pattern overlay */}
+      <div className="pointer-events-none absolute inset-0">
+        <div
+          className="absolute inset-0 opacity-[0.07]"
+          style={{
+            backgroundImage: `linear-gradient(rgba(255,255,255,0.4) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.4) 1px, transparent 1px)`,
+            backgroundSize: '24px 24px'
+          }}
+        />
+        {/* Left red radial glow */}
+        <div
+          className="absolute -bottom-24 -left-40 w-[60rem] h-[60rem] opacity-60 blur-3xl"
+          style={{
+            background: 'radial-gradient(closest-side, rgba(239,68,68,0.55), rgba(239,68,68,0.35), transparent 70%)'
+          }}
+        />
+        {/* Right red radial glow */}
+        <div
+          className="absolute -bottom-32 -right-52 w-[62rem] h-[62rem] opacity-70 blur-[80px]"
+          style={{
+            background: 'radial-gradient(closest-side, rgba(185,28,28,0.65), rgba(185,28,28,0.35), transparent 75%)'
+          }}
+        />
       </div>
-
-      {/* Glowing top border */}
-      <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-cyan-500 to-transparent opacity-60"></div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Main Footer Content */}
         <div className="py-16">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
-            {/* Company Info - Enhanced */}
+            {/* Company Info */}
             <motion.div 
               className="lg:col-span-4"
               initial={{ opacity: 0, y: 30 }}
@@ -142,27 +135,23 @@ export default function Footer() {
               viewport={{ once: true }}
             >
               <div className="mb-8">
-                <div className="relative group">
-                  <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-cyan-500/20 rounded-3xl blur-xl opacity-0 transition-opacity duration-300"></div>
-                  <Image
-                    src={'/assets/svgs/GenZBotLogo.svg'}
-                    alt="GenZBot Logo"
-                    width={280}
-                    height={200}
-                    priority
-                    className="relative z-10 transition-transform duration-300"
-                  />
-                </div>
+                <Image
+                  src={'/assets/svgs/GenZBotLogo.svg'}
+                  alt="GenZBot Logo"
+                  width={280}
+                  height={200}
+                  priority
+                  className="filter brightness-0 invert"
+                />
               </div>
               
-              {/* Enhanced description */}
-              <p className="text-gray-500 text-lg leading-relaxed mb-8">
+              <p className="text-gray-300 text-lg leading-relaxed mb-8">
                 Pioneering the future of automation with AI-driven solutions. We transform 
                 manual processes into intelligent workflows, empowering businesses to scale 
                 efficiently and focus on what matters most.
               </p>
 
-              {/* Enhanced Social Links */}
+              {/* Social Links */}
               <div className="flex space-x-4">
                 {socialLinks.map((social, index) => (
                   <motion.a
@@ -170,24 +159,21 @@ export default function Footer() {
                     href={social.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className={`w-12 h-12 rounded-2xl bg-gradient-to-r ${social.gradient} flex items-center justify-center text-white hover:scale-110 transition-all duration-300 shadow-lg hover:shadow-2xl group`}
-                    whileHover={{ y: -5 }}
+                    className={`w-12 h-12 rounded-xl bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-all duration-300 border border-white/20 hover:border-white/40`}
+                    whileHover={{ y: -2, scale: 1.05 }}
                     initial={{ opacity: 0, scale: 0 }}
                     whileInView={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.3, delay: index * 0.1 }}
                     viewport={{ once: true }}
                   >
-                    <div className="relative">
-                      {social.icon}
-                      <ExternalLink className="absolute -top-1 -right-1 w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                    </div>
+                    {social.icon}
                   </motion.a>
                 ))}
               </div>
             </motion.div>
 
-            {/* Navigation Links - Enhanced */}
-            <div className="lg:col-span-8 grid grid-cols-1 md:grid-cols-3 gap-8">
+            {/* Navigation Links */}
+            <div className="lg:col-span-8 grid grid-cols-1 md:grid-cols-4 gap-8">
               {/* Quick Links */}
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
@@ -195,8 +181,8 @@ export default function Footer() {
                 transition={{ duration: 0.6, delay: 0.1 }}
                 viewport={{ once: true }}
               >
-                <h4 className="text-2xl font-bold mb-6 bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
-                  Quick Links
+                <h4 className="text-sm font-medium mb-6 text-gray-300 tracking-wide">
+                  <span className="text-gray-400 mr-2">//</span> Quick Links
                 </h4>
                 <ul className="space-y-3">
                   {quickLinks.map((link, index) => (
@@ -209,10 +195,9 @@ export default function Footer() {
                     >
                       <Link 
                         href={link.href} 
-                        className="text-gray-500 hover:text-orange-400 transition-all duration-300 flex items-center group"
+                        className="text-gray-300 hover:text-white transition-colors duration-300 text-sm"
                       >
-                        <ArrowRight className="w-4 h-4 mr-2 opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:translate-x-1" />
-                        <span className="group-hover:translate-x-1 transition-transform duration-300">{link.label}</span>
+                        {link.label}
                       </Link>
                     </motion.li>
                   ))}
@@ -220,14 +205,14 @@ export default function Footer() {
               </motion.div>
 
               {/* Services */}
-              <motion.div
+              {/* <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
                 viewport={{ once: true }}
               >
-                <h4 className="text-2xl font-bold mb-6 bg-gradient-to-r from-green-400 to-emerald-400 bg-clip-text text-transparent">
-                  Services
+                <h4 className="text-sm font-medium mb-6 text-gray-300 tracking-wide">
+                  <span className="text-gray-400 mr-2">//</span> Services
                 </h4>
                 <ul className="space-y-3">
                   {services.map((service, index) => (
@@ -240,25 +225,24 @@ export default function Footer() {
                     >
                       <Link 
                         href={service.href} 
-                        className="text-gray-500 hover:text-orange-400 transition-all duration-300 flex items-center group"
+                        className="text-gray-300 hover:text-white transition-colors duration-300 text-sm"
                       >
-                        <ArrowRight className="w-4 h-4 mr-2 opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:translate-x-1" />
-                        <span className="group-hover:translate-x-1 transition-transform duration-300">{service.label}</span>
+                        {service.label}
                       </Link>
                     </motion.li>
                   ))}
                 </ul>
-              </motion.div>
+              </motion.div> */}
 
               {/* Solutions */}
-              <motion.div
+              {/* <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.3 }}
                 viewport={{ once: true }}
               >
-                <h4 className="text-2xl font-bold mb-6 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-                  Solutions
+                <h4 className="text-sm font-medium mb-6 text-gray-300 tracking-wide">
+                  <span className="text-gray-400 mr-2">//</span> Solutions
                 </h4>
                 <ul className="space-y-3">
                   {solutions.map((solution, index) => (
@@ -271,142 +255,172 @@ export default function Footer() {
                     >
                       <Link 
                         href={solution.href} 
-                        className="text-gray-500 hover:text-orange-400 transition-all duration-300 flex items-center group"
+                        className="text-gray-300 hover:text-white transition-colors duration-300 text-sm"
                       >
-                        <ArrowRight className="w-4 h-4 mr-2 opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:translate-x-1" />
-                        <span className="group-hover:translate-x-1 transition-transform duration-300">{solution.label}</span>
+                        {solution.label}
                       </Link>
                     </motion.li>
                   ))}
+                </ul>
+              </motion.div> */}
+
+              {/* Support */}
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.4 }}
+                viewport={{ once: true }}
+              >
+                <h4 className="text-sm font-medium mb-6 text-gray-300 tracking-wide">
+                  <span className="text-gray-400 mr-2">//</span> Support
+                </h4>
+                <ul className="space-y-3">
+                  <li>
+                    <Link href="/contact" className="text-gray-300 hover:text-white transition-colors duration-300 text-sm">
+                      Contact Us
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/help" className="text-gray-300 hover:text-white transition-colors duration-300 text-sm">
+                      Help Center
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/documentation" className="text-gray-300 hover:text-white transition-colors duration-300 text-sm">
+                      Documentation
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/support" className="text-gray-300 hover:text-white transition-colors duration-300 text-sm">
+                      Technical Support
+                    </Link>
+                  </li>
                 </ul>
               </motion.div>
             </div>
           </div>
         </div>
 
-        {/* Enhanced Stats Section */}
-        {/* <motion.div 
-          className="py-12 border-t border-white/10"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-        >
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            {stats.map((stat, index) => (
-              <motion.div
-                key={stat.label}
-                className="text-center group"
-                initial={{ opacity: 0, scale: 0.8 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                whileHover={{ scale: 1.05 }}
-              >
-                <div className="bg-white/10 backdrop-blur-xl rounded-2xl p-6 border border-white/20 hover:bg-white/15 transition-all duration-300">
-                  <div className={`w-12 h-12 mx-auto mb-4 rounded-xl bg-gradient-to-r ${stat.gradient} flex items-center justify-center text-white shadow-lg group-hover:scale-110 transition-transform duration-300`}>
-                    {stat.icon}
-                  </div>
-                  <div className="text-3xl font-bold text-black mb-2 group-hover:text-cyan-300 transition-colors duration-300">
-                    {stat.value}
-                  </div>
-                  <div className="text-gray-500 text-sm">{stat.label}</div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div> */}
+        {/* Divider */}
+        <div className="border-t border-white/20"></div>
 
-        {/* Enhanced Contact Section */}
-        <motion.div 
-          className="py-12 border-t border-white/10"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-        >
-          <div className="bg-white/5 backdrop-blur-xl rounded-3xl p-8 border border-white/10">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              <div className="flex items-center gap-4 group">
-                <div className="w-12 h-12 rounded-2xl bg-gradient-to-r from-blue-500 to-cyan-500 flex items-center justify-center text-white shadow-lg group-hover:scale-110 transition-transform duration-300">
-                  <Mail className="w-6 h-6" />
-                </div>
-                <div>
-                  <h5 className="font-bold text-black mb-1">Email Us</h5>
-                  <a href="mailto:info@genzbots.com" className="text-gray-500 hover:text-orange-500 transition-colors">
-                    info@genzbots.com
-                  </a>
-                </div>
+        {/* Newsletter and Legal Section */}
+        <div className="py-12">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            {/* Newsletter Signup */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+            >
+              <h3 className="text-2xl font-bold text-white mb-4">
+                Never miss an update
+              </h3>
+              <p className="text-gray-300 mb-6 text-sm leading-relaxed">
+                Get all the latest news, blog posts and product updates from GenZBot. 
+                Delivered directly to your inbox. We'll rarely send more than one email a month.
+              </p>
+              
+              <div className="flex flex-col sm:flex-row gap-4 mb-4">
+                <input
+                  type="email"
+                  placeholder="example@gmail.com"
+                  className="flex-1 px-4 py-3 bg-gray-800 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-red-500 transition-colors"
+                />
+                <button className="px-6 py-3 bg-white text-gray-900 font-semibold rounded-lg hover:bg-gray-100 transition-colors">
+                  Join
+                </button>
               </div>
               
-              <div className="flex items-center gap-4 group">
-                <div className="w-12 h-12 rounded-2xl bg-gradient-to-r from-green-500 to-emerald-500 flex items-center justify-center text-white shadow-lg group-hover:scale-110 transition-transform duration-300">
-                  <Phone className="w-6 h-6" />
-                </div>
-                <div>
-                  <h5 className="font-bold text-black mb-1">Call Us</h5>
-                  <a href="tel:+15085016411" className="text-gray-500 hover:text-orange-500 transition-colors">
-                    +1 (508) 501 6411
-                  </a>
-                </div>
+              <div className="flex items-center gap-3">
+                <input
+                  type="checkbox"
+                  id="marketing-consent"
+                  className="w-4 h-4 rounded border border-gray-500 bg-gray-800 accent-red-600"
+                />
+                <span className="w-5 h-px bg-white/30" />
+                <label htmlFor="marketing-consent" className="text-gray-400 text-sm">
+                  I agree to receive marketing emails from GenZBot
+                </label>
               </div>
-              
-              <div className="flex items-center gap-4 group">
-                <div className="w-12 h-12 rounded-2xl bg-gradient-to-r from-purple-500 to-indigo-500 flex items-center justify-center text-white shadow-lg group-hover:scale-110 transition-transform duration-300">
-                  <MapPin className="w-6 h-6" />
+            </motion.div>
+
+            {/* Contact Info */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              viewport={{ once: true }}
+              className="flex flex-col justify-center"
+            >
+              <div className="space-y-6">
+                <div className="flex items-center gap-4">
+                  <div className="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center">
+                    <Mail className="w-5 h-5 text-white" />
+                  </div>
+                  <div>
+                    <p className="text-gray-300 text-sm">Email</p>
+                    <a href="mailto:info@genzbots.com" className="text-white hover:text-red-400 transition-colors">
+                      info@genzbots.com
+                    </a>
+                  </div>
                 </div>
-                <div>
-                  <h5 className="font-bold text-black mb-1">Visit Us</h5>
-                  <div className="text-gray-500 hover:text-orange-500 text-sm leading-relaxed">
-                    8 The Green, Suite A<br />
-                    Dover, Delaware 19901<br />
-                    United States
+                
+                <div className="flex items-center gap-4">
+                  <div className="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center">
+                    <Phone className="w-5 h-5 text-white" />
+                  </div>
+                  <div>
+                    <p className="text-gray-300 text-sm">Phone</p>
+                    <a href="tel:+15085016411" className="text-white hover:text-red-400 transition-colors">
+                      +1 (508) 501 6411
+                    </a>
+                  </div>
+                </div>
+                
+                <div className="flex items-center gap-4">
+                  <div className="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center">
+                    <MapPin className="w-5 h-5 text-white" />
+                  </div>
+                  <div>
+                    <p className="text-gray-300 text-sm">Address</p>
+                    <p className="text-white text-sm">
+                      8 The Green, Suite A<br />
+                      Dover, Delaware 19901<br />
+                      United States
+                    </p>
                   </div>
                 </div>
               </div>
-            </div>
+            </motion.div>
           </div>
-        </motion.div>
+        </div>
 
-        {/* Enhanced Footer Bottom */}
+        {/* Footer Bottom */}
         <motion.div 
-          className="py-8 border-t border-white/10"
+          className="py-8 border-t border-white/20"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
         >
           <div className="flex flex-col md:flex-row justify-between items-center gap-6">
-            <div className="flex items-center gap-2 text-black">
-              <span>© 2025 GenZBot. All rights reserved.</span>
-              <Heart className="w-4 h-4 text-red-600 animate-pulse" />
-              <span>Made with passion for automation</span>
+            <div className="text-gray-400 text-sm">
+              © 2025 GenZBot, Designed by GenZBot Team
             </div>
             
             <div className="flex items-center gap-8">
-              <Link href="/privacy" className="text-black hover:text-amber-400 transition-colors duration-300">
+              <Link href="/privacy" className="text-gray-400 hover:text-white transition-colors text-sm">
                 Privacy Policy
               </Link>
-              <Link href="/terms" className="text-black hover:text-orange-400 transition-colors duration-300">
+              <Link href="/terms" className="text-gray-400 hover:text-white transition-colors text-sm">
                 Terms of Service
-              </Link>
-              <Link href="/cookies" className="text-black hover:text-blue-400 transition-colors duration-300">
-                Cookie Policy
               </Link>
             </div>
           </div>
         </motion.div>
       </div>
-
-      <style jsx>{`
-        @keyframes float {
-          0%, 100% { transform: translateY(0px) rotate(0deg); }
-          50% { transform: translateY(-20px) rotate(180deg); }
-        }
-        .animate-float {
-          animation: float 12s ease-in-out infinite;
-        }
-      `}</style>
     </footer>
   );
 }

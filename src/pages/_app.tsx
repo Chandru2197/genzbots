@@ -12,6 +12,7 @@ import '../styles/globals.css';
 import { ParticlesBackground } from '../components/enhanced/ParticlesBackground';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+import BackToTop from '../components/BackToTop';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -60,6 +61,7 @@ export default function App({ Component, pageProps, router }: AppProps) {
           </AnimatePresence>
         </MantineProvider>
         {['/cookies', '/privacy', '/terms'].includes(router.pathname) ? null : <Footer />}
+        {['/cookies', '/privacy', '/terms'].includes(router.pathname) ? null : <BackToTop />}
       </div>
     </>
   );
