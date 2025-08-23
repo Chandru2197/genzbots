@@ -241,36 +241,8 @@ export const contact2Contact: ContactProps = {
 export const features2Contact: FeaturesProps = {
   columns: 3,
   header: {
-    title: 'Why Choose Our Automation Solutions?',
-    subtitle: 'Discover what makes us the preferred choice for business automation',
+    title: '',
+    subtitle: '',
   },
-  items: [
-    {
-      title: 'Expert Consultation',
-      description: 'Get personalized advice from our automation specialists',
-      icon: HelpCircle,
-      callToAction: {
-        text: 'Learn More',
-        href: '/services',
-      },
-    },
-    {
-      title: '24/7 Support',
-      description: 'Round-the-clock technical support and maintenance',
-      icon: MessagesSquare,
-      callToAction: {
-        text: 'Contact Support',
-        href: '/support',
-      },
-    },
-    {
-      title: 'Proven Results',
-      description: 'Join 500+ companies that have transformed their operations',
-      icon: Headset,
-      callToAction: {
-        text: 'View Case Studies',
-        href: '/case-studies',
-      },
-    },
-  ],
+  items: [],
 };

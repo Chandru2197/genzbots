@@ -5,21 +5,21 @@ import Link from 'next/link';
 import SafeLink from '@/components/ui/SafeLink';
 import { useState, useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
-import { 
-  IconCircleDashedCheck, 
-  IconHandFingerRight, 
+import {
+  IconCircleDashedCheck,
+  IconHandFingerRight,
   IconPhoneCall,
   IconTarget,
   IconBulb,
   IconRocket,
   IconShield
 } from '@tabler/icons-react';
-import { 
-  Sparkles, 
-  Zap, 
-  TrendingUp, 
-  Users, 
-  Globe, 
+import {
+  Sparkles,
+  Zap,
+  TrendingUp,
+  Users,
+  Globe,
   Award,
   CheckCircle,
   ArrowRight,
@@ -30,151 +30,176 @@ interface PartnerShowcaseProps {
   addToRefs?: (el: HTMLElement | null) => void;
 }
 
-const MiniCard = ({ 
-  title, 
-  description, 
-  gradientStart, 
-  gradientEnd, 
-  index 
-}: { 
-  title: string; 
-  description: string; 
-  gradientStart: string; 
-  gradientEnd: string; 
+const MiniCard = ({
+  title,
+  description,
+  gradientStart,
+  gradientEnd,
+  index,
+  icon: IconComponent
+}: {
+  title: string;
+  description: string;
+  gradientStart: string;
+  gradientEnd: string;
   index: number;
+  icon: any;
 }) => {
   const [isHovered, setIsHovered] = useState(-1);
-  
+
   return (
-    <motion.div 
-      className="relative h-full min-h-[400px] group cursor-pointer perspective-1000"
+    <motion.div
+      className="relative h-full min-h-[420px] group cursor-pointer"
       onMouseEnter={() => setIsHovered(index)}
       onMouseLeave={() => setIsHovered(-1)}
-      initial={{ opacity: 0, scale: 0.8 }}
+      initial={{ opacity: 0, scale: 0.9 }}
       animate={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 0.5, delay: index * 0.1 }}
-      whileHover={{ 
-        y: -5,
-        rotateX: 2,
-        rotateY: 2,
+      transition={{ duration: 0.6, delay: index * 0.15 }}
+      whileHover={{
+        y: -8,
+        scale: 1.02,
       }}
     >
-      {/* Enhanced glowing background with stronger blur */}
-      <div 
-        className="absolute inset-0 rounded-3xl blur-2xl transform transition-all duration-500 group-hover:scale-110"
+      {/* Colorful background glow */}
+      <div
+        className="absolute inset-0 rounded-3xl blur-xl transform transition-all duration-500 group-hover:scale-110"
         style={{
-          background: `radial-gradient(circle at center, ${gradientStart}40, ${gradientEnd}20)`,
-          opacity: isHovered === index ? '0.6' : '0.3'
+          background: `linear-gradient(135deg, ${gradientStart}, ${gradientEnd})`,
+          opacity: 0.6,
         }}
       ></div>
-      
-      {/* Glass card container with enhanced blur and transparency */}
-      <div 
-        className="relative h-full overflow-hidden rounded-3xl transition-all duration-500 group-hover:shadow-[0_0_40px_rgba(0,0,0,0.3)]"
+
+      {/* Glassmorphism card */}
+      <div
+        className="relative h-full overflow-hidden rounded-3xl transform transition-all duration-500 group-hover:scale-105"
         style={{
-          background: `linear-gradient(135deg, rgba(0,0,0,0.4), rgba(0,0,0,0.2))`,
-          backdropFilter: 'blur(8px) saturate(150%)',
-          WebkitBackdropFilter: 'blur(8px) saturate(150%)',
-          border: '1px solid rgba(255,255,255,0.12)',
-          boxShadow: isHovered === index 
-            ? '0 8px 32px rgba(0,0,0,0.4), inset 0 0 0 1px rgba(255,255,255,0.1), inset 0 0 32px rgba(0,0,0,0.3)'
-            : '0 4px 16px rgba(0,0,0,0.3), inset 0 0 0 1px rgba(255,255,255,0.08)'
+          background: `linear-gradient(135deg, 
+            rgba(255,255,255,0.25), 
+            rgba(255,255,255,0.1))`,
+          backdropFilter: 'blur(20px) saturate(180%)',
+          WebkitBackdropFilter: 'blur(20px) saturate(180%)',
+          border: '1px solid rgba(255,255,255,0.3)',
+          boxShadow: `
+            0 8px 32px rgba(0,0,0,0.12),
+            0 0 0 1px rgba(255,255,255,0.05),
+            inset 0 1px 0 rgba(255,255,255,0.3),
+            inset 0 -1px 0 rgba(255,255,255,0.1),
+            0 20px 40px ${gradientStart}20
+          `
         }}
       >
-        {/* Animated light effect */}
-        <div 
-          className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700"
+        {/* Subtle gradient overlay for depth */}
+        <div
+          className="absolute inset-0 rounded-3xl opacity-30"
           style={{
-            background: `linear-gradient(105deg, 
-              transparent 20%, 
-              rgba(255,255,255,0.1) 40%,
-              rgba(255,255,255,0.1) 60%,
-              transparent 80%)`,
-            transform: isHovered === index ? 'translateX(100%)' : 'translateX(-100%)',
-            transition: 'transform 0.75s ease-in-out'
+            background: `linear-gradient(135deg, 
+              ${gradientStart}15, 
+              transparent 50%, 
+              ${gradientEnd}15)`
           }}
         ></div>
 
-        {/* Content container with glass effect */}
-        <div className="relative h-full flex flex-col p-6 z-10">
-          {/* Enhanced header with glass effect */}
-          <div className="flex items-center justify-between mb-4">
-            <div 
-              className="w-12 h-12 rounded-2xl flex items-center justify-center transform transition-all duration-500 group-hover:scale-110 group-hover:rotate-12"
+        {/* Animated light reflection */}
+        <div
+          className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700"
+          style={{
+            background: `linear-gradient(105deg, 
+              transparent 30%, 
+              rgba(255,255,255,0.4) 50%,
+              transparent 70%)`,
+            transform: isHovered === index ? 'translateX(100%)' : 'translateX(-100%)',
+            transition: 'transform 0.8s ease-in-out'
+          }}
+        ></div>
+
+        {/* Card content */}
+        <div className="relative h-full p-6 flex flex-col z-10">
+          {/* Header with icon and status */}
+          <div className="flex items-center justify-between mb-6">
+            <div
+              className="w-16 h-16 rounded-2xl flex items-center justify-center transform transition-all duration-500 group-hover:scale-110 group-hover:rotate-6"
               style={{
-                background: `linear-gradient(135deg, ${gradientStart}90, ${gradientEnd}90)`,
-                backdropFilter: 'blur(4px)',
-                border: '1px solid rgba(255,255,255,0.2)',
-                boxShadow: `0 4px 12px ${gradientStart}30`
+                background: `linear-gradient(135deg, 
+                  rgba(255,255,255,0.4), 
+                  rgba(255,255,255,0.2))`,
+                backdropFilter: 'blur(15px)',
+                border: '1px solid rgba(255,255,255,0.4)',
+                boxShadow: `
+                  0 8px 32px rgba(0,0,0,0.1),
+                  inset 0 1px 0 rgba(255,255,255,0.5),
+                  0 4px 12px ${gradientStart}30
+                `
               }}
             >
-              <Star className="w-6 h-6 text-white" />
+              <IconComponent className="w-8 h-8 text-white drop-shadow-lg" />
             </div>
             <div className="flex items-center space-x-2">
-              <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse shadow-[0_0_8px_rgba(74,222,128,0.6)]"></div>
-              <span className="text-green-400 text-xs font-semibold">NEW</span>
+              <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse shadow-[0_0_8px_rgba(74,222,128,0.8)]"></div>
+              <span className="text-white text-sm font-bold tracking-wide"
+                style={{
+                  textShadow: '0 2px 4px rgba(0,0,0,0.6)'
+                }}
+              >
+                NEW
+              </span>
             </div>
           </div>
-          
-          {/* Enhanced content section */}
-          <div className="mb-6">
-            <h3 className="text-xl font-bold mb-3 transition-colors duration-300 line-clamp-2"
+
+          {/* Title and description */}
+          <div className="mb-6 flex-grow">
+            <h3 className="text-2xl font-bold mb-4 text-white leading-tight"
               style={{
-                color: 'white',
-                textShadow: '0 2px 4px rgba(0,0,0,0.3)',
-                WebkitTextStroke: '0.5px rgba(0,0,0,0.1)'
+                textShadow: '0 4px 8px rgba(0,0,0,0.8), 0 2px 4px rgba(0,0,0,0.6)'
               }}
             >
               {title}
             </h3>
-            <p className="text-gray-100 text-sm leading-relaxed line-clamp-4 font-medium tracking-wide" 
+            <p className="text-white text-sm leading-relaxed font-medium"
               style={{
-                textShadow: '0 1px 2px rgba(0,0,0,0.2)'
+                textShadow: '0 2px 6px rgba(0,0,0,0.8), 0 1px 3px rgba(0,0,0,0.6)'
               }}
             >
               {description}
             </p>
           </div>
-          
-          {/* Enhanced stats with glass effect */}
-          <div className="grid grid-cols-3 gap-2 mt-auto">
+
+          {/* Stats grid */}
+          <div className="grid grid-cols-3 gap-3 mt-auto">
             {[
-              { value: '99%', label: 'Success', color: gradientStart },
-              { value: '24/7', label: 'Support', color: gradientEnd },
-              { value: 'Fast', label: 'Deploy', color: 'white' }
+              { value: '99%', label: 'Success', color: '#00ff88' },
+              { value: '24/7', label: 'Support', color: '#00d4ff' },
+              { value: 'Fast', label: 'Deploy', color: '#ff6b6b' }
             ].map((stat, i) => (
-              <div 
+              <div
                 key={i}
-                className="relative overflow-hidden rounded-xl transition-all duration-300 group-hover:shadow-lg"
+                className="relative overflow-hidden rounded-xl p-3 transition-all duration-300"
                 style={{
-                  background: 'rgba(255,255,255,0.05)',
-                  backdropFilter: 'blur(4px)',
-                  border: '1px solid rgba(255,255,255,0.1)'
+                  background: `linear-gradient(135deg, 
+                    rgba(255,255,255,0.3), 
+                    rgba(255,255,255,0.1))`,
+                  backdropFilter: 'blur(15px)',
+                  border: '1px solid rgba(255,255,255,0.4)',
+                  boxShadow: `
+                    0 4px 12px rgba(0,0,0,0.1),
+                    inset 0 1px 0 rgba(255,255,255,0.4)
+                  `
                 }}
               >
-                <div className="p-2 relative z-10">
-                  <div className="text-sm font-bold tracking-wide" 
-                    style={{ 
-                      color: stat.color,
-                      textShadow: '0 1px 2px rgba(0,0,0,0.2)'
-                    }}
-                  >
-                    {stat.value}
-                  </div>
-                  <div className="text-xs text-white font-medium tracking-wide"
-                    style={{
-                      textShadow: '0 1px 2px rgba(0,0,0,0.2)'
-                    }}
-                  >
-                    {stat.label}
-                  </div>
-                </div>
-                <div 
-                  className="absolute inset-0 opacity-0 group-hover:opacity-20 transition-opacity duration-300"
+                <div className="text-sm font-bold mb-1"
                   style={{
-                    background: `linear-gradient(135deg, ${gradientStart}40, ${gradientEnd}40)`
+                    color: stat.color,
+                    textShadow: '0 2px 4px rgba(0,0,0,0.8)'
                   }}
-                ></div>
+                >
+                  {stat.value}
+                </div>
+                <div className="text-xs font-medium text-white"
+                  style={{
+                    textShadow: '0 1px 3px rgba(0,0,0,0.8)'
+                  }}
+                >
+                  {stat.label}
+                </div>
               </div>
             ))}
           </div>
@@ -197,34 +222,39 @@ export default function PartnerShowcase({ addToRefs }: PartnerShowcaseProps) {
       description: `At GenZbots, we don't just automate tasks—we reimagine workflows to unlock productivity, accuracy, and scalability. Our solutions cut through operational bottlenecks, freeing your team to focus on strategic growth while we handle the rest.`,
       features: [
         {
-          text: 'Borderless Innovation',
-          gradientStart: "#a1c4fd",
-          gradientEnd: "#c2e9fb",
-          description: "With dual hubs in India (cost-efficient delivery) and the US (cutting-edge tech adoption), we blend global expertise with localized execution."
+          text: 'Global Expertise',
+          gradientStart: "#1e3a8a",
+          gradientEnd: "#3b82f6",
+          description: "Dual hubs in India and the US provide cost-efficient delivery with cutting-edge technology adoption for optimal results.",
+          icon: Globe
         },
         {
-          text: 'Hyper-Personalized Automation',
-          gradientStart: "#d4fc79", 
-          gradientEnd: "#96e6a1",
-          description: "No cookie-cutter solutions. We audit, redesign, and deploy workflows tailored to your industry, systems, and pain points."
+          text: 'Tailored Solutions',
+          gradientStart: "#dc2626",
+          gradientEnd: "#f97316",
+          description: "Custom automation workflows designed specifically for your industry, systems, and unique business challenges.",
+          icon: IconTarget
         },
         {
-          text: 'ROI-First Mindset',
-          gradientStart: "#fccb90",
-          gradientEnd: "#d57eeb",
-          description: "We track time saved, error reduction, and cost impact—so you see measurable gains from Day 1."
+          text: 'Proven ROI',
+          gradientStart: "#0891b2",
+          gradientEnd: "#06b6d4",
+          description: "Measurable results from day one with tracked time savings, error reduction, and quantifiable cost impact.",
+          icon: TrendingUp
         },
         {
-          text: 'Future-Proof Tech Stack',
-          gradientStart: "#d299c2",
-          gradientEnd: "#fef9d7",
-          description: "Platform-agnostic approach. We recommend only what fits your needs, whether it's UiPath, Power Automate, or custom Python bots."
-        },  
+          text: 'Future-Ready Technology',
+          gradientStart: "#7c3aed",
+          gradientEnd: "#a855f7",
+          description: "Platform-agnostic solutions using the best tools for your needs - UiPath, Power Automate, or custom development.",
+          icon: IconBulb
+        },
         {
-          text: 'White-Glove Partnership',
-          gradientStart: "#fddb92",
-          gradientEnd: "#d1fdff",
-          description: "From pilot to scale, we're with you—offering 24/7 support, continuous optimization, and change management."
+          text: 'End-to-End Support',
+          gradientStart: "#059669",
+          gradientEnd: "#10b981",
+          description: "Complete partnership from pilot to scale with 24/7 support, continuous optimization, and change management.",
+          icon: IconCircleDashedCheck
         },
       ],
       advantage: [
@@ -289,7 +319,7 @@ export default function PartnerShowcase({ addToRefs }: PartnerShowcaseProps) {
             <span className="font-semibold text-lg">Partnership Excellence</span>
             <Sparkles className="w-5 h-5 ml-3" />
           </div>
-          
+
           <h2 className="text-6xl md:text-7xl font-bold leading-tight mb-6">
             <span className="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
               {activeSolution.title.split(' ').slice(0, 2).join(' ')}
@@ -299,7 +329,7 @@ export default function PartnerShowcase({ addToRefs }: PartnerShowcaseProps) {
               {activeSolution.title.split(' ').slice(2).join(' ')}
             </span>
           </h2>
-          
+
           <p className="text-xl text-blue-100 max-w-4xl mx-auto leading-relaxed">
             Transform Your Business with Intelligent Automation—Designed for the Future
           </p>
@@ -321,7 +351,7 @@ export default function PartnerShowcase({ addToRefs }: PartnerShowcaseProps) {
               </div>
 
               {/* Mini Cards Grid */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6 mb-8">
                 {activeSolution.features.map((feature: any, index: number) => (
                   <MiniCard
                     key={index}
@@ -330,12 +360,13 @@ export default function PartnerShowcase({ addToRefs }: PartnerShowcaseProps) {
                     gradientStart={feature.gradientStart}
                     gradientEnd={feature.gradientEnd}
                     index={index}
+                    icon={feature.icon}
                   />
                 ))}
               </div>
 
               {/* Call to Action Quote */}
-              <motion.div 
+              <motion.div
                 className="bg-white/10 rounded-2xl p-6 border border-white/20 mb-8"
                 initial={{ opacity: 0, y: 20 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -362,7 +393,7 @@ export default function PartnerShowcase({ addToRefs }: PartnerShowcaseProps) {
                     </span>
                   </button>
                 </SafeLink>
-                
+
                 <SafeLink href="/contact">
                   <button className="w-full flex-1 py-4 px-6 bg-gradient-to-r from-green-500 to-emerald-500 text-white font-semibold rounded-2xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-2xl group relative overflow-hidden">
                     <div className="absolute inset-0 bg-white/20 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>

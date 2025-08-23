@@ -24,7 +24,7 @@ const ServicesPage = () => {
       icon: FileText,
       color: 'from-blue-500 to-cyan-500',
       features: ['Strategic Planning', 'Architecture Design', 'ROI Analysis', 'Risk Assessment'],
-      href: '/services/bot-blueprint'
+      href: '/automation-process/bot-blueprint'
     },
     {
       id: 'build-test',
@@ -33,7 +33,7 @@ const ServicesPage = () => {
       icon: Wrench,
       color: 'from-green-500 to-emerald-500',
       features: ['Development', 'Testing', 'Quality Assurance', 'Performance Optimization'],
-      href: '/services/build-and-test'
+      href: '/automation-process/build-and-test'
     },
     {
       id: 'discovery-call',
@@ -42,7 +42,7 @@ const ServicesPage = () => {
       icon: Users,
       color: 'from-purple-500 to-indigo-500',
       features: ['Process Analysis', 'Opportunity Assessment', 'Custom Solutions', 'Expert Consultation'],
-      href: '/services/discovery-call'
+      href: '/automation-process/discovery-call'
     },
     {
       id: 'hyper-care',
@@ -51,7 +51,7 @@ const ServicesPage = () => {
       icon: Shield,
       color: 'from-red-500 to-pink-500',
       features: ['24/7 Monitoring', 'Proactive Support', 'Performance Tuning', 'Issue Resolution'],
-      href: '/services/hyper-care'
+      href: '/automation-process/hyper-care'
     },
     {
       id: 'scale-optimize',
@@ -60,7 +60,7 @@ const ServicesPage = () => {
       icon: TrendingUp,
       color: 'from-orange-500 to-yellow-500',
       features: ['Scalability Planning', 'Performance Enhancement', 'Cost Optimization', 'Growth Strategy'],
-      href: '/services/scale-optimize'
+      href: '/automation-process/scale-optimize'
     }
   ];
 
@@ -95,12 +95,7 @@ const ServicesPage = () => {
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 relative z-10">
           {/* Header */}
-          <motion.div
-            className="text-center mb-16"
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-          >
+          <div className="text-center mb-16">
             <div className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-blue-600 to-cyan-600 rounded-full text-white mb-8 shadow-lg">
               <Sparkles className="w-6 h-6 mr-3" />
               <span className="font-semibold text-lg">Our Services</span>
@@ -120,19 +115,16 @@ const ServicesPage = () => {
             <p className="text-xl text-blue-100 max-w-4xl mx-auto leading-relaxed">
               From strategic planning to ongoing optimization, we provide comprehensive automation services tailored to your business needs.
             </p>
-          </motion.div>
+          </div>
 
           {/* Services Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
             {services.map((service, index) => {
               const IconComponent = service.icon;
               return (
-                <motion.div
+                <div
                   key={service.id}
                   className="relative group"
-                  initial={{ opacity: 0, y: 50 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
                 >
                   <SafeLink href={service.href}>
                     <div 
@@ -180,18 +172,13 @@ const ServicesPage = () => {
                       </div>
                     </div>
                   </SafeLink>
-                </motion.div>
+                </div>
               );
             })}
           </div>
 
           {/* CTA Section */}
-          <motion.div
-            className="text-center"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
-          >
+          <div className="text-center">
             <div 
               className="bg-white/10 backdrop-blur-xl rounded-3xl p-12 border border-white/20 shadow-2xl"
             >
@@ -214,7 +201,7 @@ const ServicesPage = () => {
                 </SafeLink>
               </div>
             </div>
-          </motion.div>
+          </div>
         </div>
 
         <style jsx>{`

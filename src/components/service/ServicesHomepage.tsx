@@ -310,7 +310,7 @@ const ServicesHomepage: React.FC = () => {
           
           {/* Enhanced Description */}
           <p className="text-2xl text-gray-600 max-w-6xl mx-auto leading-relaxed mb-12 animate-fade-up">
-            Discover tailored automation solutions designed for your specific industry. From banking to healthcare, 
+            Explore our comprehensive automation process designed for your specific industry. From banking to healthcare, 
             retail to manufacturing - we've engineered specialized workflows that understand your unique challenges.
           </p>
 
@@ -359,11 +359,11 @@ const ServicesHomepage: React.FC = () => {
           {/* Section Header */}
           <div className="text-center mb-20">
             <h2 className="text-6xl font-black text-gray-900 mb-6 animate-fade-up">
-              Industry-Specific
-              <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"> Solutions</span>
+              Automation Process
+              <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"> Flow</span>
             </h2>
             <p className="text-2xl text-gray-600 max-w-4xl mx-auto animate-fade-up" style={{ animationDelay: '200ms' }}>
-              Click on any industry to discover our specialized automation workflows
+              Click on any industry to discover our specialized automation process workflows
             </p>
           </div>
 

@@ -90,7 +90,7 @@ const ReactFlowSection: React.FC<ReactFlowSectionProps> = ({ addToRefs }) => {
         description: 'Free 30-min consultation',
         icon: <Search className="w-5 h-5" />,
         color: 'from-blue-500 to-cyan-500',
-        link: '/services/discovery-call',
+        link: '/automation-process/discovery-call',
         status: 'idle',
         details: {
           duration: '30 minutes',
@@ -110,7 +110,7 @@ const ReactFlowSection: React.FC<ReactFlowSectionProps> = ({ addToRefs }) => {
         icon: <Activity className="w-5 h-5" />,
         color: 'from-green-500 to-emerald-500',
         status: 'idle',
-        link:'/services/discovery-call',
+        link:'/automation-process/discovery-call',
         details: {
           duration: '3-5 days',
           deliverables: ['Process Maps', 'Inefficiency Report', 'Automation Opportunities'],
@@ -129,7 +129,7 @@ const ReactFlowSection: React.FC<ReactFlowSectionProps> = ({ addToRefs }) => {
         icon: <DollarSign className="w-5 h-5" />,
         color: 'from-yellow-500 to-orange-500',
         status: 'idle',
-        link:'/services/discovery-call',
+        link:'/automation-process/discovery-call',
         details: {
           duration: '2-3 days',
           deliverables: ['ROI Analysis', 'Cost-Benefit Report', 'Timeline Projection'],
@@ -148,7 +148,7 @@ const ReactFlowSection: React.FC<ReactFlowSectionProps> = ({ addToRefs }) => {
         icon: <Code className="w-5 h-5" />,
         color: 'from-purple-500 to-indigo-500',
         status: 'idle',
-        link: '/services/bot-blueprint',
+        link: '/automation-process/bot-blueprint',
         details: {
           duration: '1-2 weeks',
           deliverables: ['Technical Specification', 'UI/UX Mockups', 'Integration Plan'],
@@ -167,7 +167,7 @@ const ReactFlowSection: React.FC<ReactFlowSectionProps> = ({ addToRefs }) => {
         icon: <Zap className="w-5 h-5" />,
         color: 'from-red-500 to-pink-500',
         status: 'idle',
-        link: '/services/build-and-test',
+        link: '/automation-process/build-and-test',
         details: {
           duration: '2-6 weeks',
           deliverables: ['Working Bot', 'Admin Dashboard', 'User Training'],
@@ -186,7 +186,7 @@ const ReactFlowSection: React.FC<ReactFlowSectionProps> = ({ addToRefs }) => {
         icon: <CheckCircle className="w-5 h-5" />,
         color: 'from-teal-500 to-cyan-500',
         status: 'idle',
-        link:'/services/build-and-test',
+        link:'/automation-process/build-and-test',
         details: {
           duration: '1-2 weeks',
           deliverables: ['Test Reports', 'Bug Fixes', 'Performance Optimization'],
@@ -205,7 +205,7 @@ const ReactFlowSection: React.FC<ReactFlowSectionProps> = ({ addToRefs }) => {
         icon: <Rocket className="w-5 h-5" />,
         color: 'from-orange-500 to-red-500',
         status: 'idle',
-        link: '/services/hyper-care',
+        link: '/automation-process/hyper-care',
         details: {
           duration: '1 week',
           deliverables: ['Live System', 'Documentation', 'Support Package'],

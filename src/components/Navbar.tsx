@@ -438,14 +438,11 @@ export default function Navbar({ addToRefs }: NavbarProps) {
     { label: 'Home', href: '/' },
     {
       label: 'Services',
-      href: '/services',
-      // dropdown: [
-      //   { label: 'Bot Blueprint', href: '/services/bot-blueprint' },
-      //   { label: 'Build & Test', href: '/services/build-and-test' },
-      //   { label: 'Discovery Call', href: '/services/discovery-call' },
-      //   { label: 'Hyper Care', href: '/services/hyper-care' },
-      //   { label: 'Scale & Optimize', href: '/services/scale-optimize' }
-      // ]
+      href: '/services'
+    },
+    {
+      label: 'Automation Process',
+      href: '/automation-process'
     },
     {
       label: 'Solutions',
@@ -457,9 +454,7 @@ export default function Navbar({ addToRefs }: NavbarProps) {
         { label: 'Custom Bot Development', href: '/solutions/custombot-development' }
       ]
     },
-    // { label: 'Products', href: '/products' },
     { label: 'About', href: '/about' },
-    { label: 'Blog', href: '/blog' },
     { label: 'Contact', href: '/contact' }
   ];
 

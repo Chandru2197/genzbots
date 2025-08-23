@@ -285,7 +285,7 @@ export default function AutomationCards({ addToRefs }: { addToRefs?: (el: HTMLEl
       icon: Search,
       customImage: "/assets/images/customer-service.png",
       technologies: ["Process audit", "ROI estimation", "Bot recommendation"],
-      servicePath: "/services/discovery-call"
+      servicePath: "/automation-process/discovery-call"
     },
     {
       title: "Bot Blueprint (48 hrs)",
@@ -293,7 +293,7 @@ export default function AutomationCards({ addToRefs }: { addToRefs?: (el: HTMLEl
       icon: Lightbulb,
       customImage: "/assets/images/prototype.png",
       technologies: ["Custom workflow diagram", "Timeline & pricing", "Integration checklist"],
-      servicePath: "/services/bot-blueprint"
+      servicePath: "/automation-process/bot-blueprint"
     },
     {
       title: "Build & Test (1-3 weeks)",
@@ -301,7 +301,7 @@ export default function AutomationCards({ addToRefs }: { addToRefs?: (el: HTMLEl
       icon: Code,
       customImage: "/assets/images/quality-control.png",
       technologies: ["Develop in agile sprints", "Share weekly demo videos", "Train your team via Discord"],
-      servicePath: "/services/build-and-test"
+      servicePath: "/automation-process/build-and-test"
     },
     {
       title: "Hypercare Launch (2 weeks)",
@@ -309,7 +309,7 @@ export default function AutomationCards({ addToRefs }: { addToRefs?: (el: HTMLEl
       icon: Rocket,
       customImage: "/assets/images/healthcare.png",
       technologies: ["24/7 priority support", "Performance analytics", "3 free tweaks"],
-      servicePath: "/services/hyper-care"
+      servicePath: "/automation-process/hyper-care"
     },
     {
       title: "Scale & Optimize (Ongoing)",
@@ -321,7 +321,7 @@ export default function AutomationCards({ addToRefs }: { addToRefs?: (el: HTMLEl
         "Provide quarterly health checks",
         "Celebrate your time savings!"
       ],
-      servicePath: "/services/scale-optimize"
+      servicePath: "/automation-process/scale-optimize"
     },
     {
       title: "Contact Us",

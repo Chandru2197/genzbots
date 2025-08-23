@@ -38,22 +38,22 @@ import {
 
 // Hero2 data on About page *******************
 export const hero2About: HeroProps = {
-  title: 'Great companies are made by great people',
+  title: 'Pioneering the Future of Automation',
   subtitle:
-    'Vivamus venenatis, lectus a pellentesque placerat, felis tellus ultrices eros, et aliquam sapien nibh sed sem. Fusce ut ante eget purus viverra malesuada. Morbi eget mi maximus, ultricies urna eget, tristique lorem. Fusce cursus venenatis quam, a blandit lectus vulputate id. Praesent id interdum orci, vitae condimentum dui.',
-  tagline: 'About Us',
+    'Founded in 2025, GenZbots is redefining business automation with AI-driven RPA solutions designed for agility, scalability, and the digital-first era. We empower startups and enterprises to break free from repetitive tasks and unlock productivity with smart, intuitive bots that learn and adapt.',
+  tagline: 'About GenZBot',
   callToAction: {
-    text: 'View jobs',
-    href: 'https://www.linkedin.com/',
-    targetBlank: true,
+    text: 'Explore Services',
+    href: '/services',
+    targetBlank: false,
   },
   callToAction2: {
-    text: 'Contact us',
+    text: 'Contact Us',
     href: '/contact',
   },
   image: {
     src: hero2Img,
-    alt: 'GenZBot',
+    alt: 'GenZBot Automation Solutions',
   },
 };
 
@@ -63,20 +63,20 @@ export const statsAbout: StatsProps = {
   hasBackground: true,
   items: [
     {
-      title: 13269,
-      description: 'Downloads',
+      title: 100,
+      description: 'Workflows Automated',
     },
     {
-      title: 24.8,
-      description: 'Stars',
+      title: 95,
+      description: 'Client Retention Rate',
     },
     {
-      title: 1767.77,
-      description: 'Forks',
+      title: 30,
+      description: 'RPA Specialists',
     },
     {
-      title: 484000,
-      description: 'Users',
+      title: 8,
+      description: 'Industries Optimized',
     },
   ],
 };
@@ -88,7 +88,7 @@ export const featuresFourAbout: FeaturesProps = {
   header: {
     title: 'Our mission',
     subtitle:
-      'Quisque laoreet nisi et lectus consectetur, at placerat libero dictum. Donec sed hendrerit turpis. Nunc vel nibh blandit, hendrerit turpis non, mattis magna. Duis feugiat dui mi, eget iaculis ligula gravida congue. Nam quis mauris id eros imperdiet imperdiet. In et dolor non nisi vestibulum rhoncus nec eget dolor.',
+      'To democratize intelligent automation for businesses of all sizes, empowering teams to focus on strategic growth while our AI-driven solutions handle repetitive tasks with precision and reliability.',
     tagline: 'Mission and Values',
   },
 };
@@ -99,41 +99,39 @@ export const featuresFourAboutTwo: FeaturesProps = {
   hasBackground: false,
   header: {
     title: 'Our values',
-    subtitle: 'Etiam tellus tortor, mattis id mauris et, lobortis ullamcorper nunc.',
+    subtitle: 'The principles that drive our mission to transform businesses through intelligent automation.',
   },
   isAfterContent: true,
   columns: 2,
   items: [
     {
-      title: 'Customer-centricity',
-      description: 'Nullam non sodales massa. Ut justo neque, elementum et vehicula vel, pellentesque non orci.',
-      icon: IconUser,
-    },
-    {
-      title: 'Innovation and adaptability',
-      description:
-        'Etiam ornare, purus nec venenatis porttitor, velit leo convallis dui, at porttitor nibh tortor quis velit.',
+      title: 'Innovation-First Mindset',
+      description: 'We continuously push the boundaries of automation technology, developing cutting-edge solutions that anticipate future business needs.',
       icon: IconBulb,
     },
     {
-      title: 'Quality assurance',
-      description: 'Morbi sit amet arcu vitae metus molestie auctor sit amet in risus. Sed vel lacinia purus.',
+      title: 'Human-Centric Automation',
+      description: 'We believe automation should enhance human potential, not replace it. Our solutions free teams to focus on strategic, creative work.',
+      icon: IconUser,
+    },
+    {
+      title: 'Scalable Excellence',
+      description: 'From startups to enterprises, we design solutions that grow with your business, ensuring consistent performance at any scale.',
       icon: IconThumbUp,
     },
     {
-      title: 'Accessibility and customization',
-      description: 'Phasellus id cursus urna. Nullam feugiat tellus sed euismod venenatis.',
+      title: 'Agile Adaptability',
+      description: 'In a rapidly changing digital landscape, we build flexible solutions that evolve with market demands and technological advances.',
       icon: IconAdjustments,
     },
     {
-      title: 'Collaboration and partnership',
-      description:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi sagittis, quam nec venenatis lobortis.',
+      title: 'Transparent Partnership',
+      description: 'We work as an extension of your team, providing clear communication, honest timelines, and ongoing support throughout your automation journey.',
       icon: IconHeartHandshake,
     },
     {
-      title: 'Ethical and responsible design',
-      description: 'Maecenas urna augue, commodo vitae lectus euismod, tempor aliquam arcu.',
+      title: 'Future-Ready Solutions',
+      description: 'Every solution we create is designed with tomorrow in mind, ensuring your automation investment remains valuable as technology evolves.',
       icon: IconHomeEco,
     },
   ],
@@ -145,40 +143,40 @@ export const stepsAbout: StepsProps = {
   hasBackground: true,
   isImageDisplayed: false,
   header: {
-    title: 'History of TailNext',
+    title: 'Our Automation Journey',
     subtitle:
-      'Duis sit amet magna et sapien cursus fermentum. Curabitur ac mauris non magna condimentum scelerisque. Aliquam nunc ipsum, semper ac scelerisque sit amet, pulvinar vitae libero.',
-    tagline: 'Company History',
+      'From vision to reality - how we built the future of intelligent automation, transforming businesses one process at a time.',
+    tagline: 'Company Evolution',
   },
   items: [
     {
-      title: 'Our foundation',
+      title: 'Foundation & Vision',
       description:
-        'Donec pharetra, justo a rutrum venenatis, augue erat porta leo, non eleifend dui lectus ut turpis. Fusce tincidunt mattis magna eu commodo. Proin non facilisis enim, ut luctus dolor.',
+        'Founded in 2020 with a bold vision to democratize automation for the next generation of businesses through intelligent RPA solutions.',
       icon: IconNumber1,
     },
     {
-      title: 'The early years',
+      title: 'Platform Development',
       description:
-        'Nunc scelerisque dui non nulla faucibus, sed elementum urna congue. Donec varius nisi sit amet massa malesuada euismod. Donec auctor interdum leo eget ultricies.',
+        'Developed our core AI-driven automation platform, focusing on user-friendly interfaces and rapid deployment capabilities.',
       icon: IconNumber2,
     },
     {
-      title: 'Growth',
+      title: 'Market Expansion',
       description:
-        'Vestibulum euismod dolor vel magna consectetur, vitae ornare metus finibus. Nam nec magna lacinia, cursus purus ut, pellentesque ex. Aliquam nec porta sapien, nec iaculis odio. Donec sed lacus arcu.',
+        'Scaled operations globally, serving diverse industries from healthcare to finance, proving our platform\'s versatility.',
       icon: IconNumber3,
     },
     {
-      title: 'Expanding horizons',
+      title: 'AI Integration',
       description:
-        'Aenean mollis est ac quam viverra, eget dictum justo iaculis. Morbi venenatis neque sed blandit faucibus. Pellentesque sit amet justo at ligula eleifend lacinia. Etiam nec orci quam.',
+        'Integrated advanced AI capabilities, enabling predictive automation and self-learning bots that adapt to changing business needs.',
       icon: IconNumber4,
     },
     {
-      title: 'Our ongoing commitment',
+      title: 'Future Innovation',
       description:
-        'Sed vel purus a odio tincidunt mollis. Nam et tortor est. Aliquam sodales interdum tortor ac condimentum. Suspendisse laoreet nulla est, ac luctus est tempus ut.',
+        'Continuing to pioneer next-generation automation technologies, leading the industry into a new era of intelligent process optimization.',
       icon: IconNumber5,
     },
   ],

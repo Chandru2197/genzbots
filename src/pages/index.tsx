@@ -9,10 +9,8 @@ import SolutionsShowcase from '@/components/home/SolutionsShowcase';
 import PartnerShowcase from '@/components/home/PartnerSection';
 import ProjectsCarousel from '@/components/home/ProjectsCarousel';
 import TestimonialsSection from '@/components/home/TestimonialsSection';
-import ContactSection from '@/components/home/ContactSection';
 import AutomationCards from '@/components/home/AutomationCards';
 import ReactFlowSection from '@/components/home/AutomationProcess';
-import SectionWrapper from '@/components/SectionWrapper';
 
 export default function Home() {
   const parallaxRefs = useRef<HTMLElement[]>([]);
